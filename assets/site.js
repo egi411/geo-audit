@@ -135,13 +135,13 @@
     }
     brand.setCustomValidity("");
     const data = new FormData(form);
-    const text = `Бриф / Эхо\n\nБренд или сайт: ${data.get("brand").trim()}\nУслуга: ${data.get("service")}\nАудитория: ${data.get("audience").trim() || "—"}\nЗадача и конкуренты: ${data.get("task").trim() || "—"}\n\nФайл подготовлен локально. Данные не отправлены.\n`;
+    const text = `Бриф / AiLeeds\n\nБренд или сайт: ${data.get("brand").trim()}\nУслуга: ${data.get("service")}\nАудитория: ${data.get("audience").trim() || "—"}\nЗадача и конкуренты: ${data.get("task").trim() || "—"}\n\nФайл подготовлен локально. Данные не отправлены.\n`;
     const url = URL.createObjectURL(
       new Blob(["\ufeff", text], { type: "text/plain;charset=utf-8" }),
     );
     const link = document.createElement("a");
     link.href = url;
-    link.download = "echo-geo-brief.txt";
+    link.download = "aileeds-brief.txt";
     document.body.append(link);
     link.click();
     link.remove();
