@@ -2,6 +2,7 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8" />
+    <meta name="author" content="Редакция AiLeeds" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>GEO-аудит сайта и бренда — анализ видимости в ИИ | AiLeeds</title>
     <meta
@@ -44,7 +45,8 @@
             "@id": "https://egi411.github.io/geo-audit/#org",
             "name": "AiLeeds",
             "url": "https://egi411.github.io/geo-audit/",
-            "logo": "https://egi411.github.io/geo-audit/assets/mark.svg"
+            "logo": "https://egi411.github.io/geo-audit/assets/mark.svg",
+            "description": "AiLeeds — бренд проекта по GEO-продвижению и аудиту видимости в нейросетях."
           },
           {
             "@type": "WebSite",
@@ -60,7 +62,13 @@
             "name": "GEO-аудит сайта и бренда — анализ видимости в ИИ | AiLeeds",
             "description": "GEO-аудит видимости сайта и бренда в нейросетях: упоминания, конкуренты, источники и репутация. Отчёт с исходными ответами и планом GEO-оптимизации от AiLeeds.",
             "inLanguage": "ru-RU",
-            "isPartOf": { "@id": "https://egi411.github.io/geo-audit/#website" }
+            "isPartOf": {
+              "@id": "https://egi411.github.io/geo-audit/#website"
+            },
+            "author": { "@id": "https://egi411.github.io/geo-audit/#org" },
+            "publisher": { "@id": "https://egi411.github.io/geo-audit/#org" },
+            "dateModified": "2026-11-02",
+            "dateCreated": "2026-11-01"
           },
           {
             "@type": "Service",
@@ -165,11 +173,12 @@
           },
           {
             "@type": "BreadcrumbList",
+            "@id": "https://egi411.github.io/geo-audit/audit/#breadcrumb",
             "itemListElement": [
               {
                 "@type": "ListItem",
                 "position": 1,
-                "name": "GEO-продвижение",
+                "name": "AiLeeds",
                 "item": "https://egi411.github.io/geo-audit/"
               },
               {
@@ -185,6 +194,7 @@
     </script>
     <script src="../assets/site.js" defer></script>
     <script src="../assets/scene.js" defer></script>
+    <script src="../assets/privacy.js" defer></script>
   </head>
   <body>
     <a class="skip" href="#main">К содержанию</a>
@@ -195,7 +205,7 @@
             src="../assets/mark.svg"
             width="33"
             height="33"
-            alt=""
+            alt="Логотип AiLeeds"
           />AiLeeds</a
         >
         <nav class="nav-links" id="navigation" aria-label="Основная навигация">
@@ -218,6 +228,34 @@
       </div>
     </header>
     <main id="main">
+      <nav class="breadcrumbs wrap" aria-label="Хлебные крошки">
+        <ol
+          itemscope
+          itemtype="https://schema.org/BreadcrumbList"
+          itemid="https://egi411.github.io/geo-audit/audit/#breadcrumb"
+        >
+          <li
+            itemprop="itemListElement"
+            itemscope
+            itemtype="https://schema.org/ListItem"
+          >
+            <a itemprop="item" href="../index.html"
+              ><span itemprop="name">AiLeeds</span></a
+            ><meta itemprop="position" content="1" />
+          </li>
+          <li
+            itemprop="itemListElement"
+            itemscope
+            itemtype="https://schema.org/ListItem"
+          >
+            <span itemprop="name" aria-current="page">GEO-аудит</span
+            ><link
+              itemprop="item"
+              href="https://egi411.github.io/geo-audit/audit/"
+            /><meta itemprop="position" content="2" />
+          </li>
+        </ol>
+      </nav>
       <section class="hero audit-hero">
         <div class="wrap hero-grid">
           <div class="hero-copy">
@@ -237,11 +275,11 @@
               >
             </div>
           </div>
-          <div class="hero-scene" aria-hidden="true">
+          <div class="hero-scene">
             <img
               class="product-object"
               src="../assets/aileeds-object.webp"
-              alt=""
+              alt="Объёмная монограмма A на чёрном металлическом корпусе — знак AiLeeds"
               width="1280"
               height="1280"
               fetchpriority="high"
@@ -699,21 +737,47 @@
     <footer class="site-footer">
       <div class="wrap">
         <div class="footer-top">
-          <a class="logo" href="../"
-            ><img
-              src="../assets/mark.svg"
-              width="33"
-              height="33"
-              alt=""
-            />AiLeeds</a
+          <div
+            itemscope
+            itemtype="https://schema.org/Organization"
+            itemid="https://egi411.github.io/geo-audit/#org"
           >
-          <div class="footer-links">
-            <a href="../">Продвижение</a><a href="../audit/">GEO-аудит</a
-            ><a href="../privacy.html">Конфиденциальность</a>
+            <a
+              class="logo"
+              itemprop="url"
+              href="../index.html"
+              aria-label="AiLeeds — главная"
+              ><img
+                itemprop="logo"
+                src="../assets/mark.svg"
+                width="33"
+                height="33"
+                alt="Логотип AiLeeds"
+              /><span itemprop="name">AiLeeds</span></a
+            >
           </div>
+          <nav class="footer-links" aria-label="Ссылки в подвале">
+            <a href="../index.html">Продвижение</a
+            ><a href="../audit/">GEO-аудит</a
+            ><a href="../contacts.html">Контакты</a
+            ><a href="../privacy.html">Конфиденциальность</a
+            ><a href="../consent.html">Согласие на обработку ПДн</a
+            ><button type="button" data-cookie-settings>
+              Настройки cookie
+            </button>
+          </nav>
+        </div>
+        <div class="content-byline">
+          <a href="../contacts.html#editorial" rel="author"
+            >Материалы: редакция AiLeeds</a
+          ><span
+            >Редакция от <time datetime="2026-11-02">2 ноября 2026</time></span
+          ><span
+            >Обновлено <time datetime="2026-11-02">2 ноября 2026</time></span
+          >
         </div>
         <div class="footer-bottom">
-          <span>© 2026 AiLeeds · GEO & AEO</span
+          <span>© 2026 AiLeeds · GEO &amp; AEO</span
           ><span>Продвижение сайтов и брендов в нейросетях</span>
         </div>
         <div class="wordmark" aria-hidden="true">AiLeeds.</div>
@@ -727,6 +791,13 @@
       <p class="dialog-note">
         Подготовьте вводные и сохраните бриф себе. Отправка заявок пока не
         подключена — мы не получим эти данные.
+      </p>
+      <p class="brief-privacy">
+        Перед заполнением прочитайте
+        <a href="../privacy.html">политику конфиденциальности</a> и
+        <a href="../consent.html"
+          >сведения о согласии на обработку персональных данных</a
+        >. Бриф остаётся в вашем браузере.
       </p>
       <form class="brief-form">
         <label
@@ -761,5 +832,30 @@
         <p class="brief-status" role="status" aria-live="polite"></p>
       </form>
     </dialog>
+    <aside
+      id="cookie-banner"
+      class="cookie-banner"
+      role="region"
+      aria-labelledby="cookie-title"
+      hidden
+    >
+      <div>
+        <h2 id="cookie-title">Cookie и настройки сайта</h2>
+        <p>
+          Аналитика и рекламные cookie не подключены. Сохраняем в вашем браузере
+          только выбор этого уведомления.
+          <a href="../privacy.html#cookies">Как это работает</a>
+        </p>
+      </div>
+      <button type="button" class="btn primary" data-cookie-accept>
+        Только необходимые
+      </button>
+    </aside>
+    <noscript
+      ><p class="cookie-noscript">
+        Аналитика и рекламные cookie не используются. Без JavaScript настройки
+        не сохраняются. <a href="../privacy.html#cookies">Подробнее</a>.
+      </p></noscript
+    >
   </body>
 </html>

@@ -13,3 +13,8 @@
 Контакты и отправка заявок пока не подключены. На сайте можно подготовить и скачать бриф без передачи данных.
 
 - [Конфиденциальность](https://egi411.github.io/geo-audit/privacy.html)
+
+## Сведения о проекте и данных
+- [Контакты и редакция](https://egi411.github.io/geo-audit/contacts.html)
+- [Конфиденциальность и cookie](https://egi411.github.io/geo-audit/privacy.html)
+- [Согласие на обработку данных: текущий статус](https://egi411.github.io/geo-audit/consent.html)
