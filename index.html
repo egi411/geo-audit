@@ -1,894 +1,529 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GEO-аудит и AEO: что о вас говорят нейросети — Эхо</title>
-<meta name="description" content="GEO- и AEO-аудит бренда в ответах ChatGPT, Perplexity, YandexGPT и GigaChat: упоминания, позиции, источники, доля рекомендаций, правдивость фактов, план исправления.">
-<link rel="canonical" href="https://echo-geo.ru/">
-<meta property="og:title" content="GEO-аудит и AEO: что о вас говорят нейросети">
-<meta property="og:description" content="Клиенты спрашивают нейросети. Узнайте, что они слышат о вас, и исправьте это.">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Эхо">
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-<meta property="og:url" content="https://echo-geo.ru/">
-<meta property="og:image" content="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=1200&q=70">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23000000'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%23F0F0F0' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='2.5' fill='%23F0F0F0'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Prata&family=Onest:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","@id":"https://echo-geo.ru/#organization","name":"Эхо","url":"https://echo-geo.ru/","description":"Агентство GEO-аудита: анализ видимости и репутации брендов в ответах нейросетей.","image":"https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=1200&q=70"}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","@id":"https://echo-geo.ru/#website","url":"https://echo-geo.ru/","name":"Эхо — GEO-аудит","publisher":{"@id":"https://echo-geo.ru/#organization"},"inLanguage":"ru-RU"}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","@id":"https://echo-geo.ru/#webpage","url":"https://echo-geo.ru/","name":"GEO-аудит и AEO: что о вас говорят нейросети","description":"GEO-аудит видимости и репутации бренда в ответах ChatGPT, Perplexity, YandexGPT и GigaChat.","isPartOf":{"@id":"https://echo-geo.ru/#website"},"about":{"@id":"https://echo-geo.ru/#organization"},"author":{"@id":"https://echo-geo.ru/#organization"},"publisher":{"@id":"https://echo-geo.ru/#organization"},"datePublished":"2026-10-07","dateModified":"2026-10-07","inLanguage":"ru-RU"}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Service","@id":"https://echo-geo.ru/#service","name":"GEO-аудит бренда","serviceType":"Generative Engine Optimization audit","provider":{"@id":"https://echo-geo.ru/#organization"},"areaServed":"RU","offers":{"@type":"Offer","priceCurrency":"RUB","price":"200000","priceSpecification":{"@type":"PriceSpecification","minPrice":"200000","priceCurrency":"RUB"}},"description":"Два раздела: Сравнение (упоминания, охват, средняя позиция, источники, доля рекомендаций, рейтинг брендов) и Репутация (сильные и слабые стороны по версии ИИ, официальное позиционирование, тональность, правдивость фактов) с рекомендациями по исправлению."}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","@id":"https://echo-geo.ru/#faq","mainEntity":[
-{"@type":"Question","name":"Что такое GEO-аудит?","acceptedAnswer":{"@type":"Answer","text":"GEO (Generative Engine Optimization) — работа с тем, как бренд представлен в ответах нейросетей. Аудит измеряет, как часто и на каком месте ИИ называет бренд по запросам клиентов, из каких источников берёт информацию, что говорит о его сильных и слабых сторонах и насколько эти факты правдивы."}},
-{"@type":"Question","name":"Какие нейросети проверяются?","acceptedAnswer":{"@type":"Answer","text":"ChatGPT, Perplexity, YandexGPT и Алиса, GigaChat; набор согласуем под аудиторию бренда. Источники ответов анализируются у ассистентов, которые показывают цитаты."}},
-{"@type":"Question","name":"Откуда берутся запросы для исследования?","acceptedAnswer":{"@type":"Answer","text":"Список промптов собираем вместе с клиентом: сценарии выбора, сравнения, вопросы о цене и надёжности. Все промпты и полученные ответы передаём в Google-таблице."}},
-{"@type":"Question","name":"Что такое AEO и чем отличается от GEO?","acceptedAnswer":{"@type":"Answer","text":"AEO (Answer Engine Optimization) — оптимизация под прямые ответы ассистента. GEO шире: присутствие и позиция бренда в рекомендациях, источники и репутация. Аудит измеряет обе стороны."}},
-{"@type":"Question","name":"Почему исследование стоит от 200 000 ₽?","acceptedAnswer":{"@type":"Answer","text":"Сотни промптов, пять ассистентов, три прогона, разметка каждого ответа по девяти параметрам, сверка фактов, рейтинг конкурентов, план на 90 дней, стратегическая сессия и контрольный замер."}},
-{"@type":"Question","name":"Чем это отличается от SEO-аудита?","acceptedAnswer":{"@type":"Answer","text":"SEO-аудит смотрит на позиции сайта в поисковой выдаче. GEO-аудит смотрит на бренд: назван ли он в ответе, в каком порядке, с какими словами и из каких источников."}},
-{"@type":"Question","name":"Что делать после аудита?","acceptedAnswer":{"@type":"Answer","text":"Отчёт заканчивается планом исправления: какие источники усилить, какие факты уточнить, какие материалы нужны, чтобы бренд чаще попадал в ответы и выглядел в них правильно."}}
-]}
-</script>
-<style>
-:root{
-  --bg:#000;--bg-2:#0A0A0A;--card:#0C0C0C;--ink:#F0F0F0;--ink-2:#A1A4A5;--ink-3:#6B6E70;--line:rgba(255,255,255,.08);--line-2:rgba(255,255,255,.14);
-  --accent:#F4A024;--ok:#3DD68C;--bad:#F0583C;--ok-soft:rgba(61,214,140,.12);--bad-soft:rgba(240,88,60,.12);--acc-soft:rgba(244,160,36,.14);
-  --serif:'Prata',Georgia,serif;--sans:'Onest',system-ui,-apple-system,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;
-  --section:96px;--r:16px;--r2:24px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-html,body{overflow-x:hidden}
-body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.45;font-size:16px;-webkit-font-smoothing:antialiased}
-img{display:block;max-width:100%}
-a{color:inherit;text-decoration:none}
-button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
-.wrap{width:min(1200px,calc(100% - 48px));margin:0 auto}
-h1{font-family:var(--serif);font-weight:400;font-size:clamp(48px,6.6vw,96px);line-height:1;letter-spacing:-.01em;color:var(--ink)}
-h2{font-family:var(--sans);font-weight:500;font-size:clamp(34px,3.9vw,56px);line-height:1.05;letter-spacing:-.045em;color:var(--ink)}
-h3{font-size:20px;font-weight:500;line-height:1.25;letter-spacing:-.01em}
-h2 em{font-style:normal;color:var(--accent)}
-p{color:var(--ink-2)}
-.lead{font-size:18px;line-height:1.5;color:var(--ink-2)}
-.small{font-size:13px;color:var(--ink-3)}
-section{padding:var(--section) 0}
-.center{text-align:center}
-.center .lead{max-width:640px;margin:14px auto 0}
-.left .lead{max-width:640px;margin-top:14px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 18px;border-radius:16px;font-size:14px;font-weight:500;border:2px solid rgba(255,255,255,.05);color:var(--ink);transition:background .2s,border-color .2s}
-.btn:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1)}
-.btn.pri{background:#fff;color:#000;border-color:#fff}
-.btn.pri:hover{background:#e6e6e6;border-color:#e6e6e6}
-.btn.lg{height:46px;padding:0 22px;font-size:15px}
-.btn svg{width:14px;height:14px}
-.pill{display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 6px 0 12px;border-radius:999px;border:1px solid var(--line-2);background:rgba(255,255,255,.03);font-size:13px;color:var(--ink);font-weight:500}
-.pill b{display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.08)}
-.pill b svg{width:9px;height:9px}
-.tag{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
-/* header */
-header{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:64px}
-.logo{display:flex;align-items:center;gap:9px;font-family:var(--serif);font-size:22px;color:var(--ink)}
-.logo svg{width:22px;height:22px}
-.menu{display:flex;gap:26px;font-size:14px;color:var(--ink-2)}
-.menu a:hover{color:var(--ink)}
-.nav-r{display:flex;justify-content:flex-end;gap:16px;align-items:center;font-size:14px}
-.nav-r .btn{height:36px;padding:0 14px}
-/* hero */
-.hero{padding:72px 0 80px;position:relative;overflow:hidden}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
-.hero h1{margin:24px 0 20px}
-.hero .lead{max-width:520px;margin-bottom:30px;font-size:18px}
-.hero-cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-/* orb */
-.orb-wrap{position:relative;display:grid;place-items:center;min-height:520px}
-.orb{width:400px;height:400px;border-radius:50%;position:relative;
-  background:radial-gradient(circle at 36% 28%,#4a4a4c 0,#1c1c1d 28%,#0a0a0a 62%,#000 100%);
-  box-shadow:inset -40px -60px 110px rgba(0,0,0,.95),inset 24px 34px 70px rgba(255,255,255,.07),0 80px 140px -30px rgba(0,0,0,.9)}
-.orb::before{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(ellipse 36% 20% at 38% 24%,rgba(255,255,255,.55),rgba(255,255,255,0) 70%);filter:blur(6px)}
-.orb::after{content:"";position:absolute;inset:-1px;border-radius:50%;border:1px solid rgba(255,255,255,.06)}
-.ring{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.07);pointer-events:none}
-.ring.r1{width:520px;height:520px}.ring.r2{width:640px;height:640px;border-color:rgba(255,255,255,.045)}.ring.r3{width:760px;height:760px;border-color:rgba(255,255,255,.025)}
-.orb-chip{position:absolute;display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:12px;background:rgba(14,14,14,.9);border:1px solid var(--line-2);font-size:13px;backdrop-filter:blur(8px);box-shadow:0 20px 40px -20px rgba(0,0,0,.9);white-space:nowrap}
-.orb-chip i{width:8px;height:8px;border-radius:50%}
-.orb-chip.c1{left:4%;top:16%}.orb-chip.c2{right:0;top:40%}.orb-chip.c3{left:10%;bottom:14%}
-.orb-chip span{color:var(--ink-2)}
-.orb-chip strong{font-weight:500;color:var(--ink)}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.orb-chip{animation:float 6s ease-in-out infinite}.orb-chip.c2{animation-delay:-2s}.orb-chip.c3{animation-delay:-4s}
-/* nets row */
-.nets{padding:40px 0 64px;text-align:center}
-.nets p{font-size:16px;max-width:460px;margin:0 auto 34px;line-height:1.5}
-.nets-row{display:flex;justify-content:center;gap:52px;flex-wrap:wrap;align-items:center}
-.nets-row span{font-size:20px;font-weight:600;letter-spacing:-.02em;color:#9a9d9e;display:flex;align-items:center;gap:9px}
-.nets-row svg{width:22px;height:22px;opacity:.8}
-/* app icon */
-.appicon{width:88px;height:88px;border-radius:22px;margin:0 auto 26px;position:relative;background:linear-gradient(160deg,#2a2a2a,#0a0a0a);border:1px solid var(--line-2);box-shadow:0 30px 60px -20px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.12);display:grid;place-items:center}
-.appicon::before{content:"";position:absolute;left:50%;top:50%;width:260px;height:260px;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(244,160,36,.22),transparent 70%);z-index:-1}
-.appicon svg{width:40px;height:40px;color:var(--accent)}
-/* ai card */
-.ai-tabs{display:flex;justify-content:center;gap:8px;margin:36px 0 22px;flex-wrap:wrap}
-.ai-tabs button{display:flex;align-items:center;gap:8px;height:38px;padding:0 14px;border-radius:12px;border:1px solid var(--line);font-size:14px;color:var(--ink-2)}
-.ai-tabs button[aria-selected="true"]{background:rgba(255,255,255,.06);border-color:var(--line-2);color:var(--ink)}
-.ai-tabs button i{width:8px;height:8px;border-radius:50%;background:var(--ink-3)}
-.ai-tabs button[aria-selected="true"] i{background:var(--accent)}
-.ai{max-width:860px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:var(--r2);overflow:hidden;box-shadow:0 60px 120px -40px rgba(0,0,0,.9)}
-.ai-head{display:flex;align-items:center;gap:10px;padding:12px 18px;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink-3)}
-.ai-head i{width:10px;height:10px;border-radius:50%;background:#2a2a2a}
-.ai-body{padding:26px 28px 24px}
-.ai-q{display:flex;gap:12px;align-items:flex-start;margin-bottom:18px}
-.ai-q b{flex:none;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.08);display:grid;place-items:center;font-size:11px;font-weight:600}
-.ai-q p{color:var(--ink);font-weight:500;font-size:16px;padding-top:4px}
-.ai-a{border-left:1px solid var(--line-2);padding-left:18px;margin-left:14px}
-.ai-a p{font-size:15px;margin-bottom:12px}
-.ai-a ol{list-style:none;display:grid;gap:8px}
-.ai-a li{display:flex;align-items:center;gap:10px;font-size:15px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid var(--line)}
-.ai-a li b{width:22px;height:22px;border-radius:6px;background:rgba(255,255,255,.06);display:grid;place-items:center;font-size:12px;font-weight:600;color:var(--ink-2)}
-.ai-a li.you{background:var(--bad-soft);border-color:rgba(240,88,60,.4);color:#ff9a86}
-.ai-a li.you b{color:#ff9a86}
-.ai-a li.miss{background:transparent;border:1px dashed rgba(240,88,60,.6);color:#ff9a86;justify-content:space-between}
-.ai-a li .err{margin-left:auto;font-size:12px;font-weight:500;color:#ff9a86;background:var(--bad-soft);padding:3px 8px;border-radius:999px}
-.ai-foot{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-3)}
-.ai-foot strong{color:#ff9a86;font-weight:500;text-align:right}
-.fade{animation:fade .35s ease}
-@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-/* cards */
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r2);overflow:hidden}
-.card-ui{padding:22px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,0))}
-.card-body{padding:22px 24px 26px}
-.card-body .ic{width:22px;height:22px;color:var(--ink);margin-bottom:12px}
-.card-body h3{margin-bottom:8px}
-.card-body p{font-size:15px;line-height:1.5}
-.card-body a{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:14px;color:var(--ink)}
-.card-body a svg{width:12px;height:12px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-/* problems */
-.prob{margin-top:40px}
-.prob .card-ui{min-height:170px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px}
-.mock-row{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:9px;background:rgba(255,255,255,.04);border:1px solid var(--line);font-size:13px;color:var(--ink-2)}
-.mock-row b{width:18px;height:18px;border-radius:5px;background:rgba(255,255,255,.06);display:grid;place-items:center;font-size:10px;font-weight:600}
-.mock-row.you{border-color:rgba(240,88,60,.5);color:#ff9a86;background:var(--bad-soft)}
-.mock-row.dash{border-style:dashed;border-color:rgba(240,88,60,.6);color:#ff9a86;justify-content:space-between;background:transparent}
-.mock-row .err{margin-left:auto;font-size:11px;color:#ff9a86}
-/* report mockup */
-.mock{margin-top:40px;background:var(--card);border:1px solid var(--line);border-radius:var(--r2);overflow:hidden;box-shadow:0 60px 120px -40px rgba(0,0,0,.9)}
-.mock-top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 18px;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink-3)}
-.rep-tabs{display:inline-flex;gap:4px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:10px;padding:3px}
-.rep-tabs button{height:28px;padding:0 12px;border-radius:7px;font-size:13px;color:var(--ink-2)}
-.rep-tabs button[aria-selected="true"]{background:rgba(255,255,255,.1);color:var(--ink)}
-.rep-panel{display:none;padding:22px}.rep-panel.on{display:block}
-.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}
-.kpi div{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:14px;padding:16px 18px;position:relative;overflow:hidden}
-.kpi .l{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
-.kpi .v{font-size:36px;font-weight:500;letter-spacing:-.03em;line-height:1.1;margin:8px 0 4px}
-.kpi .v span{font-size:15px;color:var(--ink-3);letter-spacing:0}
-.kpi .v.bad{color:var(--bad)}.kpi .v.ok{color:var(--ok)}
-.kpi .s{font-size:13px;color:var(--ink-2)}
-.kpi div.glow-bad::before,.kpi div.glow-ok::before{content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;border-radius:50%;filter:blur(30px);opacity:.5}
-.kpi div.glow-bad::before{background:var(--bad)}.kpi div.glow-ok::before{background:var(--ok)}
-.rep-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:14px}
-.box{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
-.box h3{font-size:15px;margin-bottom:12px;color:var(--ink)}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{text-align:left;font-weight:500;color:var(--ink-3);font-size:11px;text-transform:uppercase;letter-spacing:.05em;padding:0 10px 10px 0;border-bottom:1px solid var(--line)}
-td{padding:10px 10px 10px 0;border-bottom:1px solid var(--line);color:var(--ink-2);white-space:nowrap}
-tr:last-child td{border-bottom:0}
-tr.you td{color:#ff9a86;background:var(--bad-soft)}
-tr.you td:first-child{border-radius:8px 0 0 8px;padding-left:8px}
-tr.you td:last-child{border-radius:0 8px 8px 0}
-.badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:500}
-.badge.ok{background:var(--ok-soft);color:var(--ok)}.badge.bad{background:var(--bad-soft);color:var(--bad)}.badge.warn{background:var(--acc-soft);color:var(--accent)}
-.bars{display:grid;gap:10px}
-.bar{display:grid;grid-template-columns:120px 1fr 40px;gap:10px;align-items:center;font-size:13px;color:var(--ink-2)}
-.bar .t{height:6px;background:rgba(255,255,255,.06);border-radius:999px;overflow:hidden}
-.bar .t i{display:block;height:100%;background:#d8d8d8;border-radius:999px}
-.bar .t i.bad{background:var(--bad)}.bar .t i.ok{background:var(--ok)}
-.bar span:last-child{text-align:right}
-.list{display:grid;gap:9px}
-.list li{list-style:none;display:flex;gap:10px;font-size:14px;color:var(--ink-2);align-items:flex-start}
-.list li svg{flex:none;width:16px;height:16px;margin-top:2px}
-.list .ok svg{color:var(--ok)}.list .bad svg{color:var(--bad)}
-.cat{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.cat div{padding:10px 12px;border-radius:9px;font-size:13px;display:flex;justify-content:space-between;gap:10px}
-.cat .ok{background:var(--ok-soft);color:var(--ok)}.cat .bad{background:var(--bad-soft);color:var(--bad)}
-.rep-note{padding:0 22px 20px;font-size:12px;color:var(--ink-3)}
-/* features grid */
-.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:48px 40px;margin-top:56px}
-.feat div svg{width:22px;height:22px;color:var(--ink);margin-bottom:14px}
-.feat h3{font-size:17px;margin-bottom:8px}
-.feat p{font-size:14px;line-height:1.55}
-.feat p strong{color:var(--ink);font-weight:500}
-.feat-head{display:flex;align-items:baseline;gap:14px;margin-top:64px;padding-top:28px;border-top:1px solid var(--line)}
-.feat-head .tag{color:var(--accent)}
-.deliv{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
-.deliv div{display:flex;gap:12px;align-items:flex-start;padding:18px 20px;border:1px solid var(--line);border-radius:var(--r);background:rgba(255,255,255,.02);font-size:14px;color:var(--ink-2);line-height:1.5}
-.deliv svg{flex:none;width:20px;height:20px;color:var(--accent);margin-top:1px}
-.deliv strong{color:var(--ink);font-weight:500}
-/* compare */
-.cmp{display:grid;grid-template-columns:1fr 1.2fr;gap:20px;margin-top:40px}
-.cmp-col{border:1px solid var(--line);border-radius:var(--r2);padding:26px 28px;background:rgba(255,255,255,.02)}
-.cmp-col.hi{background:var(--card);border-color:var(--line-2);box-shadow:0 40px 80px -40px rgba(0,0,0,.9)}
-.cmp-h{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:18px}
-.cmp-col.hi .cmp-h{color:var(--accent)}
-.cmp ul{display:grid;gap:12px}
-.cmp li{list-style:none;font-size:15px;color:var(--ink-2);line-height:1.5;padding-left:26px;position:relative}
-.cmp li::before{content:"";position:absolute;left:0;top:7px;width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.08)}
-.cmp-col.hi li::before{background:var(--acc-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F4A024' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12l4 4 8-8'/%3E%3C/svg%3E") center/9px no-repeat}
-.cmp li strong{color:var(--ink);font-weight:500}
-/* scale */
-.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;max-width:1000px;margin:36px auto 0}
-.scale div{border:1px solid var(--line);border-radius:14px;padding:16px 14px;background:rgba(255,255,255,.02)}
-.scale b{display:block;font-size:34px;font-weight:500;letter-spacing:-.03em;line-height:1;margin-bottom:8px;color:var(--ink)}
-.scale span{font-size:13px;color:var(--ink-2);line-height:1.35;display:block}
-/* format */
-.fmt-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
-.price{background:var(--card);border:1px solid var(--line-2);border-radius:var(--r2);padding:30px;position:relative;overflow:hidden}
-.price::before{content:"";position:absolute;right:-80px;top:-80px;width:260px;height:260px;border-radius:50%;background:var(--accent);filter:blur(80px);opacity:.25}
-.price .tag{color:var(--accent)}
-.price-v{font-size:clamp(36px,4vw,52px);font-weight:500;letter-spacing:-.04em;line-height:1;margin:14px 0 14px;color:var(--ink)}
-.price p{font-size:15px;line-height:1.5;margin-bottom:18px}
-.price ul{display:grid;gap:8px;margin-bottom:24px}
-.price li{list-style:none;font-size:14px;color:var(--ink-2);padding-left:22px;position:relative}
-.price li::before{content:"";position:absolute;left:0;top:6px;width:12px;height:12px;border-radius:50%;background:var(--acc-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F4A024' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12l4 4 8-8'/%3E%3C/svg%3E") center/8px no-repeat}
-.price .btn{width:100%}
-/* process */
-.proc{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px}
-.proc div{padding:22px 22px 24px;border:1px solid var(--line);border-radius:var(--r2);background:var(--card);position:relative}
-.proc .n{font-family:var(--mono);font-size:12px;color:var(--accent);margin-bottom:28px}
-.proc h3{margin-bottom:8px}
-.proc p{font-size:14px;line-height:1.5}
-/* quiz */
-.quiz-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start}
-.whom{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:26px}
-.whom div{padding:12px 14px;border:1px solid var(--line);border-radius:12px;font-size:14px;color:var(--ink-2)}
-.quiz{background:var(--card);border:1px solid var(--line);border-radius:var(--r2);padding:28px}
-.q{display:none}.q.on{display:block}
-.q .qt{font-size:19px;font-weight:500;line-height:1.3;margin-bottom:16px;color:var(--ink);letter-spacing:-.01em}
-.opts{display:grid;gap:8px}
-.opts button{text-align:left;padding:13px 16px;border:1px solid var(--line);border-radius:12px;font-size:15px;color:var(--ink-2);transition:border-color .15s,background .15s,color .15s}
-.opts button:hover{border-color:var(--line-2);background:rgba(255,255,255,.04);color:var(--ink)}
-.q-prog{display:flex;gap:6px;margin-bottom:22px}
-.q-prog i{height:3px;flex:1;background:rgba(255,255,255,.08);border-radius:2px}
-.q-prog i.on{background:var(--accent)}
-.q-res{display:none}.q-res.on{display:block}
-.q-res .lvl{font-size:28px;font-weight:500;letter-spacing:-.03em;margin-bottom:10px}
-.q-res p{font-size:15px;margin-bottom:12px}
-.q-res .focus{display:grid;gap:8px;margin:16px 0 20px}
-.q-res .focus div{padding:11px 14px;border-radius:10px;background:var(--acc-soft);color:var(--accent);font-size:14px;font-weight:500}
-/* faq */
-.faq{display:grid;grid-template-columns:.8fr 1.2fr;gap:48px}
-details{border-top:1px solid var(--line);padding:18px 0}
-details:last-child{border-bottom:1px solid var(--line)}
-summary{list-style:none;cursor:pointer;font-weight:500;font-size:17px;display:flex;justify-content:space-between;gap:20px;color:var(--ink)}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"+";font-size:22px;line-height:1;color:var(--ink-3);transition:transform .2s}
-details[open] summary::after{transform:rotate(45deg)}
-details p{margin-top:10px;font-size:15px;max-width:620px;line-height:1.55}
-/* cta */
-.cta{position:relative;overflow:hidden}
-.cta::before{content:"";position:absolute;left:50%;top:-200px;width:900px;height:600px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(244,160,36,.12),transparent 70%);pointer-events:none}
-.cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;position:relative}
-form{background:var(--card);border:1px solid var(--line);border-radius:var(--r2);padding:28px}
-.f-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-label{display:block;font-size:13px;font-weight:500;margin-bottom:6px;color:var(--ink-2)}
-.field{margin-bottom:14px}
-input,select{width:100%;height:44px;padding:0 14px;border:1px solid var(--line-2);border-radius:12px;font:inherit;font-size:15px;background:rgba(255,255,255,.03);color:var(--ink)}
-select option{background:#111}
-input::placeholder{color:var(--ink-3)}
-input:focus,select:focus{outline:2px solid rgba(255,255,255,.25);border-color:transparent}
-.consent{display:flex;gap:10px;align-items:flex-start;font-size:12px;color:var(--ink-3);margin:4px 0 18px}
-.consent input{width:16px;height:16px;margin-top:1px;flex:none;accent-color:#fff}
-.consent a{text-decoration:underline}
-form .btn{width:100%}
-.sent{display:none;padding:30px;text-align:center}
-.sent.on{display:block}
-.sent h3{font-size:24px;margin-bottom:8px}
-.cta-list{display:grid;gap:12px;margin-top:28px}
-.cta-list div{display:flex;gap:12px;font-size:15px;color:var(--ink-2);align-items:flex-start}
-.cta-list svg{flex:none;width:18px;height:18px;color:var(--accent);margin-top:2px}
-/* footer */
-footer{padding:36px 0;border-top:1px solid var(--line)}
-.foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--ink-3)}
-.foot a:hover,.ck-open:hover{color:var(--ink)}
-.ck-open{font-size:13px;color:var(--ink-3)}
-/* cookie */
-.ck{position:fixed;right:20px;bottom:20px;z-index:60;width:420px;max-width:calc(100% - 32px);background:#0E0E0E;border:1px solid var(--line-2);border-radius:var(--r);padding:18px;box-shadow:0 30px 60px -20px rgba(0,0,0,.9)}
-.ck[hidden]{display:none}
-.ck p{font-size:13px;margin-bottom:12px;line-height:1.45}
-.ck p a{text-decoration:underline}
-.ck-b{display:flex;gap:8px;flex-wrap:wrap}
-.ck .btn{height:36px;padding:0 14px;font-size:13px}
-.rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
-.rv.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.rv,.fade,.orb-chip{transition:none;animation:none;opacity:1;transform:none}}
-@media (max-width:1000px){
-  :root{--section:64px}
-  .hero-grid,.grid2,.rep-grid,.quiz-grid,.faq,.cta-grid,.cmp,.fmt-grid{grid-template-columns:1fr}
-  .scale{grid-template-columns:repeat(3,1fr)}
-  .grid3,.feat,.deliv{grid-template-columns:1fr 1fr}
-  .proc{grid-template-columns:1fr 1fr}
-  .kpi{grid-template-columns:1fr 1fr}
-  .menu{display:none}
-  .nav{grid-template-columns:1fr auto}
-  .orb-wrap{min-height:420px}.orb{width:300px;height:300px}.ring.r1{width:400px;height:400px}.ring.r2{width:500px;height:500px}.ring.r3{display:none}
-  .hero{padding:48px 0 56px}
-}
-@media (max-width:600px){
-  .wrap{width:calc(100% - 32px)}
-  .grid3,.feat,.deliv,.proc,.kpi,.f-row,.cat,.whom,.scale{grid-template-columns:1fr}
-  .feat{gap:28px}
-  .hero-cta .btn{width:100%}
-  .ai-body{padding:18px}
-  .bar{grid-template-columns:90px 1fr 36px}
-  .orb-wrap{min-height:340px}.orb{width:230px;height:230px}.ring.r1{width:300px;height:300px}.ring.r2{width:380px;height:380px}
-  .orb-chip{font-size:12px;padding:7px 10px}
-  .ck{right:0;bottom:0;left:0;width:auto;max-width:none;border-radius:var(--r) var(--r) 0 0;padding-bottom:calc(18px + env(safe-area-inset-bottom,0px))}
-}
-</style>
-</head>
-<body>
-
-<header>
-  <div class="wrap nav">
-    <a class="logo" href="#"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#F0F0F0" stroke-width="1.5" opacity=".35"/><circle cx="16" cy="16" r="8.5" fill="none" stroke="#F0F0F0" stroke-width="1.5" opacity=".7"/><circle cx="16" cy="16" r="3" fill="#F0F0F0"/></svg>Эхо</a>
-    <nav class="menu" aria-label="Разделы">
-      <a href="#problem">Проблема</a><a href="#report">Отчёт</a><a href="#what">Состав</a><a href="#format">Формат</a><a href="#process">Процесс</a><a href="#faq">Вопросы</a>
-    </nav>
-    <div class="nav-r"><a href="#report" class="menu-link" style="color:var(--ink-2)">Пример отчёта</a><a class="btn pri" href="#order">Заказать аудит</a></div>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <a class="pill" href="#format">Исследование под ключ: 2 раздела, 5 ассистентов, план на 90 дней <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 6l6 6-6 6"/></svg></b></a>
-      <h1>Что о вас говорят нейросети?</h1>
-      <p class="lead">Нейросеть не показывает десять ссылок. Она называет три–пять брендов и объясняет, почему. Полный GEO-аудит измеряет, попадаете ли вы в этот список по сотням запросов клиентов, на каком месте, с какими словами и из каких источников, а затем превращает это в план действий для маркетинга, PR и контента.</p>
-      <div class="hero-cta">
-        <a class="btn pri lg" href="#order">Обсудить исследование</a>
-        <a class="btn lg" href="#report">Пример отчёта</a>
-      </div>
-    </div>
-    <div class="orb-wrap" aria-hidden="true">
-      <span class="ring r3"></span><span class="ring r2"></span><span class="ring r1"></span>
-      <div class="orb"></div>
-      <div class="orb-chip c1"><i style="background:var(--bad)"></i><span>ChatGPT</span><strong>бренд не упомянут</strong></div>
-      <div class="orb-chip c2"><i style="background:var(--accent)"></i><span>Perplexity</span><strong>позиция 4 из 5</strong></div>
-      <div class="orb-chip c3"><i style="background:var(--ok)"></i><span>YandexGPT</span><strong>прямая рекомендация</strong></div>
-    </div>
-  </div>
-</section>
-
-<section class="nets">
-  <div class="wrap">
-    <p>Исследуем ответы всех ассистентов, которыми пользуются ваши клиенты, и размечаем каждый ответ по девяти параметрам.</p>
-    <div class="nets-row">
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M7 12h10"/></svg>ChatGPT</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4l16 16M20 4L4 20"/></svg>Perplexity</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M5 7l14 10M19 7L5 17"/></svg>YandexGPT</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="9"/></svg>Алиса</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h16M12 4v16"/><circle cx="12" cy="12" r="9"/></svg>GigaChat</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M9 12h6"/></svg>Copilot</span>
-    </div>
-  </div>
-</section>
-
-<section id="problem" class="center">
-  <div class="wrap">
-    <div class="appicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16v10H9l-5 4z"/><path d="M8 10h8M8 13h5"/></svg></div>
-    <h2>Выдача стала <em>одним ответом</em></h2>
-    <p class="lead">GEO (Generative Engine Optimization) отвечает за видимость бренда в ответах нейросетей, AEO (Answer Engine Optimization) — за попадание в сам ответ на вопрос. Ассистент сравнивает, выбирает и рекомендует до того, как человек открыл хотя бы один сайт. Каждый запрос, где вас нет, — клиент, который ушёл к конкуренту, так и не узнав о вас.</p>
-
-    <div class="ai-tabs" role="tablist" aria-label="Сценарии">
-      <button role="tab" aria-selected="true" data-s="0"><i></i>Вас не назвали</button>
-      <button role="tab" aria-selected="false" data-s="1"><i></i>Назвали последним</button>
-      <button role="tab" aria-selected="false" data-s="2"><i></i>Назвали с ошибкой</button>
-    </div>
-    <div class="ai" id="ai">
-      <div class="ai-head"><i></i><i></i><i></i><span style="margin-left:6px">Иллюстрация ответа ассистента</span></div>
-      <div class="ai-body" id="aiBody"></div>
-    </div>
-  </div>
-</section>
-
-<section id="scenarios" class="left">
-  <div class="wrap">
-    <h2>Три проблемы, которые находит <em>GEO-аудит</em></h2>
-    <p class="lead">Каждая измеряется отдельно, у каждой своя причина и своё исправление. Поэтому исследование состоит из двух разделов: сравнение с конкурентами и репутация, а план исправления адресует все три проблемы по приоритету.</p>
-    <div class="grid3 prob">
-      <article class="card rv">
-        <div class="card-ui">
-          <div class="mock-row"><b>1</b>Конкурент А</div><div class="mock-row"><b>2</b>Конкурент Б</div><div class="mock-row"><b>3</b>Конкурент В</div><div class="mock-row dash"><span>Ваш бренд</span><span>не упомянут</span></div>
-        </div>
-        <div class="card-body">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M8 8l8 8M16 8l-8 8"/></svg>
-          <h3>Вас нет в ответе</h3>
-          <p>По запросам, где клиент выбирает поставщика, ассистент называет конкурентов, а ваш бренд не упоминает. Чаще всего причина в источниках: ИИ опирается на сайты, где о вас не написано.</p>
-          <a href="#report">Упоминания, охват, источники <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
-        </div>
-      </article>
-      <article class="card rv">
-        <div class="card-ui">
-          <div class="mock-row"><b>1</b>Конкурент А</div><div class="mock-row"><b>2</b>Конкурент Б</div><div class="mock-row"><b>3</b>Конкурент В</div><div class="mock-row you"><b>4</b>Ваш бренд<span class="err">как альтернатива</span></div>
-        </div>
-        <div class="card-body">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 18h16M6 14h4v4H6zM14 8h4v10h-4z"/></svg>
-          <h3>Вы упомянуты последним</h3>
-          <p>Бренд есть, но в конце списка или как «альтернатива». Прямых рекомендаций нет, в сравнениях вы проигрываете по категориям, которые ИИ считает важными.</p>
-          <a href="#report">Средняя позиция, доля рекомендаций <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
-        </div>
-      </article>
-      <article class="card rv">
-        <div class="card-ui">
-          <div class="mock-row"><b>·</b>Доставка от 3 дней<span class="err">устарело</span></div><div class="mock-row"><b>·</b>Гарантии нет<span class="err">неверно</span></div><div class="mock-row"><b>·</b>Только B2C<span class="err">неверно</span></div><div class="mock-row"><b>·</b>Работает с 2016 года</div>
-        </div>
-        <div class="card-body">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17v.5"/></svg>
-          <h3>О вас говорят неверно</h3>
-          <p>Старые цены, чужое позиционирование, негатив из одного отзыва пятилетней давности. Нейросеть пересказывает это уверенно, и клиент принимает за факт.</p>
-          <a href="#report">Тональность, правдивость фактов <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></a>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section id="why" class="left">
-  <div class="wrap">
-    <h2>Почему один запрос в ChatGPT <em>ничего не показывает</em></h2>
-    <p class="lead">Ответ нейросети меняется от формулировки, от ассистента и от попытки к попытке. Решение о бренде нельзя принимать по одному скриншоту. Исследование показывает закономерность, а не случайный ответ.</p>
-    <div class="cmp">
-      <div class="cmp-col">
-        <div class="cmp-h">Один запрос вручную</div>
-        <ul><li>Одна формулировка, которую придумали вы</li><li>Один ассистент, одна попытка</li><li>Ответ без источников и без конкурентов</li><li>Нет цифры, с которой можно сравнить следующий замер</li><li>Нет ответа на вопрос «что делать»</li></ul>
-      </div>
-      <div class="cmp-col hi">
-        <div class="cmp-h">Полный GEO-аудит</div>
-        <ul><li><strong>Сотни запросов</strong> из реальных сценариев выбора, согласованные с вами по категориям продуктов</li><li><strong>Пять ассистентов</strong> и <strong>три прогона</strong> каждого запроса, чтобы доли были устойчивыми</li><li><strong>Девять параметров</strong> на каждый ответ: упоминание, позиция, прямая рекомендация, последнее место, источник, тон, позиционирование, правдивость, категория</li><li><strong>Рейтинг конкурентов</strong> по тем же метрикам, что и у вас</li><li><strong>План исправления</strong> с приоритетами, исполнителями и повторным замером</li></ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="report" class="center">
-  <div class="wrap">
-    <h2>Отчёт GEO-аудита: <em>сравнение и репутация</em></h2>
-    <p class="lead">Два раздела, в каждом цифры, таблицы, сводка по клиенту и рекомендации по GEO- и AEO-оптимизации. Отчёт читается руководителем за полчаса, а команда маркетинга получает из него готовые задачи.</p>
-    <div class="scale">
-      <div><b>2</b><span>раздела: сравнение и репутация</span></div>
-      <div><b>5</b><span>ассистентов в исследовании</span></div>
-      <div><b>×3</b><span>прогона каждого запроса</span></div>
-      <div><b>9</b><span>параметров разметки ответа</span></div>
-      <div><b>90</b><span>дней — горизонт плана исправления</span></div>
-    </div>
-
-    <div class="mock" style="text-align:left">
-      <div class="mock-top">
-        <div class="rep-tabs" role="tablist">
-          <button role="tab" aria-selected="true" data-p="cmp">Раздел 1. Сравнение</button>
-          <button role="tab" aria-selected="false" data-p="rep">Раздел 2. Репутация</button>
-        </div>
-        <span>Пример: 120 запросов · 4 ассистента · 3 прогона</span>
-      </div>
-
-      <div class="rep-panel on" id="p-cmp">
-        <div class="kpi">
-          <div><div class="l">Упоминаний</div><div class="v">19 <span>из 120</span></div><div class="s">запросов исследования</div></div>
-          <div class="glow-bad"><div class="l">Охват бренда</div><div class="v bad">16%</div><div class="s">запросов, где вы названы</div></div>
-          <div><div class="l">Средняя позиция</div><div class="v">3,8</div><div class="s">у лидера категории 1,6</div></div>
-          <div><div class="l">Прямые рекомендации</div><div class="v">11%</div><div class="s">последнее место 42%</div></div>
-        </div>
-        <div class="rep-grid">
-          <div class="box">
-            <h3>Рейтинг брендов в ответах</h3>
-            <div style="overflow:auto">
-            <table>
-              <thead><tr><th>#</th><th>Бренд</th><th>Доля показов</th><th>Упомянут</th><th>Ср. позиция</th><th>Прямые</th><th>Топ-3</th><th>Последний</th></tr></thead>
-              <tbody>
-                <tr><td>1</td><td>Конкурент А</td><td>71%</td><td>85</td><td>1,6</td><td>48%</td><td>92%</td><td>2%</td></tr>
-                <tr><td>2</td><td>Конкурент Б</td><td>58%</td><td>70</td><td>2,3</td><td>31%</td><td>74%</td><td>9%</td></tr>
-                <tr><td>3</td><td>Конкурент В</td><td>44%</td><td>53</td><td>2,9</td><td>18%</td><td>55%</td><td>17%</td></tr>
-                <tr><td>4</td><td>Конкурент Г</td><td>30%</td><td>36</td><td>3,4</td><td>12%</td><td>38%</td><td>28%</td></tr>
-                <tr class="you"><td>5</td><td>Ваш бренд</td><td>16%</td><td>19</td><td>3,8</td><td>11%</td><td>26%</td><td>42%</td></tr>
-                <tr><td>6</td><td>Конкурент Д</td><td>12%</td><td>14</td><td>4,1</td><td>7%</td><td>21%</td><td>50%</td></tr>
-              </tbody>
-            </table>
-            </div>
-          </div>
-          <div style="display:grid;gap:14px">
-            <div class="box">
-              <h3>Откуда ИИ берёт информацию</h3>
-              <div class="bars">
-                <div class="bar"><span>otzovik.com</span><div class="t"><i style="width:82%"></i></div><span>24%</span></div>
-                <div class="bar"><span>vc.ru</span><div class="t"><i style="width:60%"></i></div><span>17%</span></div>
-                <div class="bar"><span>market.yandex.ru</span><div class="t"><i style="width:48%"></i></div><span>14%</span></div>
-                <div class="bar"><span>habr.com</span><div class="t"><i style="width:36%"></i></div><span>11%</span></div>
-                <div class="bar"><span>ваш сайт</span><div class="t"><i class="bad" style="width:10%"></i></div><span>3%</span></div>
-              </div>
-            </div>
-            <div class="box">
-              <h3>Где вы топ, где лучше конкуренты</h3>
-              <div class="cat">
-                <div class="ok">Цена <span>1-е</span></div><div class="ok">Доставка <span>2-е</span></div><div class="bad">Надёжность <span>5-е</span></div><div class="bad">Поддержка <span>нет</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="rep-panel" id="p-rep">
-        <div class="kpi">
-          <div class="glow-ok"><div class="l">Позитив</div><div class="v ok">54%</div><div class="s">оценочных фрагментов</div></div>
-          <div class="glow-bad"><div class="l">Негатив</div><div class="v bad">31%</div><div class="s">у топ-3 конкурентов 12–19%</div></div>
-          <div><div class="l">Официальное позиционирование</div><div class="v">Нет</div><div class="s">ИИ формулирует вас по-своему</div></div>
-          <div><div class="l">Правдивость фактов</div><div class="v">7 <span>из 12</span></div><div class="s">проверенных утверждений верны</div></div>
-        </div>
-        <div class="rep-grid">
-          <div class="box">
-            <h3>Что ИИ говорит о бренде</h3>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
-              <ul class="list">
-                <li class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5L20 7"/></svg>Доступные цены, частые акции</li>
-                <li class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5L20 7"/></svg>Быстрая доставка по крупным городам</li>
-                <li class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5L20 7"/></svg>Широкий ассортимент</li>
-              </ul>
-              <ul class="list">
-                <li class="bad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6L6 18"/></svg>«Поддержка отвечает долго» (один источник 2021 года)</li>
-                <li class="bad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6L6 18"/></svg>«Нет гарантии» (неверно, гарантия 2 года)</li>
-                <li class="bad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6L6 18"/></svg>Путает с одноимённым брендом из другой ниши</li>
-              </ul>
-            </div>
-            <h3 style="margin-top:20px">Сравнение правдивости</h3>
-            <div style="overflow:auto">
-            <table>
-              <thead><tr><th>Утверждение ИИ</th><th>На самом деле</th><th>Статус</th></tr></thead>
-              <tbody>
-                <tr><td>Доставка от 3 дней</td><td>От 1 дня в 40 городах</td><td><span class="badge warn">Устарело</span></td></tr>
-                <tr><td>Гарантии нет</td><td>Гарантия 24 месяца</td><td><span class="badge bad">Неверно</span></td></tr>
-                <tr><td>Работает с 2016 года</td><td>С 2016 года</td><td><span class="badge ok">Верно</span></td></tr>
-                <tr><td>Только B2C</td><td>Есть B2B-направление</td><td><span class="badge bad">Неверно</span></td></tr>
-              </tbody>
-            </table>
-            </div>
-          </div>
-          <div style="display:grid;gap:14px">
-            <div class="box">
-              <h3>Концентрация доменов</h3>
-              <div class="bars">
-                <div class="bar"><span>otzovik.com</span><div class="t"><i class="bad" style="width:90%"></i></div><span>46%</span></div>
-                <div class="bar"><span>irecommend.ru</span><div class="t"><i style="width:40%"></i></div><span>21%</span></div>
-                <div class="bar"><span>vc.ru</span><div class="t"><i style="width:26%"></i></div><span>13%</span></div>
-                <div class="bar"><span>ваш сайт</span><div class="t"><i style="width:16%"></i></div><span>8%</span></div>
-              </div>
-            </div>
-            <div class="box">
-              <h3>Доля позитивных оценок: вы и топ-3</h3>
-              <div class="bars">
-                <div class="bar"><span>Ваш бренд</span><div class="t"><i class="ok" style="width:54%"></i></div><span>54%</span></div>
-                <div class="bar"><span>Конкурент А</span><div class="t"><i class="ok" style="width:81%"></i></div><span>81%</span></div>
-                <div class="bar"><span>Конкурент Б</span><div class="t"><i class="ok" style="width:76%"></i></div><span>76%</span></div>
-                <div class="bar"><span>Конкурент В</span><div class="t"><i class="ok" style="width:69%"></i></div><span>69%</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <p class="rep-note">Пример страниц отчёта. Бренды и цифры иллюстративные. В полных разделах также сводные таблицы, аналоги, которые рекомендует ИИ, и план исправления.</p>
-    </div>
-  </div>
-</section>
-
-<section id="what" class="left">
-  <div class="wrap">
-    <h2>Что входит в GEO-аудит <em>бренда</em></h2>
-    <p class="lead">GEO-аудит — это измерение того, как нейросети называют и описывают бренд по запросам клиентов. Каждый пункт ниже — отдельная таблица или страница отчёта с цифрами по вам и по конкурентам, а не абзац общих слов.</p>
-
-    <div class="feat-head" style="margin-top:48px"><span class="tag">Раздел 1</span><h3>Сравнение с конкурентами</h3></div>
-    <div class="feat" style="margin-top:36px">
-      <div class="rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19V9M10 19V5M16 19v-8M22 19H2"/></svg><h3>Упоминания и охват</h3><p>Сколько раз бренд назван из <strong>X запросов</strong> и в каком проценте запросов он вообще присутствует.</p></div>
-      <div class="rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg><h3>Топ-10 доменов</h3><p>Откуда ИИ берёт информацию в вашей категории и какие сайты формируют список рекомендаций.</p></div>
-      <div class="rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 17l5-6 4 3 7-8"/><path d="M20 6v5h-5"/></svg><h3>Средняя позиция</h3><p>На каком месте бренд стоит в ответе в среднем и как расположены <strong>три ближайших конкурента</strong>.</p></div>
-      <div class="rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.5 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg><h3>Доля прямых рекомендаций</h3><p>Как часто ассистент называет вас первым выбором и как часто <strong>последним</strong> в списке.</p></div>
-      <div class="rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><h3>Рейтинг топ-5–10 брендов</h3><p>Позиция, доля показов, число упоминаний, средняя позиция, доли прямых, топ-3 и последних рекомендаций.</p></div>
-      <div class="rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h8M8 17h5"/></svg><h3>Сводная таблица клиента</h3><p>Все показатели только по вашему бренду на одной странице, чтобы сравнивать замеры между собой.</p></div>
-      <div class="rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 7h12M8 12h12M8 17h12M4 7h.01M4 12h.01M4 17h.01"/></svg><h3>Аналоги</h3><p>Какие бренды ИИ предлагает вместо вас и в каких формулировках.</p></div>
-      <div class="rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 6h7v7H4zM13 6h7v7h-7zM4 15h7v5H4zM13 15h7v5h-7z"/></svg><h3>Категории</h3><p>В каких категориях запросов вы лидер, а в каких ассистент считает лучшими конкурентов.</p></div>
-      <div class="rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 20l9-5-9-5-9 5 9 5z"/><path d="M12 10l9-5-9-5-9 5 9 5z"/></svg><h3>Рекомендации</h3><p>Что исправить в первую очередь, чтобы попадать в ответы чаще и выше.</p></div>
-    </div>
-
-    <div class="feat-head"><span class="tag">Раздел 2</span><h3>Репутация</h3></div>
-    <div class="feat" style="margin-top:36px">
-      <div class="rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 20V9l5-5 5 5v11"/><path d="M7 14h10"/></svg><h3>Сильные и слабые стороны</h3><p>О каких сторонах бренда нейросеть отзывается хорошо, о каких нет, со сводкой по конкурентам.</p></div>
-      <div class="rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h9"/></svg><h3>Официальное позиционирование</h3><p>Встречаются ли ваши формулировки в ответах ИИ или он описывает вас по-своему.</p></div>
-      <div class="rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3"/></svg><h3>Концентрация доменов</h3><p>Какие сайты формируют мнение о бренде и насколько оно зависит от <strong>одного источника</strong>.</p></div>
-      <div class="rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 9V5a3 3 0 00-6 0v4H5v11h12l3-8z"/></svg><h3>Тональность</h3><p>Доля позитивных и негативных оценок бренда и те же доли у трёх ближайших конкурентов.</p></div>
-      <div class="rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg><h3>Сравнение правдивости</h3><p>Что ИИ утверждает о бренде и что из этого соответствует действительности.</p></div>
-      <div class="rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 20l9-5-9-5-9 5 9 5z"/><path d="M12 10l9-5-9-5-9 5 9 5z"/></svg><h3>Сводная и рекомендации</h3><p>Сводная таблица по репутации и план: какие факты уточнить, какие источники усилить.</p></div>
-    </div>
-
-    <div class="feat-head"><span class="tag">Поставка</span><h3>Что вы получаете в итоге</h3></div>
-    <div class="deliv">
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5a1 1 0 011-1h9l5 5v10a1 1 0 01-1 1H5a1 1 0 01-1-1z"/><path d="M14 4v5h5M8 14h8M8 17h5"/></svg><span><strong>Отчёт для руководства</strong> в PDF: выводы на первой странице, затем оба раздела с таблицами, рейтингами и сводками</span></div>
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span><strong>Google-таблица с сырыми данными:</strong> все промпты, полные ответы каждого ассистента, разметка по девяти параметрам</span></div>
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h7v7H4zM13 6h7v7h-7zM4 15h7v5H4zM13 15h7v5h-7z"/></svg><span><strong>Карта источников:</strong> какие домены формируют ответы в вашей категории и где у конкурентов есть присутствие, а у вас нет</span></div>
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20l9-5-9-5-9 5 9 5z"/><path d="M12 10l9-5-9-5-9 5 9 5z"/></svg><span><strong>План исправления на 90 дней:</strong> задачи по приоритету с ожидаемым эффектом и исполнителем: сайт, PR, контент, карточки на площадках</span></div>
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 18h16M6 14h4v4H6zM14 8h4v10h-4z"/></svg><span><strong>Стратегическая сессия с командой:</strong> разбираем результаты, отвечаем на вопросы, распределяем задачи плана</span></div>
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><strong>Контрольный замер</strong> по тем же запросам и ассистентам после внедрения плана, чтобы увидеть динамику в цифрах</span></div>
-    </div>
-  </div>
-</section>
-
-<section id="format" class="left">
-  <div class="wrap fmt-grid">
-    <div>
-      <h2>Формат <em>и стоимость</em></h2>
-      <p class="lead">Полный GEO-аудит — это исследование под конкретный бренд, а не шаблонный отчёт. Объём запросов, набор ассистентов и список конкурентов фиксируем в брифе, и от них зависит итоговая смета.</p>
-      <div class="cta-list">
-        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg><span>Оба раздела: сравнение с конкурентами и репутация</span></div>
-        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg><span>Пять ассистентов, три прогона, разметка по девяти параметрам</span></div>
-        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg><span>Отчёт, таблица, карта источников, план на 90 дней, сессия, контрольный замер</span></div>
-      </div>
-    </div>
-    <div class="price">
-      <div class="tag">Полный GEO-аудит бренда</div>
-      <div class="price-v">от 200 000 ₽</div>
-      <p>Итоговая стоимость зависит от числа категорий продуктов, запросов и конкурентов. Смету присылаем после брифа, до начала работ.</p>
-      <ul>
-        <li>Запросы собираем по вашим категориям продуктов и сценариям выбора</li>
-        <li>Сроки каждого этапа фиксируем в договоре</li>
-        <li>Контрольный замер входит в стоимость</li>
-      </ul>
-      <a class="btn pri lg" href="#order">Запросить смету</a>
-    </div>
-  </div>
-</section>
-
-<section id="process" class="center">
-  <div class="wrap">
-    <div class="appicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-    <h2>Как проходит <em>GEO-аудит</em></h2>
-    <p class="lead">Исследование строится на ваших запросах и ваших конкурентах, а не на общих списках. Поэтому начинаем с брифа, а заканчиваем не отчётом, а задачами в работе у вашей команды.</p>
-    <div class="proc" style="text-align:left">
-      <div class="rv"><div class="n">01</div><h3>Бриф и гипотезы</h3><p>Фиксируем бренд, конкурентов, категории продуктов и официальное позиционирование. Формулируем, что хотим проверить, и выбираем ассистентов под вашу аудиторию.</p></div>
-      <div class="rv"><div class="n">02</div><h3>Матрица запросов</h3><p>Собираем сотни промптов так, как спрашивают клиенты: выбор, сравнение, цена, надёжность, «что лучше для…». Раскладываем по категориям и согласуем список с вами.</p></div>
-      <div class="rv"><div class="n">03</div><h3>Прогон и разметка</h3><p>Задаём каждый запрос пяти ассистентам по три раза, размечаем каждый ответ по девяти параметрам, сверяем факты с официальными данными бренда.</p></div>
-      <div class="rv"><div class="n">04</div><h3>Отчёт, план, сессия</h3><p>Передаём отчёт, таблицу, карту источников и план на 90 дней. На сессии разбираем результаты и распределяем задачи. После внедрения делаем контрольный замер.</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="after" class="left">
-  <div class="wrap">
-    <h2>Что происходит <em>после отчёта</em></h2>
-    <p class="lead">План исправления написан так, чтобы его можно было отдать в работу на следующий день. Каждая задача привязана к проблеме из отчёта и к показателю, который она должна сдвинуть.</p>
-    <div class="grid3 prob">
-      <article class="card rv">
-        <div class="card-body">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
-          <h3>Сайт и факты</h3>
-          <p>Какие страницы и формулировки нужны, чтобы ассистенты брали ваше позиционирование и актуальные условия, а не чужой пересказ: ответы на вопросы, факты с цифрами, разметка.</p>
-        </div>
-      </article>
-      <article class="card rv">
-        <div class="card-body">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>
-          <h3>Источники и площадки</h3>
-          <p>Где нужно присутствие, чтобы попадать в ответы: отраслевые медиа, каталоги, площадки отзывов, экспертные публикации. Для каждой — что именно разместить и почему.</p>
-        </div>
-      </article>
-      <article class="card rv">
-        <div class="card-body">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 17l5-6 4 3 7-8"/><path d="M20 6v5h-5"/></svg>
-          <h3>Замер динамики</h3>
-          <p>Те же запросы, те же ассистенты, те же метрики через 90 дней. Видно, что сработало, что нет, и какие задачи ставить в следующий цикл.</p>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section id="check" class="left">
-  <div class="wrap quiz-grid">
-    <div>
-      <h2>Нужен ли вам <em>GEO-аудит</em> уже сейчас</h2>
-      <p class="lead">Три вопроса, которые показывают, какой раздел исследования для вас важнее. Ответы никуда не отправляются.</p>
-      <div class="whom">
-        <div>Клиники и медицинские центры</div><div>SaaS и онлайн-сервисы</div><div>Интернет-магазины и бренды товаров</div><div>B2B-услуги и производители</div><div>Образование и курсы</div><div>Недвижимость и девелоперы</div>
-      </div>
-    </div>
-    <div class="quiz" id="quiz">
-      <div class="q-prog"><i class="on"></i><i></i><i></i></div>
-      <div class="q on">
-        <p class="qt">Когда вы последний раз спрашивали ChatGPT или Алису о своей нише, как клиент?</p>
-        <div class="opts"><button data-v="2">Никогда</button><button data-v="1">Пробовали пару раз, результат не записывали</button><button data-v="0">Проверяем регулярно</button></div>
-      </div>
-      <div class="q">
-        <p class="qt">Знаете ли вы, какие сайты формируют мнение нейросетей о вашем бренде?</p>
-        <div class="opts"><button data-v="2">Нет</button><button data-v="1">Догадываемся: отзовики и маркетплейсы</button><button data-v="0">Да, работаем с ними</button></div>
-      </div>
-      <div class="q">
-        <p class="qt">Клиенты приходили с неверными представлениями о вас: цены, условия, гарантия?</p>
-        <div class="opts"><button data-v="2">Да, регулярно</button><button data-v="1">Иногда</button><button data-v="0">Нет</button></div>
-      </div>
-      <div class="q-res" id="qres"></div>
-    </div>
-  </div>
-</section>
-
-<section id="faq" class="left">
-  <div class="wrap faq">
-    <div><h2>Вопросы <em>о GEO и AEO</em></h2></div>
-    <div>
-      <details open><summary>Что такое GEO-аудит?</summary><p>GEO, Generative Engine Optimization, — работа с тем, как бренд представлен в ответах нейросетей. Аудит измеряет, как часто и на каком месте ИИ называет бренд по запросам клиентов, из каких источников берёт информацию, что говорит о сильных и слабых сторонах и насколько это правдиво.</p></details>
-      <details><summary>Какие нейросети проверяются?</summary><p>ChatGPT, Perplexity, YandexGPT и Алиса, GigaChat, Copilot. Набор согласуем под аудиторию бренда. Источники ответов анализируем у тех ассистентов, которые показывают цитаты; для остальных концентрацию доменов оцениваем по косвенным признакам и говорим об этом в отчёте прямо.</p></details>
-      <details><summary>Откуда берутся запросы для исследования?</summary><p>Список промптов собираем вместе с вами: сценарии выбора, сравнения с конкурентами, вопросы о цене, сроках и надёжности. Количество запросов зависит от числа продуктов и категорий. Все промпты и ответы передаём в Google-таблице.</p></details>
-      <details><summary>Почему цифры в ответах нейросетей могут меняться?</summary><p>Ответы ИИ не детерминированы: один и тот же вопрос может дать разный список. Поэтому мы делаем повторные прогоны и считаем доли, а не единичные ответы. В отчёте указываем, насколько устойчив каждый показатель.</p></details>
-      <details><summary>Что такое AEO и чем отличается от GEO?</summary><p>AEO, Answer Engine Optimization, — оптимизация под прямые ответы: чтобы ассистент брал формулировку бренда в сам ответ на вопрос. GEO шире: она отвечает за присутствие и позицию бренда в рекомендациях, источники и репутацию. В аудите мы измеряем обе стороны, а план исправления покрывает и GEO, и AEO.</p></details>
-      <details><summary>Почему исследование стоит от 200 000 ₽?</summary><p>Потому что это не один запрос и не один ассистент. Сотни промптов, пять ассистентов, три прогона, разметка каждого ответа по девяти параметрам и сверка фактов с официальными данными. К этому добавляются рейтинг конкурентов по тем же метрикам, план на 90 дней с исполнителями, стратегическая сессия и контрольный замер. Вы получаете основание для решений на уровне руководителя, а не скриншот.</p></details>
-      <details><summary>Чем это отличается от SEO-аудита?</summary><p>SEO-аудит смотрит на позиции сайта в поисковой выдаче. GEO-аудит смотрит на бренд: назван ли он в ответе, в каком порядке, с какими словами и из каких источников. Сайт здесь лишь один из источников, часто не главный.</p></details>
-      <details><summary>Что делать после аудита?</summary><p>Отчёт заканчивается планом исправления: какие источники усилить, какие факты уточнить на сайте и в публичных карточках, какие материалы нужны, чтобы бренд чаще попадал в ответы и выглядел в них верно. Внедрение можно делать своей командой или с нами.</p></details>
-    </div>
-  </div>
-</section>
-
-<section class="cta left" id="order">
-  <div class="wrap cta-grid">
-    <div>
-      <h2>Узнайте, что нейросети <em>говорят о вас</em></h2>
-      <p class="lead">Оставьте контакт. Зададим несколько вопросов по брифу, предложим состав исследования под ваш бренд и пришлём смету до начала работ.</p>
-      <div class="cta-list">
-        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg><span>Два раздела отчёта: сравнение с конкурентами и репутация</span></div>
-        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg><span>Google-таблица с промптами и ответами нейросетей</span></div>
-        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg><span>План на 90 дней, стратегическая сессия и контрольный замер</span></div>
-      </div>
-    </div>
-    <div>
-      <form id="lead" novalidate>
-        <input type="text" name="company" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
-        <div class="f-row">
-          <div class="field"><label for="name">Имя</label><input id="name" name="name" required autocomplete="name" placeholder="Как к вам обращаться"></div>
-          <div class="field"><label for="brand">Бренд или сайт</label><input id="brand" name="brand" required placeholder="brand.ru"></div>
-        </div>
-        <div class="f-row">
-          <div class="field"><label for="channel">Как связаться</label><select id="channel" name="channel"><option>Telegram</option><option>WhatsApp</option><option>Телефон</option><option>Почта</option></select></div>
-          <div class="field"><label for="contact">Контакт</label><input id="contact" name="contact" required placeholder="@никнейм, номер или почта"></div>
-        </div>
-        <div class="field"><label for="niche">Ниша и главные конкуренты</label><input id="niche" name="niche" placeholder="Например: стоматология, Москва; конкуренты А, Б"></div>
-        <label class="consent"><input type="checkbox" id="agree" required><span>Согласен на обработку персональных данных в соответствии с <a href="privacy.html">политикой конфиденциальности</a></span></label>
-        <button class="btn pri lg" type="submit">Запросить смету</button>
-        <p class="small" style="margin-top:12px;text-align:center">Ответим в рабочее время в выбранном мессенджере</p>
-      </form>
-      <div class="sent card" id="sent"><h3>Заявка принята</h3><p id="sentMsg">Свяжемся в выбранном мессенджере и уточним бриф.</p></div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap foot">
-    <span>© <span id="year"></span> Эхо. GEO-аудит бренда в нейросетях. Обновлено <time datetime="2026-10-07">7 октября 2026</time></span>
-    <span style="display:flex;gap:18px"><a href="privacy.html">Политика конфиденциальности</a><button type="button" class="ck-open">Настройки cookie</button></span>
-  </div>
-</footer>
-
-<aside class="ck" id="ck" role="dialog" aria-live="polite" aria-label="Использование cookie" hidden>
-  <p>Сайт использует необходимые cookie и, с вашего согласия, аналитические. Подробнее в <a href="privacy.html#s05">политике конфиденциальности</a>.</p>
-  <div class="ck-b"><button type="button" class="btn pri" data-ck="all">Принимаю</button><button type="button" class="btn" data-ck="necessary">Только необходимые</button></div>
-</aside>
-
-<script>
-// Данные клиента: заполнить перед сдачей
-var CONTACTS = { phone: "", whatsapp: "", telegram: "", address: "", hours: "" };
-var SOCIALS  = { vk: "", telegram: "", youtube: "", dzen: "" };
-var LEGAL    = { entity: "", inn: "", ogrn: "", legalAddress: "", email: "" };
-var FORM     = { endpoint: "", accessKey: "" }; // Web3Forms / Formspree / свой обработчик (POST JSON)
-(function(){
-  // Hero scenarios
-  var S=[
-    {q:'Какую CRM выбрать для небольшой стоматологии?',a:'Для клиники на 3–6 кресел чаще всего рекомендуют:',list:[['Конкурент А',''],['Конкурент Б',''],['Конкурент В',''],['Конкурент Г','']],miss:true,foot:'Ваш бренд не упомянут ни в одном из вариантов ответа'},
-    {q:'Сравни сервисы доставки для интернет-магазина одежды',a:'Если важны сроки и возвраты, порядок такой:',list:[['Конкурент А',''],['Конкурент Б',''],['Конкурент В',''],['Ваш бренд','you']],miss:false,foot:'Назван последним, как «ещё один вариант», без рекомендации'},
-    {q:'Стоит ли заказывать у этой компании? Какие условия?',a:'Компания работает с 2016 года. Из минусов:',list:[['Доставка от 3 дней','err|устарело'],['Гарантии нет','err|неверно'],['Работает только с B2C','err|неверно'],['Ассортимент широкий','']],miss:false,foot:'Три из четырёх фактов не соответствуют действительности'}
-  ];
-  var body=document.getElementById('aiBody'),tabs=document.querySelectorAll('.ai-tabs button');
-  function render(i){
-    var s=S[i],h='<div class="fade"><div class="ai-q"><b>Вы</b><p>'+s.q+'</p></div><div class="ai-a"><p>'+s.a+'</p><ol>';
-    s.list.forEach(function(it,k){
-      var cls=it[1].indexOf('you')>-1?' class="you"':'',err='';
-      if(it[1].indexOf('err')===0){err='<span class="err">'+it[1].split('|')[1]+'</span>';}
-      h+='<li'+cls+'><b>'+(k+1)+'</b>'+it[0]+err+'</li>';
-    });
-    if(s.miss)h+='<li class="miss"><span>Ваш бренд</span><span>не упомянут</span></li>';
-    h+='</ol></div><div class="ai-foot"><span>Что это значит для бренда</span><strong>'+s.foot+'</strong></div></div>';
-    body.innerHTML=h;
-    tabs.forEach(function(t,k){t.setAttribute('aria-selected',k===i?'true':'false')});
-  }
-  tabs.forEach(function(t){t.addEventListener('click',function(){render(+t.dataset.s)})});
-  render(0);
-  var auto=setInterval(function(){var cur=+document.querySelector('.ai-tabs [aria-selected="true"]').dataset.s;render((cur+1)%3)},6000);
-  document.getElementById('ai').addEventListener('mouseenter',function(){clearInterval(auto)});
-  document.querySelectorAll('.ai-tabs button').forEach(function(t){t.addEventListener('click',function(){clearInterval(auto)})});
-
-  // Report tabs
-  document.querySelectorAll('.rep-tabs button').forEach(function(b){
-    b.addEventListener('click',function(){
-      document.querySelectorAll('.rep-tabs button').forEach(function(x){x.setAttribute('aria-selected','false')});
-      b.setAttribute('aria-selected','true');
-      document.querySelectorAll('.rep-panel').forEach(function(p){p.classList.remove('on')});
-      document.getElementById('p-'+b.dataset.p).classList.add('on');
-    });
-  });
-
-  // Quiz
-  var qs=document.querySelectorAll('#quiz .q'),prog=document.querySelectorAll('.q-prog i'),score=[],step=0;
-  document.querySelectorAll('#quiz .opts button').forEach(function(b){
-    b.addEventListener('click',function(){
-      score.push(+b.dataset.v);
-      qs[step].classList.remove('on');step++;
-      if(step<qs.length){qs[step].classList.add('on');prog[step].classList.add('on');}
-      else{
-        var sum=score.reduce(function(a,c){return a+c},0),res=document.getElementById('qres'),
-            lvl=sum>=5?'Аудит нужен сейчас':sum>=3?'Стоит проверить':'Вы в хорошей форме',
-            txt=sum>=5?'Вы не видите, что нейросети говорят клиентам, и уже сталкиваетесь с последствиями. Начните с полного аудита двух разделов.':sum>=3?'Есть белые пятна. Аудит покажет, где вы теряете позиции и какие источники формируют мнение о бренде.':'Вы уже следите за ситуацией. Аудит пригодится как замер перед запуском новых продуктов или кампаний.',
-            f=[];
-        if(score[0]>0)f.push('Раздел 1 · Упоминания, охват и средняя позиция');
-        if(score[1]>0)f.push('Раздел 1 · Топ-10 доменов-источников');
-        if(score[2]>0)f.push('Раздел 2 · Правдивость фактов и официальное позиционирование');
-        if(!f.length)f.push('Контрольный замер по обоим разделам');
-        res.innerHTML='<div class="lvl">'+lvl+'</div><p>'+txt+'</p><div class="focus">'+f.map(function(x){return '<div>'+x+'</div>'}).join('')+'</div><a class="btn" href="#order">Обсудить аудит</a>';
-        res.classList.add('on');
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>GEO-продвижение — ваш бренд в ответах ИИ · Эхо</title>
+    <meta
+      name="description"
+      content="Помогаем брендам быть понятными и заметными в ответах нейросетей: GEO-аудит, контент, источники и контроль динамики."
+    />
+    <meta name="theme-color" content="#080909" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://egi411.github.io/geo-audit/" />
+    <meta
+      property="og:title"
+      content="GEO-продвижение — ваш бренд в ответах ИИ · Эхо"
+    />
+    <meta
+      property="og:description"
+      content="Помогаем брендам быть понятными и заметными в ответах нейросетей: GEO-аудит, контент, источники и контроль динамики."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content="Эхо" />
+    <meta property="og:url" content="https://egi411.github.io/geo-audit/" />
+    <meta
+      property="og:image"
+      content="https://egi411.github.io/geo-audit/assets/social.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="assets/mark.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="assets/site.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://egi411.github.io/geo-audit/#org",
+            "name": "Эхо",
+            "url": "https://egi411.github.io/geo-audit/"
+          },
+          {
+            "@type": "WebSite",
+            "url": "https://egi411.github.io/geo-audit/",
+            "name": "Эхо — GEO-продвижение",
+            "inLanguage": "ru-RU"
+          },
+          {
+            "@type": "Service",
+            "name": "GEO-продвижение бренда",
+            "url": "https://egi411.github.io/geo-audit/",
+            "description": "Помогаем брендам быть понятными и заметными в ответах нейросетей: GEO-аудит, контент, источники и контроль динамики.",
+            "provider": { "@id": "https://egi411.github.io/geo-audit/#org" }
+          }
+        ]
       }
-    });
-  });
-
-  // Form
-  var form=document.getElementById('lead');
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-    if(form.company.value)return; // honeypot
-    var ok=true;form.querySelectorAll('[required]').forEach(function(i){
-      var bad=i.type==='checkbox'?!i.checked:!i.value.trim();
-      i.style.outline=bad?'2px solid var(--bad)':'';if(bad)ok=false;
-    });
-    if(!ok)return;
-    var data={name:form.name.value,brand:form.brand.value,channel:form.channel.value,contact:form.contact.value,niche:form.niche.value,access_key:FORM.accessKey};
-    function done(msg){form.style.display='none';if(msg)document.getElementById('sentMsg').textContent=msg;document.getElementById('sent').classList.add('on');}
-    if(!FORM.endpoint){
-      var to=CONTACTS.telegram?'https://t.me/'+CONTACTS.telegram.replace('@',''):CONTACTS.whatsapp?'https://wa.me/'+CONTACTS.whatsapp.replace(/\D/g,''):'';
-      if(to){window.open(to,'_blank');done('Напишите нам в мессенджер, он открылся в новой вкладке.');}
-      else done('Форма пока не подключена. Напишите нам любым удобным способом, контакты появятся здесь после запуска.');
-      return;
-    }
-    fetch(FORM.endpoint,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
-      .then(function(r){done(r.ok?'':'Не удалось отправить. Попробуйте ещё раз чуть позже.')})
-      .catch(function(){done('Не удалось отправить. Попробуйте ещё раз чуть позже.')});
-  });
-
-  // Cookie consent
-  var CK_KEY='echo-geo:cookie-consent',CK_TTL=365*24*60*60*1000,ck=document.getElementById('ck');
-  function applyChoice(c){window.SiteConsent=c;document.documentElement.setAttribute('data-consent',c);document.dispatchEvent(new CustomEvent('site:consent',{detail:c}));/* единственная точка подключения счётчиков, только при c==='all' */}
-  function readCk(){try{var v=JSON.parse(localStorage.getItem(CK_KEY));if(v&&Date.now()-v.at<CK_TTL)return v.choice}catch(e){}return null}
-  function showCk(){ck.hidden=false;ck.querySelector('button').focus({preventScroll:true})}
-  var saved=readCk();
-  if(saved)applyChoice(saved);else setTimeout(showCk,700);
-  ck.querySelectorAll('[data-ck]').forEach(function(b){b.addEventListener('click',function(){var c=b.dataset.ck;try{localStorage.setItem(CK_KEY,JSON.stringify({choice:c,at:Date.now(),v:1}))}catch(e){}applyChoice(c);ck.hidden=true})});
-  document.querySelectorAll('.ck-open').forEach(function(b){b.addEventListener('click',showCk)});
-
-  // Reveal
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
-  document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
-  document.getElementById('year').textContent=new Date().getFullYear();
-})();
-</script>
-</body>
+    </script>
+    <script src="assets/site.js" defer></script>
+    <script src="assets/scene.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">К содержанию</a>
+    <header class="site-header">
+      <div class="wrap nav">
+        <a class="logo" href="./" aria-label="Эхо — главная"
+          ><img src="assets/mark.svg" width="33" height="33" alt="" />Эхо</a
+        >
+        <nav class="nav-links" id="navigation" aria-label="Основная навигация">
+          <a href="./" aria-current="page">GEO-продвижение</a
+          ><a href="audit/">Аудит</a><a href="#process">Как работаем</a
+          ><a href="#faq">Вопросы</a>
+        </nav>
+        <a class="btn nav-cta" href="#brief"
+          >Подготовить бриф <span aria-hidden="true">↗</span></a
+        ><button
+          class="menu-toggle"
+          aria-controls="navigation"
+          aria-expanded="false"
+          aria-label="Открыть меню"
+        >
+          Меню
+        </button>
+      </div>
+    </header>
+    <main id="main">
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow">GEO — продвижение в нейросетях</div>
+            <h1>Ваш бренд.<br />В ответах <span>ИИ.</span></h1>
+            <p class="lead">
+              Клиенты спрашивают нейросети, кого выбрать.<br />Помогаем вашему
+              бренду стать частью ответа — через контент, источники и репутацию.
+            </p>
+            <div class="actions">
+              <a class="btn primary" href="#approach"
+                >Как это работает
+                <span class="arrow" aria-hidden="true">↗</span></a
+              ><a class="text-link" href="audit/"
+                >Начать с аудита
+                <span class="arrow" aria-hidden="true">→</span></a
+              >
+            </div>
+            <div class="hero-note">GENERATIVE ENGINE OPTIMIZATION / ЭХО</div>
+          </div>
+          <div class="hero-scene" aria-hidden="true">
+            <img
+              class="scene-fallback"
+              src="assets/resonance.svg"
+              alt=""
+              width="1000"
+              height="900"
+            /><canvas id="resonance"></canvas>
+            <div class="hero-ground"></div>
+            <div class="scene-label">
+              <span><i></i>ЭХО / РЕЗОНАНС</span><span>СИГНАЛ → ОТВЕТ</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="model-strip">
+        <div class="wrap">
+          <div class="models">
+            <span class="models-label"
+              >В поле внимания<br />
+              вашей аудитории</span
+            ><span class="model-name"><b>✳</b> ChatGPT</span
+            ><span class="model-name"><b>⊹</b> Perplexity</span
+            ><span class="model-name"><b>✦</b> Gemini</span
+            ><span class="model-name"><b>Я</b> Алиса</span
+            ><span class="model-name"><b>◈</b> GigaChat</span>
+          </div>
+          <p class="model-disclaimer">
+            Набор ассистентов согласуем под аудиторию. Названия обозначают
+            платформы для исследования.
+          </p>
+        </div>
+      </div>
+      <section class="block" id="approach">
+        <div class="wrap">
+          <div class="section-top reveal">
+            <div>
+              <div class="eyebrow">Новая точка выбора</div>
+              <h2>
+                Раньше искали ссылки.<br /><span>Теперь ждут ответ.</span>
+              </h2>
+            </div>
+            <p>
+              Нейросеть собирает рекомендацию из доступных ей сведений. Важно,
+              чтобы среди них были точные факты о вас и убедительные причины
+              выбрать ваш продукт.
+            </p>
+          </div>
+          <div class="demo reveal">
+            <div class="demo-controls">
+              <p class="demo-intro">Как бренд может выглядеть в ответе ИИ</p>
+              <div role="group" aria-label="Сценарий ответа">
+                <button class="scenario" data-scenario="0" aria-pressed="true">
+                  <span class="num">01</span
+                  ><span
+                    ><strong>Вас пока не видно</strong
+                    ><small>Рекомендуют конкурентов</small></span
+                  ></button
+                ><button
+                  class="scenario"
+                  data-scenario="1"
+                  aria-pressed="false"
+                >
+                  <span class="num">02</span
+                  ><span
+                    ><strong>Факты искажены</strong
+                    ><small>Упоминание не помогает выбору</small></span
+                  ></button
+                ><button
+                  class="scenario"
+                  data-scenario="2"
+                  aria-pressed="false"
+                >
+                  <span class="num">03</span
+                  ><span
+                    ><strong>Вас понимают правильно</strong
+                    ><small>Продукт соответствует запросу</small></span
+                  >
+                </button>
+              </div>
+            </div>
+            <div class="answer" id="scenario-panel" aria-live="polite">
+              <div class="demo-caption">
+                <span>Пример логики ответа</span><span>✳</span>
+              </div>
+              <p class="answer-q">«Какой сервис выбрать для моей задачи?»</p>
+              <div class="answer-content">
+                <p class="answer-body">
+                  Можно рассмотреть <strong>компанию А</strong> и
+                  <strong>компанию Б</strong>. У них есть подробные описания
+                  решений и материалы по вашей задаче.
+                </p>
+                <div class="answer-brand">
+                  Вашего бренда нет в рекомендации.
+                </div>
+                <p class="answer-foot">
+                  Нет упоминания → нет шанса участвовать в выборе.
+                </p>
+              </div>
+            </div>
+          </div>
+          <p class="demo-bottom">
+            Иллюстрация сценариев, а не реальный ответ модели и не обещание
+            результата.
+          </p>
+        </div>
+      </section>
+      <section class="block" id="work">
+        <div class="wrap">
+          <div class="section-top reveal">
+            <div>
+              <div class="eyebrow">Что меняем</div>
+              <h2>Создаём основания<br /><span>вас рекомендовать.</span></h2>
+            </div>
+            <p>
+              GEO объединяет работу над сайтом, внешними источниками и тем, что
+              модели знают о компании. Каждый шаг начинается с проверяемой
+              гипотезы.
+            </p>
+          </div>
+          <div class="services">
+            <div class="service-row reveal">
+              <span class="num">01 /</span>
+              <h3>Понимаем точку старта</h3>
+              <p>
+                Исследуем запросы клиентов, ответы ассистентов и конкурентов.
+                Отделяем отсутствие бренда от ошибок и слабого позиционирования.
+              </p>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+            <div class="service-row reveal">
+              <span class="num">02 /</span>
+              <h3>Делаем сайт понятным</h3>
+              <p>
+                Уточняем продукты и факты, структуру страниц, доступность
+                контента для поиска. Добавляем ответы на вопросы, которые влияют
+                на выбор.
+              </p>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+            <div class="service-row reveal">
+              <span class="num">03 /</span>
+              <h3>Усиливаем источники</h3>
+              <p>
+                Находим релевантные площадки и пробелы в информации о бренде.
+                Готовим экспертные материалы и согласуем факты в доступных
+                источниках.
+              </p>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+            <div class="service-row reveal">
+              <span class="num">04 /</span>
+              <h3>Проверяем изменения</h3>
+              <p>
+                Повторяем замеры по согласованной методике. Смотрим на
+                присутствие, рекомендации и точность фактов, корректируем
+                приоритеты.
+              </p>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="block editorial">
+        <div class="wrap editorial-grid">
+          <div class="reveal">
+            <div class="eyebrow">Система, а не один текст</div>
+            <h2>
+              Один бренд.<br /><span
+                >Много источников.<br />Цельный образ.</span
+              >
+            </h2>
+            <p>
+              Ваш сайт, публикации, отраслевые каталоги и отзывы могут
+              рассказывать разные истории. Мы находим противоречия и помогаем
+              собрать понятный, подтверждённый образ компании.
+            </p>
+            <a class="text-link" href="#process"
+              >Из чего состоит работа
+              <span class="arrow" aria-hidden="true">→</span></a
+            >
+          </div>
+          <div class="orbit-diagram reveal" aria-hidden="true">
+            <div class="orbit-ring"></div>
+            <div class="orbit-ring"></div>
+            <div class="orbit-ring"></div>
+            <div class="orbit-core">
+              <img src="assets/mark.svg" alt="" width="51" height="51" />
+            </div>
+            <span class="orbit-tag one">ВАШ САЙТ</span
+            ><span class="orbit-tag two">ЭКСПЕРТНЫЕ МАТЕРИАЛЫ</span
+            ><span class="orbit-tag three">ВНЕШНИЕ ИСТОЧНИКИ</span>
+          </div>
+        </div>
+      </section>
+      <section class="block" id="process">
+        <div class="wrap">
+          <div class="section-top reveal">
+            <div>
+              <div class="eyebrow">Как работаем</div>
+              <h2>От первого замера<br /><span>к следующему.</span></h2>
+            </div>
+            <p>
+              Прозрачный цикл: у каждой задачи есть причина, у каждого изменения
+              — способ проверить его результат.
+            </p>
+          </div>
+          <div class="process">
+            <div class="reveal">
+              <div class="step-num">01 / ИССЛЕДОВАНИЕ</div>
+              <h3>Находим разрывы</h3>
+              <p>
+                Согласуем аудиторию, конкурентов и матрицу запросов. Фиксируем
+                исходную картину.
+              </p>
+            </div>
+            <div class="reveal">
+              <div class="step-num">02 / ПРИОРИТЕТЫ</div>
+              <h3>Собираем план</h3>
+              <p>
+                Выбираем задачи по значимости для бизнеса. Разделяем быстрые
+                исправления и системную работу.
+              </p>
+            </div>
+            <div class="reveal">
+              <div class="step-num">03 / ВНЕДРЕНИЕ</div>
+              <h3>Меняем источники</h3>
+              <p>
+                Работаем с сайтом, фактами и материалами. Согласуем изменения с
+                вашей командой.
+              </p>
+            </div>
+            <div class="reveal">
+              <div class="step-num">04 / ПРОВЕРКА</div>
+              <h3>Сравниваем замеры</h3>
+              <p>
+                Повторяем исследование. Фиксируем динамику и обновляем гипотезы
+                следующего цикла.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="block" id="audit">
+        <div class="wrap">
+          <div class="audit-banner reveal">
+            <div>
+              <div class="eyebrow">Самостоятельный первый шаг</div>
+              <h2>Сначала —<br />услышать реальность.</h2>
+              <p>
+                GEO-аудит покажет, как нейросети представляют ваш бренд: кто
+                попадает в рекомендации, какие факты теряются и с чего начать
+                изменения.
+              </p>
+              <a class="btn" href="audit/"
+                >Подробнее об аудите
+                <span class="arrow" aria-hidden="true">↗</span></a
+              >
+            </div>
+            <div class="scan-art" aria-hidden="true">
+              <div class="scan-heading">
+                <span>ЭХО / GEO-АУДИТ</span><span>↗</span>
+              </div>
+              <div class="scan-line"></div>
+              <div class="scan-line"></div>
+              <div class="scan-line"></div>
+              <div class="scan-line"></div>
+              <div class="scan-line"></div>
+              <div class="scan-beam"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="block" id="faq">
+        <div class="wrap faq-layout">
+          <div>
+            <div class="eyebrow">Без магии и обещаний</div>
+            <h2>Хорошие<br />вопросы.</h2>
+          </div>
+          <div>
+            <details>
+              <summary>Что такое GEO-продвижение?</summary>
+              <p>
+                GEO — Generative Engine Optimization: работа с тем, как бренд
+                представлен в ответах генеративных систем. Мы изучаем
+                рекомендации, исправляем информацию, развиваем полезный контент
+                и проверяем изменения повторными исследованиями.
+              </p>
+            </details>
+            <details>
+              <summary>Это заменяет SEO?</summary>
+              <p>
+                Нет. Поисковая доступность, структура и качество сайта важны и
+                для GEO. SEO помогает находить страницы, а GEO дополнительно
+                рассматривает присутствие бренда, точность его описания и
+                рекомендации в ответах ассистентов.
+              </p>
+            </details>
+            <details>
+              <summary>Можно гарантировать рекомендацию ChatGPT?</summary>
+              <p>
+                Нет. Ответ зависит от модели, режима поиска, формулировки
+                запроса и контекста пользователя. Мы можем отвечать за методику,
+                согласованные работы и прозрачность замеров, но не управляем
+                выдачей платформ.
+              </p>
+            </details>
+            <details>
+              <summary>Обязательно начинать с аудита?</summary>
+              <p>
+                Исходный замер нужен, чтобы выбирать задачи осмысленно и
+                сравнивать изменения. Если у вас уже есть исследование, сначала
+                посмотрим его методику и актуальность.
+              </p>
+            </details>
+            <details>
+              <summary>Как вы оцениваете результат?</summary>
+              <p>
+                Сравниваем присутствие бренда, характер рекомендаций и точность
+                фактов по согласованным запросам. Для сопоставимости фиксируем
+                условия и делаем повторы. Бизнес-эффект оцениваем отдельно, если
+                есть доступные данные об обращениях и источниках трафика.
+              </p>
+            </details>
+            <details>
+              <summary>Когда появится эффект?</summary>
+              <p>
+                Универсального срока нет: модели и поисковые индексы обновляются
+                по-разному. Сначала определяем исходное состояние и объём
+                внедрения, затем согласуем контрольные точки без обещания
+                фиксированного места в ответе.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+      <section class="closing" id="brief">
+        <div class="wrap">
+          <div class="eyebrow">Начнём с вашего бренда</div>
+          <h2>Следующий ответ.<br />С вашим брендом.</h2>
+          <p>
+            Расскажите о сайте, аудитории и задачах. Это первый шаг к плану
+            GEO-продвижения.
+          </p>
+          <button class="btn primary" data-open-brief>
+            Подготовить бриф <span class="arrow" aria-hidden="true">↗</span>
+          </button>
+          <p class="small">
+            Бриф сохраняется файлом. Данные никуда не отправляются.
+          </p>
+          <noscript
+            ><p class="noscript">
+              Для подготовки брифа включите JavaScript. Контакты пока не
+              опубликованы.
+            </p></noscript
+          >
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer-top">
+          <a class="logo" href="./"
+            ><img src="assets/mark.svg" width="33" height="33" alt="" />Эхо</a
+          >
+          <div class="footer-links">
+            <a href="./">Продвижение</a><a href="audit/">GEO-аудит</a
+            ><a href="privacy.html">Конфиденциальность</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Эхо · GEO & AEO</span
+          ><span>Быть услышанным. Стать ответом.</span>
+        </div>
+        <div class="wordmark" aria-hidden="true">Эхо.</div>
+      </div>
+    </footer>
+    <dialog id="brief-dialog" aria-labelledby="brief-title">
+      <div class="dialog-head">
+        <h2 id="brief-title">Коротко о задаче</h2>
+        <button class="dialog-close" aria-label="Закрыть бриф">×</button>
+      </div>
+      <p class="dialog-note">
+        Подготовьте вводные и сохраните бриф себе. Отправка заявок пока не
+        подключена — мы не получим эти данные.
+      </p>
+      <form class="brief-form">
+        <label
+          >Бренд или сайт<input
+            name="brand"
+            required
+            maxlength="200"
+            placeholder="Название или example.ru"
+            autocomplete="organization" /></label
+        ><label
+          >Что вас интересует<select
+            name="service"
+            aria-label="Что вас интересует"
+          >
+            <option>GEO-продвижение</option>
+            <option>GEO-аудит</option>
+          </select></label
+        ><label
+          >Кто ваши клиенты?<input
+            name="audience"
+            maxlength="400"
+            placeholder="Продукт, аудитория, география" /></label
+        ><label
+          >Задача и конкуренты<textarea
+            name="task"
+            maxlength="3000"
+            placeholder="Что важно узнать или изменить?"
+          ></textarea></label
+        ><button class="btn primary" type="submit">
+          Скачать бриф <span aria-hidden="true">↓</span>
+        </button>
+        <p class="brief-status" role="status" aria-live="polite"></p>
+      </form>
+    </dialog>
+  </body>
 </html>

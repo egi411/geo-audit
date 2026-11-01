@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>GEO-аудит — что нейросети говорят о бренде · Эхо</title>
+    <meta
+      name="description"
+      content="Исследуем видимость и репутацию бренда в нейросетях. Сравнение с конкурентами, проверка фактов, источники и план приоритетных изменений."
+    />
+    <meta name="theme-color" content="#080909" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://egi411.github.io/geo-audit/audit/" />
+    <meta
+      property="og:title"
+      content="GEO-аудит — что нейросети говорят о бренде · Эхо"
+    />
+    <meta
+      property="og:description"
+      content="Исследуем видимость и репутацию бренда в нейросетях. Сравнение с конкурентами, проверка фактов, источники и план приоритетных изменений."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content="Эхо" />
+    <meta
+      property="og:url"
+      content="https://egi411.github.io/geo-audit/audit/"
+    />
+    <meta
+      property="og:image"
+      content="https://egi411.github.io/geo-audit/assets/social.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="../assets/mark.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="../assets/site.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://egi411.github.io/geo-audit/#org",
+            "name": "Эхо",
+            "url": "https://egi411.github.io/geo-audit/"
+          },
+          {
+            "@type": "WebSite",
+            "url": "https://egi411.github.io/geo-audit/",
+            "name": "Эхо — GEO-продвижение",
+            "inLanguage": "ru-RU"
+          },
+          {
+            "@type": "Service",
+            "name": "GEO-аудит бренда",
+            "url": "https://egi411.github.io/geo-audit/audit/",
+            "description": "Исследуем видимость и репутацию бренда в нейросетях. Сравнение с конкурентами, проверка фактов, источники и план приоритетных изменений.",
+            "provider": { "@id": "https://egi411.github.io/geo-audit/#org" }
+          }
+        ]
+      }
+    </script>
+    <script src="../assets/site.js" defer></script>
+    <script src="../assets/scene.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">К содержанию</a>
+    <header class="site-header">
+      <div class="wrap nav">
+        <a class="logo" href="../" aria-label="Эхо — главная"
+          ><img src="../assets/mark.svg" width="33" height="33" alt="" />Эхо</a
+        >
+        <nav class="nav-links" id="navigation" aria-label="Основная навигация">
+          <a href="../">GEO-продвижение</a
+          ><a href="../audit/" aria-current="page">Аудит</a
+          ><a href="#process">Как работаем</a><a href="#faq">Вопросы</a>
+        </nav>
+        <a class="btn nav-cta" href="#brief"
+          >Подготовить бриф <span aria-hidden="true">↗</span></a
+        ><button
+          class="menu-toggle"
+          aria-controls="navigation"
+          aria-expanded="false"
+          aria-label="Открыть меню"
+        >
+          Меню
+        </button>
+      </div>
+    </header>
+    <main id="main">
+      <section class="hero audit-hero">
+        <div class="wrap hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow">Эхо / GEO-аудит</div>
+            <h1>Что нейросети<br />говорят <span>о вас?</span></h1>
+            <p class="lead">
+              Исследуем видимость и репутацию бренда в ответах ИИ. Показываем,
+              где вы теряете внимание и какие изменения стоит сделать первыми.
+            </p>
+            <div class="actions">
+              <a class="btn primary" href="#report"
+                >Посмотреть отчёт
+                <span class="arrow" aria-hidden="true">↓</span></a
+              ><a class="text-link" href="../"
+                >GEO-продвижение
+                <span class="arrow" aria-hidden="true">→</span></a
+              >
+            </div>
+            <div class="hero-note">СРАВНЕНИЕ / РЕПУТАЦИЯ / ПЛАН ДЕЙСТВИЙ</div>
+          </div>
+          <div class="hero-scene" aria-hidden="true">
+            <img
+              class="scene-fallback"
+              src="../assets/resonance.svg"
+              alt=""
+              width="1000"
+              height="900"
+            /><canvas id="resonance"></canvas>
+            <div class="hero-ground"></div>
+            <div class="scene-label">
+              <span><i></i>ЭХО / РЕЗОНАНС</span><span>СИГНАЛ → ОТВЕТ</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="model-strip">
+        <div class="wrap">
+          <div class="models">
+            <span class="models-label"
+              >В поле внимания<br />
+              вашей аудитории</span
+            ><span class="model-name"><b>✳</b> ChatGPT</span
+            ><span class="model-name"><b>⊹</b> Perplexity</span
+            ><span class="model-name"><b>✦</b> Gemini</span
+            ><span class="model-name"><b>Я</b> Алиса</span
+            ><span class="model-name"><b>◈</b> GigaChat</span>
+          </div>
+          <p class="model-disclaimer">
+            Набор ассистентов согласуем под аудиторию. Названия обозначают
+            платформы для исследования.
+          </p>
+        </div>
+      </div>
+      <section class="block" id="report">
+        <div class="wrap">
+          <div class="section-top reveal">
+            <div>
+              <div class="eyebrow">Загляните в исследование</div>
+              <h2>Видимость бренда.<br /><span>В деталях.</span></h2>
+            </div>
+            <p>
+              Два ракурса одной картины: насколько бренд заметен и что именно о
+              нём говорят. С исходными ответами и объяснением выводов.
+            </p>
+          </div>
+          <div class="report-preview reveal">
+            <div class="report-tabs" role="tablist" aria-label="Разделы отчёта">
+              <button
+                class="report-tab"
+                role="tab"
+                id="tab-visibility"
+                aria-selected="true"
+                aria-controls="panel-visibility"
+                tabindex="0"
+              >
+                Видимость</button
+              ><button
+                class="report-tab"
+                role="tab"
+                id="tab-reputation"
+                aria-selected="false"
+                aria-controls="panel-reputation"
+                tabindex="-1"
+              >
+                Репутация
+              </button>
+            </div>
+            <div
+              class="report-panel"
+              id="panel-visibility"
+              role="tabpanel"
+              aria-labelledby="tab-visibility"
+              tabindex="0"
+            >
+              <p class="report-label">
+                УЧЕБНЫЙ ПРИМЕР · УСЛОВНЫЕ БРЕНДЫ И ДАННЫЕ · НЕ РЕЗУЛЬТАТ КЛИЕНТА
+              </p>
+              <table class="report-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Бренд</th>
+                    <th scope="col">Охват запросов</th>
+                    <th scope="col">Ср. позиция</th>
+                    <th scope="col">Характер ответа</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Компания А</td>
+                    <td>
+                      72%<span class="bar" style="--value: 72%"><i></i></span>
+                    </td>
+                    <td>1,8</td>
+                    <td>Рекомендация</td>
+                  </tr>
+                  <tr class="own">
+                    <td>Ваш бренд</td>
+                    <td>
+                      38%<span class="bar" style="--value: 38%"><i></i></span>
+                    </td>
+                    <td>3,2</td>
+                    <td>Альтернатива</td>
+                  </tr>
+                  <tr>
+                    <td>Компания Б</td>
+                    <td>
+                      26%<span class="bar" style="--value: 26%"><i></i></span>
+                    </td>
+                    <td>4,1</td>
+                    <td>Упоминание</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p class="answer-foot">
+                В реальном отчёте: условия замера, повторы, исходные ответы и
+                выводы по каждой категории.
+              </p>
+            </div>
+            <div
+              class="report-panel"
+              id="panel-reputation"
+              role="tabpanel"
+              aria-labelledby="tab-reputation"
+              tabindex="0"
+              hidden
+            >
+              <p class="report-label">
+                УЧЕБНЫЙ ПРИМЕР · УСЛОВНЫЕ СИТУАЦИИ · НЕ РЕЗУЛЬТАТ КЛИЕНТА
+              </p>
+              <div class="report-grid">
+                <div class="report-item">
+                  <span class="status">01 / ФАКТЫ</span>
+                  <h3>Устаревшее описание</h3>
+                  <p>
+                    Ассистент называет продукт, который компания больше не
+                    предлагает. Проверяем источник и готовим список исправлений.
+                  </p>
+                </div>
+                <div class="report-item">
+                  <span class="status">02 / ПОЗИЦИОНИРОВАНИЕ</span>
+                  <h3>Теряется специализация</h3>
+                  <p>
+                    Бренд описан слишком широко. Сравниваем ответ с официальными
+                    материалами и находим недостающие аргументы.
+                  </p>
+                </div>
+              </div>
+              <p class="answer-foot">
+                Каждое наблюдение связываем с ответом модели и проверяемыми
+                фактами.
+              </p>
+            </div>
+          </div>
+          <p class="demo-bottom">
+            Источники анализируем там, где ассистент показывает ссылки.
+            Отсутствующие цитаты не подменяем догадками.
+          </p>
+        </div>
+      </section>
+      <section class="block" id="what">
+        <div class="wrap">
+          <div class="section-top reveal">
+            <div>
+              <div class="eyebrow">Что входит в аудит</div>
+              <h2>Вся картина.<br /><span>В понятной структуре.</span></h2>
+            </div>
+            <p>
+              Состав и глубину исследования согласуем до старта: под продукт,
+              рынок и сценарии выбора ваших клиентов.
+            </p>
+          </div>
+          <div class="deliverables">
+            <div class="deliverable reveal">
+              <div class="num">01 / ВИДИМОСТЬ</div>
+              <h3>Упоминания и позиции</h3>
+              <p>
+                В каких запросах вас называют, в каком порядке и рекомендуют ли
+                как подходящий вариант.
+              </p>
+            </div>
+            <div class="deliverable reveal">
+              <div class="num">02 / КОНКУРЕНТЫ</div>
+              <h3>С кем вас сравнивают</h3>
+              <p>
+                Какие бренды появляются рядом и вместо вас. В каких категориях
+                они заметнее.
+              </p>
+            </div>
+            <div class="deliverable reveal">
+              <div class="num">03 / ИСТОЧНИКИ</div>
+              <h3>На что ссылается ИИ</h3>
+              <p>
+                Какие сайты цитируются в ответах и какие сведения о бренде
+                доступны на этих площадках.
+              </p>
+            </div>
+            <div class="deliverable reveal">
+              <div class="num">04 / РЕПУТАЦИЯ</div>
+              <h3>Как вас описывают</h3>
+              <p>
+                Сильные и слабые стороны в ответах, тональность и соответствие
+                вашему позиционированию.
+              </p>
+            </div>
+            <div class="deliverable reveal">
+              <div class="num">05 / ФАКТЫ</div>
+              <h3>Где ошибаются модели</h3>
+              <p>
+                Сверка утверждений с официальными данными. Отдельно отмечаем то,
+                что нельзя проверить.
+              </p>
+            </div>
+            <div class="deliverable reveal">
+              <div class="num">06 / СЛЕДУЮЩИЙ ШАГ</div>
+              <h3>План по приоритетам</h3>
+              <p>
+                Что исправить на сайте, какие материалы подготовить и какие
+                источники проработать.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="block editorial" id="process">
+        <div class="wrap">
+          <div class="section-top reveal">
+            <div>
+              <div class="eyebrow">Методика</div>
+              <h2>
+                Воспроизводимый подход.<br /><span>Проверяемые выводы.</span>
+              </h2>
+            </div>
+            <p>
+              Один ответ ничего не доказывает. Фиксируем условия исследования и
+              сохраняем материалы, на которых строятся рекомендации.
+            </p>
+          </div>
+          <div class="process">
+            <div class="reveal">
+              <div class="step-num">01 / БРИФ</div>
+              <h3>Фиксируем контекст</h3>
+              <p>
+                Бренд, продукты, клиенты, конкуренты и официальные факты для
+                проверки.
+              </p>
+            </div>
+            <div class="reveal">
+              <div class="step-num">02 / ЗАПРОСЫ</div>
+              <h3>Собираем матрицу</h3>
+              <p>
+                Выбор, сравнение и сомнения клиентов. Согласуем ассистентов и
+                режимы работы.
+              </p>
+            </div>
+            <div class="reveal">
+              <div class="step-num">03 / ИССЛЕДОВАНИЕ</div>
+              <h3>Повторяем и размечаем</h3>
+              <p>
+                Сохраняем ответы, условия и даты замеров. Проверяем факты и
+                ссылки.
+              </p>
+            </div>
+            <div class="reveal">
+              <div class="step-num">04 / РЕЗУЛЬТАТ</div>
+              <h3>Разбираем выводы</h3>
+              <p>
+                Отчёт, таблица запросов и ответов, карта наблюдаемых источников
+                и план изменений.
+              </p>
+            </div>
+          </div>
+          <p class="method-note">
+            Ответы моделей меняются. Результат аудита — снимок при согласованных
+            условиях, а не универсальная оценка для всех пользователей.
+            Контрольный замер согласуем отдельно.
+          </p>
+        </div>
+      </section>
+      <section class="block" id="faq">
+        <div class="wrap faq-layout">
+          <div>
+            <div class="eyebrow">Без магии и обещаний</div>
+            <h2>Хорошие<br />вопросы.</h2>
+          </div>
+          <div>
+            <details>
+              <summary>Чем аудит отличается от продвижения?</summary>
+              <p>
+                Аудит выявляет проблемы и задаёт приоритеты. Продвижение
+                включает внедрение изменений в контенте и источниках, а также
+                последующие замеры. Аудит можно заказать как самостоятельное
+                исследование.
+              </p>
+            </details>
+            <details>
+              <summary>Какие нейросети вы проверяете?</summary>
+              <p>
+                Набор согласуем под рынок и аудиторию: например, ChatGPT,
+                Perplexity, Gemini, Алису и GigaChat. В отчёте фиксируем
+                доступные версии и режимы. Цитаты и домены собираем только там,
+                где они действительно показаны.
+              </p>
+            </details>
+            <details>
+              <summary>Откуда берутся запросы?</summary>
+              <p>
+                Из сценариев выбора вашего продукта: вопросы клиентов,
+                сравнения, ограничения, отраслевые задачи. Матрицу запросов
+                согласуем до замера и передаём вместе с результатами.
+              </p>
+            </details>
+            <details>
+              <summary>Что я получу?</summary>
+              <p>
+                Отчёт по видимости и репутации, исходные запросы и ответы в
+                таблице, наблюдаемые источники и приоритетный план. Глубину
+                сравнения и формат передачи согласуем перед стартом.
+              </p>
+            </details>
+            <details>
+              <summary>Можно ли провести аудит самостоятельно?</summary>
+              <p>
+                Да. Важно заранее определить матрицу запросов, повторять замеры
+                в сопоставимых условиях и не делать вывод по одному ответу.
+                Отдельно проверяйте факты и сохраняйте исходные материалы.
+              </p>
+            </details>
+            <details>
+              <summary>Что делать после отчёта?</summary>
+              <p>
+                Можно внедрить рекомендации своей командой или продолжить работу
+                над GEO с нами. Для этого есть отдельное направление продвижения
+                — от исправления фактов до развития контента и повторных
+                замеров.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+      <section class="closing" id="brief">
+        <div class="wrap">
+          <div class="eyebrow">Начнём с вашего бренда</div>
+          <h2>Услышьте, что ИИ<br />говорит о вас.</h2>
+          <p>
+            Расскажите о сайте, аудитории и задачах. Это первый шаг к
+            исследованию вашей видимости.
+          </p>
+          <button class="btn primary" data-open-brief>
+            Подготовить бриф <span class="arrow" aria-hidden="true">↗</span>
+          </button>
+          <p class="small">
+            Бриф сохраняется файлом. Данные никуда не отправляются.
+          </p>
+          <noscript
+            ><p class="noscript">
+              Для подготовки брифа включите JavaScript. Контакты пока не
+              опубликованы.
+            </p></noscript
+          >
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer-top">
+          <a class="logo" href="../"
+            ><img
+              src="../assets/mark.svg"
+              width="33"
+              height="33"
+              alt=""
+            />Эхо</a
+          >
+          <div class="footer-links">
+            <a href="../">Продвижение</a><a href="../audit/">GEO-аудит</a
+            ><a href="../privacy.html">Конфиденциальность</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Эхо · GEO & AEO</span
+          ><span>Быть услышанным. Стать ответом.</span>
+        </div>
+        <div class="wordmark" aria-hidden="true">Эхо.</div>
+      </div>
+    </footer>
+    <dialog id="brief-dialog" aria-labelledby="brief-title">
+      <div class="dialog-head">
+        <h2 id="brief-title">Коротко о задаче</h2>
+        <button class="dialog-close" aria-label="Закрыть бриф">×</button>
+      </div>
+      <p class="dialog-note">
+        Подготовьте вводные и сохраните бриф себе. Отправка заявок пока не
+        подключена — мы не получим эти данные.
+      </p>
+      <form class="brief-form">
+        <label
+          >Бренд или сайт<input
+            name="brand"
+            required
+            maxlength="200"
+            placeholder="Название или example.ru"
+            autocomplete="organization" /></label
+        ><label
+          >Что вас интересует<select
+            name="service"
+            aria-label="Что вас интересует"
+          >
+            <option>GEO-продвижение</option>
+            <option>GEO-аудит</option>
+          </select></label
+        ><label
+          >Кто ваши клиенты?<input
+            name="audience"
+            maxlength="400"
+            placeholder="Продукт, аудитория, география" /></label
+        ><label
+          >Задача и конкуренты<textarea
+            name="task"
+            maxlength="3000"
+            placeholder="Что важно узнать или изменить?"
+          ></textarea></label
+        ><button class="btn primary" type="submit">
+          Скачать бриф <span aria-hidden="true">↓</span>
+        </button>
+        <p class="brief-status" role="status" aria-live="polite"></p>
+      </form>
+    </dialog>
+  </body>
+</html>
