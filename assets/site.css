@@ -2118,3 +2118,627 @@ textarea::placeholder {
     font-size: 15px;
   }
 }
+/* Question → short answer → explanation, with original graphite product scenes. */
+:root {
+  --backdrop-wash: #080909d9;
+  --backdrop-clear: #08090900;
+  --backdrop-soft: #08090977;
+  --answer-ink: #d8d7d0;
+}
+.short-answer {
+  color: var(--answer-ink);
+  font-size: 14px;
+  line-height: 1.75;
+  font-weight: 450;
+  margin: 15px 0 17px;
+  max-width: 560px;
+}
+.hero h1 {
+  font-size: clamp(39px, 4vw, 59px);
+  line-height: 1.16;
+}
+.hero-copy > .short-answer {
+  font-size: 17px;
+  line-height: 1.65;
+  max-width: 440px;
+  margin: 24px 0 0;
+  color: var(--ink);
+}
+.hero .lead {
+  margin: 15px 0 28px;
+  line-height: 1.8;
+  font-size: 14px;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(
+      90deg,
+      var(--bg) 8%,
+      var(--backdrop-wash) 32%,
+      var(--backdrop-clear) 72%
+    ),
+    url("graphite-background.webp");
+  background-size: cover;
+  background-position: center 55%;
+  opacity: 0.9;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--black) 15%,
+    var(--black) 78%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+.hero-scene {
+  position: relative;
+  z-index: 1;
+}
+.section-top .short-answer {
+  margin-bottom: 0;
+  max-width: 490px;
+}
+.section-top > p {
+  padding-top: 4px;
+}
+.section-top h2 {
+  font-size: clamp(32px, 3.2vw, 46px);
+  line-height: 1.18;
+}
+.service-heading {
+  min-width: 0;
+}
+.service-row h3 {
+  font-size: 21px;
+  line-height: 1.35;
+}
+.service-heading .short-answer {
+  font-size: 12px;
+  line-height: 1.8;
+  margin: 12px 0 0;
+  color: var(--muted);
+}
+.service-row > .arrow {
+  grid-column: 4;
+}
+.service-row > p {
+  font-size: 13px;
+}
+.editorial {
+  isolation: isolate;
+}
+.editorial::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(
+      90deg,
+      var(--bg) 15%,
+      var(--backdrop-wash) 45%,
+      var(--backdrop-soft)
+    ),
+    url("graphite-background.webp");
+  background-size: cover;
+  background-position: center 75%;
+  opacity: 0.65;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    var(--black) 25%,
+    var(--black) 80%,
+    transparent
+  );
+  pointer-events: none;
+}
+.editorial .short-answer {
+  font-size: 15px;
+  margin: 20px 0 0;
+  max-width: 450px;
+}
+.editorial h2 {
+  font-size: clamp(33px, 3.4vw, 48px);
+}
+.editorial .short-answer + p {
+  margin-top: 15px;
+}
+.process h3 {
+  font-size: 18px;
+  line-height: 1.4;
+  margin-bottom: 0;
+}
+.process .short-answer {
+  font-size: 12px;
+  color: var(--answer-ink);
+  line-height: 1.8;
+  margin: 14px 0 13px;
+}
+.process .short-answer + p {
+  margin: 0;
+}
+.audit-banner {
+  background: linear-gradient(125deg, var(--surface), var(--bg));
+  gap: 40px;
+}
+.audit-banner h2 {
+  font-size: 34px;
+  line-height: 1.2;
+}
+.audit-banner .short-answer {
+  color: var(--ink);
+  font-size: 14px;
+  margin: 18px 0 13px;
+}
+.audit-banner .short-answer + p {
+  font-size: 13px;
+  margin-bottom: 25px;
+}
+.audit-sculpture {
+  position: relative;
+  max-width: 370px;
+  justify-self: center;
+  width: 100%;
+  aspect-ratio: 1;
+}
+.audit-sculpture img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0.8) saturate(0.7)
+    drop-shadow(0 30px 25px var(--product-shadow));
+  animation: audit-hover 11s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.motion-in-view.audit-sculpture img {
+  animation-play-state: running;
+}
+.source-sculpture {
+  position: relative;
+  aspect-ratio: 1.1;
+  min-width: 0;
+  isolation: isolate;
+}
+.source-sculpture::before {
+  content: "";
+  position: absolute;
+  inset: 20% 0;
+  background: radial-gradient(ellipse, var(--product-glow), transparent 70%);
+  filter: blur(20px);
+  z-index: -1;
+}
+.source-sculpture img {
+  position: absolute;
+  object-fit: contain;
+  height: auto;
+  filter: brightness(0.75) saturate(0.65)
+    drop-shadow(0 25px 20px var(--product-shadow));
+  animation-play-state: paused !important;
+}
+.source-sculpture .sculpture-brand {
+  left: 2%;
+  top: 3%;
+  width: 57%;
+  transform: rotate(-9deg);
+  animation: brand-hover 13s ease-in-out infinite;
+  z-index: 1;
+}
+.source-sculpture .sculpture-audit {
+  right: 2%;
+  bottom: 3%;
+  width: 70%;
+  transform: rotate(8deg);
+  animation: lens-hover 15s ease-in-out infinite;
+  z-index: 2;
+}
+.source-sculpture.motion-in-view img {
+  animation-play-state: running !important;
+}
+.platform-card h3 {
+  font-size: 20px;
+  line-height: 1.4;
+  margin-bottom: 0;
+}
+.platform-card .short-answer {
+  font-size: 13px;
+  color: var(--answer-ink);
+  margin: 15px 0 13px;
+}
+.platform-card .short-answer + p {
+  font-size: 12px;
+}
+.comparison-grid h3 {
+  font-size: 20px;
+  margin-bottom: 0;
+}
+.comparison-grid .short-answer {
+  font-size: 13px;
+  color: var(--answer-ink);
+  margin: 15px 0 12px;
+}
+.use-case-grid h3 {
+  font-size: 21px;
+  line-height: 1.4;
+  margin-bottom: 0;
+}
+.use-case-grid .short-answer {
+  font-size: 13px;
+  color: var(--answer-ink);
+  margin: 15px 0 12px;
+}
+.faq-layout h2 {
+  font-size: 34px;
+  line-height: 1.2;
+}
+.faq-layout .short-answer {
+  font-size: 13px;
+  margin: 20px 0 0;
+  max-width: 300px;
+}
+.closing {
+  isolation: isolate;
+  overflow: clip;
+}
+.closing::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(
+      90deg,
+      var(--bg),
+      var(--backdrop-wash),
+      var(--backdrop-soft)
+    ),
+    url("graphite-background.webp");
+  background-size: cover;
+  background-position: center 80%;
+  opacity: 0.45;
+  mask-image: linear-gradient(to bottom, transparent, var(--black) 60%);
+  pointer-events: none;
+}
+.closing h2 {
+  font-size: clamp(35px, 4vw, 55px);
+}
+.closing .short-answer {
+  font-size: 15px;
+  color: var(--ink);
+  max-width: 530px;
+  margin: 22px auto 0;
+}
+.closing .short-answer + p {
+  margin: 15px auto 27px;
+}
+.dialog-head {
+  align-items: flex-start;
+}
+.dialog-head h2 {
+  font-size: 24px;
+  line-height: 1.3;
+}
+.dialog-head + .short-answer {
+  font-size: 13px;
+  margin: 0 0 13px;
+  color: var(--ink);
+}
+.cookie-banner .short-answer {
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--ink);
+  margin: 0 0 6px;
+}
+.cookie-banner h2 {
+  font-size: 16px;
+}
+.document-page > .short-answer {
+  font-size: 16px;
+  color: var(--ink);
+  max-width: 720px;
+  margin: 24px 0 0;
+}
+.document-meta {
+  margin: 18px 0 40px;
+}
+.document-page section > .short-answer {
+  font-size: 14px;
+  color: var(--answer-ink);
+  margin: 18px 0 13px;
+}
+.document-page section h2 {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+.report-item h3 {
+  font-size: 16px;
+  line-height: 1.45;
+  margin: 0;
+}
+.report-item .short-answer {
+  font-size: 12px;
+  color: var(--ink);
+  margin: 13px 0;
+}
+.deliverable h3 {
+  font-size: 18px;
+  line-height: 1.4;
+  margin: 0;
+}
+.deliverable .short-answer {
+  font-size: 12px;
+  color: var(--ink);
+  margin: 14px 0 12px;
+}
+.inline-offer {
+  gap: 25px;
+}
+.inline-offer > div {
+  flex: 1;
+  min-width: 0;
+}
+.inline-offer h3 {
+  font-size: 20px;
+  margin: 0;
+}
+.inline-offer .short-answer {
+  font-size: 13px;
+  color: var(--ink);
+  margin: 13px 0;
+}
+.offer-object {
+  width: 110px;
+  flex-shrink: 0;
+  height: auto;
+  filter: brightness(0.75) saturate(0.6);
+  animation: audit-hover 12s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.offer-object.motion-in-view {
+  animation-play-state: running;
+}
+@keyframes audit-hover {
+  0%,
+  100% {
+    transform: perspective(900px) rotateY(-5deg) rotateX(2deg) translateY(3px);
+  }
+  50% {
+    transform: perspective(900px) rotateY(4deg) rotateX(-1deg) translateY(-8px);
+  }
+}
+@keyframes brand-hover {
+  0%,
+  100% {
+    transform: rotate(-9deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-7deg) translateY(-9px);
+  }
+}
+@keyframes lens-hover {
+  0%,
+  100% {
+    transform: rotate(8deg) translateY(0);
+  }
+  50% {
+    transform: rotate(6deg) translateY(7px);
+  }
+}
+@media (max-width: 1000px) {
+  .hero h1 {
+    font-size: clamp(36px, 4.6vw, 50px);
+  }
+  .hero-copy > .short-answer {
+    font-size: 15px;
+  }
+  .hero .lead {
+    font-size: 13px;
+  }
+  .service-row h3 {
+    font-size: 19px;
+  }
+  .inline-offer {
+    flex-wrap: wrap;
+  }
+  .inline-offer .btn {
+    margin-left: auto;
+  }
+  .source-sculpture {
+    aspect-ratio: 1;
+  }
+}
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: clamp(36px, 8vw, 56px);
+  }
+  .hero-copy > .short-answer {
+    font-size: 16px;
+    max-width: 430px;
+    margin-top: 22px;
+  }
+  .hero .lead {
+    font-size: 14px;
+    max-width: 440px;
+    margin-top: 13px;
+  }
+  .hero::before {
+    background-image:
+      linear-gradient(
+        180deg,
+        var(--backdrop-wash) 10%,
+        var(--backdrop-soft) 55%,
+        var(--backdrop-clear)
+      ),
+      url("graphite-background-mobile.webp");
+    background-position: center bottom;
+    background-size: cover;
+    opacity: 0.6;
+    mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      var(--black) 45%,
+      var(--black) 85%,
+      transparent
+    );
+  }
+  .hero-scene {
+    margin-top: 25px;
+  }
+  .section-top h2 {
+    font-size: clamp(30px, 5.8vw, 42px);
+  }
+  .section-top .short-answer {
+    font-size: 14px;
+    margin-top: 16px;
+  }
+  .section-top > p {
+    padding: 0;
+  }
+  .service-row > .arrow {
+    grid-column: 3;
+  }
+  .service-heading .short-answer {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+  .service-row > p {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .editorial-grid {
+    gap: 28px;
+  }
+  .editorial h2 {
+    font-size: clamp(32px, 5.7vw, 42px);
+  }
+  .editorial .short-answer {
+    font-size: 14px;
+  }
+  .editorial::before {
+    background-image:
+      linear-gradient(
+        180deg,
+        var(--bg) 10%,
+        var(--backdrop-wash) 45%,
+        var(--backdrop-soft)
+      ),
+      url("graphite-background-mobile.webp");
+    background-position: right bottom;
+    opacity: 0.6;
+  }
+  .source-sculpture {
+    max-width: 420px;
+    width: 100%;
+    margin: auto;
+    aspect-ratio: 1.05;
+  }
+  .audit-banner h2 {
+    font-size: 29px;
+  }
+  .audit-sculpture {
+    max-width: 300px;
+  }
+  .process h3 {
+    font-size: 17px;
+  }
+  .faq-layout h2 {
+    font-size: 31px;
+  }
+  .faq-layout .short-answer {
+    max-width: 440px;
+    margin-top: 17px;
+  }
+  .closing h2 {
+    font-size: clamp(33px, 6.6vw, 47px);
+  }
+  .closing::before {
+    background-image:
+      linear-gradient(
+        90deg,
+        var(--bg),
+        var(--backdrop-wash),
+        var(--backdrop-soft)
+      ),
+      url("graphite-background-mobile.webp");
+  }
+  .closing .short-answer {
+    font-size: 14px;
+  }
+  .document-page > .short-answer {
+    font-size: 14px;
+  }
+  .inline-offer {
+    align-items: flex-start;
+  }
+  .offer-object {
+    width: 110px;
+  }
+  .inline-offer .btn {
+    margin-left: 0;
+  }
+  .inline-offer > div {
+    width: 100%;
+    flex: auto;
+  }
+  .dialog-head h2 {
+    font-size: 22px;
+  }
+  .document-page section > .short-answer {
+    font-size: 13px;
+  }
+  .deliverable h3 {
+    font-size: 17px;
+  }
+  .short-answer {
+    font-size: 13px;
+  }
+}
+@media (max-width: 414px) {
+  .hero h1 {
+    font-size: clamp(33px, 8.6vw, 37px);
+  }
+  .hero-copy > .short-answer {
+    font-size: 15px;
+  }
+  .section-top h2 {
+    font-size: 30px;
+  }
+  .process {
+    grid-template-columns: 1fr;
+  }
+  .process h3 {
+    font-size: 20px;
+  }
+  .process .short-answer {
+    font-size: 13px;
+    max-width: 340px;
+  }
+  .process p {
+    font-size: 12px;
+    max-width: 340px;
+  }
+  .process .step-num {
+    padding-bottom: 17px;
+    margin-bottom: 20px;
+  }
+  .dialog-head h2 {
+    font-size: 20px;
+  }
+  .cookie-banner h2 {
+    font-size: 15px;
+  }
+  .source-sculpture {
+    max-width: 330px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .source-sculpture img,
+  .audit-sculpture img,
+  .offer-object {
+    animation: none !important;
+    will-change: auto;
+  }
+}

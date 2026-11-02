@@ -1,27 +1,40 @@
 (() => {
   "use strict";
   const scene = document.querySelector(".hero-scene");
-  if (!scene) return;
+  const elements = [
+    ...document.querySelectorAll(
+      ".hero-scene,.source-sculpture,.audit-sculpture,.offer-object",
+    ),
+  ];
+  if (!elements.length) return;
   const reduced = matchMedia("(prefers-reduced-motion: reduce)");
-  let visible = true,
-    frame = 0;
-  const active = () =>
-    scene.classList.toggle(
-      "scene-active",
-      visible && !document.hidden && !reduced.matches,
-    );
+  const visible = new Map(
+    elements.map((el) => [el, !("IntersectionObserver" in window)]),
+  );
+  let frame = 0;
+  function refresh() {
+    elements.forEach((el) => {
+      const active = visible.get(el) && !document.hidden && !reduced.matches;
+      el.classList.toggle("motion-in-view", active);
+      if (el === scene) el.classList.toggle("scene-active", active);
+    });
+  }
   if ("IntersectionObserver" in window) {
-    new IntersectionObserver((entries) => {
-      visible = entries[0].isIntersecting;
-      active();
-    }).observe(scene);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) =>
+        visible.set(entry.target, entry.isIntersecting),
+      );
+      refresh();
+    });
+    elements.forEach((el) => observer.observe(el));
   }
   window.addEventListener(
     "pointermove",
     (event) => {
       if (
+        !scene ||
         event.pointerType !== "mouse" ||
-        !visible ||
+        !visible.get(scene) ||
         document.hidden ||
         reduced.matches ||
         frame
@@ -42,10 +55,10 @@
     { passive: true },
   );
   reduced.addEventListener("change", () => {
-    scene.style.removeProperty("--rx");
-    scene.style.removeProperty("--ry");
-    active();
+    scene?.style.removeProperty("--rx");
+    scene?.style.removeProperty("--ry");
+    refresh();
   });
-  document.addEventListener("visibilitychange", active);
-  active();
+  document.addEventListener("visibilitychange", refresh);
+  refresh();
 })();
