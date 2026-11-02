@@ -1,0 +1,955 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Редакция AiLeeds" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Что покажет GEO-аудит сайта и бренда? | AiLeeds</title>
+    <meta
+      name="description"
+      content="GEO-аудит видимости сайта и бренда в нейросетях: упоминания, конкуренты, источники и репутация. Отчёт с исходными ответами и планом GEO-оптимизации от AiLeeds."
+    />
+    <meta name="theme-color" content="#080909" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://egi411.github.io/geo-audit/audit/" />
+    <meta
+      property="og:title"
+      content="Что покажет GEO-аудит сайта и бренда? | AiLeeds"
+    />
+    <meta
+      property="og:description"
+      content="GEO-аудит видимости сайта и бренда в нейросетях: упоминания, конкуренты, источники и репутация. Отчёт с исходными ответами и планом GEO-оптимизации от AiLeeds."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content="AiLeeds" />
+    <meta
+      property="og:url"
+      content="https://egi411.github.io/geo-audit/audit/"
+    />
+    <meta
+      property="og:image"
+      content="https://egi411.github.io/geo-audit/assets/social.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="../assets/mark.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="../assets/site.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://egi411.github.io/geo-audit/#org",
+            "name": "AiLeeds",
+            "url": "https://egi411.github.io/geo-audit/",
+            "logo": "https://egi411.github.io/geo-audit/assets/mark.svg",
+            "description": "AiLeeds — бренд проекта по GEO-продвижению и аудиту видимости в нейросетях."
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://egi411.github.io/geo-audit/#website",
+            "name": "AiLeeds",
+            "url": "https://egi411.github.io/geo-audit/",
+            "inLanguage": "ru-RU"
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://egi411.github.io/geo-audit/audit/#page",
+            "url": "https://egi411.github.io/geo-audit/audit/",
+            "name": "Что покажет GEO-аудит сайта и бренда? | AiLeeds",
+            "description": "GEO-аудит видимости сайта и бренда в нейросетях: упоминания, конкуренты, источники и репутация. Отчёт с исходными ответами и планом GEO-оптимизации от AiLeeds.",
+            "inLanguage": "ru-RU",
+            "isPartOf": {
+              "@id": "https://egi411.github.io/geo-audit/#website"
+            },
+            "author": { "@id": "https://egi411.github.io/geo-audit/#org" },
+            "publisher": { "@id": "https://egi411.github.io/geo-audit/#org" },
+            "dateModified": "2026-11-02",
+            "dateCreated": "2026-11-01",
+            "datePublished": "2026-11-02"
+          },
+          {
+            "@type": "Service",
+            "name": "GEO-аудит сайта и бренда",
+            "url": "https://egi411.github.io/geo-audit/audit/",
+            "serviceType": "GEO visibility audit",
+            "description": "GEO-аудит видимости сайта и бренда в нейросетях: упоминания, конкуренты, источники и репутация. Отчёт с исходными ответами и планом GEO-оптимизации от AiLeeds.",
+            "provider": { "@id": "https://egi411.github.io/geo-audit/#org" }
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Чем аудит отличается от продвижения?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Аудит выявляет проблемы и задаёт приоритеты. Продвижение включает внедрение изменений в контенте и источниках, а также последующие замеры. Аудит можно заказать как самостоятельное исследование."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Какие нейросети вы проверяете?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Набор согласуем под рынок и аудиторию: например, ChatGPT, Perplexity, Gemini, Алису и GigaChat. В отчёте фиксируем доступные версии и режимы. Цитаты и домены собираем только там, где они действительно показаны."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Откуда берутся запросы?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Из сценариев выбора вашего продукта: вопросы клиентов, сравнения, ограничения, отраслевые задачи. Матрицу запросов согласуем до замера и передаём вместе с результатами."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Что я получу?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Отчёт по видимости и репутации, исходные запросы и ответы в таблице, наблюдаемые источники и приоритетный план. Глубину сравнения и формат передачи согласуем перед стартом."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Можно ли провести аудит самостоятельно?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Да. Важно заранее определить матрицу запросов, повторять замеры в сопоставимых условиях и не делать вывод по одному ответу. Отдельно проверяйте факты и сохраняйте исходные материалы."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Что делать после отчёта?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Можно внедрить рекомендации своей командой или продолжить работу над GEO с нами. Для этого есть отдельное направление продвижения — от исправления фактов до развития контента и повторных замеров."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Чем GEO-аудит сайта отличается от аудита бренда?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Аудит сайта оценивает страницы как источник информации: доступность, структуру, содержание и факты. Аудит бренда рассматривает представление компании в ответах ИИ, включая внешние площадки и сравнение с конкурентами. В AiLeeds объединяем оба ракурса, чтобы рекомендации не ограничивались правками метатегов."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Какие показатели есть в отчёте?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Присутствие бренда по согласованным запросам, среднее место там, где ответ содержит упорядоченный список, характер рекомендации, точность утверждений и наблюдаемые цитаты. Обязательно указываем объём и условия выборки: проценты без них могут вводить в заблуждение."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Почему нужны повторные запросы к нейросетям?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Одинаковый вопрос может дать разные ответы. Повторы помогают увидеть устойчивые наблюдения и отделить их от единичного результата. Для сравнения периодов сохраняем матрицу запросов, режим работы и другие доступные условия исследования."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Нужен ли доступ к сайту для GEO-аудита?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Для анализа публичных страниц и ответов ИИ доступ к административной панели обычно не требуется. Данные поисковой аналитики полезны для выбора запросов и оценки переходов; состав необходимых доступов определяем под конкретный объём исследования."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Можно ли использовать отчёт со своей командой?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Да. Вместе с выводами вы получаете исходные материалы и приоритетные задачи. Их можно передать разработчику, редактору или SEO-специалисту. Дальнейшее продвижение с AiLeeds — отдельное решение, а не условие получения результатов."
+                }
+              }
+            ]
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://egi411.github.io/geo-audit/audit/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "AiLeeds",
+                "item": "https://egi411.github.io/geo-audit/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "GEO-аудит",
+                "item": "https://egi411.github.io/geo-audit/audit/"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+    <script src="../assets/site.js" defer></script>
+    <script src="../assets/scene.js" defer></script>
+    <script src="../assets/privacy.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">К содержанию</a>
+    <header class="site-header">
+      <div class="wrap nav">
+        <a class="logo" href="../" aria-label="AiLeeds — главная"
+          ><img
+            src="../assets/mark.svg"
+            width="33"
+            height="33"
+            alt="Логотип AiLeeds"
+          />AiLeeds</a
+        >
+        <nav class="nav-links" id="navigation" aria-label="Основная навигация">
+          <a href="../">GEO-продвижение</a
+          ><a href="../audit/" aria-current="page">Аудит</a
+          ><a href="#process">Как работаем</a><a href="#faq">Вопросы</a>
+        </nav>
+        <a class="btn nav-cta" href="#brief" aria-label="Составить бриф"
+          ><span class="desktop-label">Составить бриф</span
+          ><span class="mobile-label" aria-hidden="true">Бриф</span>
+          <span aria-hidden="true">↗</span></a
+        ><button
+          class="menu-toggle"
+          aria-controls="navigation"
+          aria-expanded="false"
+          aria-label="Открыть меню"
+        >
+          Меню
+        </button>
+      </div>
+    </header>
+    <main id="main">
+      <nav class="breadcrumbs wrap" aria-label="Хлебные крошки">
+        <ol
+          itemscope
+          itemtype="https://schema.org/BreadcrumbList"
+          itemid="https://egi411.github.io/geo-audit/audit/#breadcrumb"
+        >
+          <li
+            itemprop="itemListElement"
+            itemscope
+            itemtype="https://schema.org/ListItem"
+          >
+            <a itemprop="item" href="../index.html"
+              ><span itemprop="name">AiLeeds</span></a
+            ><meta itemprop="position" content="1" />
+          </li>
+          <li
+            itemprop="itemListElement"
+            itemscope
+            itemtype="https://schema.org/ListItem"
+          >
+            <span itemprop="name" aria-current="page">GEO-аудит</span
+            ><link
+              itemprop="item"
+              href="https://egi411.github.io/geo-audit/audit/"
+            /><meta itemprop="position" content="2" />
+          </li>
+        </ol>
+      </nav>
+      <section class="hero audit-hero">
+        <div class="wrap hero-grid">
+          <div class="hero-copy">
+            <h1>Что покажет<br /><span>GEO-аудит?</span></h1>
+            <p class="short-answer">
+              Карту видимости сайта и бренда, ошибки в ответах и план изменений.
+            </p>
+            <p class="lead">
+              Проверьте, рекомендуют ли ChatGPT, Алиса и Perplexity вашу
+              компанию. Получите сравнение с конкурентами, проверку фактов и
+              план работ для продвижения бренда в нейросетях.
+            </p>
+            <div class="actions">
+              <a class="btn primary" href="#report"
+                >Посмотреть отчёт
+                <span class="arrow" aria-hidden="true">↓</span></a
+              ><a class="text-link" href="../"
+                >GEO-продвижение
+                <span class="arrow" aria-hidden="true">→</span></a
+              >
+            </div>
+          </div>
+          <div class="hero-scene">
+            <img
+              class="product-object"
+              src="../assets/aileeds-audit.webp"
+              alt="Объёмная металлическая линза с диаграммой — GEO-аудит AiLeeds"
+              width="1280"
+              height="1280"
+              fetchpriority="high"
+              decoding="async"
+            />
+            <div class="hero-ground"></div>
+          </div>
+        </div>
+      </section>
+      <div class="model-strip">
+        <div class="wrap">
+          <div class="models">
+            <span class="model-name"><b>✳</b> ChatGPT</span
+            ><span class="model-name"><b>⊹</b> Perplexity</span
+            ><span class="model-name"><b>✦</b> Gemini</span
+            ><span class="model-name"><b>Я</b> Алиса</span
+            ><span class="model-name"><b>◈</b> GigaChat</span>
+          </div>
+        </div>
+      </div>
+      <section class="block" id="report">
+        <div class="wrap">
+          <div class="section-top reveal">
+            <div>
+              <h2>Как выглядит отчёт GEO-аудита?</h2>
+              <p class="short-answer">
+                Он объединяет сравнение видимости и проверку репутации бренда.
+              </p>
+            </div>
+            <p>
+              В отчёте видны запросы, по которым бренд появляется в ответах ИИ,
+              его положение среди конкурентов и ошибки в описании. Все выводы
+              связываем с сохранёнными ответами и условиями исследования.
+            </p>
+          </div>
+          <div class="report-preview reveal">
+            <div class="report-tabs" role="tablist" aria-label="Разделы отчёта">
+              <button
+                class="report-tab"
+                role="tab"
+                id="tab-visibility"
+                aria-selected="true"
+                aria-controls="panel-visibility"
+                tabindex="0"
+              >
+                Видимость</button
+              ><button
+                class="report-tab"
+                role="tab"
+                id="tab-reputation"
+                aria-selected="false"
+                aria-controls="panel-reputation"
+                tabindex="-1"
+              >
+                Репутация
+              </button>
+            </div>
+            <div
+              class="report-panel"
+              id="panel-visibility"
+              role="tabpanel"
+              aria-labelledby="tab-visibility"
+              tabindex="0"
+            >
+              <p class="report-label">
+                Пример отчёта · демонстрационные данные
+              </p>
+              <table class="report-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Бренд</th>
+                    <th scope="col">Охват запросов</th>
+                    <th scope="col">Ср. позиция</th>
+                    <th scope="col">Характер ответа</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Компания А</td>
+                    <td>
+                      72%<span class="bar" style="--value: 72%"><i></i></span>
+                    </td>
+                    <td>1,8</td>
+                    <td>Рекомендация</td>
+                  </tr>
+                  <tr class="own">
+                    <td>Ваш бренд</td>
+                    <td>
+                      38%<span class="bar" style="--value: 38%"><i></i></span>
+                    </td>
+                    <td>3,2</td>
+                    <td>Альтернатива</td>
+                  </tr>
+                  <tr>
+                    <td>Компания Б</td>
+                    <td>
+                      26%<span class="bar" style="--value: 26%"><i></i></span>
+                    </td>
+                    <td>4,1</td>
+                    <td>Упоминание</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p class="answer-foot">
+                В реальном отчёте: условия замера, повторы, исходные ответы и
+                выводы по каждой категории.
+              </p>
+            </div>
+            <div
+              class="report-panel"
+              id="panel-reputation"
+              role="tabpanel"
+              aria-labelledby="tab-reputation"
+              tabindex="0"
+              hidden
+            >
+              <p class="report-label">
+                Пример отчёта · демонстрационные ситуации
+              </p>
+              <div class="report-grid">
+                <div class="report-item">
+                  <span class="status">01 / ФАКТЫ</span>
+                  <h3>Верно ли ИИ описывает ваши продукты?</h3>
+                  <p class="short-answer">
+                    В примере ассистент упоминает уже недоступный продукт.
+                  </p>
+                  <p>
+                    Ассистент называет продукт, который компания больше не
+                    предлагает. Проверяем источник и готовим список исправлений.
+                  </p>
+                </div>
+                <div class="report-item">
+                  <span class="status">02 / ПОЗИЦИОНИРОВАНИЕ</span>
+                  <h3>Сохраняется ли специализация бренда?</h3>
+                  <p class="short-answer">
+                    В примере описание слишком широкое и теряет вашу экспертизу.
+                  </p>
+                  <p>
+                    Бренд описан слишком широко. Сравниваем ответ с официальными
+                    материалами и находим недостающие аргументы.
+                  </p>
+                </div>
+              </div>
+              <p class="answer-foot">
+                Каждое наблюдение связываем с ответом модели и проверяемыми
+                фактами.
+              </p>
+            </div>
+          </div>
+          <p class="demo-bottom">
+            Источники анализируем там, где ассистент показывает ссылки.
+            Отсутствующие цитаты не подменяем догадками.
+          </p>
+        </div>
+      </section>
+      <section class="block" id="what">
+        <div class="wrap">
+          <div class="section-top reveal">
+            <div>
+              <h2>Что проверяем в GEO-аудите?</h2>
+              <p class="short-answer">
+                Упоминания, конкурентов, источники, репутацию и достоверность
+                фактов.
+              </p>
+            </div>
+            <p>
+              Проверяем не только наличие названия компании. Разбираем
+              рекомендации, источники, продукты и репутацию, чтобы составить
+              конкретный план изменений для сайта и внешних площадок.
+            </p>
+          </div>
+          <div class="deliverables">
+            <div class="deliverable reveal">
+              <div class="num">01 / ВИДИМОСТЬ</div>
+              <h3>Как часто и на каком месте вас называют?</h3>
+              <p class="short-answer">
+                Фиксируем присутствие и порядок в ответах с перечнем
+                рекомендаций.
+              </p>
+              <p>
+                В каких запросах вас называют, в каком порядке и рекомендуют ли
+                как подходящий вариант.
+              </p>
+            </div>
+            <div class="deliverable reveal">
+              <div class="num">02 / КОНКУРЕНТЫ</div>
+              <h3>С кем нейросети сравнивают ваш бренд?</h3>
+              <p class="short-answer">
+                С компаниями, которые появляются рядом или предлагаются вместо
+                вас.
+              </p>
+              <p>
+                Какие бренды появляются рядом и вместо вас. В каких категориях
+                они заметнее.
+              </p>
+            </div>
+            <div class="deliverable reveal">
+              <div class="num">03 / ИСТОЧНИКИ</div>
+              <h3>На какие источники ссылается ИИ?</h3>
+              <p class="short-answer">
+                Собираем домены и страницы, чьи ссылки видны в ответах.
+              </p>
+              <p>
+                Какие сайты цитируются в ответах и какие сведения о бренде
+                доступны на этих площадках.
+              </p>
+            </div>
+            <div class="deliverable reveal">
+              <div class="num">04 / РЕПУТАЦИЯ</div>
+              <h3>Как ИИ описывает ваш бренд?</h3>
+              <p class="short-answer">
+                Разбираем сильные стороны, ограничения и характер оценки.
+              </p>
+              <p>
+                Сильные и слабые стороны в ответах, тональность и соответствие
+                вашему позиционированию.
+              </p>
+            </div>
+            <div class="deliverable reveal">
+              <div class="num">05 / ФАКТЫ</div>
+              <h3>Какие факты модели искажают?</h3>
+              <p class="short-answer">
+                Проверяем утверждения о продуктах, условиях и специализации.
+              </p>
+              <p>
+                Сверка утверждений с официальными данными. Отдельно отмечаем то,
+                что нельзя проверить.
+              </p>
+            </div>
+            <div class="deliverable reveal">
+              <div class="num">06 / СЛЕДУЮЩИЙ ШАГ</div>
+              <h3>Какие изменения нужны первыми?</h3>
+              <p class="short-answer">
+                Задачи, закрывающие наиболее значимые проблемы из исследования.
+              </p>
+              <p>
+                Что исправить на сайте, какие материалы подготовить и какие
+                источники проработать.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="block editorial" id="process">
+        <div class="wrap">
+          <div class="section-top reveal">
+            <div>
+              <h2>Как проходит аудит видимости бренда?</h2>
+              <p class="short-answer">
+                Согласуем запросы, повторяем замеры и разбираем исходные ответы.
+              </p>
+            </div>
+            <p>
+              Определяем запросы и конкурентов, делаем повторные замеры и
+              сохраняем исходные ответы. Передаём методику вместе с
+              результатами, чтобы следующий аудит можно было сравнить с первым.
+            </p>
+          </div>
+          <div class="process">
+            <div class="reveal">
+              <div class="step-num">01 / БРИФ</div>
+              <h3>Что нужно до начала аудита?</h3>
+              <p class="short-answer">
+                Бренд, продукты, конкуренты и официальные факты для сверки.
+              </p>
+              <p>
+                Бренд, продукты, клиенты, конкуренты и официальные факты для
+                проверки.
+              </p>
+            </div>
+            <div class="reveal">
+              <div class="step-num">02 / ЗАПРОСЫ</div>
+              <h3>Какие вопросы задаём ассистентам?</h3>
+              <p class="short-answer">
+                Сценарии выбора, сравнения и сомнения ваших клиентов.
+              </p>
+              <p>
+                Выбор, сравнение и сомнения клиентов. Согласуем ассистентов и
+                режимы работы.
+              </p>
+            </div>
+            <div class="reveal">
+              <div class="step-num">03 / ИССЛЕДОВАНИЕ</div>
+              <h3>Как делаем выводы проверяемыми?</h3>
+              <p class="short-answer">
+                Сохраняем ответы, повторяем запросы и фиксируем условия.
+              </p>
+              <p>
+                Сохраняем ответы, условия и даты замеров. Проверяем факты и
+                ссылки.
+              </p>
+            </div>
+            <div class="reveal">
+              <div class="step-num">04 / РЕЗУЛЬТАТ</div>
+              <h3>Что обсуждаем по итогам исследования?</h3>
+              <p class="short-answer">
+                Наблюдения, подтверждающие их ответы и приоритеты внедрения.
+              </p>
+              <p>
+                Отчёт, таблица запросов и ответов, карта наблюдаемых источников
+                и план изменений.
+              </p>
+            </div>
+          </div>
+          <p class="method-note">
+            Ответы моделей меняются. Результат аудита — снимок при согласованных
+            условиях, а не универсальная оценка для всех пользователей.
+            Контрольный замер согласуем отдельно.
+          </p>
+        </div>
+      </section>
+      <section class="block" id="results">
+        <div class="wrap">
+          <div class="section-top reveal">
+            <div class="heading-copy">
+              <h2>Что вы получите после GEO-аудита?</h2>
+              <p class="short-answer">
+                Отчёт, исходные ответы, проверку фактов и план GEO-оптимизации.
+              </p>
+            </div>
+            <p>
+              Материалы для руководителя, маркетинга и команды внедрения: от
+              исходных ответов до списка конкретных задач.
+            </p>
+          </div>
+          <div class="use-case-grid">
+            <article class="reveal">
+              <h3>Где видно положение среди конкурентов?</h3>
+              <p class="short-answer">
+                В отчёте по платформам и категориям запросов.
+              </p>
+              <p>
+                Упоминания по платформам и категориям запросов, положение в
+                списке рекомендаций, сравнение с выбранными конкурентами.
+                Отдельно отмечаем запросы, в которых бренд не появился.
+              </p>
+            </article>
+            <article class="reveal">
+              <h3>Как проверить выводы аудита?</h3>
+              <p class="short-answer">
+                Открыть таблицу запросов, условий и сохранённых ответов.
+              </p>
+              <p>
+                Исходные формулировки, даты, условия замеров и сохранённые
+                ответы. Можно проверить наблюдения, передать материалы своей
+                команде и использовать матрицу для повторного исследования.
+              </p>
+            </article>
+            <article class="reveal">
+              <h3>Как узнать об ошибках в описании бренда?</h3>
+              <p class="short-answer">
+                По списку утверждений, сверенных с официальными данными.
+              </p>
+              <p>
+                Список неточностей о продуктах, условиях и специализации
+                компании. Там, где показаны ссылки, указываем наблюдаемые
+                источники. Непроверенные сведения не выдаём за установленные
+                причины.
+              </p>
+            </article>
+            <article class="reveal">
+              <h3>Как превратить аудит в план действий?</h3>
+              <p class="short-answer">
+                Получить задачи по сайту, контенту и источникам с приоритетами.
+              </p>
+              <p>
+                Рекомендации по страницам сайта, контенту и внешним площадкам.
+                Для задач указываем приоритет и объясняем, какую обнаруженную
+                проблему они должны решить.
+              </p>
+            </article>
+          </div>
+          <div class="inline-offer reveal">
+            <img
+              class="offer-object"
+              src="../assets/aileeds-object.webp"
+              width="1254"
+              height="1254"
+              loading="lazy"
+              decoding="async"
+              alt="Объёмная монограмма AiLeeds — направление GEO-продвижения"
+            />
+            <div>
+              <h3>Нужно внедрение после исследования?</h3>
+              <p class="short-answer">
+                Его можно продолжить отдельной услугой GEO-продвижения.
+              </p>
+              <p>
+                Продолжим работу в рамках GEO-продвижения: подготовим материалы,
+                внесём согласованные изменения и проверим динамику.
+              </p>
+            </div>
+            <a class="btn" href="../"
+              >Услуга продвижения <span aria-hidden="true">↗</span></a
+            >
+          </div>
+        </div>
+      </section>
+      <section class="block" id="faq">
+        <div class="wrap faq-layout">
+          <div>
+            <h2>Что важно знать перед GEO-аудитом?</h2>
+            <p class="short-answer">
+              Объём, запросы и условия исследования согласуются до начала
+              работы.
+            </p>
+          </div>
+          <div>
+            <details>
+              <summary>Чем аудит отличается от продвижения?</summary>
+              <p>
+                Аудит выявляет проблемы и задаёт приоритеты. Продвижение
+                включает внедрение изменений в контенте и источниках, а также
+                последующие замеры. Аудит можно заказать как самостоятельное
+                исследование.
+              </p>
+            </details>
+            <details>
+              <summary>Какие нейросети вы проверяете?</summary>
+              <p>
+                Набор согласуем под рынок и аудиторию: например, ChatGPT,
+                Perplexity, Gemini, Алису и GigaChat. В отчёте фиксируем
+                доступные версии и режимы. Цитаты и домены собираем только там,
+                где они действительно показаны.
+              </p>
+            </details>
+            <details>
+              <summary>Откуда берутся запросы?</summary>
+              <p>
+                Из сценариев выбора вашего продукта: вопросы клиентов,
+                сравнения, ограничения, отраслевые задачи. Матрицу запросов
+                согласуем до замера и передаём вместе с результатами.
+              </p>
+            </details>
+            <details>
+              <summary>Что я получу?</summary>
+              <p>
+                Отчёт по видимости и репутации, исходные запросы и ответы в
+                таблице, наблюдаемые источники и приоритетный план. Глубину
+                сравнения и формат передачи согласуем перед стартом.
+              </p>
+            </details>
+            <details>
+              <summary>Можно ли провести аудит самостоятельно?</summary>
+              <p>
+                Да. Важно заранее определить матрицу запросов, повторять замеры
+                в сопоставимых условиях и не делать вывод по одному ответу.
+                Отдельно проверяйте факты и сохраняйте исходные материалы.
+              </p>
+            </details>
+            <details>
+              <summary>Что делать после отчёта?</summary>
+              <p>
+                Можно внедрить рекомендации своей командой или продолжить работу
+                над GEO с нами. Для этого есть отдельное направление продвижения
+                — от исправления фактов до развития контента и повторных
+                замеров.
+              </p>
+            </details>
+            <details>
+              <summary>
+                Чем GEO-аудит сайта отличается от аудита бренда?
+              </summary>
+              <p>
+                Аудит сайта оценивает страницы как источник информации:
+                доступность, структуру, содержание и факты. Аудит бренда
+                рассматривает представление компании в ответах ИИ, включая
+                внешние площадки и сравнение с конкурентами. В AiLeeds
+                объединяем оба ракурса, чтобы рекомендации не ограничивались
+                правками метатегов.
+              </p>
+            </details>
+            <details>
+              <summary>Какие показатели есть в отчёте?</summary>
+              <p>
+                Присутствие бренда по согласованным запросам, среднее место там,
+                где ответ содержит упорядоченный список, характер рекомендации,
+                точность утверждений и наблюдаемые цитаты. Обязательно указываем
+                объём и условия выборки: проценты без них могут вводить в
+                заблуждение.
+              </p>
+            </details>
+            <details>
+              <summary>Почему нужны повторные запросы к нейросетям?</summary>
+              <p>
+                Одинаковый вопрос может дать разные ответы. Повторы помогают
+                увидеть устойчивые наблюдения и отделить их от единичного
+                результата. Для сравнения периодов сохраняем матрицу запросов,
+                режим работы и другие доступные условия исследования.
+              </p>
+            </details>
+            <details>
+              <summary>Нужен ли доступ к сайту для GEO-аудита?</summary>
+              <p>
+                Для анализа публичных страниц и ответов ИИ доступ к
+                административной панели обычно не требуется. Данные поисковой
+                аналитики полезны для выбора запросов и оценки переходов; состав
+                необходимых доступов определяем под конкретный объём
+                исследования.
+              </p>
+            </details>
+            <details>
+              <summary>Можно ли использовать отчёт со своей командой?</summary>
+              <p>
+                Да. Вместе с выводами вы получаете исходные материалы и
+                приоритетные задачи. Их можно передать разработчику, редактору
+                или SEO-специалисту. Дальнейшее продвижение с AiLeeds —
+                отдельное решение, а не условие получения результатов.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+      <section class="closing" id="brief">
+        <div class="wrap">
+          <h2>С чего начать GEO-аудит?</h2>
+          <p class="short-answer">
+            Сохранить вводные о сайте, продуктах и конкурентах.
+          </p>
+          <p>
+            Укажите сайт, продукты и конкурентов. Бриф поможет определить, какие
+            запросы и сценарии выбора включить в исследование.
+          </p>
+          <button class="btn primary" data-open-brief>
+            Составить бриф <span class="arrow" aria-hidden="true">↗</span>
+          </button>
+          <p class="small">
+            Бриф сохраняется файлом. Данные никуда не отправляются.
+          </p>
+          <noscript
+            ><p class="noscript">
+              Для подготовки брифа включите JavaScript. Контакты пока не
+              опубликованы.
+            </p></noscript
+          >
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer-top">
+          <div
+            itemscope
+            itemtype="https://schema.org/Organization"
+            itemid="https://egi411.github.io/geo-audit/#org"
+          >
+            <a
+              class="logo"
+              itemprop="url"
+              href="../index.html"
+              aria-label="AiLeeds — главная"
+              ><img
+                itemprop="logo"
+                src="../assets/mark.svg"
+                width="33"
+                height="33"
+                alt="Логотип AiLeeds"
+              /><span itemprop="name">AiLeeds</span></a
+            >
+          </div>
+          <nav class="footer-links" aria-label="Ссылки в подвале">
+            <a href="../index.html">Продвижение</a
+            ><a href="../audit/">GEO-аудит</a
+            ><a href="../contacts.html">Контакты</a
+            ><a href="../privacy.html">Конфиденциальность</a
+            ><a href="../consent.html">Согласие на обработку ПДн</a
+            ><button type="button" data-cookie-settings>
+              Настройки cookie
+            </button>
+          </nav>
+        </div>
+        <div class="content-byline">
+          <a href="../contacts.html#editorial" rel="author"
+            >Материалы: редакция AiLeeds</a
+          ><span
+            >Опубликовано <time datetime="2026-11-02">2 ноября 2026</time></span
+          ><span
+            >Обновлено <time datetime="2026-11-02">2 ноября 2026</time></span
+          >
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 AiLeeds · GEO &amp; AEO</span
+          ><span>Продвижение сайтов и брендов в нейросетях</span>
+        </div>
+        <div class="wordmark" aria-hidden="true">AiLeeds.</div>
+      </div>
+    </footer>
+    <dialog id="brief-dialog" aria-labelledby="brief-title">
+      <div class="dialog-head">
+        <h2 id="brief-title">Что указать в брифе на GEO-аудит?</h2>
+        <button class="dialog-close" aria-label="Закрыть бриф">×</button>
+      </div>
+      <p class="short-answer">
+        Бренд, аудиторию, задачу исследования и конкурентов.
+      </p>
+      <p class="dialog-note">
+        Подготовьте вводные и сохраните бриф себе. Отправка заявок пока не
+        подключена — мы не получим эти данные.
+      </p>
+      <p class="brief-privacy">
+        Перед заполнением прочитайте
+        <a href="../privacy.html">политику конфиденциальности</a> и
+        <a href="../consent.html"
+          >сведения о согласии на обработку персональных данных</a
+        >. Бриф остаётся в вашем браузере.
+      </p>
+      <form class="brief-form">
+        <label
+          >Бренд или сайт<input
+            name="brand"
+            required
+            maxlength="200"
+            placeholder="Название или example.ru"
+            autocomplete="organization" /></label
+        ><label
+          >Что вас интересует<select
+            name="service"
+            aria-label="Что вас интересует"
+          >
+            <option>GEO-продвижение</option>
+            <option>GEO-аудит</option>
+          </select></label
+        ><label
+          >Кто ваши клиенты?<input
+            name="audience"
+            maxlength="400"
+            placeholder="Продукт, аудитория, география" /></label
+        ><label
+          >Задача и конкуренты<textarea
+            name="task"
+            maxlength="3000"
+            placeholder="Что важно узнать или изменить?"
+          ></textarea></label
+        ><button class="btn primary" type="submit">
+          Скачать бриф <span aria-hidden="true">↓</span>
+        </button>
+        <p class="brief-status" role="status" aria-live="polite"></p>
+      </form>
+    </dialog>
+    <aside
+      id="cookie-banner"
+      class="cookie-banner"
+      role="region"
+      aria-labelledby="cookie-title"
+      hidden
+    >
+      <div>
+        <h2 id="cookie-title">Какие cookie используются?</h2>
+        <p class="short-answer">
+          Только настройка этого уведомления; аналитика не подключена.
+        </p>
+        <p>
+          Аналитика и рекламные cookie не подключены. Сохраняем в вашем браузере
+          только выбор этого уведомления.
+          <a href="../privacy.html#cookies">Как это работает</a>
+        </p>
+      </div>
+      <button type="button" class="btn primary" data-cookie-accept>
+        Только необходимые
+      </button>
+    </aside>
+    <noscript
+      ><p class="cookie-noscript">
+        Аналитика и рекламные cookie не используются. Без JavaScript настройки
+        не сохраняются. <a href="../privacy.html#cookies">Подробнее</a>.
+      </p></noscript
+    >
+  </body>
+</html>
