@@ -41,35 +41,6 @@
     document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
     document.documentElement.classList.add("motion-enabled");
   }
-  const scenarios = [
-    [
-      "Можно рассмотреть <strong>компанию А</strong> и <strong>компанию Б</strong>. У них есть подробные описания решений и материалы по вашей задаче.",
-      "Вашего бренда нет в рекомендации.",
-      "Нет упоминания → нет шанса участвовать в выборе.",
-    ],
-    [
-      "<strong>Ваш бренд</strong> тоже может подойти. По доступным сведениям, он работает только с крупными компаниями.",
-      "Но вы работаете и с небольшими командами.",
-      "Ошибка в фактах → клиент может исключить вас из выбора.",
-    ],
-    [
-      "<strong>Ваш бренд</strong> стоит рассмотреть: у него есть решение для небольших команд, а на сайте подробно описаны условия и сценарии применения.",
-      "Точное описание. Понятные причины рассмотреть бренд.",
-      "К такому представлению стремимся. Ответы ИИ не гарантируются.",
-    ],
-  ];
-  document.querySelectorAll("[data-scenario]").forEach((button) =>
-    button.addEventListener("click", () => {
-      document
-        .querySelectorAll("[data-scenario]")
-        .forEach((b) => b.setAttribute("aria-pressed", String(b === button)));
-      const [body, brand, foot] = scenarios[Number(button.dataset.scenario)];
-      const content = document.querySelector(".answer-content");
-      content.querySelector(".answer-body").innerHTML = body;
-      content.querySelector(".answer-brand").textContent = brand;
-      content.querySelector(".answer-foot").textContent = foot;
-    }),
-  );
   const tabs = [...document.querySelectorAll("[role=tab]")];
   function selectTab(tab) {
     tabs.forEach((t) => {
