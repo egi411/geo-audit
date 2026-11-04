@@ -3,3 +3,8 @@ Source page: https://powerofgeo.com/
 Source asset: https://cdn.prod.website-files.com/690737c12eaba5388456c2c0/6907558bf0037622118e9814_c5b7d72a1e460c7138c7d0380768a521_chatgpt-phone-new.avif
 Added at the owner's explicit request using their reference, 2026-11-04.
 The screen is an illustrative ChatGPT answer from the reference, not an AiLeeds case study.
+
+chatgpt-phone-ru.webp
+Edited with built-in ImageGen from the phone reference, at the owner's request, 2026-11-04.
+Screen: Russian illustrative buyer prompt about choosing an e-commerce marketing agency, followed by selection criteria.
+This is an illustration, not a recorded ChatGPT result or client case. Generated source is preserved in the Codex image library.
