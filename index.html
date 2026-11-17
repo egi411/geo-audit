@@ -1,860 +1,302 @@
 <!doctype html>
 <html lang="ru">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="datePublished" content="2026-10-07" />
-    <meta name="dateModified" content="2026-11-04" />
-    <link rel="describedby" href="https://egi411.github.io/geo-audit/llms.txt" type="text/plain" />
-    <meta name="author" content="Редакция AiLeeds" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Как попасть в рекомендации нейросетей? GEO | AiLeeds</title>
-    <meta
-      name="description"
-      content="GEO-продвижение для бизнеса в ChatGPT, Claude, Grok и Алисе. Помогаем бренду участвовать в выборе клиента: аудит, контент, источники и мониторинг AI-рекомендаций."
-    />
-    <meta name="theme-color" content="#080909" />
-    <meta name="robots" content="index,follow,max-image-preview:large" />
-    <link rel="canonical" href="https://egi411.github.io/geo-audit/" />
-    <meta
-      property="og:title"
-      content="Как попасть в рекомендации нейросетей? GEO | AiLeeds"
-    />
-    <meta
-      property="og:description"
-      content="GEO-продвижение для бизнеса в ChatGPT, Claude, Grok и Алисе. Помогаем бренду участвовать в выборе клиента: аудит, контент, источники и мониторинг AI-рекомендаций."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="ru_RU" />
-    <meta property="og:site_name" content="AiLeeds" />
-    <meta property="og:url" content="https://egi411.github.io/geo-audit/" />
-    <meta
-      property="og:image"
-      content="https://egi411.github.io/geo-audit/assets/social.png?v=6d0df694aeac"
-    />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="assets/mark.svg?v=beaba9c74d03"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="assets/site.css?v=d84cc65a64b8" />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "Organization",
-            "@id": "https://egi411.github.io/geo-audit/#org",
-            "name": "AiLeeds",
-            "url": "https://egi411.github.io/geo-audit/",
-            "logo": "https://egi411.github.io/geo-audit/assets/mark.svg?v=beaba9c74d03",
-            "description": "AiLeeds — бренд проекта по GEO-продвижению и аудиту видимости в нейросетях."
-          },
-          {
-            "@type": "WebSite",
-            "@id": "https://egi411.github.io/geo-audit/#website",
-            "name": "AiLeeds",
-            "url": "https://egi411.github.io/geo-audit/",
-            "inLanguage": "ru-RU"
-          },
-          {
-            "@type": "WebPage",
-            "@id": "https://egi411.github.io/geo-audit/#page",
-            "url": "https://egi411.github.io/geo-audit/",
-            "name": "Как попасть в рекомендации нейросетей? GEO | AiLeeds",
-            "description": "GEO-продвижение для бизнеса в ChatGPT, Claude, Grok и Алисе. Помогаем бренду участвовать в выборе клиента: аудит, контент, источники и мониторинг AI-рекомендаций.",
-            "inLanguage": "ru-RU",
-            "isPartOf": {
-              "@id": "https://egi411.github.io/geo-audit/#website"
-            },
-            "author": { "@id": "https://egi411.github.io/geo-audit/#org" },
-            "publisher": { "@id": "https://egi411.github.io/geo-audit/#org" },
-            "dateModified": "2026-11-04",
-            "datePublished": "2026-10-07"
-          },
-          {
-            "@type": "Service",
-            "name": "GEO-продвижение сайта и бренда",
-            "url": "https://egi411.github.io/geo-audit/",
-            "serviceType": "Generative Engine Optimization",
-            "description": "GEO-продвижение для бизнеса в ChatGPT, Claude, Grok и Алисе. Помогаем бренду участвовать в выборе клиента: аудит, контент, источники и мониторинг AI-рекомендаций.",
-            "provider": { "@id": "https://egi411.github.io/geo-audit/#org" }
-          },
-          {
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "Что означает GEO и как работает продвижение в нейросетях?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "GEO — Generative Engine Optimization, оптимизация под генеративные системы. AiLeeds анализирует вопросы клиентов и ответы ассистентов, затем улучшает страницы, факты о компании и релевантные источники. Задача услуги — повысить шансы бренда быть найденным, корректно описанным и рассмотренным при выборе продукта."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Можно гарантировать рекомендацию ChatGPT?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Нет. Ответ зависит от модели, режима поиска, формулировки запроса и контекста пользователя. Мы можем отвечать за методику, согласованные работы и прозрачность замеров, но не управляем выдачей платформ."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Обязательно начинать с аудита?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Исходный замер нужен, чтобы выбирать задачи осмысленно и сравнивать изменения. Если у вас уже есть исследование, сначала посмотрим его методику и актуальность."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Как вы оцениваете результат?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Сравниваем присутствие бренда, характер рекомендаций и точность фактов по согласованным запросам. Для сопоставимости фиксируем условия и делаем повторы. Бизнес-эффект оцениваем отдельно, если есть доступные данные об обращениях и источниках трафика."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Когда появится эффект?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Универсального срока нет: модели и поисковые индексы обновляются по-разному. Сначала определяем исходное состояние и объём внедрения, затем согласуем контрольные точки без обещания фиксированного места в ответе."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Нужно ли создавать отдельные страницы под ChatGPT и Алису?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Не обязательно. Сначала оцениваем существующие страницы услуг, продуктов и справочные материалы. Новую страницу создаём, если для отдельной задачи клиента действительно не хватает содержательного ответа. Дубли с переставленными ключевыми словами не решают эту задачу."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Как связаны GEO-продвижение и заявки?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Упоминание бренда помогает участвовать в выборе, но само по себе не равно заявке. Если настроена аналитика, отдельно отслеживаем переходы с AI-платформ и дальнейшие обращения. Динамику рекомендаций и бизнес-результаты рассматриваем раздельно, чтобы не приписывать GEO неподтверждённый эффект."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Можно ли работать вместе с нашим SEO-агентством?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Да. Используем существующую структуру сайта, согласуем технические задачи и контент с вашей командой. GEO-исследование помогает дополнить SEO-план вопросами клиентов и наблюдениями из ответов нейросетей, не создавая противоречий между направлениями."
-                }
-              }
-            ]
-          }
-        ]
-      }
-    </script>
-    <script src="assets/site.js?v=8208a7d88a9b" defer></script>
-    <script src="assets/scene.js" defer></script>
-    <script src="assets/privacy.js" defer></script>
-  </head>
-  <body itemscope itemtype="https://schema.org/WebPage" itemid="https://egi411.github.io/geo-audit/#page">
-    <a class="skip" href="#main">К содержанию</a>
-    <header class="site-header">
-      <div class="wrap nav">
-        <a class="logo" href="./" aria-label="AiLeeds — главная"
-          ><img
-            class="wordmark-logo"
-            src="assets/aileeds-logo.svg"
-            width="264"
-            height="40"
-            alt="AILEEDS"
-        /></a>
-        <nav class="nav-links" id="navigation" aria-label="Основная навигация">
-          <a href="./" aria-current="page">GEO-продвижение</a
-          ><a href="audit/">Аудит</a><a href="what-is-geo/">Что такое GEO?</a><a href="#process">Как работаем</a
-          ><a href="#faq">Вопросы</a>
-        </nav>
-        <a class="btn nav-cta" href="#brief" aria-label="Составить бриф"
-          ><span class="desktop-label">Составить бриф</span
-          ><span class="mobile-label" aria-hidden="true">Бриф</span>
-          <span aria-hidden="true">↗</span></a
-        ><button
-          class="menu-toggle"
-          aria-controls="navigation"
-          aria-expanded="false"
-          aria-label="Открыть меню"
-        >
-          Меню
-        </button>
-      </div>
-    </header>
-    <main id="main">
-      <section class="hero hero-marketing">
-        <div class="wrap hero-grid">
-          <div class="hero-copy">
-            <h1>Как стать брендом,<br />который рекомендуют <span>нейросети?</span></h1>
-            <p class="short-answer">
-              GEO-продвижение AiLeeds помогает вашему бизнесу попадать
-              в рекомендации ChatGPT, Claude, Grok и Алисы.
-            </p>
-            <p class="lead">
-              Покупатель спрашивает ИИ, кого выбрать. Работаем с сайтом,
-              контентом и источниками, чтобы ваш бренд участвовал в этом выборе.
-            </p>
-            <div class="actions">
-              <a class="btn primary" href="#work"
-                >Что сделаем для бренда
-                <span class="arrow" aria-hidden="true">↗</span></a
-              ><a class="text-link" href="audit/"
-                >Проверить AI-видимость
-                <span class="arrow" aria-hidden="true">→</span></a
-              >
-            </div>
-          </div>
-          <figure class="hero-scene phone-scene">
-            <img
-              class="phone-object"
-              src="assets/chatgpt-phone-ru.webp"
-              alt="Смартфон с иллюстрацией запроса о выборе агентства для продвижения интернет-магазина"
-              width="1146"
-              height="1373"
-              fetchpriority="high"
-              decoding="async"
-            />
-            <figcaption>Иллюстрация запроса и ответа AI-ассистента</figcaption>
-          </figure>
-        </div>
-      </section>
-      <div class="model-strip">
-        <div class="wrap">
-          <div class="models">
-            <span class="model-name"
-              ><img
-                class="brand-mark"
-                src="assets/brands/chatgpt.svg"
-                width="28"
-                height="28"
-                alt="Логотип ChatGPT"
-                aria-hidden="true"
-              /><span>ChatGPT</span></span
-            ><span class="model-name"
-              ><img
-                class="brand-mark"
-                src="assets/brands/claude.svg"
-                width="28"
-                height="28"
-                alt="Логотип Claude"
-                aria-hidden="true"
-              /><span>Claude</span></span
-            ><span class="model-name"
-              ><img
-                class="brand-mark brand-mono"
-                src="assets/brands/grok.svg"
-                width="28"
-                height="28"
-                alt="Логотип Grok"
-                aria-hidden="true"
-              /><span>Grok</span></span
-            ><span class="model-name"
-              ><img
-                class="brand-mark"
-                src="assets/brands/gemini.svg"
-                width="28"
-                height="28"
-                alt="Логотип Gemini"
-                aria-hidden="true"
-              /><span>Gemini</span></span
-            ><span class="model-name"
-              ><img
-                class="brand-mark"
-                src="assets/brands/alice.svg"
-                width="28"
-                height="28"
-                alt="Логотип Алиса"
-                aria-hidden="true"
-              /><span>Алиса</span></span
-            ><span class="model-name"
-              ><img
-                class="brand-mark brand-mono"
-                src="assets/brands/gigachat.svg"
-                width="28"
-                height="28"
-                alt="Логотип GigaChat"
-                aria-hidden="true"
-              /><span>GigaChat</span></span
-            >
-          </div>
-        </div>
-      </div>
-
-      <section class="block buying-choice" aria-labelledby="buying-choice-title">
-        <div class="wrap">
-          <div class="section-top reveal">
-            <div>
-              <h2 id="buying-choice-title">Зачем бренду GEO-продвижение?</h2>
-              <p class="short-answer">Чтобы участвовать в выборе клиента внутри AI-ответа.</p>
-            </div>
-            <p>Продвигаем конкретные продукты и услуги по вопросам, с которыми покупатель приходит за рекомендацией.</p>
-          </div>
-          <div class="buying-outcomes">
-            <article class="reveal">
-              <h3>Как увеличить видимость бренда?</h3>
-              <p class="short-answer">Проработать запросы, по которым покупатели ищут решение.</p>
-              <p>Изучаем рекомендации ассистентов и находим темы, где вместо вас представлены конкуренты.</p>
-            </article>
-            <article class="reveal">
-              <h3>Как укрепить доверие к компании?</h3>
-              <p class="short-answer">Сделать сведения о продуктах точными и проверяемыми.</p>
-              <p>Согласуем факты на сайте и внешних площадках. Раскрываем преимущества, условия и ограничения.</p>
-            </article>
-            <article class="reveal">
-              <h3>Как связать GEO с заявками?</h3>
-              <p class="short-answer">Измерять рекомендации, переходы и обращения раздельно.</p>
-              <p>При подключённой аналитике проверяем путь от AI-источника до обращения, а не только число упоминаний.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="block" id="work">
-        <div class="wrap">
-          <div class="section-top reveal">
-            <div>
-              <h2>Что делаем для продвижения бренда в нейросетях?</h2>
-              <p class="short-answer">
-                Аудит, SEO-подготовка, контент, внешние источники и контроль
-                видимости.
-              </p>
-            </div>
-            <p>
-              Передаём план с приоритетами, подготовленные материалы и отчёт.
-              Выполненные работы и динамику ответов моделей показываем отдельно.
-            </p>
-          </div>
-          <div class="services">
-            <div class="service-row reveal">
-              <span class="num">01 /</span>
-              <div class="service-heading">
-                <h3>Что показывает аудит видимости?</h3>
-                <p class="short-answer">
-                  Где вас рекомендуют и каким конкурентам вы уступаете.
-                </p>
-              </div>
-              <p>
-                Разделяем отсутствие бренда, нейтральное упоминание и прямую
-                рекомендацию. Сопоставляем результат с выбранными конкурентами.
-              </p>
-            </div>
-            <div class="service-row reveal">
-              <span class="num">02 /</span>
-              <div class="service-heading">
-                <h3>Как подготовить сайт к AI-поиску?</h3>
-                <p class="short-answer">
-                  Устранить барьеры индексации и раскрыть вопросы покупателей.
-                </p>
-              </div>
-              <p>
-                Уточняем страницы услуг, характеристики продуктов, условия и
-                ограничения. Структурируем ответы на вопросы, влияющие на
-                покупку.
-              </p>
-            </div>
-            <div class="service-row reveal">
-              <span class="num">03 /</span>
-              <div class="service-heading">
-                <h3>Какие внешние источники прорабатывать?</h3>
-                <p class="short-answer">
-                  Релевантные площадки, на которых клиент может проверить вашу
-                  экспертизу.
-                </p>
-              </div>
-              <p>
-                Сверяем факты о компании и готовим материалы для подходящих
-                отраслевых площадок. Приоритет получают источники, значимые для
-                вашей категории.
-              </p>
-            </div>
-            <div class="service-row reveal">
-              <span class="num">04 /</span>
-              <div class="service-heading">
-                <h3>Как проверить результат продвижения?</h3>
-                <p class="short-answer">
-                  Сопоставить повторные замеры по одной матрице запросов.
-                </p>
-              </div>
-              <p>
-                Отдельно показываем динамику упоминаний, характер рекомендаций и
-                ошибки в фактах. Сохраняем исходные ответы для проверки выводов.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="block editorial">
-        <div class="wrap editorial-grid">
-          <div class="reveal">
-            <h2>Почему позиций в поиске недостаточно?</h2>
-            <p class="short-answer">
-              Они не показывают, рекомендует ли ваш бренд AI-ассистент.
-            </p>
-            <p>
-              Клиент может получить список подходящих компаний прямо в диалоге.
-              Проверяем, есть ли в нём ваш бренд, за что его рекомендуют
-              и какие сведения помогают покупателю сравнить предложения.
-            </p>
-            <a class="text-link" href="#process"
-              >Из чего состоит работа
-              <span class="arrow" aria-hidden="true">→</span></a
-            >
-          </div>
-          <div
-            class="source-sculpture reveal"
-            role="img"
-            aria-label="AiLeeds: анализ видимости и подготовка бренда к рекомендациям ИИ"
-          >
-            <img
-              class="sculpture-brand"
-              src="assets/aileeds-object.webp"
-              width="1254"
-              height="1254"
-              loading="lazy"
-              decoding="async"
-              alt="Объёмный знак AiLeeds"
-            /><img
-              class="sculpture-audit"
-              src="assets/aileeds-audit.webp"
-              width="1280"
-              height="1280"
-              loading="lazy"
-              decoding="async"
-              alt="Объёмная линза над диаграммой — анализ видимости бренда"
-            />
-          </div>
-        </div>
-      </section>
-      <section class="block" id="process">
-        <div class="wrap">
-          <div class="section-top reveal">
-            <div>
-              <h2>Как проходит GEO-продвижение сайта?</h2>
-              <p class="short-answer">
-                Через исследование, план, внедрение и проверку изменений.
-              </p>
-            </div>
-          </div>
-          <div class="process">
-            <div class="reveal">
-              <div class="step-num">01 / ИССЛЕДОВАНИЕ</div>
-              <h3>С чего начинается работа?</h3>
-              <p class="short-answer">
-                С замера видимости бренда и изучения конкурентов.
-              </p>
-              <p>
-                Согласуем продукты, рынки, конкурентов и критерии оценки. На
-                этой основе составляем матрицу запросов.
-              </p>
-            </div>
-            <div class="reveal">
-              <div class="step-num">02 / ПРИОРИТЕТЫ</div>
-              <h3>Как выбираем задачи?</h3>
-              <p class="short-answer">
-                По значимости обнаруженных проблем для вашего бизнеса.
-              </p>
-              <p>
-                Разделяем исправления фактов, технические задачи и новые
-                материалы. Указываем зависимости и порядок внедрения.
-              </p>
-            </div>
-            <div class="reveal">
-              <div class="step-num">03 / ВНЕДРЕНИЕ</div>
-              <h3>Что меняем в ходе продвижения?</h3>
-              <p class="short-answer">
-                Страницы, факты и материалы на согласованных площадках.
-              </p>
-              <p>
-                Перед публикацией материалов сверяем сведения о продукте и
-                согласуем правки с вашей командой.
-              </p>
-            </div>
-            <div class="reveal">
-              <div class="step-num">04 / ПРОВЕРКА</div>
-              <h3>Как оцениваем изменения?</h3>
-              <p class="short-answer">
-                Повторяем исследование и сравниваем представление бренда.
-              </p>
-              <p>
-                В отчёте сохраняем условия замеров и исходные ответы. Изменение
-                видимости отделяем от выполненных работ.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="block" id="audit">
-        <div class="wrap">
-          <div class="audit-banner reveal">
-            <div>
-              <h2>Где ваш бренд уступает конкурентам?</h2>
-              <p class="short-answer">
-                GEO-аудит покажет разрыв в видимости, рекомендациях и точности
-                фактов.
-              </p>
-              <p>
-                Сравнение с конкурентами, исходные ответы и приоритеты внедрения
-                — в отдельном исследовании.
-              </p>
-              <a class="btn" href="audit/"
-                >Подробнее об аудите
-                <span class="arrow" aria-hidden="true">↗</span></a
-              >
-            </div>
-            <div class="audit-sculpture">
-              <img
-                src="assets/aileeds-audit.webp"
-                width="1280"
-                height="1280"
-                loading="lazy"
-                decoding="async"
-                alt="3D-линза с диаграммой для услуги GEO-аудита"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="block" id="platforms">
-        <div class="wrap">
-          <div class="section-top reveal">
-            <div class="heading-copy">
-              <h2>Как продвигать бренд в ChatGPT, Алисе и AI-поиске?</h2>
-              <p class="short-answer">
-                Изучать ответы каждой платформы и улучшать доступную ей
-                информацию.
-              </p>
-            </div>
-            <p>
-              Исследуем каждую платформу отдельно: совпадение результатов в
-              одной модели не означает такую же видимость в другой.
-            </p>
-          </div>
-          <div class="platform-grid">
-            <article class="platform-card reveal">
-              <div class="platform-logos" aria-hidden="true">
-                <img
-                  class="brand-mark"
-                  src="assets/brands/chatgpt.svg"
-                  width="28"
-                  height="28"
-                  alt="Логотип ChatGPT"
-                  aria-hidden="true"
-                /><img
-                  class="brand-mark"
-                  src="assets/brands/claude.svg"
-                  width="28"
-                  height="28"
-                  alt="Логотип Claude"
-                  aria-hidden="true"
-                /><img
-                  class="brand-mark brand-mono"
-                  src="assets/brands/grok.svg"
-                  width="28"
-                  height="28"
-                  alt="Логотип Grok"
-                  aria-hidden="true"
-                />
-              </div>
-              <h3>Как продвигать бренд в ChatGPT, Claude и Grok?</h3>
-              <p class="short-answer">
-                Проверять упоминания бренда, рекомендации и ответы на
-                вопросы покупателей.
-              </p>
-              <p>
-                Находим запросы, по которым бренд отсутствует или описан
-                неточно. Если ответ содержит ссылки, анализируем источники
-                и готовим изменения для страниц сайта.
-              </p>
-            </article>
-            <article class="platform-card reveal">
-              <div class="platform-logos" aria-hidden="true">
-                <img
-                  class="brand-mark"
-                  src="assets/brands/alice.svg"
-                  width="28"
-                  height="28"
-                  alt="Логотип Алиса"
-                  aria-hidden="true"
-                />
-              </div>
-              <h3>Что важно для продвижения в Алисе?</h3>
-              <p class="short-answer">
-                Доступные поиску страницы и точные сведения о компании.
-              </p>
-              <p>
-                Проверяем ответы по вашим категориям и соответствие описаний
-                официальным данным. Готовим задачи для страниц услуг и
-                продуктов.
-              </p>
-            </article>
-            <article class="platform-card reveal">
-              <div class="platform-logos" aria-hidden="true">
-                <img
-                  class="brand-mark"
-                  src="assets/brands/gemini.svg"
-                  width="28"
-                  height="28"
-                  alt="Логотип Gemini"
-                  aria-hidden="true"
-                />
-              </div>
-              <h3>Как готовить сайт для AI-функций Google?</h3>
-              <p class="short-answer">
-                Опираясь на индексацию, полезный контент и базовые требования
-                SEO.
-              </p>
-              <p>
-                Проверяем доступность важных страниц поиску, структуру
-                материалов и соответствие контента запросам аудитории.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-      <section class="block geo-intro-link" id="geo-seo">
-        <div class="wrap">
-          <h2>Что такое GEO и чем оно отличается от SEO?</h2>
-          <p class="short-answer">GEO развивает видимость бренда в ответах нейросетей; SEO — видимость страниц в поиске.</p>
-          <a class="text-link" href="what-is-geo/">Разобраться в GEO <span class="arrow" aria-hidden="true">→</span></a>
-        </div>
-      </section>
-      <section class="block" id="business">
-        <div class="wrap">
-          <div class="section-top reveal">
-            <div class="heading-copy">
-              <h2>Кому подходит GEO-продвижение?</h2>
-              <p class="short-answer">
-                Бизнесу, чьи клиенты сравнивают решения и ищут рекомендации
-                перед покупкой.
-              </p>
-            </div>
-          </div>
-          <div class="use-case-grid">
-            <article class="reveal">
-              <h3>Зачем GEO компаниям B2B?</h3>
-              <p class="short-answer">
-                Чтобы участвовать в выборе подрядчика по задачам и
-                специализации.
-              </p>
-              <p>
-                Собираем вопросы об опыте, специализации и критериях выбора
-                подрядчика. Готовим страницы решений, разборы задач и аргументы
-                для включения компании в список поставщиков.
-              </p>
-            </article>
-            <article class="reveal">
-              <h3>Зачем GEO продуктам и SaaS?</h3>
-              <p class="short-answer">
-                Чтобы точнее представлять функции, интеграции и сценарии
-                использования.
-              </p>
-              <p>
-                Прорабатываем запросы о функциях, интеграциях, альтернативах и
-                выборе сервиса под конкретную команду. Уточняем документацию,
-                сравнения и ограничения продукта.
-              </p>
-            </article>
-            <article class="reveal">
-              <h3>Зачем GEO брендам и магазинам?</h3>
-              <p class="short-answer">
-                Чтобы покупатели находили подходящие продукты и проверяемые
-                характеристики.
-              </p>
-              <p>
-                Актуализируем характеристики, категории, сценарии использования
-                и информацию о производителе. Изучаем, какие продукты предлагают
-                ассистенты в ответ на запросы покупателей.
-              </p>
-            </article>
-            <article class="reveal">
-              <h3>Нужно ли GEO при работающем SEO?</h3>
-              <p class="short-answer">
-                Да, если важно оценивать и развивать присутствие в AI-ответах.
-              </p>
-              <p>
-                Дополняем действующее продвижение анализом AI-видимости. Находим
-                страницы, которым не хватает ясных ответов, подтверждений
-                экспертизы и согласованных данных о бренде.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-      <section class="block" id="faq">
-        <div class="wrap faq-layout">
-          <div>
-            <h2>Что важно знать перед GEO-продвижением?</h2>
-            <p class="short-answer">
-              Методика и внедрение проверяемы; конкретный ответ модели не
-              гарантируется.
-            </p>
-          </div>
-          <div>
-            <details>
-              <summary>
-                Что означает GEO и как работает продвижение в нейросетях?
-              </summary>
-              <p>
-                GEO — Generative Engine Optimization, оптимизация под
-                генеративные системы. AiLeeds анализирует вопросы клиентов и
-                ответы ассистентов, затем улучшает страницы, факты о компании и
-                релевантные источники. Задача услуги — повысить шансы бренда
-                быть найденным, корректно описанным и рассмотренным при выборе
-                продукта.
-              </p>
-            </details>
-
-            <details>
-              <summary>Можно гарантировать рекомендацию ChatGPT?</summary>
-              <p>
-                Нет. Ответ зависит от модели, режима поиска, формулировки
-                запроса и контекста пользователя. Мы можем отвечать за методику,
-                согласованные работы и прозрачность замеров, но не управляем
-                выдачей платформ.
-              </p>
-            </details>
-            <details>
-              <summary>Обязательно начинать с аудита?</summary>
-              <p>
-                Исходный замер нужен, чтобы выбирать задачи осмысленно и
-                сравнивать изменения. Если у вас уже есть исследование, сначала
-                посмотрим его методику и актуальность.
-              </p>
-            </details>
-            <details>
-              <summary>Как вы оцениваете результат?</summary>
-              <p>
-                Сравниваем присутствие бренда, характер рекомендаций и точность
-                фактов по согласованным запросам. Для сопоставимости фиксируем
-                условия и делаем повторы. Бизнес-эффект оцениваем отдельно, если
-                есть доступные данные об обращениях и источниках трафика.
-              </p>
-            </details>
-            <details>
-              <summary>Когда появится эффект?</summary>
-              <p>
-                Универсального срока нет: модели и поисковые индексы обновляются
-                по-разному. Сначала определяем исходное состояние и объём
-                внедрения, затем согласуем контрольные точки без обещания
-                фиксированного места в ответе.
-              </p>
-            </details>
-
-            <details>
-              <summary>
-                Нужно ли создавать отдельные страницы под ChatGPT и Алису?
-              </summary>
-              <p>
-                Не обязательно. Сначала оцениваем существующие страницы услуг,
-                продуктов и справочные материалы. Новую страницу создаём, если
-                для отдельной задачи клиента действительно не хватает
-                содержательного ответа. Дубли с переставленными ключевыми
-                словами не решают эту задачу.
-              </p>
-            </details>
-            <details>
-              <summary>Как связаны GEO-продвижение и заявки?</summary>
-              <p>
-                Упоминание бренда помогает участвовать в выборе, но само по себе
-                не равно заявке. Если настроена аналитика, отдельно отслеживаем
-                переходы с AI-платформ и дальнейшие обращения. Динамику
-                рекомендаций и бизнес-результаты рассматриваем раздельно, чтобы
-                не приписывать GEO неподтверждённый эффект.
-              </p>
-            </details>
-            <details>
-              <summary>
-                Можно ли работать вместе с нашим SEO-агентством?
-              </summary>
-              <p>
-                Да. Используем существующую структуру сайта, согласуем
-                технические задачи и контент с вашей командой. GEO-исследование
-                помогает дополнить SEO-план вопросами клиентов и наблюдениями из
-                ответов нейросетей, не создавая противоречий между
-                направлениями.
-              </p>
-            </details>
-          </div>
-        </div>
-      </section>
-      <section class="closing" id="brief">
-        <div class="wrap">
-          <h2>С чего начать продвижение в нейросетях?</h2>
-          <p class="short-answer">
-            Подготовить сайт, описание продуктов и список конкурентов для брифа.
-          </p>
-
-          <button class="btn primary" data-open-brief>
-            Составить бриф <span class="arrow" aria-hidden="true">↗</span>
-          </button>
-          <p class="small">
-            Бриф сохраняется файлом. Данные никуда не отправляются.
-          </p>
-          <noscript
-            ><p class="noscript">
-              Для подготовки брифа включите JavaScript. Контакты пока не
-              опубликованы.
-            </p></noscript
-          >
-        </div>
-      </section>
-    </main>
-    <footer class="site-footer">
-      <div class="wrap">
-        <div class="footer-top">
-          <div
-            itemscope
-            itemtype="https://schema.org/Organization"
-            itemid="https://egi411.github.io/geo-audit/#org"
-          >
-            <a
-              class="logo"
-              itemprop="url"
-              href="index.html"
-              aria-label="AiLeeds — главная"
-              ><img
-                class="wordmark-logo"
-                itemprop="logo"
-                src="assets/aileeds-logo.svg"
-                width="264"
-                height="40"
-                alt="AILEEDS" /><meta itemprop="name" content="AiLeeds"
-            /></a>
-          </div>
-          <nav class="footer-links" aria-label="Ссылки в подвале">
-            <a href="index.html">Продвижение</a><a href="audit/">GEO-аудит</a
-            ><a href="what-is-geo/">Что такое GEO?</a><a href="contacts.html">Контакты</a
-            ><a href="privacy.html">Конфиденциальность</a
-            ><a href="consent.html">Согласие на обработку ПДн</a
-            ><button type="button" data-cookie-settings>
-              Настройки cookie
-            </button>
-          </nav>
-        </div>
-        <div class="content-byline">
-          <a href="contacts.html#editorial" rel="author"
-            >Материалы: редакция AiLeeds</a
-          ><span
-            >Сайт опубликован
-            <time itemprop="datePublished" datetime="2026-10-07">7 октября 2026</time></span
-          ><span
-            >Обновлено <time itemprop="dateModified" datetime="2026-11-04">4 ноября 2026</time></span
-          >
-        </div>
-        <div class="footer-bottom">
-          <span>© 2026 AiLeeds · GEO &amp; AEO</span>
-        </div>
-      </div>
-    </footer>
-    <dialog id="brief-dialog" aria-labelledby="brief-title">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Как стать брендом, который рекомендуют нейросети? | aileed</title>
+<meta name="description" content="GEO-продвижение бренда в ChatGPT, Алисе и других нейросетях. Помогаем бизнесу участвовать в выборе покупателя внутри AI-ответа. aileed.">
+<meta name="author" content="Редакция aileed">
+<meta name="datePublished" content="2026-10-07">
+<meta name="dateModified" content="2026-11-18">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#080909">
+<link rel="canonical" href="https://egi411.github.io/geo-audit/">
+<link rel="describedby" type="text/plain" href="https://egi411.github.io/geo-audit/llms.txt">
+<meta property="og:title" content="Как стать брендом, который рекомендуют нейросети? | aileed">
+<meta property="og:description" content="GEO-продвижение бренда в ChatGPT, Алисе и других нейросетях. Помогаем бизнесу участвовать в выборе покупателя внутри AI-ответа. aileed.">
+<meta property="og:url" content="https://egi411.github.io/geo-audit/">
+<meta property="og:site_name" content="aileed">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://egi411.github.io/geo-audit/assets/social.png?v=4d03d1317403">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="assets/mark.svg?v=beaba9c74d03">
+<link rel="stylesheet" href="assets/site.css?v=ff874ec89dfa">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://egi411.github.io/geo-audit/#org", "name": "aileed", "url": "https://egi411.github.io/geo-audit/", "logo": "https://egi411.github.io/geo-audit/assets/aileed-logo.svg?v=2156c6f6d0d5"}, {"@type": "WebSite", "@id": "https://egi411.github.io/geo-audit/#website", "name": "aileed", "url": "https://egi411.github.io/geo-audit/"}, {"@type": "WebPage", "@id": "https://egi411.github.io/geo-audit/#page", "url": "https://egi411.github.io/geo-audit/", "name": "Как стать брендом, который рекомендуют нейросети? | aileed", "description": "GEO-продвижение бренда в ChatGPT, Алисе и других нейросетях. Помогаем бизнесу участвовать в выборе покупателя внутри AI-ответа. aileed.", "inLanguage": "ru-RU", "author": {"@id": "https://egi411.github.io/geo-audit/#org"}, "publisher": {"@id": "https://egi411.github.io/geo-audit/#org"}, "datePublished": "2026-10-07", "dateModified": "2026-11-18", "isPartOf": {"@id": "https://egi411.github.io/geo-audit/#website"}}, {"@type": "Service", "name": "GEO-продвижение", "provider": {"@id": "https://egi411.github.io/geo-audit/#org"}, "url": "https://egi411.github.io/geo-audit/", "description": "GEO-продвижение бренда в ChatGPT, Алисе и других нейросетях. Помогаем бизнесу участвовать в выборе покупателя внутри AI-ответа. aileed."}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Можно гарантировать рекомендацию нейросети?", "acceptedAnswer": {"@type": "Answer", "text": "Нет. Ответы зависят от платформы и контекста пользователя. GEO развивает присутствие бренда, но не даёт контроля над чужой выдачей."}}, {"@type": "Question", "name": "GEO заменяет SEO?", "acceptedAnswer": {"@type": "Answer", "text": "Нет. SEO помогает находить страницы в поиске, а GEO обращается к представлению бренда внутри AI-ответа. Для бизнеса эти направления могут дополнять друг друга."}}, {"@type": "Question", "name": "Упоминание бренда уже означает продажу?", "acceptedAnswer": {"@type": "Answer", "text": "Нет. Между знакомством, сравнением и обращением есть разница. Пользу GEO для бизнеса нужно оценивать отдельно от самого факта упоминания."}}, {"@type": "Question", "name": "Можно начать с отдельного аудита?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Аудит — самостоятельная услуга. Решение о дальнейшем продвижении принимается отдельно."}}]}]}</script>
+<script src="assets/site.js?v=19bba830d3ce" defer>
+</script>
+<script src="assets/privacy.js?v=5a8c73a1b54d" defer>
+</script>
+<script src="assets/experience.js?v=717e7b4e29d0" defer>
+</script>
+</head>
+<body class="brand-refresh" itemscope itemtype="https://schema.org/WebPage" itemid="https://egi411.github.io/geo-audit/#page">
+<div class="a-reading-progress" aria-hidden="true">
+</div>
+<a class="skip" href="#main">К содержанию</a>
+<header class="site-header">
+<div class="wrap nav">
+<a class="logo" href="index.html" aria-label="aileed — главная">
+<img class="wordmark-logo" src="assets/aileed-logo.svg?v=2156c6f6d0d5" width="232" height="48" alt="aileed">
+</a>
+<nav class="nav-links" id="navigation" aria-label="Основная навигация">
+<a href="index.html" aria-current="page">Продвижение</a>
+<a href="audit/">Аудит</a>
+<a href="why-geo/">Зачем GEO</a>
+<a href="platforms/">Платформы</a>
+<a href="blog/">Блог</a>
+</nav>
+<button class="btn nav-cta" type="button" aria-label="Составить бриф" data-open-brief>
+<span class="desktop-label">Составить бриф</span>
+<span class="mobile-label" aria-hidden="true">Бриф</span>
+<span aria-hidden="true">↗</span>
+</button>
+<button class="menu-toggle" aria-controls="navigation" aria-expanded="false" aria-label="Открыть меню">Меню</button>
+</div>
+</header>
+<aside id="cookie-banner" class="cookie-banner a-cookie wrap" aria-labelledby="cookie-title" hidden>
+<div>
+<h2 id="cookie-title">Какие cookie используются?</h2>
+<p class="short-answer">Только необходимые настройки. Аналитика не подключена.</p>
+</div>
+<a href="privacy.html#cookies">Подробнее</a>
+<button type="button" class="btn" data-cookie-accept>Понятно</button>
+</aside>
+<main id="main">
+<section class="a-hero ">
+<div class="a-orbit" aria-hidden="true">
+</div>
+<div class="wrap a-hero-grid">
+<div class="a-hero-copy">
+<h1>Как стать брендом,<br>который рекомендуют <span>нейросети?</span>
+</h1>
+<p class="short-answer">GEO-продвижение aileed помогает вашему бренду участвовать в выборе клиента внутри AI-ответа.</p>
+<p class="a-lead">Пока покупатель сравнивает решения в ChatGPT или Алисе, ваш бизнес должен быть среди вариантов, которые он рассматривает.</p>
+<div class="actions">
+<a class="btn primary" href="audit/">Проверить AI-видимость <span aria-hidden="true">↗</span>
+</a>
+<a class="text-link" href="why-geo/">Зачем бренду GEO <span aria-hidden="true">→</span>
+</a>
+</div>
+</div>
+<div class="a-scene" data-scene>
+<img class="a-hero-art" src="assets/aileed-recommendation.webp?v=5bb865750407" alt="Объёмный AI-ответ с выделенным знаком выбора бренда" width="1000" height="1000" fetchpriority="high" decoding="async" />
+</div>
+</div>
+</section>
+<div class="a-model-strip wrap">
+<span>
+<img class="brand-mark" src="assets/brands/chatgpt.svg?v=f3b4a78ed08d" alt="Логотип ChatGPT" aria-hidden="true" width="1000" height="1000" loading="lazy" decoding="async" />ChatGPT</span>
+<span>
+<img class="brand-mark" src="assets/brands/claude.svg?v=a3101f3047a1" alt="Логотип Claude" aria-hidden="true" width="1000" height="1000" loading="lazy" decoding="async" />Claude</span>
+<span>
+<img class="brand-mark brand-mono" src="assets/brands/grok.svg?v=9175fc90c226" alt="Логотип Grok" aria-hidden="true" width="1000" height="1000" loading="lazy" decoding="async" />Grok</span>
+<span>
+<img class="brand-mark" src="assets/brands/gemini.svg?v=63b9297958cc" alt="Логотип Gemini" aria-hidden="true" width="1000" height="1000" loading="lazy" decoding="async" />Gemini</span>
+<span>
+<img class="brand-mark" src="assets/brands/alice.svg?v=8c3f8e1b6451" alt="Логотип Алиса" aria-hidden="true" width="1000" height="1000" loading="lazy" decoding="async" />Алиса</span>
+<span>
+<img class="brand-mark brand-mono" src="assets/brands/gigachat.svg?v=00d995d3e32e" alt="Логотип GigaChat" aria-hidden="true" width="1000" height="1000" loading="lazy" decoding="async" />GigaChat</span>
+</div>
+<section class="a-section " id="value">
+<div class="wrap">
+<div class="a-section-head reveal">
+<h2>Кого клиент рассматривает ещё до перехода на сайт?</h2>
+<p class="short-answer">Тех, кого нейросеть называет в ответ на его вопрос.</p>
+<p>Рекомендация может стать первым знакомством с компанией. Важно, чтобы в этот момент клиент увидел ваше предложение и понял, чем оно ему подходит.</p>
+</div>
+<div class="a-benefit-grid">
+<article class="a-benefit reveal">
+<img class="a-card-art" src="assets/aileed-shortlist.webp?v=8aaf5c2512d7" alt="Объёмная иллюстрация: Вас замечают при выборе" width="1000" height="1000" loading="lazy" decoding="async" />
+<h3>Вас замечают при выборе?</h3>
+<p class="short-answer">Ваш бренд должен присутствовать в разговоре о нужном клиенту решении.</p>
+<p>Работа с AI-видимостью дополняет привычные каналы привлечения.</p>
+</article>
+<article class="a-benefit reveal">
+<img class="a-card-art" src="assets/aileed-trust.webp?v=a5772997d4ce" alt="Объёмная иллюстрация: Понятно, почему выбрать вас" width="1000" height="1000" loading="lazy" decoding="async" />
+<h3>Понятно, почему выбрать вас?</h3>
+<p class="short-answer">Сильное предложение помогает отличить вас от похожих компаний.</p>
+<p>Компетенции, продукт и преимущества должны складываться в ясный образ.</p>
+</article>
+</div>
+</div>
+</section>
+<section class="a-section " id="business">
+<div class="wrap">
+<div class="a-section-head reveal">
+<h2>Для каких решений клиенты обращаются к ИИ?</h2>
+<p class="short-answer">Для выбора подрядчика, продукта или сервиса под свою задачу.</p>
+</div>
+<div class="a-audience">
+<div>
+<h3>Вы продаёте услуги бизнесу?</h3>
+<p class="short-answer">Попадите в поле выбора, когда клиент ищет подходящего партнёра.</p>
+<p>Актуально для сложных услуг, где до обращения сравнивают опыт, специализацию и подходящий формат сотрудничества.</p>
+</div>
+<div>
+<h3>У вас магазин или продукт?</h3>
+<p class="short-answer">Будьте среди вариантов, которые покупатель рассматривает перед покупкой.</p>
+<p>Когда выбирают категорию, совместимость или подходящее решение, узнаваемость бренда становится частью выбора.</p>
+</div>
+<div>
+<h3>Вы развиваете SaaS или AI-сервис?</h3>
+<p class="short-answer">Помогите будущему клиенту увидеть ценность вашего продукта.</p>
+<p>Особенно когда он сравнивает альтернативы и ищет сервис под конкретный сценарий.</p>
+</div>
+</div>
+<a class="text-link" href="why-geo/">Зачем GEO вашему бизнесу <span aria-hidden="true">→</span>
+</a>
+</div>
+</section>
+<section class="a-section " id="offers">
+<div class="wrap">
+<div class="a-split">
+<div>
+<div class="a-section-head reveal">
+<h2>Какую услугу выбрать для вашей задачи?</h2>
+<p class="short-answer">Аудит — чтобы понять положение бренда. Продвижение — чтобы развивать его присутствие в AI-ответах.</p>
+</div>
+<div class="a-offer-list">
+<a href="audit/">
+<strong>GEO-аудит</strong>
+<span>Видимость, конкуренты и образ бренда в нейросетях</span>
+<b aria-hidden="true">↗</b>
+</a>
+<a href="platforms/">
+<strong>GEO-продвижение</strong>
+<span>Присутствие бренда на нужных вашей аудитории платформах</span>
+<b aria-hidden="true">↗</b>
+</a>
+</div>
+</div>
+<div class="a-scene" data-scene>
+<img class="a-feature-art" src="assets/aileeds-audit.webp?v=06c763416cb9" alt="Объёмная линза: ясный взгляд на AI-видимость" width="1000" height="1000" loading="lazy" decoding="async" />
+</div>
+</div>
+</div>
+</section>
+<section class="a-section " id="platforms">
+<div class="wrap">
+<div class="a-section-head reveal">
+<h2>В каких нейросетях важно присутствовать?</h2>
+<p class="short-answer">В тех, к которым обращается ваша аудитория.</p>
+</div>
+<p class="a-wide-copy">ChatGPT, Claude, Grok, Gemini, Алиса и GigaChat — разные точки встречи бренда с покупателем. Одна платформа не заменяет все остальные.</p>
+<a class="btn" href="platforms/">Посмотреть направления <span aria-hidden="true">↗</span>
+</a>
+</div>
+</section>
+<section class="a-section " id="faq">
+<div class="wrap">
+<div class="a-section-head reveal">
+<h2>Что важно знать перед началом?</h2>
+<p class="short-answer">Решение о GEO должно учитывать вашу аудиторию и задачу бизнеса.</p>
+</div>
+<div class="a-faq">
+<details>
+<summary>Можно гарантировать рекомендацию нейросети?</summary>
+<p>Нет. Ответы зависят от платформы и контекста пользователя. GEO развивает присутствие бренда, но не даёт контроля над чужой выдачей.</p>
+</details>
+<details>
+<summary>GEO заменяет SEO?</summary>
+<p>Нет. SEO помогает находить страницы в поиске, а GEO обращается к представлению бренда внутри AI-ответа. Для бизнеса эти направления могут дополнять друг друга.</p>
+</details>
+<details>
+<summary>Упоминание бренда уже означает продажу?</summary>
+<p>Нет. Между знакомством, сравнением и обращением есть разница. Пользу GEO для бизнеса нужно оценивать отдельно от самого факта упоминания.</p>
+</details>
+<details>
+<summary>Можно начать с отдельного аудита?</summary>
+<p>Да. Аудит — самостоятельная услуга. Решение о дальнейшем продвижении принимается отдельно.</p>
+</details>
+</div>
+</div>
+</section>
+<section class="a-section " id="blog">
+<div class="wrap">
+<div class="a-section-head reveal">
+<h2>Что стоит знать о выборе в AI-ответах?</h2>
+<p class="short-answer">Материалы для тех, кто отвечает за маркетинг и рост бизнеса.</p>
+</div>
+<div class="a-post-grid">
+<article class="a-post reveal">
+<a href="what-is-geo/">
+<img class="a-post-art" src="assets/aileed-recommendation.webp?v=5bb865750407" alt="Обложка: Что такое GEO и зачем оно бизнесу?" width="1000" height="1000" loading="lazy" decoding="async" />
+<div>
+<h3>Что такое GEO и зачем оно бизнесу?</h3>
+<p class="short-answer">GEO — работа с присутствием сайта и бренда в ответах генеративных систем.</p>
+<span class="a-read">Читать материал <span aria-hidden="true">↗</span>
+</span>
+</div>
+</a>
+</article>
+<article class="a-post reveal">
+<a href="blog/mention-or-recommendation/">
+<img class="a-post-art" src="assets/aileed-trust.webp?v=a5772997d4ce" alt="Обложка: Упоминание бренда — это уже рекомендация?" width="1000" height="1000" loading="lazy" decoding="async" />
+<div>
+<h3>Упоминание бренда — это уже рекомендация?</h3>
+<p class="short-answer">Нет. Название в ответе ещё не означает, что ассистент предлагает выбрать именно вас.</p>
+<span class="a-read">Читать материал <span aria-hidden="true">↗</span>
+</span>
+</div>
+</a>
+</article>
+<article class="a-post reveal">
+<a href="blog/why-ai-recommends-competitors/">
+<img class="a-post-art" src="assets/aileed-shortlist.webp?v=8aaf5c2512d7" alt="Обложка: Почему ИИ рекомендует конкурентов?" width="1000" height="1000" loading="lazy" decoding="async" />
+<div>
+<h3>Почему ИИ рекомендует конкурентов?</h3>
+<p class="short-answer">Ответ может отличаться от привычной картины поисковой выдачи и узнаваемости на рынке.</p>
+<span class="a-read">Читать материал <span aria-hidden="true">↗</span>
+</span>
+</div>
+</a>
+</article>
+</div>
+<a class="text-link" href="blog/">Весь блог <span aria-hidden="true">→</span>
+</a>
+</div>
+</section>
+<section class="a-section a-closing" id="brief">
+<div class="wrap">
+<div class="a-section-head reveal">
+<h2>Готовы сделать бренд заметнее в AI-ответах?</h2>
+<p class="short-answer">Начните с задачи вашего бизнеса.</p>
+</div>
+<button class="btn primary" data-open-brief>Составить бриф <span aria-hidden="true">↗</span>
+</button>
+<p class="a-local-note">Бриф можно сохранить файлом. Отправка заявок пока не подключена.</p>
+</div>
+</section>
+</main>
+<footer class="site-footer a-footer">
+<div class="wrap">
+<div class="footer-top">
+<a class="logo" href="index.html">
+<img class="wordmark-logo" src="assets/aileed-logo.svg?v=2156c6f6d0d5" width="232" height="48" alt="aileed">
+</a>
+<nav class="footer-links" aria-label="Ссылки в подвале">
+<a href="what-is-geo/">Что такое GEO?</a>
+<a href="why-geo/">Зачем бренду GEO?</a>
+<a href="platforms/">Продвижение в нейросетях</a>
+<a href="blog/">Блог</a>
+<a href="contacts.html">Контакты</a>
+<a href="privacy.html">Конфиденциальность</a>
+<a href="consent.html">Обработка данных</a>
+<button type="button" data-cookie-settings>Настройки cookie</button>
+</nav>
+</div>
+<div class="content-byline">
+<a href="contacts.html#editorial" rel="author">Материалы: редакция aileed</a>
+<span>Опубликовано <time itemprop="datePublished" datetime="2026-10-07">7 октября 2026</time>
+</span>
+<span>Обновлено <time itemprop="dateModified" datetime="2026-11-18">18 ноября 2026</time>
+</span>
+</div>
+<div class="footer-bottom">© 2026 aileed</div>
+</div>
+</footer>
+<dialog id="brief-dialog" aria-labelledby="brief-title">
       <div class="dialog-head">
         <h2 id="brief-title">Что указать в брифе на продвижение?</h2>
         <button class="dialog-close" aria-label="Закрыть бриф">×</button>
@@ -875,58 +317,44 @@
             required
             maxlength="200"
             placeholder="Название или example.ru"
-            autocomplete="organization" /></label
-        ><label
+            autocomplete="organization" />
+</label
+        >
+<label
           >Что вас интересует<select
             name="service"
             aria-label="Что вас интересует"
           >
             <option>GEO-продвижение</option>
             <option>GEO-аудит</option>
-          </select></label
-        ><label
+          </select>
+</label
+        >
+<label
           >Кто ваши клиенты?<input
             name="audience"
             maxlength="400"
-            placeholder="Продукт, аудитория, география" /></label
-        ><label
+            placeholder="Продукт, аудитория, география" />
+</label
+        >
+<label
           >Задача и конкуренты<textarea
             name="task"
             maxlength="3000"
             placeholder="Что важно узнать или изменить?"
-          ></textarea></label
-        ><button class="btn primary" type="submit">
+          >
+</textarea>
+</label
+        >
+<button class="btn primary" type="submit">
           Скачать бриф <span aria-hidden="true">↓</span>
         </button>
-        <p class="brief-status" role="status" aria-live="polite"></p>
+        <p class="brief-status" role="status" aria-live="polite">
+</p>
       </form>
     </dialog>
-    <aside
-      id="cookie-banner"
-      class="cookie-banner"
-      role="region"
-      aria-labelledby="cookie-title"
-      hidden
-    >
-      <div>
-        <h2 id="cookie-title">Какие cookie используются?</h2>
-        <p class="short-answer">
-          Только настройка этого уведомления; аналитика не подключена.
-        </p>
-        <p>
-          Сохраняем только выбор этого уведомления в вашем браузере.
-          <a href="privacy.html#cookies">Подробнее</a>
-        </p>
-      </div>
-      <button type="button" class="btn primary" data-cookie-accept>
-        Только необходимые
-      </button>
-    </aside>
-    <noscript
-      ><p class="cookie-noscript">
-        Аналитика и рекламные cookie не используются. Без JavaScript настройки
-        не сохраняются. <a href="privacy.html#cookies">Подробнее</a>.
-      </p></noscript
-    >
-  </body>
+<noscript>
+<p class="cookie-noscript">Аналитика и рекламные cookie не используются.</p>
+</noscript>
+</body>
 </html>

@@ -1,0 +1,38 @@
+{
+  "domain": "aileed.ru",
+  "registrar": "REG.RU",
+  "currentBaseUrl": "https://egi411.github.io/geo-audit/",
+  "targetBaseUrl": "https://aileed.ru/",
+  "activated": false,
+  "dnsRecords": [
+    {
+      "type": "A",
+      "name": "@",
+      "value": "185.199.108.153"
+    },
+    {
+      "type": "A",
+      "name": "@",
+      "value": "185.199.109.153"
+    },
+    {
+      "type": "A",
+      "name": "@",
+      "value": "185.199.110.153"
+    },
+    {
+      "type": "A",
+      "name": "@",
+      "value": "185.199.111.153"
+    },
+    {
+      "type": "CNAME",
+      "name": "www",
+      "value": "egi411.github.io"
+    }
+  ],
+  "sources": [
+    "https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site",
+    "https://help.reg.ru/support/dns-servery-i-nastroyka-zony/nastroyka-resursnykh-zapisey-dns/nastroyka-resursnykh-zapisey-v-lichnom-kabinete"
+  ]
+}

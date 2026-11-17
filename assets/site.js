@@ -106,13 +106,13 @@
     }
     brand.setCustomValidity("");
     const data = new FormData(form);
-    const text = `Бриф / AiLeeds\n\nБренд или сайт: ${data.get("brand").trim()}\nУслуга: ${data.get("service")}\nАудитория: ${data.get("audience").trim() || "—"}\nЗадача и конкуренты: ${data.get("task").trim() || "—"}\n\nФайл подготовлен локально. Данные не отправлены.\n`;
+    const text = `Бриф / aileed\n\nБренд или сайт: ${data.get("brand").trim()}\nУслуга: ${data.get("service")}\nАудитория: ${data.get("audience").trim() || "—"}\nЗадача и конкуренты: ${data.get("task").trim() || "—"}\n\nФайл подготовлен локально. Данные не отправлены.\n`;
     const url = URL.createObjectURL(
       new Blob(["\ufeff", text], { type: "text/plain;charset=utf-8" }),
     );
     const link = document.createElement("a");
     link.href = url;
-    link.download = "aileeds-brief.txt";
+    link.download = "aileed-brief.txt";
     document.body.append(link);
     link.click();
     link.remove();
