@@ -10,3 +10,6 @@ Screen: Russian illustrative buyer prompt about choosing an e-commerce marketing
 This is an illustration, not a recorded ChatGPT result or client case. Generated source is preserved in the Codex image library.
 
 Aileed November rebrand: aileed-recommendation.webp, aileed-shortlist.webp, aileed-trust.webp — original built-in ImageGen renders. Prompt set and semantic mapping: design.md. Generated originals remain in the Codex image library. WebP delivery conversion uses cwebp.
+
+Quote stage: original built-in ImageGen editorial plates, 2026-11-18. Two isolated solids, split at the transparent gutter for independent geometry, plus an optical disc at two responsive resolutions. Materials and placement are described in design.md.
+The vector quotation emblem is original. The wordmark uses outlines of Onest, with custom spacing. Onest project: https://github.com/simpals/onest (SIL Open Font License).
