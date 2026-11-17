@@ -27,7 +27,6 @@
   position: absolute;
   z-index: -1;
   pointer-events: none;
-  mix-blend-mode: screen;
   background: var(--stage-black) url("optical-horizon.webp") center top / 100% auto no-repeat;
   background-blend-mode: screen;
   mask-image: linear-gradient(180deg, transparent, black 19%, black 68%, transparent);
@@ -285,7 +284,7 @@
   .studio-showcase { isolation: isolate; }
   .studio-showcase::before {
     content: ""; position: absolute; z-index: -1; pointer-events: none;
-    inset: -6% -75% 0; opacity: .65; mix-blend-mode: screen;
+    inset: -6% -75% 0; opacity: .65;
     background: var(--stage-black) url("optical-horizon-small.webp") center top / 100% auto no-repeat; background-blend-mode: screen;
   }
   .studio-hero::before, .studio-journal::before, .studio-article-head::before, .document-lead::before, .a-closing::before { background-image: url("optical-horizon-small.webp"); }
