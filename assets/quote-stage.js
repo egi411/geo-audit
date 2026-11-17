@@ -1,6 +1,6 @@
 (() => {
   "use strict";
-  // The first two coordinates register each bevel to the original 752 × 900 texture
+  // The first two coordinates register each bevel to the original texture
   // crop. The third is its distance from the centre plane in the same units.
   const profiles = {
     metal: {
@@ -43,6 +43,41 @@
     },
   };
 
+  // A relief field describes the visible faces of each square product plate.
+  // Heights use the same pixel scale as the texture, like the two quote meshes.
+  function bevel(edge, width) {
+    const t = Math.max(0, Math.min(1, edge / width + 0.5));
+    return t * t * (3 - 2 * t);
+  }
+
+  function productDepth(name, u, v) {
+    if (name === "lens") {
+      const radius = Math.hypot((u - 0.62 - (v - 0.48) * 0.14) / 0.35, (v - 0.48) / 0.41);
+      return -85 + 129 * bevel(1.19 - radius, 0.21) + 31 * Math.max(0, 1 - radius * radius);
+    }
+    if (name === "shortlist") {
+      const face = Math.min(u - (0.48 - v * 0.085), (0.90 - v * 0.14) - u);
+      return -60 + 50 * bevel(u + v * 0.14 - 0.32, 0.04) + 85 * bevel(face, 0.045);
+    }
+    const front = Math.min(u - 0.43, v - (0.54 - u * 0.18));
+    return -65 + 49 * bevel(u + v * 0.21 - 0.15, 0.07) + 102 * bevel(front, 0.06);
+  }
+
+  function productProfile(name) {
+    const steps = 24;
+    const vertices = [], triangles = [];
+    for (let row = 0; row <= steps; row++) {
+      for (let col = 0; col <= steps; col++) {
+        const u = col / steps, v = row / steps;
+        vertices.push(u * 724, v * 724, productDepth(name, u, v));
+        if (row === steps || col === steps) continue;
+        const i = row * (steps + 1) + col;
+        triangles.push(i, i + 1, i + steps + 2, i, i + steps + 2, i + steps + 1);
+      }
+    }
+    return {vertices, triangles};
+  }
+
   const stage = document.querySelector("[data-quote-stage]");
   if (!stage || !window.IntersectionObserver || !window.ResizeObserver) return;
 
@@ -51,15 +86,17 @@
   const toggle = stage.querySelector(".quote-motion-toggle");
   const reduced = matchMedia("(prefers-reduced-motion: reduce)");
   const pointer = matchMedia("(hover: hover) and (pointer: fine)");
-  const objects = Object.keys(profiles).map(name => ({
-    name, image: layer.querySelector(".quote-" + name)
-  }));
+  const objects = Array.from(layer.querySelectorAll("[data-profile]"), image => {
+    const name = image.dataset.profile;
+    const size = profiles[name] ? [752, 900] : [724, 724];
+    return {name, image, size};
+  });
 
   // Move registered points in three dimensions before mapping them back to the viewport.
   const vertexSource = `
     attribute vec3 aPoint;
     attribute vec3 aNormal;
-    uniform vec2 uViewport, uCenter, uSize;
+    uniform vec2 uViewport, uCenter, uSize, uTextureSize;
     uniform vec3 uAngles;
     varying vec2 vUV;
     varying vec3 vNormal;
@@ -68,8 +105,8 @@
       return mat2(c, s, -s, c);
     }
     void main() {
-      vUV = aPoint.xy / vec2(752.0, 900.0);
-      vec3 p = vec3((vUV - 0.5) * uSize, aPoint.z * uSize.x / 752.0);
+      vUV = aPoint.xy / uTextureSize;
+      vec3 p = vec3((vUV - 0.5) * uSize, aPoint.z * uSize.x / uTextureSize.x);
       float restZ = p.z;
       vec3 n = aNormal;
       p.xz = turn(uAngles.y) * p.xz;
@@ -138,7 +175,7 @@
   }
 
   function upload(object) {
-    const mesh = interleavedMesh(profiles[object.name]);
+    const mesh = interleavedMesh(profiles[object.name] || productProfile(object.name));
     object.buffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, object.buffer);
     gl.bufferData(gl.ARRAY_BUFFER, mesh, gl.STATIC_DRAW);
@@ -180,10 +217,11 @@
     objects.forEach((item, index) => {
       const side = index ? 1 : -1;
       const wave = Math.sin(t * 0.49 + index * 2);
+      gl.uniform2f(uniforms.TextureSize, ...item.size);
       gl.uniform2f(uniforms.Size, item.width, item.height);
       gl.uniform2f(uniforms.Center, item.x + smoothX * side * 12 + wave * 5, item.y + wave * (index ? 10 : 7) - scroll * (index ? 62 : 29));
       gl.uniform3f(uniforms.Angles, wave * 0.13 + smoothY * 0.13, Math.cos(t * 0.42 + index) * 0.16 + smoothX * 0.21 + side * scroll * 0.2, item.roll + wave * 0.045);
-      gl.uniform1f(uniforms.Glass, index);
+      gl.uniform1f(uniforms.Glass, item.name === "metal" ? 0 : 1);
       gl.bindBuffer(gl.ARRAY_BUFFER, item.buffer);
       gl.vertexAttribPointer(aPoint, 3, gl.FLOAT, false, 24, 0);
       gl.vertexAttribPointer(aNormal, 3, gl.FLOAT, false, 24, 12);
@@ -229,7 +267,7 @@
       shaders.forEach(s => gl.deleteShader(s));
       if (!gl.getProgramParameter(program, gl.LINK_STATUS)) throw Error("program");
       gl.useProgram(program);
-      uniforms = Object.fromEntries(["Viewport","Center","Size","Angles","Light","Glass"].map(key => [key, gl.getUniformLocation(program, "u"+key)]));
+      uniforms = Object.fromEntries(["Viewport","Center","Size","TextureSize","Angles","Light","Glass"].map(key => [key, gl.getUniformLocation(program, "u"+key)]));
       aPoint = gl.getAttribLocation(program, "aPoint");
       aNormal = gl.getAttribLocation(program, "aNormal");
       gl.enableVertexAttribArray(aPoint);
