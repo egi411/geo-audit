@@ -4,6 +4,8 @@ from pathlib import Path
 import json,subprocess,sys,urllib.request
 root=Path(__file__).resolve().parents[1]
 config=json.loads((root/'deploy/domain.json').read_text())
+if config.get('deferredByOwner'):
+ sys.exit('Domain connection is deferred by the owner. Resume only after a new explicit request.')
 dns=json.load(urllib.request.urlopen('https://dns.google/resolve?name='+config['domain']+'&type=A',timeout=20))
 actual={x['data'] for x in dns.get('Answer',[]) if x['type']==1}
 expected={x['value'] for x in config['dnsRecords'] if x['type']=='A'}
