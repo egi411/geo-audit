@@ -8,3 +8,5 @@ chatgpt-phone-ru.webp
 Edited with built-in ImageGen from the phone reference, at the owner's request, 2026-11-04.
 Screen: Russian illustrative buyer prompt about choosing an e-commerce marketing agency, followed by selection criteria.
 This is an illustration, not a recorded ChatGPT result or client case. Generated source is preserved in the Codex image library.
+
+Aileed November rebrand: aileed-recommendation.webp, aileed-shortlist.webp, aileed-trust.webp — original built-in ImageGen renders. Prompt set and semantic mapping: design.md. Generated originals remain in the Codex image library. WebP delivery conversion uses cwebp.
