@@ -15,3 +15,5 @@ Quote stage: original built-in ImageGen editorial plates, 2026-11-18. Two isolat
 The vector quotation emblem is original. The wordmark uses outlines of Onest, with custom spacing. Onest project: https://github.com/simpals/onest (SIL Open Font License).
 
 Interior optical collection, 2026-11-18: studio-lens.webp, studio-shortlist.webp, studio-dialogue.webp. Three original product studies generated together with built-in ImageGen on transparency. Each 724-pixel crop maps to a separate relief field in quote-stage.js. Creative brief and placement are in design.md.
+
+Buyer scenarios: three original generated studio illustrations of architectural lighting, a compact grinder and a salon booking tablet. They accompany hypothetical buyer questions. Optics and answer display are original product studies. cover-prism, cover-mention and cover-choice are crops from an original three-panel optical still life. Local variable font subsets are Onest from Google Fonts, licensed in fonts/OFL.txt.

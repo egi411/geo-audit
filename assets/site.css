@@ -1,4 +1,19 @@
-@import url("https://fonts.googleapis.com/css2?family=Onest:wght@400;450;500;550;600;650&family=Prata&display=swap");
+@font-face {
+  font-family: 'Onest';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(fonts/onest-cyrillic.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Onest';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(fonts/onest-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 :root {
   --marketing-glow: #ad704238;
   --marketing-glow-soft: #ad704212;
@@ -19,9 +34,9 @@
   --glass: #080909d9;
   --glow: #ad70421f;
   --white: #fff;
-  --font-display: "Prata", Georgia, serif;
-  --font-body: "Onest", sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, monospace;
+  --font-display: var(--font-body);
+  --font-body: "Onest", system-ui, Arial, sans-serif;
+  --font-mono: var(--font-body);
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --space: 24px;
 }
@@ -3095,7 +3110,7 @@ textarea::placeholder {
 .a-scene.is-moving img { animation-play-state:running; }
 @keyframes a-object-drift { 0%,100% { transform:translateY(3px) rotateX(var(--scene-y,0deg)) rotateY(var(--scene-x,0deg)); } 50% { transform:translateY(-12px) rotateX(var(--scene-y,0deg)) rotateY(var(--scene-x,0deg)); } }
 .a-model-strip { display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:25px;padding-block:30px;border-block:1px solid var(--line); }
-.a-model-strip>span { display:flex;align-items:center;gap:11px;font-size:15px;color:var(--answer-ink); }
+.a-model-strip>a { display:flex;align-items:center;gap:11px;font-size:15px;color:var(--answer-ink); }
 .a-section { padding:100px 0;border-bottom:1px solid var(--line); }
 .a-section-head { max-width:850px;margin-bottom:45px; }
 .a-section-head h2 { font-size:clamp(32px,3.7vw,53px);line-height:1.12;font-weight:500;letter-spacing:-.045em; }
@@ -3203,7 +3218,7 @@ textarea::placeholder {
  .a-scene { width:min(470px,100%);margin:0 auto; }
  .a-hero-art,.a-feature-art { width:100%;max-width:100%;margin:0; }
  .a-model-strip { justify-content:center;gap:22px;padding-block:25px; }
- .a-model-strip>span { font-size:14px; }
+ .a-model-strip>a { font-size:14px; }
  .a-section { padding:65px 0; }
  .a-section-head { margin-bottom:32px; }
  .a-section-head h2 { font-size:clamp(30px,5.8vw,43px); }
