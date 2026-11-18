@@ -23,10 +23,20 @@
   document.addEventListener("visibilitychange",refresh);
   reduced.addEventListener("change",()=>{scenes.forEach(el=>{el.style.removeProperty("--scene-x");el.style.removeProperty("--scene-y");});refresh();});
   let progressPending=false;
-  const readingProgress=document.querySelector(".a-reading-progress");
+  const header=document.querySelector(".site-header");
+  const entrances = document.querySelectorAll(".shortlist-model,.buyer-letter-layout,.shelf-story,.metric-cell,.service-tile,.delivery-list>div,.answer-lab,.reading-body>section,.question-list,.decision-scene,.journal-opening h1,.audit-opening h1");
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        if (!reduced.matches) entry.target.classList.add("enter-light");
+        observer.unobserve(entry.target);
+      }
+    }, {threshold: .08});
+    entrances.forEach(el => observer.observe(el));
+  }
   function progress(){if(progressPending)return;progressPending=true;requestAnimationFrame(()=>{
-    const max=document.documentElement.scrollHeight-innerHeight;
-    readingProgress?.style.setProperty("--read",max>0?String(scrollY/max):"0");
+    header?.classList.toggle("is-scrolled", scrollY > 18);
     if(!document.hidden&&!reduced.matches){
       visible.forEach(el=>{
         const box=el.parentElement.getBoundingClientRect();

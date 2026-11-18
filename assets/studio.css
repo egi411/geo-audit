@@ -238,7 +238,7 @@
 .reading-body a, .document-lead a, .a-article-author a { color: var(--studio-key); text-decoration: underline; text-underline-offset: 4px; }
 .reading-body ul { padding-left: 22px; }
 .reading-body li::marker { color: var(--stage-copper); }
-.a-article-cta { padding-block: 0 64px; max-width: 1160px !important; }
+.a-article-cta { padding-block: 0 64px; }
 .document-lead { padding-block: clamp(44px, 5.5vw, 84px); }
 .document-lead::before { inset: 1% -28% -18% 42%; opacity: .45; }
 .document-lead h1 { max-width: 870px; font-size: clamp(38px, 4.4vw, 66px); }

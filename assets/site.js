@@ -41,6 +41,26 @@
     document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
     document.documentElement.classList.add("motion-enabled");
   }
+  // Reveal the changed answer only when the selector is too close to a viewport edge.
+  function keepAnswerVisible(element) {
+    if (!element) return;
+    const box = element.getBoundingClientRect();
+    const header = document.querySelector(".site-header").getBoundingClientRect();
+    const top = header.bottom + 14;
+    const bottom = window.innerHeight - 14;
+    const excerptEnd = box.top + Math.min(box.height, 130);
+    if (box.top < top || excerptEnd > bottom) {
+      window.scrollBy({top: box.top < top ? box.top - top : excerptEnd - bottom, behavior: "instant"});
+    }
+  }
+  document.querySelector(".buyer-controls")?.addEventListener("change", (event) => {
+    const active = document.querySelector('[data-buyer="' + event.target.value + '"] figcaption');
+    keepAnswerVisible(active);
+  });
+  document.querySelector(".sample-choices")?.addEventListener("change", (event) => {
+    const active = document.querySelector('[data-variant="' + event.target.value + '"] blockquote');
+    keepAnswerVisible(active);
+  });
   const tabs = [...document.querySelectorAll("[role=tab]")];
   function selectTab(tab, updateLink = false) {
     tabs.forEach((t) => {
@@ -49,7 +69,10 @@
       t.tabIndex = active ? 0 : -1;
       document.getElementById(t.getAttribute("aria-controls")).hidden = !active;
     });
-    if (updateLink) history.replaceState(history.state, "", "#" + tab.id);
+    if (updateLink) {
+      history.replaceState(history.state, "", "#" + tab.id);
+      keepAnswerVisible(document.getElementById(tab.getAttribute("aria-controls")).querySelector("h3"));
+    }
   }
   function selectLinkedPlatform() {
     const linked = tabs.find((tab) => "#" + tab.id === location.hash);
@@ -68,7 +91,7 @@
       if (next !== undefined) {
         e.preventDefault();
         selectTab(tabs[next], true);
-        tabs[next].focus();
+        tabs[next].focus({preventScroll: true});
       }
     });
   });
