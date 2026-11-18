@@ -83,7 +83,6 @@
 
   const layer = stage.querySelector(".quote-objects");
   const canvas = layer.querySelector("canvas");
-  const toggle = stage.querySelector(".quote-motion-toggle");
   const reduced = matchMedia("(prefers-reduced-motion: reduce)");
   const pointer = matchMedia("(hover: hover) and (pointer: fine)");
   const objects = Array.from(layer.querySelectorAll("[data-profile]"), image => {
@@ -162,7 +161,7 @@
   }
 
   let gl, program, uniforms, aPoint, aNormal, frame = 0, last = 0, elapsed = 0;
-  let visible = false, paused = false, ready = false, loading = false;
+  let visible = false, ready = false, loading = false;
   let aimX = 0, aimY = 0, smoothX = 0, smoothY = 0;
   const bounds = {width: 0, height: 0};
 
@@ -232,25 +231,28 @@
     stage.style.setProperty("--horizon-rise", Math.round(scroll * 34 + smoothY * 3) + "px");
   }
   function tick(now) {
-    frame = requestAnimationFrame(tick);
-    if (now - last < 31) return;
-    elapsed += last ? Math.min(80, now - last) : 0;
+    frame = 0;
+    const d = last ? Math.min(64, now-last) : 32;
     last = now;
-    smoothX += (aimX - smoothX) * 0.13;
-    smoothY += (aimY - smoothY) * 0.13;
+    elapsed = Math.min(2300,elapsed+d);
+    const blend=1-Math.exp(-d/80);
+    smoothX += (aimX-smoothX)*blend;
+    smoothY += (aimY-smoothY)*blend;
     draw();
+    if (elapsed < 2300 || Math.abs(smoothX-aimX)+Math.abs(smoothY-aimY) > .003) wake();
+  }
+  function wake() {
+    if (!frame && ready && visible && !document.hidden && !reduced.matches) frame=requestAnimationFrame(tick);
   }
   function sync() {
     cancelAnimationFrame(frame);
-    frame = last = 0;
-    toggle.hidden = !ready || reduced.matches;
+    frame=last=0;
     if (reduced.matches) {
       layer.classList.remove("is-rendered");
       stage.style.removeProperty("--horizon-rise");
-    }
-    if (visible && !document.hidden && !reduced.matches) {
-      if (!ready) { initialize(); return; }
-      if (!paused) frame = requestAnimationFrame(tick);
+    } else if (visible && !document.hidden) {
+      if (!ready) initialize();
+      else wake();
     }
   }
   async function initialize() {
@@ -284,17 +286,14 @@
     }
   }
   stage.addEventListener("pointermove", e => {
-    if (!pointer.matches || reduced.matches || paused) return;
+    if (!pointer.matches || reduced.matches) return;
     const box = stage.getBoundingClientRect();
     aimX = (e.clientX-box.left) / box.width * 2 - 1;
     aimY = (e.clientY-box.top) / box.height * 2 - 1;
+    wake();
   }, {passive:true});
-  stage.addEventListener("pointerleave", () => { aimX = aimY = 0; });
-  toggle.addEventListener("click", () => {
-    paused = !paused;
-    toggle.setAttribute("aria-pressed", String(paused));
-    sync();
-  });
+  stage.addEventListener("pointerleave", () => { aimX = aimY = 0; wake(); });
+  document.addEventListener("scroll",wake,{passive:true});
   canvas.addEventListener("webglcontextlost", e => {
     e.preventDefault();
     ready = false;

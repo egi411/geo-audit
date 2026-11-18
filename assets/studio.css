@@ -103,7 +103,6 @@
   border-bottom: 1px solid var(--studio-line);
   border-radius: 50%;
 }
-.studio-showcase .quote-motion-toggle { left: auto; right: 0; bottom: 0; transform: none; }
 .a-section { border-bottom: 1px solid var(--line); padding-block: clamp(65px, 7vw, 110px); }
 .a-section-head h2 { width: fit-content; font-size: clamp(34px, 3.8vw, 58px); font-weight: 540; letter-spacing: -.055em; text-wrap: balance; }
 .a-section-head > .short-answer { margin: 17px 0 9px; }
