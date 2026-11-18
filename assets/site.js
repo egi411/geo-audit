@@ -1,5 +1,40 @@
 (() => {
   "use strict";
+  // Page zoom changes CSS viewport width and pixel density in inverse proportion.
+  // Track that change separately from window resizing and pinch zoom.
+  const displayKey = "aileed:display-zoom";
+  let density = window.devicePixelRatio || 1;
+  let width = window.innerWidth;
+  let magnification = 1;
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(displayKey));
+    if (saved?.density === density && Number.isFinite(saved.factor) && saved.factor > 0) {
+      magnification = saved.factor;
+    }
+  } catch { /* A blocked store still allows zoom during this visit. */ }
+
+  function updateDisplayScale() {
+    const nextDensity = window.devicePixelRatio || 1;
+    const nextWidth = window.innerWidth;
+    if (density !== nextDensity) {
+      const sameWindowWidth = Math.abs(width * density - nextWidth * nextDensity) <= Math.max(density, nextDensity) * 2;
+      magnification = sameWindowWidth ? magnification * nextDensity / density : 1;
+      if (Math.abs(magnification - 1) < .005) magnification = 1;
+      try {
+        if (magnification === 1) sessionStorage.removeItem(displayKey);
+        else sessionStorage.setItem(displayKey, JSON.stringify({density: nextDensity, factor: magnification}));
+      } catch { /* No storage is needed for the current document. */ }
+    }
+    width = nextWidth;
+    density = nextDensity;
+    const root = document.documentElement.style;
+    if (magnification === 1) root.removeProperty("--layout-vw");
+    else root.setProperty("--layout-vw", (width * magnification / 100) + "px");
+  }
+  updateDisplayScale();
+  window.addEventListener("resize", updateDisplayScale, {passive: true});
+  window.addEventListener("pageshow", updateDisplayScale);
+
   const menu = document.querySelector(".menu-toggle");
   const navigation = document.querySelector(".nav-links");
   function closeMenu() {

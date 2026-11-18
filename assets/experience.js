@@ -41,7 +41,7 @@
       visible.forEach(el=>{
         const box=el.parentElement.getBoundingClientRect();
         const distance=(innerHeight/2-box.top-box.height/2)/innerHeight;
-        el.style.setProperty("--scene-rise",Math.round(Math.max(-1,Math.min(1,distance))*26)+"px");
+        el.style.setProperty("--scene-rise",(Math.max(-1,Math.min(1,distance))*1.625).toFixed(3)+"rem");
       });
     }
     progressPending=false;
