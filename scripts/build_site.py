@@ -11,11 +11,6 @@ def asset(name):
 def img(src,alt,cls='',eager=False):
  decorative=' aria-hidden="true"' if src.startswith('brands/') else ''
  return f'<img class="{cls}" src="{{PRE}}{asset(src)}" alt="{html.escape(alt)}"{decorative} width="1000" height="1000" '+('fetchpriority="high"' if eager else 'loading="lazy"')+' decoding="async" />'
-def motion_toggle():
- return '''<button class="quote-motion-toggle" type="button" aria-label="Пауза анимации" aria-pressed="false" title="Пауза анимации" hidden>
-   <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path class="pause-glyph" d="M4 3h3v10H4zm5 0h3v10H9z"/><path class="play-glyph" d="m4 2 10 6-10 6z"/></svg>
- </button>'''
-
 def hero(h,a,p,profile,alt,primary,secondary=('Зачем бренду GEO','why-geo/')):
  product=asset('studio-'+profile+'.webp')
  return f'''<section class="studio-hero studio-{profile}" data-quote-stage>
@@ -25,7 +20,7 @@ def hero(h,a,p,profile,alt,primary,secondary=('Зачем бренду GEO','why
    <a class="text-link" href="{{PRE}}{secondary[1]}">{secondary[0]} <span aria-hidden="true">→</span></a></div></div>
    <div class="studio-showcase"><div class="studio-floor" aria-hidden="true"></div>
    <div class="quote-objects studio-object"><img class="quote-body" data-profile="{profile}" src="{{PRE}}{product}" width="724" height="724" alt="{alt}" fetchpriority="high">
-   <canvas class="quote-canvas" aria-hidden="true"></canvas></div>{motion_toggle()}</div></div>
+   <canvas class="quote-canvas" aria-hidden="true"></canvas></div></div></div>
  </section>'''
 
 def quote_stage():
@@ -48,7 +43,7 @@ def quote_stage():
      <div class="actions"><a class="btn primary" href="{{PRE}}audit/">Проверить AI-видимость <span aria-hidden="true">↗</span></a>
      <a class="text-link" href="{{PRE}}why-geo/">Зачем бренду GEO <span aria-hidden="true">→</span></a></div>
    </div>
-   {motion_toggle()}
+
  </section>"""
 def chapter(name, content, anchor=''):
  anchor = f' id="{anchor}"' if anchor else ''
@@ -66,7 +61,7 @@ def scene_image(name, alt, sizes):
  sizes="{sizes}" width="1440" height="960" alt="{alt}" loading="lazy" decoding="async">'''
 
 def faq(items):
- entries=''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q,a in items)
+ entries=''.join(f'<details{" open" if i==0 else ""}><summary>{q}</summary><p>{a}</p></details>' for i,(q,a) in enumerate(items))
  return chapter('question-column',headline('Что важно знать перед началом?','До начала работ определите, какой выбор покупателя вам важно изучить. Ниже — о границах услуги и использовании отчёта.')+'<div class="question-list">'+entries+'</div>','faq'),items
 
 def closing(audit=False):
@@ -82,11 +77,15 @@ strip='<nav class="a-model-strip wrap" id="platforms" aria-label="Продвиж
 
 def services(question, answer):
  options=[
-  ('audit/','GEO-аудит','Узнайте, в каких ответах появляется ваш бренд, что о нём говорят и кого предлагают рядом.','audit-signal','Три выдвижные колонки отмечают независимые показатели аудита','Что входит в аудит'),
+  ('audit/','GEO-аудит','Узнайте, в каких ответах появляется ваш бренд, что о нём говорят и кого предлагают рядом.','report','Стеклянные листы отчёта о видимости бренда','Что входит в аудит'),
   ('platforms/','GEO-продвижение','Помогите покупателю встретить ваш продукт в ответе ассистента и понять, чем он подходит.','answer-display','Объёмная реплика из стекла над экраном смартфона','Выбрать платформу')]
  items=[]
  for route,name,reason,image,alt,link in options:
-  art=(f'<img class="scene-image" src="{{PRE}}{asset("audit-signal-small.webp")}" alt="{alt}" width="540" height="388" loading="lazy">' if image=='audit-signal' else scene_image(image,alt,'(max-width: 700px) 96vw, (max-width: 1200px) 51vw, 660px'))
+  if image=='report':
+   art=f'''<div class="dossier-art"><img src="{{PRE}}{asset("object-sources.webp")}" class="dossier-sheets" width="512" height="512" alt="{alt}" loading="lazy">
+   <div class="dossier-fields" aria-hidden="true"><span>В отчёте</span><b>Упоминания</b><b>Источники</b><b>Ссылки</b></div></div>'''
+  else:
+   art=scene_image(image,alt,'(max-width: 700px) 96vw, (max-width: 1200px) 51vw, 660px')
   items.append(f'<a class="service-tile" href="{{PRE}}{route}"><div class="product-shot" data-scene>{art}</div><div class="service-description"><strong>{name}</strong><p>{reason}</p><span class="tile-action">{link} <span aria-hidden="true">↗</span></span></div></a>')
  return chapter('service-gallery',headline(question,answer)+'<div class="service-pair">'+''.join(items)+'</div>','offers')
 
@@ -109,29 +108,25 @@ home_questions,mainfaq=faq(commonfaq)
 # Detail pages.
 why=hero('Зачем бренду <span>GEO?</span>','GEO-продвижение помогает участвовать в выборе покупателя, когда тот обращается за рекомендацией к ИИ.','Ваш продукт может подходить клиенту, но остаться за пределами его списка вариантов. GEO помогает бизнесу развивать присутствие в этой точке выбора.','shortlist','Стеклянная карточка выделена среди двух металлических альтернатив',('Понять текущую видимость','audit/'),('Выбрать платформу','platforms/'))
 why+=chapter('choice-story',headline('Где бренд теряет покупателя?','В ответе ассистента выбор может сузиться ещё до знакомства с сайтом.')+"""
- <div class="choice-flow"><div class="choice-art" data-scene>"""+img('aileed-shortlist.webp','Стеклянная карточка выбора среди графитовых альтернатив')+"""</div><dl class="choice-lines"><div><dt>Вас пропустили</dt><dd>Подходящий заказчик видит других подрядчиков и может вообще не узнать о вашей компании.</dd></div>
+ <div class="choice-flow"><figure class="decision-scene" data-scene>"""+scene_image('scene-hotel','Гостиница с подсветкой фасада и номеров','(max-width:700px) 95vw, 55vw')+"""<figcaption><span>Вопрос заказчика</span><blockquote>Кому доверить освещение нового отеля?</blockquote></figcaption></figure><dl class="choice-lines"><div><dt>Вас пропустили</dt><dd>Подходящий заказчик видит других подрядчиков и может вообще не узнать о вашей компании.</dd></div>
  <div><dt>Вас перепутали</dt><dd>Устаревшее описание услуги отсекает клиентов, которым на самом деле подходит ваш продукт.</dd></div>
  <div><dt>Вас не отличили</dt><dd>Название есть среди вариантов, но покупателю неясно, в чём ваше преимущество.</dd></div></dl></div>""")
-why+=chapter('platform-priority',headline('Когда GEO стоит вложений?','Когда клиент ещё не выбрал поставщика и задаёт ИИ вопрос о категории, условиях или альтернативах.')+"""<div class="priority-note"><strong>Сравнение подрядчиков</strong><p>Если отдел продаж слышит «нам предложили вас и ещё две компании», важно понять, какой аргумент ассистент приводит в пользу каждой. Одного упоминания имени для ответа мало.</p></div>
+why+=chapter('platform-priority investment-cases',headline('Когда GEO стоит вложений?','Когда клиент ещё не выбрал поставщика и задаёт ИИ вопрос о категории, условиях или альтернативах.')+"""<div class="priority-note"><strong>Сравнение подрядчиков</strong><p>Если отдел продаж слышит «нам предложили вас и ещё две компании», важно понять, какой аргумент ассистент приводит в пользу каждой. Одного упоминания имени для ответа мало.</p></div>
  <div class="priority-note"><strong>Выбор конкретной модели</strong><p>Если покупателю нужна кофемашина определённой ширины, имеют значение модель, габариты и ссылка на карточку товара. Упоминание категории не решает задачу выбора.</p></div>
  <div class="priority-note"><strong>Решение о бюджете</strong><p>Аудит покажет вопросы, в которых появляются конкуренты без вас. Чтобы связать присутствие с продажами, отдельно смотрят переходы, обращения и данные CRM.</p></div>"""+arrow_link('audit/#competitors','Посмотреть показатели конкурентов'))
 why+=services('С какой задачи начать?','Выберите между оценкой текущей видимости и работой над присутствием бренда в рекомендациях.')+closing()
-def audit_film():
- poster=asset('audit-signal.webp')
- return f'''<section class="signal-hero"><div class="wrap signal-layout"><div class="signal-copy">
- <h1>Называет ли ИИ <span>ваш бренд?</span></h1>
+def audit_opening():
+ return """<header class="audit-opening wrap"><h1>Называет ли ИИ <span>ваш бренд?</span></h1>
  <p class="short-answer">GEO-аудит покажет, где вас упоминают, кому достаются ссылки и какие конкуренты появляются в ответах вместо вас.</p>
- <div class="actions"><a class="action-pill" href="#results">Посмотреть метрики <span aria-hidden="true">↓</span></a>
- <a class="signal-secondary" href="#sample">Разобрать пример <span aria-hidden="true">↗</span></a></div></div>
- <figure class="signal-figure"><video muted playsinline loop preload="none" poster="{{PRE}}{poster}" data-film="{{PRE}}{asset('audit-signal.mp4')}" aria-label="Иллюстрация трёх показателей аудита. Металлические секции раскрываются независимо."></video>
- <figcaption><i aria-hidden="true"></i> Упоминание · Источник · Ссылка</figcaption><button type="button" class="film-control" aria-label="Пауза анимации" aria-pressed="false" hidden>Ⅱ</button></figure></div></section>'''
+ <div class="actions"><a class="btn primary" href="#sample">Разобрать пример <span aria-hidden="true">↓</span></a>
+ <a class="text-link" href="#results">Посмотреть метрики <span aria-hidden="true">↗</span></a></div></header>"""
 
 def metric_sheet():
  metrics=[
   ('text','Упоминание бренда','Название встречается в основном тексте.','Повтор названия в одном ответе засчитывается один раз. Название только в адресе или в подписи ссылки сюда не входит.'),
   ('sources','Сайт в источниках','Домен есть в списке источников ответа.','Несколько страниц одного сайта дают одно попадание за замер. Источник может остаться за пределами текста, который видит покупатель.'),
   ('url','URL в ответе','Полный адрес сайта встроен в сам ответ.','Считается и ссылка под словом. В отчёте видно, на какую страницу ведёт адрес — на карточку продукта, обзор или главную.')]
- rows=''.join(f'<div class="metric-cell"><i class="metric-icon icon-{key}" aria-hidden="true"></i><dt>{name}</dt><dd><strong>{definition}</strong><p>{detail}</p></dd></div>' for key,name,definition,detail in metrics)
+ rows=''.join(f'<div class="metric-cell"><div class="metric-sculpture"><img src="{{PRE}}{asset("object-"+key+".webp")}" width="512" height="512" loading="lazy" alt="{name}" aria-hidden="true"></div><dt>{name}</dt><dd><strong>{definition}</strong><p>{detail}</p></dd></div>' for key,name,definition,detail in metrics)
  return chapter('metric-sheet',headline('Что измеряет GEO-аудит?','Три показателя отвечают на разные вопросы. Для каждого вы увидите число попаданий и его долю в выбранной группе замеров.')+f'<dl class="metric-ledger">{rows}</dl>'+'''<div class="measure-base"><strong>Откуда берётся процент?</strong><p>Число замеров с признаком делится на все попытки в выбранной группе. Один замер — один вопрос одной модели в одном повторе. Отказы и ошибки остаются в базе и показаны отдельно. Доли трёх признаков могут пересекаться.</p></div>''','results')
 
 def answer_sample():
@@ -143,9 +138,20 @@ def answer_sample():
  for i,(key,label,line,refs,brand,src,url,conclusion) in enumerate(samples):
   tabs.append(f'<label><input type="radio" name="sample" value="{key}"'+(' checked' if i==0 else '')+f'><span>{label}</span></label>')
   flags=''.join(f'<div><dt>{name}</dt><dd class="flag-{"yes" if status=="Есть" else "no"}">{status}</dd></div>' for name,status in [('Имя в тексте',brand),('Сайт в источниках',src),('URL в ответе',url)])
-  cards.append(f'<div class="answer-variant" data-variant="{key}"><div class="sample-output"><span>Пример ответа</span><blockquote>{line}</blockquote><p class="sample-source"><b>Источники</b> {refs}</p></div><div class="sample-coding"><dl>{flags}</dl><p>{conclusion}</p></div></div>')
- return chapter('answer-lab',headline('Что видно в одном ответе?','Один и тот же вопрос о выборе сервиса может дать три разных результата. Переключите вариант, чтобы увидеть, что попадёт в отчёт.')+
- '<div class="sample-board"><div class="sample-top"><b>Какой сервис поддержки подойдёт небольшой команде?</b><fieldset class="sample-choices"><legend>Вариант ответа</legend>'+''.join(tabs)+'</fieldset></div>'+''.join(cards)+'</div><p class="sample-note">Учебный пример. «Линия» — вымышленный сервис.</p>','sample')
+  cards.append(f'''<div class="answer-variant" data-variant="{key}">
+  <div class="sample-output"><span>Ответ ассистента</span><blockquote>{line}</blockquote>
+  <p class="sample-source"><b>Источники</b> {refs}</p></div>
+  <div class="sample-coding"><img class="indicator-poster" src="{{PRE}}{asset("indicator-"+key+".webp")}" width="600" height="400" alt="Индикатор присутствия бренда" aria-hidden="true">
+  <dl>{flags}</dl></div><p class="sample-result">{conclusion}</p></div>''')
+ return f'''<section class="answer-lab wrap" id="sample">
+ <header class="console-title"><div><h2>Что видно в одном ответе?</h2>
+ <p class="short-answer">Переключите пример и посмотрите, какие признаки попадут в отчёт.</p></div>
+ <span class="demo-label">Учебный пример</span></header>
+ <div class="sample-board" data-indicator="{{PRE}}{asset("indicator-frames.webp")}">
+ <div class="sample-top"><div><span>Вопрос покупателя</span><b>Какой сервис поддержки подойдёт небольшой команде?</b></div>
+ <fieldset class="sample-choices"><legend>Вариант ответа</legend>{"".join(tabs)}</fieldset></div>
+ <div class="sample-variants">{"".join(cards)}<div class="animated-indicator" aria-hidden="true"><canvas width="420" height="280"></canvas></div></div></div>
+ <p class="sample-note">«Линия» — вымышленный сервис.</p></section>'''
 
 def competitor_sheet():
  rows=[
@@ -163,7 +169,7 @@ def deliverables():
  ('Продукту и PR','Контекст репутации','Фрагменты ответов с характеристиками продукта, оговорками и оценками. Условия и спорные утверждения выделены для сверки с действующим предложением.'),
  ('Редакции и разработке','Приоритеты по страницам','Для конкретного URL собраны наблюдение, подтверждающий пример и задача по содержанию или доступности страницы. Команда может вернуться к тому же вопросу после изменений.')]
  return chapter('report-delivery',headline('Что команда получит на руки?','Отчёт с выводами, рабочую таблицу и приложение с ответами. Каждый вывод можно проследить до вопроса, модели, даты и источника.')+
- '<div class="delivery-list">'+''.join(f'<div><span>{team}</span><strong>{name}</strong><p>{desc}</p></div>' for team,name,desc in rows)+'</div>','report')
+ '<div class="delivery-list">'+''.join(f'<div><div class="report-glyph glyph-{i}" aria-hidden="true"><i></i><i></i><i></i></div><span>{team}</span><strong>{name}</strong><p>{desc}</p></div>' for i,(team,name,desc) in enumerate(rows))+'</div>','report')
 
 platformbody=hero('Где продвигать <span>бренд в ИИ?</span>','Начните с вопросов, которые ваши покупатели задают в ChatGPT, Алисе и других ассистентах.','Здесь — шесть примеров выбора продукта. В каждом разборе есть вопрос клиента, признак видимости и решение для вашей команды.','dialogue','Две реплики из дымчатого стекла и меди',('Сравнить платформы','#compare'),('Посмотреть метрики','audit/#results'))
 platform_cases=[
@@ -179,10 +185,11 @@ for (name,key),(q,answer,topic,prompt,measure,decision,url,ref) in zip(platforms
  panel_bodies.append(f'''<div role="tabpanel" id="panel-{key}" aria-labelledby="tab-{key}" tabindex="0">
  <div class="platform-context"><span>{topic}</span><h3>{q}</h3><p class="short-answer">{answer}</p>
  <figure><figcaption>Пример вопроса покупателя</figcaption><blockquote>{prompt}</blockquote></figure></div>
- <div class="platform-insight"><dl><div><dt>Что фиксируем</dt><dd>{measure}</dd></div><div><dt>Решение для команды</dt><dd>{decision}</dd></div></dl><a href="{url}">{ref} ↗</a></div></div>''')
+ <div class="platform-insight"><div class="platform-trace" aria-hidden="true"><i class="trace-question"></i><i class="trace-wire"></i><i class="trace-hub">{brand_mark(name,key)}</i><i class="trace-wire"></i><i class="trace-answer"></i></div><dl><div><dt>Что фиксируем</dt><dd>{measure}</dd></div><div><dt>Решение для команды</dt><dd>{decision}</dd></div></dl><a href="{url}">{ref} ↗</a></div></div>''')
 platformbody+=chapter('platform-atlas',headline('Что проверять по платформам?','Выберите ассистента и разберите покупательский вопрос. Это примеры для разных рынков. Для вашего бренда сравнение строится вокруг его продукта и аудитории.')+f'<div class="atlas-stage"><div class="atlas-tabs" role="tablist" aria-label="AI-платформы">{panel_tabs}</div><div class="atlas-panels">{"".join(panel_bodies)}</div></div>','compare')
-platformbody+=chapter('platform-priority',headline('С какой площадки начать?','Выберите ту, которую клиенты называют в разговорах с продажами. Если таких данных пока нет, сравните ответы на один коммерческий вопрос в нескольких ассистентах.')+'''<div class="priority-note"><strong>Сравнивайте сопоставимое</strong><p>Сохраните формулировку вопроса, дату, регион и режим поиска. Ответ из API и ответ в приложении могут различаться. Отсутствие списка источников в одном режиме учитывается отдельно.</p></div>'''+arrow_link('audit/#results','Какие метрики войдут в аудит'))+closing()
-audit=audit_film()+strip+metric_sheet()+answer_sample()+competitor_sheet()+deliverables()
+platform_map='<nav class="assistant-orbit" aria-label="Перейти к разбору платформы"><span class="orbit-core" aria-hidden="true"></span>'+''.join(f'<a href="#tab-{key}" aria-label="Разбор {name}">{brand_mark(name,key)}</a>' for name,key in platforms)+'</nav>'
+platformbody+=chapter('platform-priority assistant-choice',headline('С какой площадки начать?','Выберите ту, которую клиенты называют в разговорах с продажами. Если таких данных пока нет, сравните ответы на один коммерческий вопрос в нескольких ассистентах.')+'''<div class="priority-note"><strong>Сравнивайте сопоставимое</strong><p>Сохраните формулировку вопроса, дату, регион и режим поиска. Ответ из API и ответ в приложении могут различаться. Отсутствие списка источников в одном режиме учитывается отдельно.</p></div>'''+arrow_link('audit/#results','Какие метрики войдут в аудит')+platform_map)+closing()
+audit='<div class="audit-stage">'+audit_opening()+answer_sample()+'</div>'+strip+metric_sheet()+competitor_sheet()+deliverables()
 x,auditfaq=faq([('Можно ли увидеть реальные ответы из моего аудита?','Да. В приложении доступны тексты, ссылки, даты, модели и статусы замеров. По ним команда может проверить выводы отчёта.'),('Что покажут вопросы без названия компании?','В каких ситуациях ассистент сам назвал бренд. Вопросы с названием выделены отдельно — они показывают, как ИИ описывает уже известную покупателю компанию.'),('Аудит покажет продажи из ИИ?','Для выводов о продажах нужны данные аналитики и CRM. Аудит показывает содержание ответов, упоминания и ссылки в пределах исследованной выборки.'),('Можно использовать результат со своей командой?','Да. Таблица связывает наблюдения с вопросами и страницами. Задачи можно передать своей редакции, продуктовой команде или разработчикам.')])
 audit+=x+closing(True)
 
@@ -193,13 +200,6 @@ cover_alt={
  'quote-glass.webp':'Объёмная кавычка из янтарного стекла',
  'studio-shortlist.webp':'Стеклянная карточка на переднем плане среди вариантов',
 }
-def story_card(post,heading='h3',eager=False):
- route,title,answer,image,date=post
- return f'''<article class="a-post"><a href="{{PRE}}{route}">
- <div class="story-image">{img(image,cover_alt[image],'a-post-art',eager)}</div>
- <div class="story-copy"><{heading}>{title}</{heading}><p class="short-answer">{answer}</p>
- <span class="a-read">Читать материал <span aria-hidden="true">↗</span></span></div></a></article>'''
-
 def story_shelf(items, heading):
  artwork={
   'what-is-geo/':('prism','Свет преломляется на гранях прозрачной призмы'),
@@ -215,9 +215,8 @@ def story_shelf(items, heading):
  return '<div class="story-shelf">'+''.join(rows)+'</div>'
 
 main+=chapter('journal-shelf',headline('Что почитать о выборе бренда в ИИ?','Три материала для тех, кто отвечает за продвижение бизнеса.')+story_shelf(posts,'h3')+arrow_link('blog/','Весь блог'),'blog')+home_questions+closing()
-blog='''<section class="studio-journal"><div class="wrap journal-front">
- <div class="a-blog-heading"><h1>Что читать <span>о GEO?</span></h1>
- <p class="short-answer">Блог aileed о видимости, доверии и роли AI-ответов в решениях покупателей.</p></div>'''+story_card(posts[0],'h2',True)+'</div></section>'+chapter('journal-shelf archive-edition',story_shelf(posts[1:],'h2'))
+blog='''<section class="journal-opening"><div class="wrap"><h1>Что читать <span>о GEO?</span></h1>
+ <p class="short-answer">Блог aileed о видимости, доверии и роли AI-ответов в решениях покупателей.</p></div></section>'''+chapter('journal-shelf archive-edition',story_shelf(posts,'h2'))
 
 def reading_layout(sections,label):
  links=[]
@@ -298,7 +297,7 @@ def write(route,title,desc,body,published,article=False,faqs=None):
    crumb+='<meta itemprop="position" content="'+str(i+1)+'"></li>'
   crumb+='</ol></nav>'
 
- head='<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+html.escape(title)+'</title><meta name="description" content="'+html.escape(desc)+'"><meta name="author" content="Редакция aileed"><meta name="datePublished" content="'+published+'"><meta name="dateModified" content="'+TODAY+'"><meta name="robots" content="index,follow,max-image-preview:large"><meta name="theme-color" content="#080909"><link rel="canonical" href="'+url+'"><link rel="describedby" type="text/plain" href="'+BASE+'llms.txt"><meta property="og:title" content="'+html.escape(title)+'"><meta property="og:description" content="'+html.escape(desc)+'"><meta property="og:url" content="'+url+'"><meta property="og:site_name" content="aileed"><meta property="og:locale" content="ru_RU"><meta property="og:type" content="'+('article' if article else 'website')+'"><meta property="og:image" content="'+BASE+asset(social)+'"><meta name="twitter:card" content="summary_large_image"><link rel="icon" type="image/svg+xml" href="'+pre+asset('mark.svg')+'"><link rel="stylesheet" href="'+pre+asset('site.css')+'"><link rel="stylesheet" href="'+pre+asset('studio.css')+'"><link rel="stylesheet" href="'+pre+asset('editions.css')+'"><script type="application/ld+json">'+json.dumps({'@context':'https://schema.org','@graph':graph},ensure_ascii=False)+'</script>'+''.join('<script src="'+pre+asset(f)+'" defer></script>' for f in ['site.js','privacy.js','experience.js']+(['quote-stage.js'] if 'data-quote-stage' in body else [])+(['audit-film.js'] if 'data-film=' in body else []))+'</head>'
+ head='<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+html.escape(title)+'</title><meta name="description" content="'+html.escape(desc)+'"><meta name="author" content="Редакция aileed"><meta name="datePublished" content="'+published+'"><meta name="dateModified" content="'+TODAY+'"><meta name="robots" content="index,follow,max-image-preview:large"><meta name="theme-color" content="#080909"><link rel="canonical" href="'+url+'"><link rel="describedby" type="text/plain" href="'+BASE+'llms.txt"><meta property="og:title" content="'+html.escape(title)+'"><meta property="og:description" content="'+html.escape(desc)+'"><meta property="og:url" content="'+url+'"><meta property="og:site_name" content="aileed"><meta property="og:locale" content="ru_RU"><meta property="og:type" content="'+('article' if article else 'website')+'"><meta property="og:image" content="'+BASE+asset(social)+'"><meta name="twitter:card" content="summary_large_image"><link rel="icon" type="image/svg+xml" href="'+pre+asset('mark.svg')+'"><link rel="stylesheet" href="'+pre+asset('site.css')+'"><link rel="stylesheet" href="'+pre+asset('studio.css')+'"><link rel="stylesheet" href="'+pre+asset('editions.css')+'"><script type="application/ld+json">'+json.dumps({'@context':'https://schema.org','@graph':graph},ensure_ascii=False)+'</script>'+''.join('<script src="'+pre+asset(f)+'" defer></script>' for f in ['site.js','privacy.js','experience.js']+(['quote-stage.js'] if 'data-quote-stage' in body else [])+(['audit-indicator.js'] if 'data-indicator=' in body else []))+'</head>'
  content=head+'<body class="brand-refresh" itemscope itemtype="https://schema.org/WebPage" itemid="'+url+'#page"><div class="a-reading-progress" aria-hidden="true"></div>'+common_header(pre,route)+notice(pre)+'<main id="main">'+crumb+body.replace('{PRE}',pre)+'</main>'+footer(pre,published)+dialog.replace('href="privacy.html"','href="'+pre+'privacy.html"').replace('href="consent.html"','href="'+pre+'consent.html"')+'<noscript><p class="cookie-noscript">Аналитика и рекламные cookie не используются.</p></noscript></body></html>'
  # Fragment-only primary destinations belong to the current page.
  content=content.replace('href="'+pre+'#','href="#')

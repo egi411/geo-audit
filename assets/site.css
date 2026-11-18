@@ -3426,22 +3426,3 @@ textarea::placeholder {
 @media(forced-colors: active) {
   .quote-copy h1 span { color: CanvasText; -webkit-text-fill-color: CanvasText; }
 }
-.quote-motion-toggle {
-  position: absolute;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 38px;
-  height: 38px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--glass);
-  border: 1px solid var(--line-bright);
-  color: var(--muted);
-  cursor: pointer;
-}
-.quote-motion-toggle:hover, .quote-motion-toggle:focus-visible { color: var(--ink); border-color: var(--accent); }
-.quote-motion-toggle[hidden], .quote-motion-toggle .play-glyph,
-.quote-motion-toggle[aria-pressed="true"] .pause-glyph { display: none; }
-.quote-motion-toggle[aria-pressed="true"] .play-glyph { display: block; }

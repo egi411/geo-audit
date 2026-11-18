@@ -1,4 +1,4 @@
-// Source of the pre-rendered audit film and posters. Render with Three.js r160.
+// Transparent indicator frames for the interactive audit example. Three.js r160.
 import * as T from 'three';
 
 export function buildAuditModel(canvas, width, height) {
@@ -30,7 +30,7 @@ export function buildAuditModel(canvas, width, height) {
   scene.environment = pmrem.fromScene(studio, 0.02).texture;
   const camera = new T.PerspectiveCamera(29,width/height,.1,50);
   camera.position.set(5.1, 4.7, 7.3);
-  camera.lookAt(0, 1.02, 0);
+  camera.lookAt(0, .86, 0);
 
   const key = new T.DirectionalLight(0xffedda, 2.4);
   key.position.set(-3, 8, 5);
@@ -40,18 +40,6 @@ export function buildAuditModel(canvas, width, height) {
   key.shadow.normalBias = .018;
   key.shadow.bias = -.00035;
   scene.add(key, new T.HemisphereLight(0xffffff, 0x635751, 1.6));
-  const ground = new T.Mesh(new T.PlaneGeometry(160,160), new T.ShadowMaterial({opacity:.018}));
-  ground.rotation.x = -Math.PI / 2;
-  ground.position.y = -.014;
-  ground.receiveShadow = true;
-  scene.add(ground);
-
-  const shade=document.createElement('canvas'); shade.width=shade.height=256;
-  const ink=shade.getContext('2d'), fade=ink.createRadialGradient(128,128,8,128,128,127);
-  fade.addColorStop(0,'rgba(16,18,18,.49)');fade.addColorStop(.52,'rgba(20,22,21,.27)');fade.addColorStop(1,'rgba(20,20,20,0)');
-  ink.fillStyle=fade; ink.fillRect(0,0,256,256);
-  const contact=new T.Mesh(new T.PlaneGeometry(6.3,4),new T.MeshBasicMaterial({map:new T.CanvasTexture(shade),transparent:true,depthWrite:false}));
-  contact.rotation.x=-Math.PI/2;contact.position.y=-.006; scene.add(contact);
   const metal = (color, roughness, metalness=1) => new T.MeshStandardMaterial({color,roughness,metalness});
   const graphite = metal(0x383e41,.32,.89);
   const recess = metal(0x121617,.4,.55);
@@ -114,7 +102,7 @@ export function buildAuditModel(canvas, width, height) {
       }
     }
     const leaves=[];
-    const leafCount=[4,6,8][i];
+    const leafCount=6;
     for(let j=0;j<leafCount;j++) {
       const leaf=place(slide,slab(.86,1.19,.065,.19,.045,finish),0,0,0);
       leaves.push(leaf);
@@ -126,21 +114,25 @@ export function buildAuditModel(canvas, width, height) {
     }
   }
   return function draw(phase) {
-    // The three pistons extend at different rates. Both ends of the film match.
-    const wave=phase*Math.PI*2;
-    const rest=[.62,1.15,1.72], travel=[.29,.46,.62];
+    // Four positions: neutral, mention, source, then mention plus a direct URL.
+    const poses = [[0,0,0], [1,0,0], [0,1,0], [1,0,1]];
+    const cursor = Math.max(0, Math.min(3, phase * 3));
+    const step = Math.min(2, Math.floor(cursor)), mix = cursor - step;
+    const smooth = mix * mix * (3 - 2 * mix);
     columns.forEach(({shaft,cap,leaves},i)=>{
-      const extension = rest[i]+travel[i]*(.44*Math.sin(wave+i*.9)+.56*Math.sin(wave*2+i*.7));
-      shaft.scale.y=extension;
-      cap.position.y=extension;
+      const level = poses[step][i] + (poses[step+1][i] - poses[step][i]) * smooth;
+      const height = .28 + level * 1.35;
+      shaft.scale.y = height;
+      cap.position.y = height;
       leaves.forEach((leaf,j)=>{
-        const portion=j/leaves.length;
-        leaf.position.y=extension*portion;
-        leaf.rotation.y=.18*portion*Math.sin(wave+i*.95);
+        const fraction=j/leaves.length;
+        leaf.scale.y=.58+.42*level;
+        leaf.position.y=height*fraction;
+        leaf.rotation.y=.12*fraction*level;
       });
-      cap.rotation.y=.18*Math.sin(wave+i*.95);
+      cap.rotation.y=.12*level;
     });
-    model.rotation.y=-.15+.09*Math.sin(wave);
+    model.rotation.y=-.31;
     renderer.render(scene,camera);
   };
 }

@@ -18,12 +18,12 @@
 <meta property="og:site_name" content="aileed">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://egi411.github.io/geo-audit/assets/social-audit.png?v=e249159e8dca">
+<meta property="og:image" content="https://egi411.github.io/geo-audit/assets/social-audit.png?v=dc496bb40297">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="../assets/mark.svg?v=38783ba247bf">
-<link rel="stylesheet" href="../assets/site.css?v=8c899006abe0">
-<link rel="stylesheet" href="../assets/studio.css?v=eddf6a8dcb96">
-<link rel="stylesheet" href="../assets/editions.css?v=e5b24278d4dd">
+<link rel="stylesheet" href="../assets/site.css?v=61dc3a366865">
+<link rel="stylesheet" href="../assets/studio.css?v=73930d00afc3">
+<link rel="stylesheet" href="../assets/editions.css?v=bdf676d1188b">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://egi411.github.io/geo-audit/#org", "name": "aileed", "url": "https://egi411.github.io/geo-audit/", "logo": "https://egi411.github.io/geo-audit/assets/aileed-logo.svg?v=0339078c6e2e"}, {"@type": "WebSite", "@id": "https://egi411.github.io/geo-audit/#website", "name": "aileed", "url": "https://egi411.github.io/geo-audit/"}, {"@type": "WebPage", "@id": "https://egi411.github.io/geo-audit/audit/#page", "url": "https://egi411.github.io/geo-audit/audit/", "name": "Что измеряет GEO-аудит бренда в нейросетях? | aileed", "description": "GEO-аудит бренда в нейросетях. Упоминания, сайт в источниках, URL в ответах, доля голоса и место среди конкурентов. Посмотрите пример и состав отчёта.", "inLanguage": "ru-RU", "author": {"@id": "https://egi411.github.io/geo-audit/#org"}, "publisher": {"@id": "https://egi411.github.io/geo-audit/#org"}, "datePublished": "2026-11-02", "dateModified": "2026-11-18", "isPartOf": {"@id": "https://egi411.github.io/geo-audit/#website"}}, {"@type": "Service", "name": "GEO-аудит", "provider": {"@id": "https://egi411.github.io/geo-audit/#org"}, "url": "https://egi411.github.io/geo-audit/audit/", "description": "GEO-аудит бренда в нейросетях. Упоминания, сайт в источниках, URL в ответах, доля голоса и место среди конкурентов. Посмотрите пример и состав отчёта."}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Можно ли увидеть реальные ответы из моего аудита?", "acceptedAnswer": {"@type": "Answer", "text": "Да. В приложении доступны тексты, ссылки, даты, модели и статусы замеров. По ним команда может проверить выводы отчёта."}}, {"@type": "Question", "name": "Что покажут вопросы без названия компании?", "acceptedAnswer": {"@type": "Answer", "text": "В каких ситуациях ассистент сам назвал бренд. Вопросы с названием выделены отдельно — они показывают, как ИИ описывает уже известную покупателю компанию."}}, {"@type": "Question", "name": "Аудит покажет продажи из ИИ?", "acceptedAnswer": {"@type": "Answer", "text": "Для выводов о продажах нужны данные аналитики и CRM. Аудит показывает содержание ответов, упоминания и ссылки в пределах исследованной выборки."}}, {"@type": "Question", "name": "Можно использовать результат со своей командой?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Таблица связывает наблюдения с вопросами и страницами. Задачи можно передать своей редакции, продуктовой команде или разработчикам."}}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "aileed", "item": "https://egi411.github.io/geo-audit/"}, {"@type": "ListItem", "position": 2, "name": "Что измеряет GEO-аудит бренда в нейросетях?", "item": "https://egi411.github.io/geo-audit/audit/"}]}]}</script>
 <script src="../assets/site.js?v=ad2b8812ef9c" defer>
 </script>
@@ -31,7 +31,7 @@
 </script>
 <script src="../assets/experience.js?v=8222084c4171" defer>
 </script>
-<script src="../assets/audit-film.js?v=259f588ad91e" defer>
+<script src="../assets/audit-indicator.js?v=46e30f1ee092" defer>
 </script>
 </head>
 <body class="brand-refresh" itemscope itemtype="https://schema.org/WebPage" itemid="https://egi411.github.io/geo-audit/audit/#page">
@@ -82,29 +82,136 @@
 </li>
 </ol>
 </nav>
-<section class="signal-hero">
-<div class="wrap signal-layout">
-<div class="signal-copy">
- <h1>Называет ли ИИ <span>ваш бренд?</span>
+<div class="audit-stage">
+<header class="audit-opening wrap">
+<h1>Называет ли ИИ <span>ваш бренд?</span>
 </h1>
  <p class="short-answer">GEO-аудит покажет, где вас упоминают, кому достаются ссылки и какие конкуренты появляются в ответах вместо вас.</p>
  <div class="actions">
-<a class="action-pill" href="#results">Посмотреть метрики <span aria-hidden="true">↓</span>
+<a class="btn primary" href="#sample">Разобрать пример <span aria-hidden="true">↓</span>
 </a>
- <a class="signal-secondary" href="#sample">Разобрать пример <span aria-hidden="true">↗</span>
+ <a class="text-link" href="#results">Посмотреть метрики <span aria-hidden="true">↗</span>
 </a>
 </div>
+</header>
+<section class="answer-lab wrap" id="sample">
+ <header class="console-title">
+<div>
+<h2>Что видно в одном ответе?</h2>
+ <p class="short-answer">Переключите пример и посмотрите, какие признаки попадут в отчёт.</p>
 </div>
- <figure class="signal-figure">
-<video muted playsinline loop preload="none" poster="../assets/audit-signal.webp?v=b47c3b903bc5" data-film="../assets/audit-signal.mp4?v=811fc2c2d1a0" aria-label="Иллюстрация трёх показателей аудита. Металлические секции раскрываются независимо.">
-</video>
- <figcaption>
-<i aria-hidden="true">
-</i> Упоминание · Источник · Ссылка</figcaption>
-<button type="button" class="film-control" aria-label="Пауза анимации" aria-pressed="false" hidden>Ⅱ</button>
-</figure>
+ <span class="demo-label">Учебный пример</span>
+</header>
+ <div class="sample-board" data-indicator="../assets/indicator-frames.webp?v=0b62240ac8f2">
+ <div class="sample-top">
+<div>
+<span>Вопрос покупателя</span>
+<b>Какой сервис поддержки подойдёт небольшой команде?</b>
 </div>
+ <fieldset class="sample-choices">
+<legend>Вариант ответа</legend>
+<label>
+<input type="radio" name="sample" value="name" checked>
+<span>Название</span>
+</label>
+<label>
+<input type="radio" name="sample" value="source">
+<span>Источник</span>
+</label>
+<label>
+<input type="radio" name="sample" value="link">
+<span>Ссылка</span>
+</label>
+</fieldset>
+</div>
+ <div class="sample-variants">
+<div class="answer-variant" data-variant="name">
+  <div class="sample-output">
+<span>Ответ ассистента</span>
+<blockquote>Для команды из пяти человек подойдёт <mark>Линия</mark>. В ней можно назначить ответственного за заявку.</blockquote>
+  <p class="sample-source">
+<b>Источники</b> Обзор сервисов поддержки · отраслевое издание</p>
+</div>
+  <div class="sample-coding">
+<img class="indicator-poster" src="../assets/indicator-name.webp?v=8ee885b24767" width="600" height="400" alt="Индикатор присутствия бренда" aria-hidden="true">
+  <dl>
+<div>
+<dt>Имя в тексте</dt>
+<dd class="flag-yes">Есть</dd>
+</div>
+<div>
+<dt>Сайт в источниках</dt>
+<dd class="flag-no">Нет</dd>
+</div>
+<div>
+<dt>URL в ответе</dt>
+<dd class="flag-no">Нет</dd>
+</div>
+</dl>
+</div>
+<p class="sample-result">Покупатель узнал название. Чтобы открыть сайт компании, ему придётся искать его отдельно.</p>
+</div>
+<div class="answer-variant" data-variant="source">
+  <div class="sample-output">
+<span>Ответ ассистента</span>
+<blockquote>Сравните, можно ли объединять обращения из почты и чата и назначать ответственного.</blockquote>
+  <p class="sample-source">
+<b>Источники</b> <mark>linea.example/help/inbox</mark> · документация сервиса</p>
+</div>
+  <div class="sample-coding">
+<img class="indicator-poster" src="../assets/indicator-source.webp?v=a25518753b0c" width="600" height="400" alt="Индикатор присутствия бренда" aria-hidden="true">
+  <dl>
+<div>
+<dt>Имя в тексте</dt>
+<dd class="flag-no">Нет</dd>
+</div>
+<div>
+<dt>Сайт в источниках</dt>
+<dd class="flag-yes">Есть</dd>
+</div>
+<div>
+<dt>URL в ответе</dt>
+<dd class="flag-no">Нет</dd>
+</div>
+</dl>
+</div>
+<p class="sample-result">Страница продукта попала в источники. В тексте ответа покупатель увидел только критерии выбора.</p>
+</div>
+<div class="answer-variant" data-variant="link">
+  <div class="sample-output">
+<span>Ответ ассистента</span>
+<blockquote>У <mark>Линии</mark> есть общий ящик для команды. Инструкция по настройке — <mark>https://linea.example/help/inbox</mark>.</blockquote>
+  <p class="sample-source">
+<b>Источники</b> Список источников отсутствует в этом примере</p>
+</div>
+  <div class="sample-coding">
+<img class="indicator-poster" src="../assets/indicator-link.webp?v=54f1d8ef37f7" width="600" height="400" alt="Индикатор присутствия бренда" aria-hidden="true">
+  <dl>
+<div>
+<dt>Имя в тексте</dt>
+<dd class="flag-yes">Есть</dd>
+</div>
+<div>
+<dt>Сайт в источниках</dt>
+<dd class="flag-no">Нет</dd>
+</div>
+<div>
+<dt>URL в ответе</dt>
+<dd class="flag-yes">Есть</dd>
+</div>
+</dl>
+</div>
+<p class="sample-result">У покупателя есть путь к конкретной инструкции. Фактический переход проверяют отдельно в аналитике сайта.</p>
+</div>
+<div class="animated-indicator" aria-hidden="true">
+<canvas width="420" height="280">
+</canvas>
+</div>
+</div>
+</div>
+ <p class="sample-note">«Линия» — вымышленный сервис.</p>
 </section>
+</div>
 <nav class="a-model-strip wrap" id="platforms" aria-label="Продвижение по платформам">
 <a href="../platforms/#tab-chatgpt">
 <img class="brand-mark" src="../assets/brands/chatgpt.svg?v=f3b4a78ed08d" alt="Логотип ChatGPT" aria-hidden="true" width="1000" height="1000" loading="lazy" decoding="async" />ChatGPT</a>
@@ -127,8 +234,9 @@
 </header>
 <dl class="metric-ledger">
 <div class="metric-cell">
-<i class="metric-icon icon-text" aria-hidden="true">
-</i>
+<div class="metric-sculpture">
+<img src="../assets/object-text.webp?v=a5b8b4344e66" width="512" height="512" loading="lazy" alt="Упоминание бренда" aria-hidden="true">
+</div>
 <dt>Упоминание бренда</dt>
 <dd>
 <strong>Название встречается в основном тексте.</strong>
@@ -136,8 +244,9 @@
 </dd>
 </div>
 <div class="metric-cell">
-<i class="metric-icon icon-sources" aria-hidden="true">
-</i>
+<div class="metric-sculpture">
+<img src="../assets/object-sources.webp?v=3a9ebb09c28e" width="512" height="512" loading="lazy" alt="Сайт в источниках" aria-hidden="true">
+</div>
 <dt>Сайт в источниках</dt>
 <dd>
 <strong>Домен есть в списке источников ответа.</strong>
@@ -145,8 +254,9 @@
 </dd>
 </div>
 <div class="metric-cell">
-<i class="metric-icon icon-url" aria-hidden="true">
-</i>
+<div class="metric-sculpture">
+<img src="../assets/object-url.webp?v=46ffd6c6a426" width="512" height="512" loading="lazy" alt="URL в ответе" aria-hidden="true">
+</div>
 <dt>URL в ответе</dt>
 <dd>
 <strong>Полный адрес сайта встроен в сам ответ.</strong>
@@ -158,110 +268,6 @@
 <strong>Откуда берётся процент?</strong>
 <p>Число замеров с признаком делится на все попытки в выбранной группе. Один замер — один вопрос одной модели в одном повторе. Отказы и ошибки остаются в базе и показаны отдельно. Доли трёх признаков могут пересекаться.</p>
 </div>
-</div>
-</section>
-<section class="edition answer-lab" id="sample">
-<div class="wrap">
-<header class="edition-head">
-<h2>Что видно в одном ответе?</h2>
-<p class="short-answer">Один и тот же вопрос о выборе сервиса может дать три разных результата. Переключите вариант, чтобы увидеть, что попадёт в отчёт.</p>
-</header>
-<div class="sample-board">
-<div class="sample-top">
-<b>Какой сервис поддержки подойдёт небольшой команде?</b>
-<fieldset class="sample-choices">
-<legend>Вариант ответа</legend>
-<label>
-<input type="radio" name="sample" value="name" checked>
-<span>Название</span>
-</label>
-<label>
-<input type="radio" name="sample" value="source">
-<span>Источник</span>
-</label>
-<label>
-<input type="radio" name="sample" value="link">
-<span>Ссылка</span>
-</label>
-</fieldset>
-</div>
-<div class="answer-variant" data-variant="name">
-<div class="sample-output">
-<span>Пример ответа</span>
-<blockquote>Для команды из пяти человек подойдёт <mark>Линия</mark>. В ней можно назначить ответственного за заявку.</blockquote>
-<p class="sample-source">
-<b>Источники</b> Обзор сервисов поддержки · отраслевое издание</p>
-</div>
-<div class="sample-coding">
-<dl>
-<div>
-<dt>Имя в тексте</dt>
-<dd class="flag-yes">Есть</dd>
-</div>
-<div>
-<dt>Сайт в источниках</dt>
-<dd class="flag-no">Нет</dd>
-</div>
-<div>
-<dt>URL в ответе</dt>
-<dd class="flag-no">Нет</dd>
-</div>
-</dl>
-<p>Покупатель узнал название. Чтобы открыть сайт компании, ему придётся искать его отдельно.</p>
-</div>
-</div>
-<div class="answer-variant" data-variant="source">
-<div class="sample-output">
-<span>Пример ответа</span>
-<blockquote>Сравните, можно ли объединять обращения из почты и чата и назначать ответственного.</blockquote>
-<p class="sample-source">
-<b>Источники</b> <mark>linea.example/help/inbox</mark> · документация сервиса</p>
-</div>
-<div class="sample-coding">
-<dl>
-<div>
-<dt>Имя в тексте</dt>
-<dd class="flag-no">Нет</dd>
-</div>
-<div>
-<dt>Сайт в источниках</dt>
-<dd class="flag-yes">Есть</dd>
-</div>
-<div>
-<dt>URL в ответе</dt>
-<dd class="flag-no">Нет</dd>
-</div>
-</dl>
-<p>Страница продукта попала в источники. В тексте ответа покупатель увидел только критерии выбора.</p>
-</div>
-</div>
-<div class="answer-variant" data-variant="link">
-<div class="sample-output">
-<span>Пример ответа</span>
-<blockquote>У <mark>Линии</mark> есть общий ящик для команды. Инструкция по настройке — <mark>https://linea.example/help/inbox</mark>.</blockquote>
-<p class="sample-source">
-<b>Источники</b> Список источников отсутствует в этом примере</p>
-</div>
-<div class="sample-coding">
-<dl>
-<div>
-<dt>Имя в тексте</dt>
-<dd class="flag-yes">Есть</dd>
-</div>
-<div>
-<dt>Сайт в источниках</dt>
-<dd class="flag-no">Нет</dd>
-</div>
-<div>
-<dt>URL в ответе</dt>
-<dd class="flag-yes">Есть</dd>
-</div>
-</dl>
-<p>У покупателя есть путь к конкретной инструкции. Фактический переход проверяют отдельно в аналитике сайта.</p>
-</div>
-</div>
-</div>
-<p class="sample-note">Учебный пример. «Линия» — вымышленный сервис.</p>
 </div>
 </section>
 <section class="edition rival-sheet" id="competitors">
@@ -311,16 +317,40 @@
 </header>
 <div class="delivery-list">
 <div>
+<div class="report-glyph glyph-0" aria-hidden="true">
+<i>
+</i>
+<i>
+</i>
+<i>
+</i>
+</div>
 <span>Маркетингу</span>
 <strong>Карта спроса</strong>
 <p>По каждой теме — вопрос покупателя, частота упоминания, конкуренты и страницы, которые появились в источниках. Видно, где у бренда уже есть присутствие, а где его предстоит развивать.</p>
 </div>
 <div>
+<div class="report-glyph glyph-1" aria-hidden="true">
+<i>
+</i>
+<i>
+</i>
+<i>
+</i>
+</div>
 <span>Продукту и PR</span>
 <strong>Контекст репутации</strong>
 <p>Фрагменты ответов с характеристиками продукта, оговорками и оценками. Условия и спорные утверждения выделены для сверки с действующим предложением.</p>
 </div>
 <div>
+<div class="report-glyph glyph-2" aria-hidden="true">
+<i>
+</i>
+<i>
+</i>
+<i>
+</i>
+</div>
 <span>Редакции и разработке</span>
 <strong>Приоритеты по страницам</strong>
 <p>Для конкретного URL собраны наблюдение, подтверждающий пример и задача по содержанию или доступности страницы. Команда может вернуться к тому же вопросу после изменений.</p>
@@ -335,7 +365,7 @@
 <p class="short-answer">До начала работ определите, какой выбор покупателя вам важно изучить. Ниже — о границах услуги и использовании отчёта.</p>
 </header>
 <div class="question-list">
-<details>
+<details open>
 <summary>Можно ли увидеть реальные ответы из моего аудита?</summary>
 <p>Да. В приложении доступны тексты, ссылки, даты, модели и статусы замеров. По ним команда может проверить выводы отчёта.</p>
 </details>
