@@ -60,59 +60,58 @@ def headline(question, answer):
 def arrow_link(route, label):
  return f'<a class="edition-link" href="{{PRE}}{route}">{label} <span aria-hidden="true">↗</span></a>'
 
-def press_photo():
- return f'''<picture class="press-photo" data-scene>
- <source media="(max-width: 650px)" srcset="{{PRE}}{asset('letterpress-small.webp')}">
- <img src="{{PRE}}{asset('letterpress.webp')}" width="1536" height="1024" loading="lazy"
- alt="Медная литера с кавычками выступает над рядом графитовых печатных знаков"></picture>'''
+def scene_image(name, alt, sizes):
+ return f'''<img class="scene-image" src="{{PRE}}{asset(name+"-small.webp")}"
+ srcset="{{PRE}}{asset(name+"-small.webp")} 720w, {{PRE}}{asset(name+".webp")} 1440w"
+ sizes="{sizes}" width="1440" height="960" alt="{alt}" loading="lazy" decoding="async">'''
 
 def faq(items):
  entries=''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q,a in items)
- return chapter('question-column',headline('Что важно знать перед началом?','О возможностях GEO, границах услуги и результате для бизнеса.')+'<div class="question-list">'+entries+'</div>','faq'),items
+ return chapter('question-column',headline('Что важно знать перед началом?','Ответы на вопросы о возможностях GEO и результате для бизнеса.')+'<div class="question-list">'+entries+'</div>','faq'),items
 
 def closing(audit=False):
- question='С чего начать GEO-аудит?' if audit else 'С чего начать продвижение бренда?'
- return chapter('brief-sheet', headline(question,'Соберите задачу в бриф. Укажите сайт, продукт и покупателей, которых хотите привлечь.')+'''
- <div class="brief-slip"><span class="slip-format">.TXT</span><button class="slip-button" type="button" data-open-brief>Составить бриф <span aria-hidden="true">↗</span></button>
- <p>Готовый файл сохраняется на вашем устройстве.</p></div>''','brief')
+ question='С чего начать GEO-аудит?' if audit else 'С чего начать продвижение в ИИ?'
+ return chapter('brief-stage',headline(question,'Опишите ваш продукт и тех, кто его выбирает. Бриф можно сохранить в TXT и обсудить с командой.')+'''
+ <button class="action-pill" type="button" data-open-brief>Составить бриф <span aria-hidden="true">↗</span></button>''','brief')
 
 platforms=[('ChatGPT','chatgpt'),('Claude','claude'),('Grok','grok'),('Gemini','gemini'),('Алиса','alice'),('GigaChat','gigachat')]
 def brand_mark(name, key):
  return img('brands/'+key+'.svg','Логотип '+name,'brand-mark'+(' brand-mono' if key in ['grok','gigachat'] else ''))
 
-strip='<div class="a-model-strip wrap">'+''.join('<span>'+brand_mark(n,k)+n+'</span>' for n,k in platforms)+'</div>'
+strip='<nav class="a-model-strip wrap" id="platforms" aria-label="Продвижение по платформам">'+''.join(f'<a href="{{PRE}}platforms/#tab-{k}">'+brand_mark(n,k)+n+'</a>' for n,k in platforms)+'</nav>'
 
 def services(question, answer):
- options=[('audit/','GEO-аудит','Хочу узнать, кого рекомендуют вместо нас и как ИИ описывает наш продукт.','studio-lens.webp','Объектив в медной оправе'),
-          ('platforms/','GEO-продвижение','Хочу, чтобы покупатели встречали наш бренд, когда ищут решение в нейросетях.','studio-dialogue.webp','Две объёмные реплики диалога')]
- rows=''.join(f'<a class="service-entry" href="{{PRE}}{route}"><span class="service-name">{name}</span><span class="service-reason">{reason}</span>{img(image,alt,"service-object")}<span class="service-arrow" aria-hidden="true">↗</span></a>' for route,name,reason,image,alt in options)
- return chapter('service-directory',headline(question,answer)+rows,'offers')
+ options=[
+  ('audit/','GEO-аудит','Узнайте, в каких ответах появляется ваш бренд, что о нём говорят и кого предлагают рядом.','audit-optics','Оптический объектив в разрезе с отдельными линзами и диафрагмой','Что входит в аудит'),
+  ('platforms/','GEO-продвижение','Помогите покупателю встретить ваш продукт в ответе ассистента и понять, чем он подходит.','answer-display','Объёмная реплика из стекла над экраном смартфона','Выбрать платформу')]
+ items=[]
+ for route,name,reason,image,alt,link in options:
+  art=scene_image(image,alt,'(max-width: 700px) 96vw, (max-width: 1200px) 51vw, 660px')
+  items.append(f'<a class="service-tile" href="{{PRE}}{route}"><div class="product-shot" data-scene>{art}</div><div class="service-description"><strong>{name}</strong><p>{reason}</p><span class="tile-action">{link} <span aria-hidden="true">↗</span></span></div></a>')
+ return chapter('service-gallery',headline(question,answer)+'<div class="service-pair">'+''.join(items)+'</div>','offers')
 
 def buyer_scenarios():
  examples=[
-  ('b2b','Услуги B2B','Кто внедряет CRM для сети клиник с несколькими филиалами?','Клиент ищет подрядчика с опытом в своей отрасли. В шорт-лист легче включить компанию, про которую понятно, какие задачи она уже умеет решать.'),
-  ('retail','Товары','Какую кофемолку выбрать для эспрессо на маленькой кухне?','Покупатель описывает условия использования. Ему нужен конкретный продукт, который подходит по размеру, функциям и назначению.'),
-  ('saas','SaaS','Какую систему записи выбрать для двух салонов с общей базой клиентов?','Команда сравнивает сервисы под свой рабочий сценарий. Решение о пробной регистрации зависит от того, насколько понятны возможности продукта.')]
+  ('b2b','Услуги B2B','Кто спроектирует освещение для небольшого отеля?','Заказчику важно увидеть бюро с опытом в гостиницах. Так он решает, у кого запросить портфолио.','scene-hotel','Архитектурный макет отеля с подсветкой фасада и гостевых комнат'),
+  ('retail','Товары','Какую кофемолку выбрать для эспрессо на маленькой кухне?','Покупатель ищет подходящую модель. Размер корпуса и качество помола для него важнее известности марки.','scene-grinder','Компактная металлическая кофемолка для эспрессо на кухонной столешнице'),
+  ('saas','SaaS','Какой сервис записи подойдёт двум салонам с общей базой клиентов?','Владелец сравнивает сервисы под свой сценарий. Ему важно понимать, можно ли вести расписания двух филиалов вместе.','scene-booking','Планшет с расписанием приёмов на стойке салона')]
  choices=[]; panels=[]
- for i,(key,label,prompt,comment) in enumerate(examples):
+ for i,(key,label,prompt,comment,photo,alt) in enumerate(examples):
   choices.append(f'<label><input type="radio" name="buyer" value="{key}"'+(' checked' if i==0 else '')+f'><span>{label}</span></label>')
-  panels.append(f'<figure class="buyer-example" data-buyer="{key}"><figcaption>Пример вопроса покупателя</figcaption><blockquote>«{prompt}»</blockquote><p>{comment}</p></figure>')
- return chapter('buyer-desk',headline('Что ваши клиенты спрашивают у ИИ?','Вопрос меняется вместе с покупкой. Выберите свой рынок и посмотрите пример.')+'<fieldset class="buyer-controls"><legend>Сфера бизнеса</legend>'+''.join(choices)+'</fieldset><div class="buyer-examples">'+''.join(panels)+'</div>'+arrow_link('why-geo/','Зачем GEO вашему бизнесу'),'business')
+  art=scene_image(photo,alt,'(max-width: 700px) 100vw, (max-width: 1400px) 82vw, 1200px')
+  panels.append(f'<figure class="buyer-example" data-buyer="{key}"><div class="buyer-photo" data-scene>{art}</div><figcaption><span class="prompt-label">Пример запроса</span><blockquote>{prompt}</blockquote><p>{comment}</p></figcaption></figure>')
+ return chapter('buyer-stage',headline('Как покупатель выбирает бренд в ИИ?','Клиент описывает задачу нейросети и получает варианты ещё до перехода на сайт. Выберите свой рынок.')+'<div class="scenario-view" id="business"><fieldset class="buyer-controls"><legend>Сфера бизнеса</legend>'+''.join(choices)+'</fieldset><div class="buyer-examples">'+''.join(panels)+'</div></div>','value')
 
-main=quote_stage()+strip
-main+=chapter('press-spread', headline('Кто попадает в список покупателя?','Бренды, которые нейросеть предлагает в ответ на его вопрос.')+press_photo()+'''
- <div class="press-caption"><p>Ещё до перехода на сайт клиент может сравнить нескольких поставщиков. Если в ответе есть ваша компания, у покупателя появляется повод узнать о ней больше.</p>'''+arrow_link('audit/','Узнать, виден ли мой бренд')+'</div>', 'value')
-main+=buyer_scenarios()+services('Какая услуга нужна вашему бренду?','Начните с вопроса, на который хотите получить ответ.')
-platform_links=''.join(f'<a href="{{PRE}}platforms/#tab-{k}">{brand_mark(n,k)}<span>{n}</span><i aria-hidden="true">↗</i></a>' for n,k in platforms)
-main+=chapter('platform-register',headline('Где покупатель может встретить ваш бренд?','Выберите нейросеть, чтобы посмотреть, как в ней может начинаться выбор компании.')+'<nav class="model-register" aria-label="Сценарии по платформам">'+platform_links+'</nav>','platforms')
+main=quote_stage()+strip+buyer_scenarios()
+main+=services('Аудит или продвижение?','Начните с аудита, если хотите оценить видимость сегодня. Выбирайте продвижение, если задача — чаще попадать в выбор клиента.')
 commonfaq=[('Можно гарантировать рекомендацию нейросети?','Нет. Ответы зависят от платформы и контекста пользователя. GEO развивает присутствие бренда, но не даёт контроля над чужой выдачей.'),('GEO заменяет SEO?','Нет. SEO помогает находить страницы в поиске, а GEO обращается к представлению бренда внутри AI-ответа. Для бизнеса эти направления могут дополнять друг друга.'),('Упоминание бренда уже означает продажу?','Нет. Между знакомством, сравнением и обращением есть разница. Пользу GEO для бизнеса нужно оценивать отдельно от самого факта упоминания.'),('Можно начать с отдельного аудита?','Да. Аудит — самостоятельная услуга. Решение о дальнейшем продвижении принимается отдельно.')]
-x,mainfaq=faq(commonfaq);main+=x
+home_questions,mainfaq=faq(commonfaq)
 # Detail pages.
 why=hero('Зачем бренду <br><span>GEO-продвижение?</span>','Чтобы участвовать в выборе покупателя, когда тот обращается за рекомендацией к ИИ.','Ваш продукт может подходить клиенту, но остаться за пределами его списка вариантов. GEO помогает бизнесу развивать присутствие в этой точке выбора.','shortlist','Стеклянная карточка выделена среди двух металлических альтернатив',('Понять текущую видимость','audit/'),('Выбрать платформу','platforms/'))
 why+=chapter('choice-story',headline('Где бренд теряет покупателя?','В ответе ассистента выбор может сузиться ещё до знакомства с сайтом.')+"""
- <dl class="choice-lines"><div><dt>Вас пропустили</dt><dd>Подходящий заказчик видит других подрядчиков и может вообще не узнать о вашей компании.</dd></div>
+ <div class="choice-flow"><div class="choice-art" data-scene>"""+img('aileed-shortlist.webp','Стеклянная карточка выбора среди графитовых альтернатив')+"""</div><dl class="choice-lines"><div><dt>Вас пропустили</dt><dd>Подходящий заказчик видит других подрядчиков и может вообще не узнать о вашей компании.</dd></div>
  <div><dt>Вас перепутали</dt><dd>Устаревшее описание услуги отсекает клиентов, которым на самом деле подходит ваш продукт.</dd></div>
- <div><dt>Вас не отличили</dt><dd>Название есть среди вариантов, но покупателю неясно, в чём ваше преимущество.</dd></div></dl>""")
+ <div><dt>Вас не отличили</dt><dd>Название есть среди вариантов, но покупателю неясно, в чём ваше преимущество.</dd></div></dl></div>""")
 why+=chapter('margin-essay',headline('Когда GEO особенно уместно?','Когда покупателю предстоит сравнить варианты и обосновать выбор.')+"""<div class="essay-text"><p>Для клиники это поиск подрядчика со знанием медицины. Для покупателя техники — модель под размер кухни. Для команды — сервис с нужной интеграцией.</p><p>Если клиент уже выбирает вашу компанию, но уходит при оформлении заказа, сначала стоит разобраться с этим этапом.</p></div>""")
 why+=services('С какой задачи начать?','Выберите между оценкой текущей видимости и работой над присутствием бренда в рекомендациях.')+closing()
 platform_copy=[('ChatGPT','Покупатель ищет решение в диалоге.','Бренду важно оказаться среди подходящих вариантов, когда клиент описывает свою задачу, ограничения и предпочтения.'),('Claude','Клиент разбирается в сложном выборе.','Значимы ясность предложения и то, насколько точно ассистент представляет специализацию компании и возможности продукта.'),('Grok','Пользователь ищет ответы и сравнивает точки зрения.','Важно, чтобы образ бренда сохранял смысл в контексте вопросов о рынке, категории и альтернативах.'),('Gemini','Клиент обращается к AI-экосистеме Google.','Присутствие бренда в AI-ответах дополняет его знакомство с компанией через другие поисковые сценарии.'),('Алиса','Покупатель задаёт вопрос привычному ассистенту.','Для русскоязычной аудитории важно, какой набор компаний и продуктов попадает в ответ на её задачу.'),('GigaChat','Клиент изучает варианты в русскоязычном AI-сервисе.','Имеет значение, насколько узнаваемо и точно представлено предложение вашего бизнеса.')]
@@ -122,11 +121,21 @@ panel_bodies=''.join(f'<div role="tabpanel" id="panel-{k}" aria-labelledby="tab-
 platformbody+=chapter('platform-atlas',headline('Какая платформа важна вашей аудитории?','Выберите ассистента, чтобы увидеть сценарий покупателя.')+f'<div class="atlas-stage"><div class="atlas-tabs" role="tablist" aria-label="AI-платформы">{panel_tabs}</div><div class="atlas-panels">{panel_bodies}</div></div>')
 platformbody+=chapter('margin-essay',headline('Нужно присутствовать сразу везде?','Приоритет зависит от аудитории и коммерческой задачи.')+'<div class="essay-text"><p>Если покупатели упоминают Алису при первом обращении, её ответы заслуживают внимания. Если команда закупок сравнивает подрядчиков в ChatGPT, точкой входа может стать этот диалог.</p><p>Видимость в одном ассистенте ничего не говорит о том, кого предложит другой.</p></div>')+closing()
 audit=hero('Кого рекомендуют нейросети: <span>вас или конкурентов?</span>','GEO-аудит даёт ясную картину видимости и образа вашего бренда в AI-ответах.','Вы увидите, где бизнес попадает в выбор клиента, с кем его сравнивают и какие искажения мешают понять предложение.','lens','Оптический объектив из графита с медной оправой и стеклянной линзой',('Что получу после аудита','#results'))
-audit+=strip+chapter('report-spread', headline('Что вы получите от GEO-аудита?','Отчёт о том, где появляется ваш бренд, с кем его сравнивают и насколько точно описывают.')+"""
- <article class="report-paper" aria-label="Содержание отчёта"><div class="report-cover"><span>GEO-аудит</span><span>Содержание отчёта</span></div>
- <div class="report-chapter"><h3>Где видно вашу компанию?</h3><p class="short-answer">В каких сценариях покупатель встречает ваш бренд и где рассматривает другие варианты.</p></div>
- <div class="report-chapter"><h3>Кто оказывается рядом?</h3><p class="short-answer">Каких конкурентов называют ассистенты и за какие свойства их выделяют.</p></div>
- <div class="report-chapter"><h3>Как описан ваш продукт?</h3><p class="short-answer">Какие сведения о компании точны и что может ввести будущего клиента в заблуждение.</p></div></article>""",'results')
+def audit_contents():
+ topics=[
+  ('visibility','Видимость','Где покупатели встречают бренд?','Вы увидите, в каких сценариях ассистенты называют вашу компанию и где в ответ попадают другие варианты.','На каких услугах и платформах сосредоточить продвижение.'),
+  ('competitors','Конкуренты','С кем вас сравнивают?','В отчёте будут компании, которые нейросети предлагают той же аудитории, и причины, которые они приводят в ответах.','Какое отличие вашего продукта стоит яснее объяснить покупателю.'),
+  ('accuracy','Точность','Верно ли описан ваш продукт?','Вы узнаете, какие сведения о специализации, услугах и возможностях компании искажены или устарели.','Какие неточности важнее исправить в первую очередь.')]
+ controls=[];panels=[]
+ for i,(key,label,question,answer,decision) in enumerate(topics):
+  controls.append(f'<label><input type="radio" name="report" value="{key}"'+(' checked' if i==0 else '')+f'><span>{label}</span></label>')
+  panels.append(f'<div class="report-topic" data-topic="{key}"><h3>{question}</h3><p class="short-answer">{answer}</p><dl><dt>Какое решение принять</dt><dd>{decision}</dd></dl></div>')
+ art=scene_image('audit-optics','Линза, диафрагма и корпус оптического объектива','(max-width: 700px) 96vw, 55vw')
+ rail='<fieldset class="topic-controls"><legend>Раздел отчёта</legend>'+''.join(controls)+'</fieldset>'
+ selectors=''.join(f'<i class="optic-pin pin-{key}" aria-hidden="true"></i>' for key,*_ in topics)
+ return chapter('report-stage',headline('Что вы получите от GEO-аудита?','Отчёт о присутствии бренда в ответах ИИ. Выберите раздел, чтобы узнать, на какой вопрос он отвечает.')+'<div class="report-view"><div class="report-instrument"><div class="report-optic"><div class="instrument-art">'+art+selectors+'</div></div>'+rail+'</div><div class="report-findings">'+''.join(panels)+'</div></div>','results')
+
+audit+=strip+audit_contents()
 audit+=chapter('margin-essay',headline('Какое решение можно принять после аудита?','Выбрать, что сейчас важнее для бизнеса.')+'<div class="essay-text"><p>Если ИИ неверно называет вашу специализацию, приоритетом станет образ компании. Если клиенты видят в рекомендациях только конкурентов, стоит обсудить продвижение.</p><p>Отчётом можно пользоваться со своей командой.</p></div>')
 x,auditfaq=faq([('Аудит включает дальнейшее продвижение?','Нет. Это самостоятельная услуга. Продвижение обсуждается отдельно.'),('Можно использовать результат со своей командой?','Да. Результат предназначен для решения вашей бизнес-задачи, а не для привязки к одному подрядчику.'),('Аудит гарантирует рекомендации ИИ?','Нет. Он помогает понять текущее положение. Никакой подрядчик не управляет всеми ответами сторонних платформ.'),('Какие нейросети входят в услугу?','Набор определяется задачей и аудиторией. На сайте представлены ChatGPT, Claude, Grok, Gemini, Алиса и GigaChat.')]);audit+=x+closing(True)
 # Editorial pages explain customer choices, not the agency's execution playbook.
@@ -144,12 +153,20 @@ def story_card(post,heading='h3',eager=False):
  <span class="a-read">Читать материал <span aria-hidden="true">↗</span></span></div></a></article>'''
 
 def story_shelf(items, heading):
+ artwork={
+  'what-is-geo/':('prism','Свет преломляется на гранях прозрачной призмы'),
+  'blog/mention-or-recommendation/':('mention','Пара металлических и стеклянных кавычек'),
+  'blog/why-ai-recommends-competitors/':('choice','Медное ребро выделяет один из трёх объектов'),
+ }
  rows=[]
- for route,title,answer,image,date in items:
-  rows.append(f'<article class="shelf-story"><a href="{{PRE}}{route}"><div class="shelf-art">{img(image,cover_alt[image])}</div><div class="shelf-words"><{heading}>{title}</{heading}><p class="short-answer">{answer}</p></div><span class="shelf-arrow" aria-hidden="true">↗</span></a></article>')
+ for route,title,answer,_,date in items:
+  cover,alt=artwork[route]
+  rows.append(f'''<article class="shelf-story"><a href="{{PRE}}{route}">
+  <div class="shelf-art"><img src="{{PRE}}{asset("cover-"+cover+".webp")}" width="1024" height="504" alt="{alt}" loading="lazy"></div>
+  <div class="shelf-words"><{heading}>{title}</{heading}><p class="short-answer">{answer}</p></div><span class="shelf-arrow" aria-hidden="true">↗</span></a></article>''')
  return '<div class="story-shelf">'+''.join(rows)+'</div>'
 
-main+=chapter('journal-shelf',headline('Что почитать о выборе бренда в ИИ?','Три материала для тех, кто отвечает за продвижение бизнеса.')+story_shelf(posts,'h3')+arrow_link('blog/','Весь блог'),'blog')+closing()
+main+=chapter('journal-shelf',headline('Что почитать о выборе бренда в ИИ?','Три материала для тех, кто отвечает за продвижение бизнеса.')+story_shelf(posts,'h3')+arrow_link('blog/','Весь блог'),'blog')+home_questions+closing()
 blog='''<section class="studio-journal"><div class="wrap journal-front">
  <div class="a-blog-heading"><h1>Что важно знать о GEO и выборе бренда <span>в нейросетях?</span></h1>
  <p class="short-answer">Блог aileed о видимости, доверии и роли AI-ответов в решениях покупателей.</p></div>'''+story_card(posts[0],'h2',True)+'</div></section>'+chapter('journal-shelf archive-edition',story_shelf(posts[1:],'h2'))
