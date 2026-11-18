@@ -228,7 +228,7 @@
       gl.drawArrays(gl.TRIANGLES, 0, item.count);
     });
     layer.classList.add("is-rendered");
-    stage.style.setProperty("--horizon-rise", Math.round(scroll * 34 + smoothY * 3) + "px");
+    stage.style.setProperty("--horizon-rise", ((scroll * 34 + smoothY * 3) / 16).toFixed(3) + "rem");
   }
   function tick(now) {
     frame = 0;
