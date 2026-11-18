@@ -3407,7 +3407,7 @@ textarea::placeholder {
   .quote-stage { min-height: 0; padding: 74px 0 clamp(170px, 43vw, 242px); }
   .quote-horizon img { width: 155%; top: -24px; }
   .quote-copy { width: calc(100% - 32px); }
-  .quote-copy h1 { font-size: clamp(29px, 8.2vw, 50px); letter-spacing: -.052em; }
+  .quote-copy h1 { font-size: clamp(26px, 8.2vw, 50px); letter-spacing: -.052em; }
   .quote-copy h1 span { display: inline; }
   .quote-stage .short-answer { font-size: 15px; max-width: 380px; margin-top: 18px; }
   .quote-copy .actions { flex-direction: row; margin-top: 22px; gap: 8px; }
