@@ -5,7 +5,6 @@
 ## Услуги
 - [GEO-продвижение](https://egi411.github.io/geo-audit/): присутствие бренда в выборе клиента внутри AI-ответов.
 - [GEO-аудит](https://egi411.github.io/geo-audit/audit/): AI-видимость, конкуренты и образ бренда.
-- [Направления по платформам](https://egi411.github.io/geo-audit/platforms/): ChatGPT, Claude, Grok, Gemini, Алиса и GigaChat.
 
 ## Материалы
 - [Зачем бренду GEO](https://egi411.github.io/geo-audit/why-geo/): бизнес-смысл и применимость.
