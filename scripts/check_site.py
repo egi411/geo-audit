@@ -8,7 +8,7 @@ ROOT=Path(__file__).resolve().parents[1]
 class Page(HTMLParser):
  def __init__(self):super().__init__();self.tags=[]
  def handle_starttag(self,t,a):self.tags.append((t,dict(a)))
-files=[ROOT/'index.html',ROOT/'audit/index.html',ROOT/'why-geo/index.html',ROOT/'platforms/index.html',ROOT/'blog/index.html',ROOT/'what-is-geo/index.html',ROOT/'blog/mention-or-recommendation/index.html',ROOT/'blog/why-ai-recommends-competitors/index.html',ROOT/'contacts.html',ROOT/'privacy.html',ROOT/'consent.html']
+files=[ROOT/'index.html',ROOT/'audit/index.html',ROOT/'why-geo/index.html',ROOT/'blog/index.html',ROOT/'what-is-geo/index.html',ROOT/'blog/mention-or-recommendation/index.html',ROOT/'blog/why-ai-recommends-competitors/index.html',ROOT/'contacts.html',ROOT/'privacy.html',ROOT/'consent.html']
 errors=[]
 for f in files:
  s=f.read_text();p=Page();p.feed(s);name=str(f.relative_to(ROOT))
@@ -35,5 +35,9 @@ for f in files:
    assert a.get('author') and a['datePublished']==page['datePublished']
   print(name,'OK')
  except Exception as e:errors.append((name,str(e)));print(name,'FAIL',e)
+legacy=(ROOT/'platforms/index.html').read_text()
+assert 'noindex,follow' in legacy and 'url=../why-geo/' in legacy
+for path in [*files,ROOT/'sitemap.xml',ROOT/'llms.txt']:
+ assert 'platforms/' not in path.read_text(), f'Retired route linked in {path.name}'
 if errors:sys.exit(1)
 print('All',len(files),'public pages passed.')

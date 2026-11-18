@@ -28,8 +28,13 @@
     width = nextWidth;
     density = nextDensity;
     const root = document.documentElement.style;
-    if (magnification === 1) root.removeProperty("--layout-vw");
-    else root.setProperty("--layout-vw", (width * magnification / 100) + "px");
+    if (magnification === 1) {
+      root.removeProperty("--layout-vw");
+      root.removeProperty("--layout-vh");
+    } else {
+      root.setProperty("--layout-vw", (width * magnification / 100) + "px");
+      root.setProperty("--layout-vh", (window.innerHeight * magnification / 100) + "px");
+    }
   }
   updateDisplayScale();
   window.addEventListener("resize", updateDisplayScale, {passive: true});
@@ -95,40 +100,6 @@
   document.querySelector(".sample-choices")?.addEventListener("change", (event) => {
     const active = document.querySelector('[data-variant="' + event.target.value + '"] blockquote');
     keepAnswerVisible(active);
-  });
-  const tabs = [...document.querySelectorAll("[role=tab]")];
-  function selectTab(tab, updateLink = false) {
-    tabs.forEach((t) => {
-      const active = t === tab;
-      t.setAttribute("aria-selected", String(active));
-      t.tabIndex = active ? 0 : -1;
-      document.getElementById(t.getAttribute("aria-controls")).hidden = !active;
-    });
-    if (updateLink) {
-      history.replaceState(history.state, "", "#" + tab.id);
-      keepAnswerVisible(document.getElementById(tab.getAttribute("aria-controls")).querySelector("h3"));
-    }
-  }
-  function selectLinkedPlatform() {
-    const linked = tabs.find((tab) => "#" + tab.id === location.hash);
-    if (tabs.length) selectTab(linked || tabs[0]);
-  }
-  selectLinkedPlatform();
-  window.addEventListener("hashchange", selectLinkedPlatform);
-  tabs.forEach((tab, index) => {
-    tab.addEventListener("click", () => selectTab(tab, true));
-    tab.addEventListener("keydown", (e) => {
-      let next;
-      if (e.key === "ArrowRight" || e.key === "ArrowDown") next = (index + 1) % tabs.length;
-      if (e.key === "ArrowLeft" || e.key === "ArrowUp") next = (index + tabs.length - 1) % tabs.length;
-      if (e.key === "Home") next = 0;
-      if (e.key === "End") next = tabs.length - 1;
-      if (next !== undefined) {
-        e.preventDefault();
-        selectTab(tabs[next], true);
-        tabs[next].focus({preventScroll: true});
-      }
-    });
   });
   const dialog = document.getElementById("brief-dialog");
   let trigger;

@@ -3,6 +3,7 @@
 from pathlib import Path
 import argparse,json,re,html,hashlib
 from xml.sax.saxutils import escape
+from visibility import frequency_figure, observation_figure, overview
 ROOT=Path(__file__).resolve().parents[1]
 ap=argparse.ArgumentParser();ap.add_argument('--base-url',default='https://egi411.github.io/geo-audit/');args=ap.parse_args();BASE=args.base_url.rstrip('/')+'/';TODAY='2026-11-18'
 def asset(name):
@@ -44,7 +45,7 @@ def quote_stage():
    <div class="quote-copy wrap">
      <h1>Как стать брендом, который <span>рекомендуют нейросети?</span></h1>
      <p class="short-answer">GEO-продвижение помогает вашему бренду попасть в список компаний, которые покупатель рассматривает по совету ChatGPT или Алисы.</p>
-     <div class="actions"><a class="btn primary" href="{{PRE}}audit/">Проверить AI-видимость <span aria-hidden="true">↗</span></a>
+     <div class="actions"><a class="btn primary" href="{{PRE}}audit/">Проверить упоминания <span aria-hidden="true">↗</span></a>
      <a class="text-link" href="{{PRE}}why-geo/">Зачем бренду GEO <span aria-hidden="true">→</span></a></div>
    </div>
 
@@ -73,16 +74,10 @@ def closing(audit=False):
  return chapter('brief-stage',headline(question,'Опишите ваш продукт и тех, кто его выбирает. Бриф можно сохранить в TXT и обсудить с командой.')+'''
  <button class="action-pill" type="button" data-open-brief>Составить бриф <span aria-hidden="true">↗</span></button>''','brief')
 
-platforms=[('ChatGPT','chatgpt'),('Claude','claude'),('Grok','grok'),('Gemini','gemini'),('Алиса','alice'),('GigaChat','gigachat')]
-def brand_mark(name, key):
- return img('brands/'+key+'.svg','Логотип '+name,'brand-mark'+(' brand-mono' if key in ['grok','gigachat'] else ''))
-
-strip='<nav class="a-model-strip wrap" id="platforms" aria-label="Продвижение по платформам">'+''.join(f'<a href="{{PRE}}platforms/#tab-{k}">'+brand_mark(n,k)+n+'</a>' for n,k in platforms)+'</nav>'
-
 def services(question, answer):
  options=[
   ('audit/','GEO-аудит','Узнайте, в каких ответах появляется ваш бренд, что о нём говорят и кого предлагают рядом.','report','Стеклянные листы отчёта о видимости бренда','Что входит в аудит'),
-  ('platforms/','GEO-продвижение','Покупатель спрашивает про сроки, совместимость или условия. Дайте ему повод включить ваш продукт в список и посмотреть предложение.','answer-display','Объёмная реплика из стекла над экраном смартфона','Примеры рекомендаций')]
+  ('why-geo/#investment','GEO-продвижение','Покупатель спрашивает про сроки, совместимость или условия. Дайте ему повод включить ваш продукт в список и посмотреть предложение.','answer-display','Объёмная реплика из стекла над экраном смартфона','Когда нужно продвижение')]
  items=[]
  for route,name,reason,image,alt,link in options:
   if image=='report':
@@ -105,27 +100,22 @@ def buyer_scenarios():
   panels.append(f'<figure class="buyer-example" data-buyer="{key}"><div class="buyer-photo" data-scene>{art}</div><figcaption><span class="prompt-label">Пример запроса</span><blockquote>{prompt}</blockquote><p>{comment}</p></figcaption></figure>')
  return chapter('buyer-stage',headline('Как покупатель выбирает бренд в ИИ?','Покупатель описывает задачу своими словами. Для отеля, магазина и онлайн-сервиса короткий список выглядит по-разному.')+'<div class="scenario-view" id="business"><fieldset class="buyer-controls"><legend>Сфера бизнеса</legend>'+''.join(choices)+'</fieldset><div class="buyer-examples">'+''.join(panels)+'</div></div>','value')
 
-main=quote_stage()+strip+buyer_scenarios()
-main+=chapter('buyer-letter', headline('Что узнает о вас покупатель?', 'Одного названия мало. Покупателю нужен повод открыть именно ваш сайт.')+"""
- <div class="buyer-letter-layout"><div class="letter-story"><p>Представьте, что вы продаёте мебель на заказ. На вопрос о шкафах для узкой прихожей нейросеть называет вашу мастерскую. Следом покупатель спрашивает, кто возьмётся за нестандартную глубину и привезёт заказ в Тулу.</p>
- <p>Если в ответе останется другая мастерская, покупатель может начать расчёт с неё. Если рядом с вашим названием есть подходящий пример и ссылка на проект, ему проще запросить смету у вас.</p>
- """+arrow_link('why-geo/','Когда бренду нужно GEO')+"""</div>
- <figure class="answer-fragment"><figcaption>Пример диалога о покупке</figcaption>
- <blockquote>Кто сделает шкаф глубиной 38 см с доставкой в Тулу?</blockquote>
- <div class="reply-fragment"><span>Что поможет покупателю</span><p>Ссылка на похожий проект, размеры готового шкафа и условия доставки в его город.</p></div></figure></div>""")
+main=quote_stage()+buyer_scenarios()
+main+=overview()
 main+=services('Аудит или продвижение?','Аудит покажет, что покупатели видят сейчас. Продвижение помогает бренду появляться в ответах о тех товарах и услугах, которые он продаёт.')
 commonfaq=[('Можно гарантировать рекомендацию нейросети?','Нет. Даже один покупатель может получить другой список, когда уточнит город, бюджет или требования к продукту.'),('GEO заменяет SEO?','Нет. SEO помогает покупателю найти вашу страницу через поиск. GEO помогает ему встретить ваш бренд, когда он просит нейросеть сравнить варианты.'),('Упоминание бренда уже означает продажу?','Покупатель может увидеть знакомое название и уйти к конкуренту. Продажу подтверждает сделка, а связь с рекомендацией помогают проверить переходы и обращения.'),('Можно начать с отдельного аудита?','Да. Вы получите отчёт и сможете передать его своей команде. Продвижение можно обсудить отдельно.')]
 home_questions,mainfaq=faq(commonfaq)
 # Detail pages.
-why=hero('Зачем бренду <span>GEO?</span>','Чтобы покупатель учитывал вашу компанию, когда спрашивает у нейросети, к кому обратиться или что купить.','Если нейросеть назвала двух конкурентов, именно их предложения клиент может открыть первыми. Стоит узнать, попадаете ли вы в этот список и что о вас говорят.','shortlist','Стеклянная карточка выделена среди двух металлических альтернатив',('Посмотреть пример аудита','audit/#sample-board'),('Примеры ответов нейросетей','platforms/#compare'))
-why+=chapter('choice-story',headline('Где бренд теряет покупателя?','В ответе нейросети выбор может сузиться ещё до знакомства с сайтом.')+"""
- <div class="choice-flow"><figure class="decision-scene" data-scene>"""+scene_image('scene-hotel','Гостиница с подсветкой фасада и номеров','(max-width:700px) 95vw, 55vw')+"""<figcaption><span>Вопрос заказчика</span><blockquote>Кому доверить освещение нового отеля?</blockquote></figcaption></figure><dl class="choice-lines"><div><dt>Вас пропустили</dt><dd>Подходящий заказчик видит других подрядчиков и может вообще не узнать о вашей компании.</dd></div>
- <div><dt>Вас перепутали</dt><dd>Устаревшее описание услуги отсекает клиентов, которым на самом деле подходит ваш продукт.</dd></div>
- <div><dt>Вас не отличили</dt><dd>Название есть среди вариантов, но покупателю неясно, в чём ваше преимущество.</dd></div></dl></div>""")
-why+=chapter('platform-priority investment-cases',headline('Когда GEO стоит вложений?','Когда клиент ещё не выбрал поставщика и задаёт ИИ вопрос о категории, условиях или альтернативах.')+"""<div class="priority-note"><strong>Сравнение подрядчиков</strong><p>Если отдел продаж слышит «нам предложили вас и ещё две компании», важно понять, какой аргумент ассистент приводит в пользу каждой. Одного упоминания имени для ответа мало.</p></div>
- <div class="priority-note"><strong>Выбор конкретной модели</strong><p>Если покупателю нужна кофемашина определённой ширины, имеют значение модель, габариты и ссылка на карточку товара. Упоминание категории не решает задачу выбора.</p></div>
- <div class="priority-note"><strong>Решение о бюджете</strong><p>Аудит покажет вопросы, в которых появляются конкуренты без вас. Чтобы связать присутствие с продажами, отдельно смотрят переходы, обращения и данные CRM.</p></div>"""+arrow_link('audit/#competitors','Посмотреть показатели конкурентов'))
-why+=services('С какой задачи начать?','Аудит покажет, кого покупателю предлагают сейчас. Продвижение пригодится, если вы уже знаете, в каких рекомендациях хотите появляться.')+closing()
+why=hero('Зачем бренду <span>GEO?</span>','Чтобы покупатель учитывал вашу компанию, когда спрашивает у нейросети, к кому обратиться или что купить.','Если нейросеть назвала двух конкурентов, именно их предложения клиент может открыть первыми. Стоит узнать, попадаете ли вы в этот список и что о вас говорят.','shortlist','Стеклянная карточка выделена среди двух металлических альтернатив',('Посмотреть пример аудита','audit/#sample-board'),('Упоминания и цитирования','#visibility'))
+why+=frequency_figure()
+why+=chapter('investment-feature',f"""
+ <div class="investment-spread" id="investment">{scene_image('scene-hotel','Модель гостиницы с подсвеченными окнами и фасадом','(max-width: 700px) 95vw, 80vw')}
+ <div class="investment-copy"><h2>Когда GEO стоит вложений?</h2>
+ <p class="short-answer">Когда вас сравнивают до первого звонка.</p>
+ <p>Владелец отеля спрашивает, кому заказать освещение фасада. В ответе два бюро. Оба делают свет, но только у одного есть ссылка на готовую гостиницу. Именно этот проект заказчик может переслать архитектору.</p>
+ <p>Если клиенты уже приходят с таким списком, начните с одного вопроса из переговоров. Посмотрите, кого назвали и чей проект привели в пример.</p>
+ {arrow_link('audit/#sample-board','Разобрать пример ответа')}</div></div>""")
+why+=closing()
 def audit_opening():
  return """<header class="audit-opening wrap"><h1>Называет ли ИИ <span>ваш бренд?</span></h1>
  <p class="short-answer">GEO-аудит покажет, где вас упоминают, кому достаются ссылки и какие конкуренты появляются в ответах вместо вас.</p>
@@ -137,8 +127,8 @@ def metric_sheet():
   ('text','Упоминание бренда','Название встречается в основном тексте.','Повтор названия в одном ответе засчитывается один раз. Название только в адресе или в подписи ссылки сюда не входит.'),
   ('sources','Сайт в источниках','Домен есть в списке источников ответа.','Несколько страниц одного сайта дают одно попадание за замер. Источник может остаться за пределами текста, который видит покупатель.'),
   ('url','URL в ответе','Полный адрес сайта встроен в сам ответ.','Считается и ссылка под словом. В отчёте видно, куда попадёт покупатель по ссылке. Это может быть карточка продукта, обзор или главная страница.')]
- rows=''.join(f'<div class="metric-cell"><div class="metric-sculpture"><img src="{{PRE}}{asset("object-"+key+".webp")}" width="512" height="512" loading="lazy" alt="{name}" aria-hidden="true"></div><dt>{name}</dt><dd><strong>{definition}</strong><p>{detail}</p></dd></div>' for key,name,definition,detail in metrics)
- return chapter('metric-sheet',headline('Что измеряет GEO-аудит?','Три показателя отвечают на разные вопросы. В отчёте вы увидите, в скольких замерах встретился каждый признак и какую долю это составляет.')+f'<dl class="metric-ledger">{rows}</dl>'+'''<div class="measure-base"><strong>Откуда берётся процент?</strong><p>Число замеров с признаком делится на все попытки в выбранной группе. За один замер считаем один ответ модели на вопрос или одну неудачную попытку получить ответ. Отказы и ошибки остаются в базе и показаны отдельно. Доли трёх признаков могут пересекаться.</p></div>''','results')
+ rows=''.join(f'<div><dt>{name}</dt><dd><strong>{definition}</strong><p>{detail}</p></dd></div>' for _,name,definition,detail in metrics)
+ return chapter('measurement-notes',headline('Что считается попаданием в отчёт?','Для каждого ответа отдельно отмечаем название в тексте, сайт в списке источников и ссылку внутри ответа.')+f'<dl class="measurement-index">{rows}</dl>'+'''<details class="source-book"><summary>Как считается процент?</summary><p>Число замеров с признаком делим на все попытки в выбранной группе. Отказы и ошибки входят в знаменатель и отмечены отдельно. Один ответ может учитываться сразу в нескольких показателях.</p></details>''','results')
 
 def answer_sample():
  samples=[
@@ -182,24 +172,7 @@ def deliverables():
  return chapter('report-delivery',headline('Что команда получит на руки?','Отчёт с выводами, рабочую таблицу и приложение с ответами. Каждый вывод можно проследить до вопроса, модели, даты и источника.')+
  '<div class="delivery-list">'+''.join(f'<div><div class="report-glyph glyph-{i}" aria-hidden="true"><i></i><i></i><i></i></div><span>{team}</span><strong>{name}</strong><p>{desc}</p></div>' for i,(team,name,desc) in enumerate(rows))+'</div>','report')
 
-platformbody=hero('Где продвигать <span>бренд в ИИ?</span>','Начните с вопросов, которые ваши покупатели задают в ChatGPT, Алисе и других ассистентах.','В шести примерах разбираем вопросы покупателей, ответы нейросетей и выводы, которые пригодятся вашей команде.','dialogue','Две реплики из дымчатого стекла и меди',('Сравнить платформы','#compare'),('Метрики GEO-аудита','audit/#results'))
-platform_cases=[
- ('Какие сервисы попадут в шорт-лист?','В ChatGPT покупатель может уточнять требования по ходу диалога. При веб-поиске ответ может содержать ссылки на источники.','Выбор SaaS','Какой сервис записи выбрать для двух салонов? А если нужна единая база клиентов?','Остался ли бренд в списке после уточнения, какую функцию ему приписали и есть ли ссылка на страницу этой функции.','Если продукт исчез после уточнения, маркетинг увидит, какое требование клиента стоит яснее раскрыть на сайте.','https://help.openai.com/en/articles/9237897-searching-the-web-with-chatgpt','О поиске в ChatGPT'),
- ('Какой подрядчик отвечает условиям закупки?','В Claude закупщик может попросить сопоставить предложения по своим критериям и проверить основания для вывода.','Закупка B2B','Сравни подрядчиков для внедрения CRM. Кто поддерживает миграцию истории и фиксирует условия поддержки в договоре?','По какому критерию упомянута компания, какой фрагмент подтверждает вывод и куда ведёт цитата при включённом поиске.','Команда продаж получит список спорных характеристик для сверки с договором и документацией.','https://support.claude.com/en/articles/10684626-enable-and-use-web-search','О веб-поиске Claude'),
- ('Какое впечатление создают отзывы?','В Grok с поиском по X можно исследовать публичное обсуждение продукта и отделить слова пользователей от заявлений компании.','Репутация продукта','Что пишут о стабильности сервиса после обновления? Какие сообщения относятся к новой версии?','Какая претензия повторяется, датирована ли публикация и относится ли она к текущей версии. Подтверждённые факты отмечаются отдельно.','PR увидит, какой вопрос уже получил официальный ответ и где покупателю всё ещё доступен только старый отзыв.','https://docs.x.ai/developers/tools/x-search','О поиске по X'),
- ('Какую модель посоветуют купить?','В Gemini покупатель может сравнить несколько моделей товара. Ссылки в ответе дают возможность проверить отдельные характеристики.','Выбор товара','Сравни узкие посудомоечные машины для кухни шириной 45 см. У какой есть короткая программа?','Какую модификацию назвали, совпадают ли размеры и комплектация, ведёт ли ссылка к производителю или в каталог магазина.','Категорийный менеджер увидит, какую карточку нужно уточнить, если ИИ смешивает соседние модели.','https://support.google.com/gemini/answer/14143489','Об источниках в Gemini'),
- ('Кого найдут рядом с домом?','Для локального бизнеса в ответе Алисы особенно важны филиал, адрес и нужная услуга. Эти сведения покупатель использует, чтобы выбрать, куда обратиться.','Локальные услуги','Где в Казани починят кофемашину с выездом в Советский район?','Назван ли нужный филиал, совпадают ли район и условия выезда, какой источник указан для проверки. Город фиксируется вместе с вопросом.','Владелец увидит, куда может уйти обращение, если ассистент назвал закрытый филиал или чужой телефон.','https://alice.yandex.ru/','Об Алисе'),
- ('Верно ли покупатель понял условия?','В GigaChat можно проверить, как русскоязычному покупателю объясняют условия сервиса и различия между тарифами.','Условия сервиса','На каком тарифе можно подключить второй склад? Входит ли загрузка остатков в базовый пакет?','Что ответ обещает пользователю, упоминает ли ограничения и совпадает ли формулировка с действующим описанием тарифа.','Продуктовая команда увидит конкретную фразу, из-за которой клиент может прийти с неверными ожиданиями.','https://giga.chat/','О GigaChat')]
-panel_tabs=''.join(f'<button role="tab" id="tab-{k}" aria-controls="panel-{k}" aria-selected="{str(i==0).lower()}" tabindex="{0 if i==0 else -1}">{brand_mark(n,k)}{n}</button>' for i,(n,k) in enumerate(platforms))
-panel_bodies=[]
-for (name,key),(q,answer,topic,prompt,measure,decision,url,ref) in zip(platforms,platform_cases,strict=True):
- panel_bodies.append(f'''<div role="tabpanel" id="panel-{key}" aria-labelledby="tab-{key}" tabindex="0">
- <div class="platform-context"><span>{topic}</span><h3>{q}</h3><p class="short-answer">{answer}</p>
- <figure><figcaption>Пример вопроса покупателя</figcaption><blockquote>{prompt}</blockquote></figure></div>
- <div class="platform-insight"><div class="platform-trace" aria-hidden="true"><i class="trace-question"></i><i class="trace-wire"></i><i class="trace-hub">{brand_mark(name,key)}</i><i class="trace-wire"></i><i class="trace-answer"></i></div><dl><div><dt>Что фиксируем</dt><dd>{measure}</dd></div><div><dt>Решение для команды</dt><dd>{decision}</dd></div></dl><a href="{url}">{ref} ↗</a></div></div>''')
-platformbody+=chapter('platform-atlas',headline('Что проверять по платформам?','Учитывайте сам вопрос, доводы в пользу бренда и ссылку, которую увидит покупатель. Ниже шесть примеров из разных отраслей.')+f'<div class="atlas-stage" id="compare"><div class="atlas-tabs" role="tablist" aria-label="AI-платформы">{panel_tabs}</div><div class="atlas-panels">{"".join(panel_bodies)}</div></div>')
-platformbody+=closing()
-audit='<div class="audit-stage">'+audit_opening()+answer_sample()+'</div>'+strip+metric_sheet()+competitor_sheet()+deliverables()
+audit='<div class="audit-stage">'+audit_opening()+answer_sample()+'</div>'+observation_figure()+metric_sheet()+competitor_sheet()+deliverables()
 x,auditfaq=faq([('Можно ли увидеть реальные ответы из моего аудита?','Да. В приложении доступны тексты, ссылки, даты, модели и статусы замеров. По ним команда может проверить выводы отчёта.'),('Что покажут вопросы без названия компании?','В каких ситуациях ассистент сам назвал бренд. Вопросы с названием мы разбираем отдельно. По ним видно, как ИИ описывает уже известную покупателю компанию.'),('Аудит покажет продажи из ИИ?','Для выводов о продажах нужны данные аналитики и CRM. Аудит показывает содержание ответов, упоминания и ссылки в пределах исследованной выборки.'),('Можно использовать результат со своей командой?','Да. Таблица связывает наблюдения с вопросами и страницами. Задачи можно передать своей редакции, продуктовой команде или разработчикам.')])
 audit+=x+closing(True)
 
@@ -248,7 +221,7 @@ geo=prose('Чем GEO отличается от SEO?','SEO помогает на
 geo+=prose('А что означает AEO?','Обычно так называют направление, связанное с прямыми ответами на вопросы пользователя.',['В маркетинговых описаниях GEO и AEO могут пересекаться. При выборе услуги полезнее уточнить, какую задачу бизнеса она решает и какой результат вы получаете, чем ориентироваться только на аббревиатуру.'])
 geo+=prose('Зачем это владельцу бизнеса?','Чтобы знать, встречает ли покупатель ваш бренд, когда просит совета у нейросети.',['Покупатель должен понять, что именно вы предлагаете. Если ассистент не называет бренд либо неверно описывает продукт, потенциальный покупатель может не рассмотреть предложение.','Это особенно значимо при сравнении подрядчиков, товаров или сервисов. Но само упоминание не равно обращению и не доказывает рост выручки.'])
 geo+=prose('Можно ли купить гарантированную рекомендацию?','Нет. Агентство не управляет ответами сторонней нейросети.',['Ответы зависят от платформы, вопроса и контекста пользователя. Результаты отдельного исследования нельзя автоматически переносить на весь рынок или на всех пользователей.','Исходная научная работа <a href="https://arxiv.org/abs/2311.09735">GEO: Generative Engine Optimization</a> рассматривает видимость контента в генеративных ответах. Авторы измеряли видимость на запросах из своего исследования. По этим данным нельзя предсказать результат отдельной компании.'])
-geo+=prose('С какой услуги начать знакомство с GEO?','Начните с аудита, если ещё не видели, что нейросети пишут о вас.',['<a href="{PRE}audit/">В отчёте аудита</a> видно, кто попадает в ответы на вопросы о вашем продукте. Если уже ясно, где бренду не хватает упоминаний, посмотрите <a href="{PRE}platforms/">направления продвижения</a>.','О выборе между услугами читайте в материале <a href="{PRE}why-geo/">«Зачем бренду GEO-продвижение?»</a>.'])
+geo+=prose('С какой услуги начать знакомство с GEO?','Начните с аудита, если ещё не видели, что нейросети пишут о вас.',['<a href="{PRE}audit/">В отчёте аудита</a> видно, кто попадает в ответы на вопросы о вашем продукте.','О выборе между услугами читайте в материале <a href="{PRE}why-geo/">«Зачем бренду GEO-продвижение?»</a>.'])
 mention=prose('В чём разница для покупателя?','Упоминание знакомит с названием, рекомендация предлагает рассмотреть его как подходящий выбор.',['Нейтральная справка о компании и предложение обратиться именно к ней выполняют разные роли. В первом случае пользователь узнаёт о существовании бренда. Во втором у него появляется причина присмотреться к продукту.','Уточните, какими словами нейросеть описала компанию. Это поможет понять, получил ли покупатель повод обратиться к вам.'])
 mention+=prose('Как это выглядит в обычном ответе?','У одного названия могут быть разные роли в диалоге.',['Фраза «Компания работает в этой категории» знакомит с названием. Слова «Для вашей задачи можно рассмотреть эту компанию» добавляют бренд в список вариантов. В ответе «С учётом ваших условий этот вариант подходит» уже есть совет.','Это учебные примеры. Чтобы узнать, состоялась ли продажа, нужны данные о сделке.'])
 mention+=prose('Всегда ли больше упоминаний лучше?','Нет, если они не связаны с нужной аудиторией или искажают предложение.',['Бренд может встречаться в нерелевантной категории, устаревшем описании или критическом контексте. Такое присутствие нельзя автоматически считать успехом продвижения.','Полезный вопрос для бизнеса: помогает ли это представление компании покупателю рассмотреть подходящий ему продукт?'])
@@ -262,11 +235,11 @@ geo+=prose('Как выглядит присутствие бренда в от�
 mention+=prose('Как понять, что вас посоветовали?','Посмотрите на действие, которое ассистент предлагает покупателю.',['Фраза «У Линии есть общий ящик» описывает функцию вымышленного сервиса. А в предложении «Для вашего отдела подойдёт Линия, потому что можно распределять обращения» есть и совет, и довод в пользу продукта. В обоих случаях название встретилось один раз.','При оценке ответа сохраните вопрос пользователя и соседние предложения. Оговорка о тарифе или ограничении может полностью изменить смысл совета.'])
 competitor+=prose('Как отличить разовый ответ от закономерности?','Смотрите на повторяемость по одной и той же теме в сопоставимых условиях.',['Если соперник появился однажды, это повод прочитать ответ. Если он появляется повторно у нескольких ассистентов по одному типу вопросов, сравните предложенный продукт, доводы и ссылки. Вопросы, где покупатель уже указал название компании, имеет смысл рассматривать отдельно. <a href="{PRE}audit/#competitors">Сравнение конкурентов в GEO-аудите</a>.'])
 def common_header(pre,current):
- nav=[('','Продвижение'),('audit/','Аудит'),('why-geo/','Зачем GEO'),('platforms/','Платформы'),('blog/','Блог')]
+ nav=[('','Продвижение'),('audit/','Аудит'),('why-geo/','Зачем GEO'),('blog/','Блог')]
  return '<a class="skip" href="#main">К содержанию</a><header class="site-header"><div class="wrap nav"><a class="logo" href="'+pre+'index.html" aria-label="aileed — главная"><img class="wordmark-logo" src="'+pre+asset('aileed-logo.svg')+'" width="170" height="46" alt="aileed"></a><nav class="nav-links" id="navigation" aria-label="Основная навигация">'+''.join('<a href="'+pre+(r or 'index.html')+'"'+(' aria-current="page"' if current==r else '')+'>'+t+'</a>' for r,t in nav)+'</nav><button class="btn nav-cta" type="button" aria-label="Составить бриф" data-open-brief><span class="desktop-label">Составить бриф</span><span class="mobile-label" aria-hidden="true">Бриф</span><span aria-hidden="true">↗</span></button><button class="menu-toggle" aria-controls="navigation" aria-expanded="false" aria-label="Открыть меню">Меню</button></div></header>'
 def notice(pre):return '<aside id="cookie-banner" class="cookie-banner a-cookie wrap" aria-labelledby="cookie-title" hidden><div><h2 id="cookie-title">Какие cookie используются?</h2><p class="short-answer">Только необходимые настройки. Аналитика не подключена.</p></div><a href="'+pre+'privacy.html#cookies">Подробнее</a><button type="button" class="btn" data-cookie-accept>Понятно</button></aside>'
 def footer(pre,published):
- links=[('what-is-geo/','Что такое GEO?'),('why-geo/','Зачем бренду GEO?'),('platforms/','Продвижение в нейросетях'),('blog/','Блог'),('contacts.html','Контакты'),('privacy.html','Конфиденциальность'),('consent.html','Обработка данных')]
+ links=[('what-is-geo/','Что такое GEO?'),('why-geo/','Зачем бренду GEO?'),('blog/','Блог'),('contacts.html','Контакты'),('privacy.html','Конфиденциальность'),('consent.html','Обработка данных')]
  return '<footer class="site-footer a-footer"><div class="wrap"><div class="footer-top"><a class="logo" href="'+pre+'index.html"><img class="wordmark-logo" src="'+pre+asset('aileed-logo.svg')+'" width="170" height="46" alt="aileed"></a><nav class="footer-links" aria-label="Ссылки в подвале">'+''.join('<a href="'+pre+r+'">'+t+'</a>' for r,t in links)+'<button type="button" data-cookie-settings>Настройки cookie</button></nav></div><div class="content-byline"><a href="'+pre+'contacts.html#editorial" rel="author">Материалы: редакция aileed</a><span>Опубликовано <time itemprop="datePublished" datetime="'+published+'">'+pretty(published)+'</time></span><span>Обновлено <time itemprop="dateModified" datetime="'+TODAY+'">'+pretty(TODAY)+'</time></span></div><div class="footer-bottom">© 2026 aileed</div></div></footer>'
 def pretty(d):
  y,m,day=d.split('-');return str(int(day))+' '+{'10':'октября','11':'ноября'}[m]+' '+y
@@ -275,7 +248,6 @@ old= (ROOT/'index.html').read_text();dialog=re.search(r'<dialog\b.*?</dialog>',o
 SOCIAL_IMAGES={
  'audit/':'social-audit.png',
  'why-geo/':'social-why.jpg',
- 'platforms/':'social-platforms.jpg',
  'blog/':'social-geo.png',
  'what-is-geo/':'social-definition.jpg',
  'blog/mention-or-recommendation/':'social-mention.jpg',
@@ -292,7 +264,7 @@ def write(route,title,desc,body,published,article=False,faqs=None):
  if article:
   headline=re.sub('<[^>]+>','',re.search('<h1>(.*?)</h1>',body,re.S).group(1))
   graph.append({'@type':'Article','@id':url+'#article','headline':headline,'mainEntityOfPage':{'@id':url+'#page'},'author':{'@id':BASE+'#org'},'publisher':{'@id':BASE+'#org'},'datePublished':published,'dateModified':TODAY,'image':BASE+asset(social),'inLanguage':'ru-RU'});page['mainEntity']={'@id':url+'#article'}
- if route in ['','audit/','platforms/']:graph.append({'@type':'Service','name':('GEO-аудит' if route=='audit/' else 'GEO-продвижение'),'provider':{'@id':BASE+'#org'},'url':url,'description':desc})
+ if route in ['','audit/']:graph.append({'@type':'Service','name':('GEO-аудит' if route=='audit/' else 'GEO-продвижение'),'provider':{'@id':BASE+'#org'},'url':url,'description':desc})
  if faqs:graph.append({'@type':'FAQPage','mainEntity':[{'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a}} for q,a in faqs]})
  if route:
   label=re.sub(r' \| aileed$','',title)
@@ -311,7 +283,6 @@ def page(route,title,desc,body,date,article=False,faqs=None):write(route,title,d
 page('','Как стать брендом, который рекомендуют нейросети? | aileed','GEO-продвижение бренда в ChatGPT, Алисе и других нейросетях. Помогаем бизнесу участвовать в выборе покупателя внутри AI-ответа. aileed.',main,'2026-10-07',faqs=mainfaq)
 page('audit/','Что измеряет GEO-аудит бренда в нейросетях? | aileed','GEO-аудит бренда в нейросетях. Упоминания, сайт в источниках, URL в ответах, доля голоса и место среди конкурентов. Посмотрите пример и состав отчёта.',audit,'2026-11-02',faqs=auditfaq)
 page('why-geo/','Зачем бренду GEO-продвижение? | aileed','Зачем бизнесу GEO-продвижение: видимость, доверие и участие в выборе клиента. Когда оно уместно для B2B, магазинов и сервисов.',why,TODAY)
-page('platforms/','Как продвигать бренд в ChatGPT, Алисе и других нейросетях? | aileed','Продвижение бренда в ChatGPT, Claude, Grok, Gemini, Алисе и GigaChat. Примеры запросов покупателей и критерии оценки ответов.',platformbody,TODAY)
 page('blog/','Что важно знать о GEO и AI-видимости? Блог | aileed','Блог aileed для владельцев бизнеса и маркетологов: GEO, рекомендации нейросетей, доверие и выбор бренда.',blog,TODAY)
 for (route,title,answer,image,date),text in zip(posts,[geo,mention,competitor]):
  cover=img(image,cover_alt[image],'article-object',True)
@@ -333,7 +304,10 @@ for name,date in [('contacts.html','2026-11-02'),('privacy.html','2026-10-07'),(
  doc='<article class="studio-document"><header class="document-lead"><div class="wrap">'+lead+'</div></header>'+reading_layout(separator+sections,'На этой странице')+'</article>'
  page(name,title,desc,doc,date)
 
+# Keep old bookmarks useful while removing the retired page from discovery.
+(ROOT/'platforms/index.html').write_text(f'<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="robots" content="noindex,follow"><link rel="canonical" href="{BASE}why-geo/"><meta http-equiv="refresh" content="0; url=../why-geo/"><title>Зачем бренду GEO? | aileed</title></head><body><a href="../why-geo/">Зачем бренду GEO?</a></body></html>\n')
+
 (ROOT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join('<url><loc>'+escape(BASE+r)+'</loc><lastmod>'+TODAY+'</lastmod></url>' for r,d in PAGES)+'</urlset>\n')
-(ROOT/'llms.txt').write_text('# aileed\n\n> GEO-продвижение и аудит брендов в ответах нейросетей.\n\n## Услуги\n- [GEO-продвижение]('+BASE+'): присутствие бренда в выборе клиента внутри AI-ответов.\n- [GEO-аудит]('+BASE+'audit/): AI-видимость, конкуренты и образ бренда.\n- [Направления по платформам]('+BASE+'platforms/): ChatGPT, Claude, Grok, Gemini, Алиса и GigaChat.\n\n## Материалы\n- [Зачем бренду GEO]('+BASE+'why-geo/): бизнес-смысл и применимость.\n- [Что такое GEO]('+BASE+'what-is-geo/): определение и отличия от SEO/AEO.\n- [Блог]('+BASE+'blog/): выбор бренда и рекомендации нейросетей.\n- [Упоминание или рекомендация]('+BASE+'blog/mention-or-recommendation/): разница для бизнеса.\n- [Почему ИИ рекомендует конкурентов]('+BASE+'blog/why-ai-recommends-competitors/): как понимать такой ответ.\n\n## Контакты и данные\n- [Контакты]('+BASE+'contacts.html): каналы отправки пока не подключены, бриф сохраняется локально.\n- [Конфиденциальность]('+BASE+'privacy.html)\n- [Обработка данных]('+BASE+'consent.html)\n\nРекомендации сторонних платформ и рост выручки не гарантируются.\n')
+(ROOT/'llms.txt').write_text('# aileed\n\n> GEO-продвижение и аудит брендов в ответах нейросетей.\n\n## Услуги\n- [GEO-продвижение]('+BASE+'): присутствие бренда в выборе клиента внутри AI-ответов.\n- [GEO-аудит]('+BASE+'audit/): AI-видимость, конкуренты и образ бренда.\n\n## Материалы\n- [Зачем бренду GEO]('+BASE+'why-geo/): бизнес-смысл и применимость.\n- [Что такое GEO]('+BASE+'what-is-geo/): определение и отличия от SEO/AEO.\n- [Блог]('+BASE+'blog/): выбор бренда и рекомендации нейросетей.\n- [Упоминание или рекомендация]('+BASE+'blog/mention-or-recommendation/): разница для бизнеса.\n- [Почему ИИ рекомендует конкурентов]('+BASE+'blog/why-ai-recommends-competitors/): как понимать такой ответ.\n\n## Контакты и данные\n- [Контакты]('+BASE+'contacts.html): каналы отправки пока не подключены, бриф сохраняется локально.\n- [Конфиденциальность]('+BASE+'privacy.html)\n- [Обработка данных]('+BASE+'consent.html)\n\nРекомендации сторонних платформ и рост выручки не гарантируются.\n')
 (ROOT/'robots.txt').write_text('User-agent: *\nAllow: /\n\nSitemap: '+BASE+'sitemap.xml\n')
 print('Rendered',len(PAGES),'pages for',BASE)

@@ -24,7 +24,7 @@
   reduced.addEventListener("change",()=>{scenes.forEach(el=>{el.style.removeProperty("--scene-x");el.style.removeProperty("--scene-y");});refresh();});
   let progressPending=false;
   const header=document.querySelector(".site-header");
-  const entrances = document.querySelectorAll(".shortlist-model,.buyer-letter-layout,.shelf-story,.metric-cell,.service-tile,.delivery-list>div,.answer-lab,.reading-body>section,.question-list,.decision-scene,.journal-opening h1,.audit-opening h1");
+  const entrances = document.querySelectorAll(".shortlist-model,.buyer-letter-layout,.shelf-story,.metric-cell,.service-tile,.delivery-list>div,.answer-lab,.reading-body>section,.question-list,.frequency-paper,.journal-opening h1,.audit-opening h1");
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(entries => {
       for (const entry of entries) {
