@@ -128,3 +128,60 @@
   .report-cover img { width: 69%; object-position: 40% 50%; }
   .report-cover::after { background: linear-gradient(90deg, #131518 31%, rgba(19,21,24,.88) 45%, rgba(19,21,24,.14) 85%); }
 }
+
+.model-ribbon {
+  --logo-gap: clamp(2.75rem, 5.5vw, 6.25rem);
+  display: grid;
+  align-items: center;
+  min-height: clamp(7.1rem, 14vw, 13.25rem);
+  padding-block: 1.4rem;
+  overflow: hidden;
+  color: white;
+  background: linear-gradient(165deg, #83aee7, #9fbbe0);
+}
+.model-ribbon:has(:focus-visible) { outline: 2px solid #25498b; outline-offset: -3px; }
+.model-ribbon-track:focus-visible { outline: none; }
+.model-ribbon ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.45rem var(--logo-gap);
+  margin: 0;
+  padding: 0 calc(var(--logo-gap) / 2);
+}
+.model-ribbon li {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: .21em;
+  font-size: clamp(1.4rem, 2.45vw, 2.75rem);
+  font-weight: 560;
+  line-height: 1;
+  letter-spacing: -.045em;
+}
+.model-ribbon img { display: block; width: auto; filter: brightness(0) invert(1); }
+.model-ribbon .symbol { height: 1.24em; }
+.model-ribbon .wordmark { height: .98em; }
+.model-ribbon ul[aria-hidden] { display: none; }
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  .model-ribbon-track {
+    display: flex;
+    width: max-content;
+    animation: audit-model-roll 52s linear -2s infinite;
+  }
+  .model-ribbon ul, .model-ribbon ul[aria-hidden] {
+    display: flex;
+    flex: none;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    min-width: 100vw;
+  }
+  .model-ribbon-track:focus { animation-play-state: paused; }
+  @keyframes audit-model-roll { to { transform: translateX(-50%); } }
+}
+@media (hover: hover) {
+  .model-ribbon:hover .model-ribbon-track { animation-play-state: paused; }
+}
