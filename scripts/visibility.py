@@ -83,3 +83,32 @@ def overview():
     <p class="short-answer">В учебной подборке о сервисе «Линия» название встречается чаще, чем его сайт в источниках. В отчёте эти показатели идут отдельно.</p></header>
     <div class="signal-totals"><dl>''' + ''.join(items) + '''</dl>
     <a class="edition-link" href="{PRE}why-geo/#visibility">Сравнить по вопросам <span aria-hidden="true">↗</span></a></div></div></section>'''
+
+
+def visibility_dashboard():
+    """Plot cumulative observations in source order, with the same base for both series."""
+    answers = [a for group in GROUPS for a in group['answers']]
+    total = len(answers)
+    plots, controls, counts = [], [], {}
+    for label, key, matches in SERIES:
+        values = [0]
+        for answer in answers:
+            values.append(values[-1] + int(matches(answer)))
+        counts[key] = values
+        path = 'M0 100 ' + ' '.join(f'H{i*100/total:.3f} V{100-value*100/total:.3f}'
+                                    for i, value in enumerate(values[1:], 1))
+        plots.append(f'<path class="trace {key}" d="{path}" vector-effect="non-scaling-stroke"/>')
+        controls.append(f'<label class="series-option {key}"><input type="radio" name="visibility-series" '
+                        f'value="{key}"' + (' checked' if key == 'mention' else '') + f'><span>{label}</span>'
+                        f'<strong><output data-count="{key}">{values[-1]}</output><small> / <span data-base>{total}</span></small></strong></label>')
+    return f'''<figure class="dashboard" data-dashboard data-counts='{json.dumps(counts)}'>
+    <figcaption><strong>Видимость бренда</strong><span>Учебная выборка · {total} ответов</span></figcaption>
+    <div class="dashboard-body"><fieldset class="series-picker"><legend>Показатель</legend>{''.join(controls)}</fieldset>
+    <div class="chart-column"><div class="chart-caption">Ответов с признаком, накопительно</div>
+    <div class="chart-frame"><div class="chart-y"><span>{total}</span><span>{total//2}</span><span>0</span></div>
+    <div class="chart-field"><svg viewBox="0 0 100 100" preserveAspectRatio="none" role="img"
+    aria-label="Упоминания и цитирования по мере разбора учебных ответов"><g class="chart-lines">{''.join(plots)}</g></svg></div></div>
+    <div class="chart-slider"><label>Разобрано ответов <output data-position>{total}</output> / {total}
+    <input type="range" min="1" max="{total}" value="{total}" aria-label="Число разобранных ответов"></label></div></div></div>
+    <a class="dashboard-source" href="{{PRE}}audit/#observations">Открыть исходные ответы <span aria-hidden="true">↗</span></a>
+    </figure>'''
