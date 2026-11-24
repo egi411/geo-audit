@@ -3,12 +3,12 @@
 from pathlib import Path
 from html.parser import HTMLParser
 from urllib.parse import urlsplit
-import json,re,sys
+import html,json,re,sys
 ROOT=Path(__file__).resolve().parents[1]
 class Page(HTMLParser):
  def __init__(self):super().__init__();self.tags=[]
  def handle_starttag(self,t,a):self.tags.append((t,dict(a)))
-files=[ROOT/'index.html',ROOT/'audit/index.html',ROOT/'why-geo/index.html',ROOT/'blog/index.html',ROOT/'what-is-geo/index.html',ROOT/'blog/mention-or-recommendation/index.html',ROOT/'blog/why-ai-recommends-competitors/index.html',ROOT/'cases/index.html',ROOT/'privacy.html',ROOT/'consent.html']
+files=[ROOT/'index.html',ROOT/'audit/index.html',ROOT/'why-geo/index.html',ROOT/'blog/index.html',ROOT/'what-is-geo/index.html',ROOT/'blog/mention-or-recommendation/index.html',ROOT/'blog/why-ai-recommends-competitors/index.html',ROOT/'cases/index.html',ROOT/'cases/fashion/index.html',ROOT/'cases/winline/index.html',ROOT/'privacy.html',ROOT/'consent.html']
 errors=[]
 for f in files:
  s=f.read_text();p=Page();p.feed(s);name=str(f.relative_to(ROOT))
@@ -24,6 +24,10 @@ for f in files:
   assert next(a['content'] for t,a in p.tags if t=='meta' and a.get('property')=='og:title')==title
   assert next(a['href'] for t,a in p.tags if t=='link' and a.get('rel')=='canonical')==page['url']
   assert 'AiLeeds' not in s and 'AILEEDS' not in s
+  visible_text=' '.join(html.unescape(re.sub('<[^>]+>', ' ', s)).split())
+  assert not re.search(r'(?<!\d)(31|33)\s*(%|из 100|вопрос|промпт)',visible_text),'retired frequency figures'
+  assert all(a.get('href','').startswith('mailto:egorkl2307@gmail.com?') for t,a in p.tags if 'data-open-brief' in a),'missing consultation destination'
+  assert not any(t in ('input','textarea','select') and a.get('name') in ('brand','audience','task','service') for t,a in p.tags),'old brief fields'
   ids=[a['id'] for t,a in p.tags if 'id' in a];assert len(ids)==len(set(ids)),'duplicate ids'
   assert sum(t=='h1' for t,a in p.tags)==1
   for field in ['datePublished','dateModified']:

@@ -2,20 +2,23 @@
   const header = document.querySelector(".site-header");
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   const home = document.querySelector(".home-hero");
-  if (home) {
+  if (home || document.querySelector("#case-directory")) {
     const moveCaseBookmark = () => {
-      const key = location.hash.slice(1);
-      if (["cases", "case-fashion", "case-winline"].includes(key)) {
-        location.replace(
-          new URL(
-            "cases/" + (key === "cases" ? "" : "#" + key),
-            document.baseURI,
-          ),
-        );
-      }
+      const oldRoute = {
+        "#case-fashion": "fashion/",
+        "#case-winline": "winline/",
+        "#cases": "",
+      };
+      if (!Object.hasOwn(oldRoute, location.hash)) return;
+      const directory = home ? "cases/" : "./";
+      location.replace(
+        new URL(directory + oldRoute[location.hash], document.baseURI),
+      );
     };
     moveCaseBookmark();
     window.addEventListener("hashchange", moveCaseBookmark);
+  }
+  if (home) {
     const notice = document.querySelector(".cookie-banner");
     function fitHero() {
       home.style.setProperty(
@@ -138,7 +141,7 @@
   );
   document
     .querySelectorAll(
-      ".instrument, .compare-plot, .service-figure, .project-intro, .slide-reader, .decision-path",
+      ".visibility-goal, .service-figure, .project-intro, .slide-reader, .decision-path",
     )
     .forEach((el) => observer.observe(el));
 })();
