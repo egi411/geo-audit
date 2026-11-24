@@ -1,20 +1,6 @@
 """Homepage illustration and published aggregate scope of the October audit."""
 
 
-def instrument():
-    # A target, not a measured performance series. One light per sample question.
-    lights = ''.join(
-        f'<i style="--arrival:{(row + column) * 45}ms"></i>'
-        for row in range(10) for column in range(10)
-    )
-    return f'''<figure class="visibility-goal" aria-labelledby="visibility-title">
-      <figcaption id="visibility-title">Видимость в нейросетях</figcaption>
-      <div class="goal-frame"><div class="goal-label"><span>Цель продвижения</span>
-      <strong>100<span>%</span></strong></div><div class="signal-matrix" aria-hidden="true">{lights}</div></div>
-      <p>Стремимся к тому, чтобы покупатель встретил ваш бренд по каждому важному для него вопросу.</p>
-      <a href="{{PRE}}audit/#observations">Как измеряем видимость <span aria-hidden="true">↗</span></a></figure>'''
-
-
 def observation_figure():
     return '''<section class="edition report-spread"><div class="wrap" id="observations">
       <header class="report-heading"><h2>Куда ведут ссылки из ответов ИИ?</h2>
