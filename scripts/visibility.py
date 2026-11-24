@@ -1,7 +1,7 @@
 """Interactive sample report for the audit."""
 
 
-def observation_figure():
+def observation_figure(photo):
     # Illustrative counts, independent of the WINLINE engagement. One feature per answer at most.
     groups = (
         ('Выбор сервиса', 25, (17, 12, 7)),
@@ -28,10 +28,14 @@ def observation_figure():
     rows = ''.join('<tr><th scope="row">'+topic+'</th><td>'+str(size)+'</td>'+
                    ''.join(f'<td>{n}</td>' for n in numbers)+'</tr>' for topic,size,numbers in groups)
     total_cells = ''.join(f'<td>{n}</td>' for n in totals)
-    return f'''<section class="audit-report wrap" id="observations"><header><h2>Отчёт по 100 промптам</h2>
-        <p class="short-answer">Учебный отчёт о вымышленном сервисе «Линия». В выборке четыре темы, по 25 промптов в каждой. Один промпт даёт один ответ. Переключайте показатель, чтобы сравнить упоминания и ссылки на сайт.</p></header>
-        <div class="scoreboard"><fieldset class="score-tabs"><legend>Показатель отчёта</legend>{''.join(controls)}</fieldset>
-        {''.join(plots)}</div>
+    return f'''<section class="audit-report wrap" id="observations" aria-labelledby="audit-report-title">
+        <div class="report-spread"><header class="report-cover">
+        <img src="{{PRE}}{photo}" width="1350" height="962" alt="Ноутбук с графиками веб-аналитики на экране" decoding="async">
+        <div class="report-title"><span>Учебный отчёт</span><h2 id="audit-report-title">Видимость по 100 промптам</h2></div></header>
+        <div class="report-pocket"><div class="scoreboard">
+        <p class="report-context">Как часто нейросеть называет сервис «Линия» и даёт ссылку на его сайт? В этой учебной выборке четыре темы по 25 вопросов. Сервис вымышлен.</p>
+        <fieldset class="score-tabs"><legend>Показатель отчёта</legend>{''.join(controls)}</fieldset>
+        {''.join(plots)}</div></div></div>
         <details class="report-register"><summary>Таблица по всем показателям</summary>
         <div class="register-scroll" tabindex="0" role="region" aria-label="Таблица результатов по четырём темам">
         <table><caption>Число ответов с каждым признаком. Один ответ может попасть в несколько столбцов.</caption><thead>

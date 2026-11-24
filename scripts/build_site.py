@@ -39,9 +39,6 @@ def chapter(name, content, anchor=''):
 def headline(question, answer):
  return f'<header class="edition-head"><h2>{question}</h2><p class="short-answer">{answer}</p></header>'
 
-def arrow_link(route, label):
- return f'<a class="edition-link" href="{{PRE}}{route}">{label} <span aria-hidden="true">↗</span></a>'
-
 def faq_entries(items):
  return ''.join(f'<details{" open" if i==0 else ""}><summary>{q}</summary><div class="faq-answer"><p>{a}</p></div></details>' for i,(q,a) in enumerate(items))
 
@@ -66,17 +63,11 @@ why_questions,whyfaq=faq([
  'Перед решением о продвижении', '')
 why+=why_questions+closing()
 def audit_opening():
- models = ('Алиса', 'ChatGPT', 'Perplexity', 'Gemini', 'Claude')
- rounds = ''.join('<i></i>' for _ in range(10))
- matrix = ''.join(f'<li><span>{name}</span><div aria-hidden="true">{rounds}</div></li>' for name in models)
- return f'''<header class="audit-cover wrap"><div class="audit-pitch"><h1>GEO-аудит бренда</h1>
- <p class="short-answer">Узнайте, где ваш бренд уступает конкурентам и что покупатель слышит о нём до встречи с вами. В отчёте вы увидите ответы нейросетей, источники сведений о продукте и страницы, с которых стоит начать работу.</p>
+ return f'''<header class="audit-intro wrap"><h1>GEO-аудит бренда</h1>
+ <div class="audit-offer"><p class="short-answer">Узнайте, что нейросети рассказывают покупателям о вашей компании и кого называют рядом с вами.</p>
+ <p>В отчёте покажем, по каким вопросам виден ваш бренд, откуда нейросети берут сведения и какие страницы стоит обновить в первую очередь.</p>
  <div class="actions"><a class="btn primary" href="{CONSULT_LINK}" data-open-brief>Обсудить аудит ↗</a>
- <a class="text-link" href="#observations">Открыть отчёт на 100 вопросов ↓</a></div></div>
- <figure class="audit-case"><figcaption><img src="{{PRE}}{asset('cases/winline.svg')}" alt="WINLINE" width="483" height="116"><span>Аудит за 10 дней</span></figcaption>
- <div class="audit-case-total"><strong>15 000</strong><span>замеров</span></div>
- <ol aria-label="Пять моделей, десять прогонов в каждой">{matrix}</ol>
- <div class="audit-case-foot"><span>Каждая метка обозначает прогон 300 вопросов</span>{arrow_link('cases/winline/', 'Весь кейс')}</div></figure></header>'''
+ <a class="text-link" href="#observations">Посмотреть образец отчёта ↓</a></div></div></header>'''
 
 
 def metric_sheet():
@@ -126,15 +117,16 @@ def deliverables():
  ('Маркетингу','Карта спроса','По каждой теме вы получите вопрос покупателя, частоту упоминаний, имена конкурентов и ссылки на источники. Можно сразу увидеть темы, в которых ваш бренд пока не встречается.'),
  ('Продукту и PR','Что говорят о продукте','Фрагменты ответов с характеристиками продукта и причинами, по которым нейросеть предлагает его или исключает из выбора. Команда сможет сверить спорное утверждение с условиями, которые предлагает клиентам сейчас.'),
  ('Редакции и разработке','Приоритеты по страницам','Для конкретного URL собраны наблюдение, подтверждающий пример и задача по содержанию или доступности страницы. Команда может вернуться к тому же вопросу после изменений.')]
- return chapter('report-delivery',headline('Что команда получит на руки?','Отчёт с выводами, таблицу для команды и исходные ответы. Для WINLINE мы собрали выводы на 26 слайдах. Данные и задачи по страницам передали в рабочей книге из 12 листов.')+
+ return chapter('report-delivery',headline('Что команда получит на руки?','Вы получите отчёт для руководителя и рабочую таблицу для команды. У каждого вывода есть исходный ответ, у каждой задачи — страница, с которой можно начать.')+
  '<div class="delivery-list">'+''.join(f'<div><span>{team}</span><strong>{name}</strong><p>{desc}</p></div>' for team,name,desc in rows)+'</div>','report')
 
 audit_focus = chapter('audit-focus', '''<header><h2>Что аудит даст вашему бизнесу</h2>
  <p>Отчёт показывает, по каким запросам покупатель встречает вашу компанию и что именно узнаёт о ней. Эти выводы помогают выбрать темы для продвижения и исправить ошибки в описании продукта.</p></header>
  <div class="audit-lenses"><article><h3>Положение среди конкурентов</h3><p>По каким темам вас видят рядом с другими компаниями? Где нейросети называют только конкурента? Отчёт показывает разницу по продуктам и отделяет поиск решения от вопросов об уже знакомом бренде.</p></article>
  <article><h3>Образ бренда</h3><p>Какие достоинства, недостатки и условия описывают нейросети? Сверяем эти утверждения с вашим предложением. Вы увидите, где сведения расходятся и к какому источнику отсылает ответ.</p></article></div>''', 'audit-value')
-audit='<div class="audit-edition">'+audit_opening()+audit_focus+observation_figure()+answer_sample()+metric_sheet()+competitor_sheet()+deliverables()
+audit='<div class="audit-edition">'+audit_opening()+observation_figure(asset('audit-workspace.webp'))+audit_focus+answer_sample()+metric_sheet()+competitor_sheet()+deliverables()
 x,auditfaq=faq([('Можно ли увидеть реальные ответы из моего аудита?','Да. В приложении доступны тексты, ссылки, даты, модели и статусы замеров. По ним команда может проверить выводы отчёта.'),('Что покажут вопросы без названия компании?','В каких ситуациях ИИ назвал бренд без подсказки. Вопросы с названием мы разбираем отдельно. По ним видно, как ИИ описывает уже известную покупателю компанию.'),('Аудит покажет продажи из ИИ?','Для выводов о продажах нужны данные аналитики и CRM. Аудит показывает содержание ответов, упоминания и ссылки в пределах исследованной выборки.'),('Можно использовать результат со своей командой?','Да. Таблица связывает наблюдения с вопросами и страницами. Редакция или разработчики могут взять задачи в работу.')], 'Вопросы о GEO-аудите', '')
+audit+='<aside class="audit-projects wrap"><a href="{PRE}cases/">Посмотрите кейсы <span aria-hidden="true">→</span></a></aside>'
 audit+=x+closing(True)+'</div>'
 
 def reading_layout(sections,label):
@@ -163,10 +155,13 @@ def common_header(pre,current):
  <a class="btn nav-cta" href="{CONSULT_LINK}" data-open-brief><span class="desktop-label">Бесплатная консультация</span><span class="mobile-label">Консультация</span><span aria-hidden="true">↗</span></a>
  <button class="menu-toggle" aria-controls="navigation" aria-expanded="false" aria-label="Открыть меню"><span class="menu-bars" aria-hidden="true"></span></button></div></header>'''
 def notice(pre):return '<aside id="cookie-banner" class="cookie-banner a-cookie" aria-labelledby="cookie-title" hidden><div><h2 id="cookie-title">Какие cookie используются?</h2><p class="short-answer">Только необходимые настройки. Аналитика не подключена.</p></div><a href="'+pre+'privacy.html#cookies">Подробнее</a><button type="button" class="btn" data-cookie-accept>Понятно</button></aside>'
-def footer(pre,published):
+def footer(pre,published,current):
+ case_links = [('cases/','Все кейсы')]
+ if current != 'audit/':
+  case_links += [('cases/fashion/','Модный бренд под NDA'),('cases/winline/','WINLINE')]
  groups=[
   ('Услуги', [('','GEO-продвижение'),('audit/','GEO-аудит')]),
-  ('Кейсы', [('cases/','Все кейсы'),('cases/fashion/','Модный бренд под NDA'),('cases/winline/','WINLINE')]),
+  ('Кейсы', case_links),
   ('О GEO', [('why-geo/','Зачем бренду GEO'),('what-is-geo/','Что такое GEO'),('blog/','Блог')]),
   ('Документы', [('privacy.html','Конфиденциальность'),('consent.html','Обработка данных')])]
  columns=[]
@@ -219,8 +214,12 @@ def write(route,title,desc,body,published,article=False,faqs=None):
 
  structured=''.join('<script type="application/ld+json">'+json.dumps({'@context':'https://schema.org',**node},ensure_ascii=False)+'</script>' for node in graph)
  section_styles = '<link rel="stylesheet" href="'+pre+asset('interior.css' if route else 'agency.css')+'">'
- head='<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+html.escape(title)+'</title><meta name="description" content="'+html.escape(desc)+'"><meta name="author" content="aileed"><meta name="datePublished" content="'+published+'"><meta name="dateModified" content="'+UPDATED+'"><meta name="robots" content="index,follow,max-image-preview:large"><meta name="theme-color" content="#101113"><link rel="canonical" href="'+url+'"><link rel="describedby" type="text/plain" href="'+BASE+'llms.txt"><meta property="og:title" content="'+html.escape(title)+'"><meta property="og:description" content="'+html.escape(desc)+'"><meta property="og:url" content="'+url+'"><meta property="og:site_name" content="aileed"><meta property="og:locale" content="ru_RU"><meta property="og:type" content="'+('article' if article else 'website')+'"><meta property="og:image" content="'+BASE+asset(social)+'"><meta name="twitter:card" content="summary_large_image"><link rel="icon" type="image/svg+xml" href="'+pre+asset('mark.svg')+'"><link rel="stylesheet" href="'+pre+asset('paper.css')+'">'+section_styles+structured+''.join('<script src="'+pre+asset(f)+'" defer></script>' for f in ['site.js','privacy.js','dashboard.js'])+'</head>'
- content=head+'<body class="paper-site" itemscope itemtype="https://schema.org/WebPage" itemid="'+url+'#page">'+common_header(pre,route)+notice(pre)+'<main id="main">'+body.replace('{PRE}',pre)+'</main>'+footer(pre,published)+dialog.replace('href="privacy.html"','href="'+pre+'privacy.html"').replace('href="consent.html"','href="'+pre+'consent.html"')+'<noscript><p class="cookie-noscript">Аналитика и рекламные cookie не используются.</p></noscript></body></html>'
+ scripts = ['site.js','privacy.js','dashboard.js']
+ if route == 'audit/':
+  section_styles += '<link rel="stylesheet" href="'+pre+asset('audit.css')+'">'
+  scripts.append('audit-reveal.js')
+ head='<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+html.escape(title)+'</title><meta name="description" content="'+html.escape(desc)+'"><meta name="author" content="aileed"><meta name="datePublished" content="'+published+'"><meta name="dateModified" content="'+UPDATED+'"><meta name="robots" content="index,follow,max-image-preview:large"><meta name="theme-color" content="#101113"><link rel="canonical" href="'+url+'"><link rel="describedby" type="text/plain" href="'+BASE+'llms.txt"><meta property="og:title" content="'+html.escape(title)+'"><meta property="og:description" content="'+html.escape(desc)+'"><meta property="og:url" content="'+url+'"><meta property="og:site_name" content="aileed"><meta property="og:locale" content="ru_RU"><meta property="og:type" content="'+('article' if article else 'website')+'"><meta property="og:image" content="'+BASE+asset(social)+'"><meta name="twitter:card" content="summary_large_image"><link rel="icon" type="image/svg+xml" href="'+pre+asset('mark.svg')+'"><link rel="stylesheet" href="'+pre+asset('paper.css')+'">'+section_styles+structured+''.join('<script src="'+pre+asset(f)+'" defer></script>' for f in scripts)+'</head>'
+ content=head+'<body class="paper-site" itemscope itemtype="https://schema.org/WebPage" itemid="'+url+'#page">'+common_header(pre,route)+notice(pre)+'<main id="main">'+body.replace('{PRE}',pre)+'</main>'+footer(pre,published,route)+dialog.replace('href="privacy.html"','href="'+pre+'privacy.html"').replace('href="consent.html"','href="'+pre+'consent.html"')+'<noscript><p class="cookie-noscript">Аналитика и рекламные cookie не используются.</p></noscript></body></html>'
  # Fragment-only primary destinations belong to the current page.
  content=content.replace('href="'+pre+'#','href="#')
  file.parent.mkdir(parents=True,exist_ok=True);file.write_text("\n".join(line.rstrip() for line in content.replace("><",">\n<").splitlines())+"\n")

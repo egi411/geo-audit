@@ -1,0 +1,131 @@
+.audit-intro {
+  display: grid;
+  grid-template-columns: var(--columns);
+  gap: var(--gap);
+  align-items: start;
+  padding-block: clamp(3rem, 9svh, 7rem) clamp(2.5rem, 7svh, 5rem);
+}
+.audit-intro h1 {
+  grid-column: 1/7;
+  max-width: 10ch;
+  font-size: clamp(3.2rem, 6.6vw, 6.65rem);
+  font-weight: 520;
+  line-height: .94;
+  letter-spacing: -.063em;
+}
+.audit-offer { grid-column: 7/-1; }
+.audit-offer .short-answer {
+  max-width: 34ch;
+  margin: 0;
+  font-size: clamp(1.3rem, 2vw, 1.95rem);
+  line-height: 1.22;
+  color: var(--ink);
+}
+.audit-offer > p + p, .report-context { max-width: 62ch; margin: 1rem 0 0; color: var(--sub); }
+.audit-offer .actions { justify-content: flex-start; margin-top: 1.45rem; }
+.audit-offer .actions a { width: auto; }
+.audit-report { padding-block: 0; scroll-margin-top: calc(var(--header) + 1rem); }
+.report-spread { isolation: isolate; }
+.report-cover {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-items: end;
+  min-height: clamp(10rem, 14vw, 15rem);
+  overflow: hidden;
+  border-radius: .55rem .55rem 0 0;
+  background: #131518;
+  color: white;
+  box-shadow: 0 .23rem .45rem -.32rem #080e20;
+}
+.report-cover img {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 63%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 45% 48%;
+}
+.report-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #131518 37%, rgba(19,21,24,.86) 44%, transparent 67%);
+}
+.report-title {
+  position: relative;
+  z-index: 1;
+  padding: clamp(1.25rem, 2.8vw, 2.6rem);
+}
+.report-title span { font-size: .86rem; color: #dadee8; }
+.report-title h2 {
+  max-width: 15ch;
+  margin-top: .52rem;
+  font-size: clamp(2.2rem, 3.7vw, 4.1rem);
+  font-weight: 500;
+  letter-spacing: -.05em;
+  line-height: .99;
+  color: white;
+}
+.report-pocket { overflow: clip; }
+.audit-report .report-pocket .scoreboard {
+  border: 1px solid #d7dce6;
+  border-top: 0;
+  border-radius: 0 0 .55rem .55rem;
+  color: #151923;
+  background: #f6f7f9;
+}
+.report-context { margin: 0 0 1.25rem; }
+.audit-projects a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.2rem;
+  border-block: 1px solid var(--rule);
+  color: var(--ink);
+  text-decoration: none;
+  font-size: clamp(1.45rem, 2.4vw, 2.3rem);
+  font-weight: 510;
+  letter-spacing: -.04em;
+}
+.audit-projects a:is(:hover, :focus-visible), .audit-projects a span { color: var(--blue); }
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  .report-spread[data-fold="closed"]:not(:focus-within) .scoreboard {
+    transform: translateY(-5rem);
+    clip-path: inset(0 0 88%);
+  }
+  .report-spread[data-fold="opening"] .scoreboard {
+    animation: unfold-report .95s cubic-bezier(.2,.66,.22,1) both;
+  }
+  .report-spread[data-fold="opening"] .report-cover img {
+    animation: settle-cover .95s cubic-bezier(.25,.68,.22,1) both;
+  }
+  @keyframes unfold-report {
+    from { transform: translateY(-5rem); clip-path: inset(0 0 88%); }
+    to { transform: translateY(0); clip-path: inset(0); }
+  }
+  @keyframes settle-cover {
+    from { transform: scale(1.06); }
+    to { transform: scale(1); }
+  }
+  .report-pocket .scoreboard.in-view .score-plot li:nth-child(2) b { animation-delay: .08s; }
+  .report-pocket .scoreboard.in-view .score-plot li:nth-child(3) b { animation-delay: .16s; }
+  .report-pocket .scoreboard.in-view .score-plot li:nth-child(4) b { animation-delay: .24s; }
+  .report-pocket .scoreboard.is-comparing .score-plot li b { animation: none; }
+  .answer-variant { animation: change-answer .34s cubic-bezier(.2,.7,.3,1); }
+  @keyframes change-answer {
+    from { transform: translateY(-.55rem); clip-path: inset(0 0 33%); }
+    to { transform: translateY(0); clip-path: inset(0); }
+  }
+}
+
+@media (max-width: 760px) {
+  .audit-intro { grid-template-columns: 1fr; row-gap: 1.25rem; }
+  .audit-intro h1, .audit-offer { grid-column: 1; }
+  .audit-offer .actions { gap: .8rem 1.2rem; }
+  .report-title h2 { max-width: 11ch; }
+  .report-cover img { width: 69%; object-position: 40% 50%; }
+  .report-cover::after { background: linear-gradient(90deg, #131518 31%, rgba(19,21,24,.88) 45%, rgba(19,21,24,.14) 85%); }
+}
