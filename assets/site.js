@@ -106,11 +106,9 @@
   document.querySelectorAll("[data-open-brief]").forEach((button) =>
     button.addEventListener("click", () => {
       trigger = button;
-      dialog.querySelector("[name=service]").value = location.pathname.includes(
-        "/audit/",
-      )
-        ? "GEO-аудит"
-        : "GEO-продвижение";
+      const service = dialog.querySelector("[name=service]");
+      if (button.dataset.openBrief === "free") service.value = "Бесплатный разбор";
+      else service.value = location.pathname.includes("/audit/") ? "GEO-аудит" : "GEO-продвижение";
       dialog.querySelector(".brief-status").textContent = "";
       dialog.showModal();
     }),
