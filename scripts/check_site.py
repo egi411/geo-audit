@@ -48,7 +48,10 @@ for f in files:
    assert not re.search('дуба[йяеию]', s, re.I), 'Dubai belongs only to the fashion case'
   if name=='audit/index.html':
    assert all(s.count(f'data-measure="{key}"')==1 for key in ('name','source','link'))
-   assert 'Учебный отчёт' in s and '300 вопросов' in s and 'scoreboard' in s
+   assert 'Учебный отчёт' in s and '100 промптам' in s and 'scoreboard' in s
+   audit_main = s.split('<main id="main">',1)[1].split('</main>',1)[0]
+   assert re.findall(r'href="(\.\./cases/[^"]*)"', audit_main) == ['../cases/'], 'audit should link once to the case directory'
+   assert 'Посмотрите кейсы' in audit_main and 'WINLINE' not in s, 'case details belong on case pages'
   if name.startswith(('blog/','what-is-geo/')):
    for t,a in p.tags:
     if t!='a': continue
