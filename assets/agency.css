@@ -50,7 +50,13 @@
   .coverage-figure figcaption strong, .coverage-figure figcaption p { font-size: .84rem; }
 }
 
-.agency-section { padding-block: var(--section); background: white; color: var(--ink); }
+.agency-section { padding-block: var(--section); color: var(--ink); }
+.demand-story, .agency-questions { background: #fff; }
+.service-index { background: var(--paper-blue); }
+.research-feature { background: #192237; }
+.research-feature .research-paper { background: transparent; border-radius: 0; padding: 0; }
+.work-scope { background: var(--paper-gray); }
+.brief-reader { background: white; }
 .agency-grid, .brief-sheet, .research-body, .service-index article, .consult-invite > .wrap {
   display: grid;
   grid-template-columns: var(--columns);
@@ -78,19 +84,46 @@
 .buyer-notebook li span, .buyer-notebook li strong { display: block; }
 .buyer-notebook li strong { margin-top: .18rem; max-width: 35ch; font-size: clamp(1.13rem,1.55vw,1.65rem); font-weight: 480; line-height: 1.23; letter-spacing: -.026em; }
 
-.fashion-canvas { position: relative; isolation: isolate; min-height: clamp(19rem,34vw,34rem); display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; padding: clamp(1.15rem,3vw,3.25rem); border-radius: .65rem; color: #fff; background: #121315; }
-.fashion-canvas > img { position: absolute; z-index: -2; inset: 0 0 0 auto; width: 64%; height: 100%; object-fit: cover; object-position: 49% 48%; filter: grayscale(1); }
-.fashion-canvas::before { position: absolute; content: ''; z-index: -1; inset: 0; background: linear-gradient(90deg,#121315 0%,#121315 29%,#121315ea 35%,#12131522 57%,transparent 70%); }
+.fashion-feature {
+  --sub: #cdd0d6;
+  background: var(--graphite);
+  color: #fff;
+  padding-top: 0;
+}
+.fashion-canvas {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.fashion-canvas > img {
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 0 auto;
+  width: 51%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 49% 48%;
+  filter: grayscale(1);
+}
+.fashion-layout {
+  min-height: clamp(19rem, 33vw, 34rem);
+  padding-block: clamp(1.5rem, 3.5vw, 3.4rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.fashion-title { max-width: 47%; }
 .fashion-label { display: flex; gap: .55rem; align-items: baseline; flex-wrap: wrap; font-size: .9rem; }
 .fashion-label span { color: #d5d6d9; }
 .fashion-title h2 { max-width: 16ch; font-size: clamp(1.6rem,2.5vw,3.25rem); line-height: 1.1; }
-.fashion-title strong { display: block; margin: .22em 0 .08em; font-size: clamp(3.9rem,8.2vw,8.65rem); line-height: .91; font-weight: 520; letter-spacing: -.07em; font-variant-numeric: lining-nums; white-space: nowrap; }
-.fashion-credit { position: absolute; bottom: .8rem; right: .9rem; color: white; background: #191b20c7; padding: .13rem .42rem; border-radius: .2rem; font-size: .7rem; }
-.project-byline { margin-top: 1.35rem; }
+.fashion-title strong { display: block; margin: .22em 0 .08em; font-size: clamp(3.9rem,8.2vw,8.65rem); line-height: .91; font-weight: 520; letter-spacing: -.055em; word-spacing: .12em; font-variant-numeric: lining-nums; white-space: nowrap; }
+.fashion-credit { position: absolute; bottom: .8rem; right: max(var(--edge), calc((100% - var(--page-width)) / 2)); color: white; background: #191b20cf; padding: .13rem .42rem; border-radius: .2rem; font-size: .7rem; }
+.project-byline { padding-top: clamp(1.6rem, 3.5vw, 3.25rem); }
 .project-byline h3 { grid-column: 1 / 6; max-width: 22ch; font-size: clamp(1.55rem,2.2vw,2.5rem); }
 .project-byline > div { grid-column: 7 / -1; }
 .project-byline p, .scope-lead p { color: var(--sub); }
-.project-byline .agency-link { margin-top: .8rem; }
+.project-byline .agency-link { color: #b3c8ff; margin-top: .8rem; }
 
 .scope-lead { max-width: 43rem; margin-bottom: 1.25rem; }
 .scope-lead p { margin-top: .7rem; max-width: 56ch; }
@@ -179,12 +212,19 @@
   .service-index article h3, .service-index article > div, .service-index article .agency-link,
   .agency-questions h2, .agency-questions .question-list,
   .consult-invite > .wrap > div, .consult-invite .btn.primary { grid-column: 1; }
-  .fashion-canvas { min-height: clamp(20rem,83vw,30rem); }
-  .fashion-canvas > img { inset: 0; height: 84%; width: 100%; object-position: center 45%; }
-  .fashion-canvas::before { background: linear-gradient(0deg,#121315 0%,#121315ee 17%,#12131513 69%),linear-gradient(180deg,#121315a1 0%,transparent 28%); }
-  .fashion-label { font-size: .8rem; }
-  .fashion-label span { color: white; }
-  .fashion-credit { top: 2.8rem; bottom: auto; right: auto; left: 1.12rem; }
+  .fashion-canvas { display: grid; }
+  .fashion-canvas > img { position: static; grid-area: 1/1; width: 100%; height: clamp(12rem, 51vw, 20rem); object-position: center 53%; }
+  .fashion-layout { grid-area: 2/1; min-height: 0; padding-block: 1.4rem 0; gap: 1rem; }
+  .fashion-label { font-size: .84rem; }
+  .fashion-title { max-width: none; }
+  .fashion-title strong { margin-top: 0; }
+  .fashion-credit {
+    position: relative;
+    grid-area: 1/1;
+    place-self: end;
+    inset: auto;
+    margin: 0 var(--edge) .6rem 0;
+  }
   .research-paper > footer p { flex: 1 1 100%; }
   .brief-switch { padding: .3rem .5rem; flex-direction: column; }
   .brief-switch label span { padding: .55rem .7rem; border: 0; border-inline-start: 2px solid transparent; }

@@ -140,3 +140,54 @@
 }
 .plot-reading { grid-column: 1/-1; margin: 0; border-top: 1px solid #c7d2e6; padding-top: 1rem; color: #39475e; max-width: 76ch; }
 .fashion-cover img { filter: grayscale(1); }
+
+/* The background paint reaches both viewport edges. The content and sticky
+   table of contents keep their original grid columns. */
+@media screen {
+  .guide-cover, .guide-signals, .guide-evidence,
+  .audit-report, .rival-sheet, .measurement-notes, .audit-projects,
+  .story-cover, .story-flow > section, .reading-body > section, .reading-end,
+  .journal-board, .portfolio-entry {
+    background-color: var(--band, white);
+    border-image: linear-gradient(var(--band, white), var(--band, white)) fill 0 // 0 100vmax;
+  }
+
+  .guide-cover, .guide-evidence, .audit-report, .measurement-notes,
+  .story-cover, .journal-board, .portfolio-fashion { --band: var(--paper-gray); }
+  .guide-signals, .rival-sheet, .audit-projects, .reading-end,
+  .portfolio-winline { --band: var(--paper-blue); }
+
+  .guide-evidence { padding: var(--section) 0; border-radius: 0; }
+  .brand-guide + .question-column { background: white; }
+  .audit-edition .audit-report { padding-block: clamp(1.3rem, 3.8svh, 3rem); }
+  .audit-edition .answer-lab { background: white; }
+  .audit-edition .audit-focus { background: var(--paper-blue); }
+  .audit-projects { padding-block: 1.1rem; }
+  .brief-stage { background: #1948cd; }
+
+  .story-fashion .story-cover { --band: var(--graphite); --ink: white; --sub: #cdd0d6; color: var(--ink); }
+  .story-fashion .story-cover .nda-stamp { color: white; border-color: #a6abb2; }
+  .story-winline .story-cover { --band: var(--paper-blue); }
+  .story-flow > section, .reading-body > section {
+    margin-block: 0;
+    padding-block: clamp(1.65rem, 4.4svh, 3.4rem);
+    border-radius: 0;
+  }
+  .story-flow > section:nth-child(even),
+  .reading-body > section:nth-of-type(even) { --band: var(--paper-gray); }
+  .case-spread .story-flow > .story-interlude { --band: var(--paper-blue); }
+  .case-contents, .reading-index { z-index: 1; }
+  .studio-article-head { background: var(--paper-blue); }
+  .document-lead { background: var(--paper-gray); }
+  .reading-edition { padding-block: 0; }
+  .reading-index { margin-block: clamp(1.65rem, 4.4svh, 3.4rem); }
+  .reading-end { padding-block: 1.6rem; }
+  .reading-end :is(.story-next, .a-article-cta) { padding-block: 0; }
+
+  .journal-hub, .portfolio-index { padding-bottom: 0; }
+  .journal-board, .portfolio-entry { padding-block: clamp(1.8rem, 5svh, 4rem); }
+  .journal-entry { background-color: white; }
+  .entry-prism { background-color: var(--paper-blue); }
+  .journal-entry:not(.entry-prism) .journal-entry-copy { padding: .8rem .9rem .8rem 0; }
+  .portfolio-list { gap: 0; }
+}
