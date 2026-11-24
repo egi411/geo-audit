@@ -80,7 +80,7 @@
   );
   document
     .querySelectorAll(
-      ".service-figure, .project-intro, .recommendation-map",
+      ".service-figure, .project-intro, .audit-case, .scoreboard",
     )
     .forEach((el) => observer.observe(el));
 })();
