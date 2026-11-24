@@ -70,7 +70,7 @@ def observation_figure():
       <div class="report-layout">{comparison_bars()}<div class="url-count"><b>{UNIQUE_URLS}</b><span>разных URL бренда<br>в источниках</span></div></div>
       <table class="report-table"><caption>Как читать показатели</caption><thead><tr><th scope="col">Показатель</th><th scope="col">Результат</th><th scope="col">Что учитывали</th></tr></thead><tbody>{table}</tbody></table>
       <p class="report-note">Один вопрос учитывается один раз в каждом показателе. Упоминания и источники могут пересекаться. Название клиента и исходные запросы закрыты по NDA.</p></div>
-      <a class="edition-link" href="{{PRE}}index.html#case-fashion">Результаты проекта за шесть месяцев ↗</a></div></section>'''
+      <a class="edition-link" href="{{PRE}}cases/#case-fashion">Результаты проекта за шесть месяцев ↗</a></div></section>'''
 
 
 def frequency_figure():

@@ -7,6 +7,7 @@
 - [GEO-аудит](https://egi411.github.io/geo-audit/audit/): AI-видимость, конкуренты и образ бренда.
 
 ## Материалы
+- [Кейсы](https://egi411.github.io/geo-audit/cases/): презентации проектов WINLINE и модного бренда под NDA.
 - [Зачем бренду GEO](https://egi411.github.io/geo-audit/why-geo/): бизнес-смысл и применимость.
 - [Что такое GEO](https://egi411.github.io/geo-audit/what-is-geo/): определение и отличия от SEO/AEO.
 - [Блог](https://egi411.github.io/geo-audit/blog/): выбор бренда и рекомендации нейросетей.
@@ -14,7 +15,7 @@
 - [Почему ИИ рекомендует конкурентов](https://egi411.github.io/geo-audit/blog/why-ai-recommends-competitors/): как понимать такой ответ.
 
 ## Контакты и данные
-- [Контакты](https://egi411.github.io/geo-audit/contacts.html): каналы отправки пока не подключены, бриф сохраняется локально.
+- [Реквизиты владельца](https://egi411.github.io/geo-audit/privacy.html#operator): информация об ИП и адрес электронной почты.
 - [Конфиденциальность](https://egi411.github.io/geo-audit/privacy.html)
 - [Обработка данных](https://egi411.github.io/geo-audit/consent.html)
 
