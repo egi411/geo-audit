@@ -37,12 +37,25 @@
   const film = home?.querySelector("[data-line-src]");
   if (film && "IntersectionObserver" in window && film.canPlayType("video/mp4")) {
     const narrowFrame = matchMedia("(max-width: 600px)");
+    const sequence = home.querySelector(".press-sequence");
+    const showFrame = () => {
+      if (!sequence || !Number.isFinite(film.duration)) return;
+      const step = Math.min(sequence.children.length - 1,
+        Math.floor(film.currentTime / film.duration * sequence.children.length));
+      sequence.hidden = !film.classList.contains("is-ready") || film.ended;
+      for (const [index, note] of Array.from(sequence.children).entries()) {
+        note.hidden = index !== step;
+      }
+    };
     let inView = false;
     const syncFilm = () => {
       const still = reducedMotion.matches || navigator.connection?.saveData;
       if (still || !inView || document.hidden) {
         film.pause();
-        if (still) film.classList.remove("is-ready");
+        if (still) {
+          film.classList.remove("is-ready");
+          if (sequence) sequence.hidden = true;
+        }
         return;
       }
       const src = narrowFrame.matches ? film.dataset.lineMobile : film.dataset.lineSrc;
@@ -52,8 +65,16 @@
       }
       if (!film.ended) film.play().catch(() => {});
     };
-    film.addEventListener("playing", () => film.classList.add("is-ready"));
-    film.addEventListener("error", () => film.classList.remove("is-ready"));
+    film.addEventListener("playing", () => {
+      film.classList.add("is-ready");
+      showFrame();
+    });
+    film.addEventListener("timeupdate", showFrame);
+    film.addEventListener("ended", showFrame);
+    film.addEventListener("error", () => {
+      film.classList.remove("is-ready");
+      if (sequence) sequence.hidden = true;
+    });
     new IntersectionObserver(([entry]) => {
       inView = entry.isIntersecting;
       syncFilm();

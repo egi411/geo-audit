@@ -22,16 +22,21 @@ CONSULT_SUBJECT = "Заявка%20на%20бесплатную%20консульт
 CONSULT_LINK = f"mailto:{CONSULT_EMAIL}?subject={CONSULT_SUBJECT}&amp;body=Здравствуйте!%20Хочу%20записаться%20на%20бесплатную%20консультацию."
 
 def home_hero():
- return f'''<section class="home-hero line-hero"><div class="wrap line-layout">
- <div class="line-intro"><div class="line-offer"><h1>Как стать брендом, который рекомендуют нейросети?</h1>
- <p class="short-answer">На бесплатной консультации покажем, с каких вопросов покупателей и страниц вашего сайта начать GEO-продвижение.</p>
+ return f'''<section class="home-hero press-hero">
+ <div class="press-film" aria-hidden="true"><picture>
+ <source media="(max-width: 600px)" srcset="{{PRE}}{asset('press-feed-mobile.webp')}">
+ <img src="{{PRE}}{asset('press-feed.webp')}" width="1440" height="810" fetchpriority="high" alt="Крупный план подачи листов в печатной машине">
+ </picture><video muted playsinline preload="none" data-line-src="{{PRE}}{asset('press-feed.mp4')}" data-line-mobile="{{PRE}}{asset('press-feed-mobile.mp4')}"></video></div>
+ <div class="press-layout wrap">
+ <div class="press-offer"><h1>Как стать брендом, который рекомендуют нейросети?</h1>
+ <p class="short-answer">Пока вы ждёте заявку с сайта, покупатель уже спрашивает у нейросети, кому позвонить. Помогаем вашему бренду попасть в его список. На бесплатном разборе покажем, с каких вопросов начать.</p>
  <div class="actions"><a class="btn primary" href="{CONSULT_LINK}" data-open-brief>Получить консультацию ↗</a>
  <a class="text-link" href="{{PRE}}cases/">Кейсы →</a></div></div>
- <div class="line-target"><strong>100<span>%</span></strong><span>Цель продвижения</span><p>Видимость в ответах на вопросы о вашем продукте.</p></div></div>
- <figure class="line-machine"><div class="machine-stage">
- <picture><source media="(max-width: 600px) and (prefers-reduced-motion: no-preference)" srcset="{{PRE}}{asset('neural-line-mobile.webp')}"><img src="{{PRE}}{asset('neural-line.webp')}" width="1280" height="440" fetchpriority="high" alt="Конвейер aileed подаёт карточки вопросов в вычислительный модуль и выводит ответ на экран."></picture>
- <video muted playsinline preload="none" aria-hidden="true" data-line-src="{{PRE}}{asset('neural-line.mp4')}" data-line-mobile="{{PRE}}{asset('neural-line-mobile.mp4')}"></video></div>
- <figcaption><span>Вопрос покупателя</span><span>Нейросеть и источники</span><span>Ответ с брендом</span></figcaption></figure>
+ <div class="press-foot"><div class="press-goal"><strong>100<span>%</span></strong><p>Наша цель — видимость в ответах по выбранным вопросам.</p></div>
+ <a class="press-case" href="{{PRE}}cases/fashion/"><span>Из кейса модного бренда <b aria-hidden="true">↗</b></span>
+ <strong class="press-result">ChatGPT и Perplexity назвали марку первой в ответах о покупке изделия ручной работы.</strong>
+ <span class="press-sequence" aria-hidden="true" hidden>
+ <i>Запрос без названия бренда</i><i>Изделие ручной работы в Дубае</i><i>В ответе появилась марка</i></span></a></div>
  </div></section>'''
 
 
@@ -61,8 +66,8 @@ def closing(audit=False):
 
 def services(question, answer):
  options=[
-  ('audit/','GEO-аудит','Узнайте, в каких ответах появляется ваш бренд, что о нём говорят и кого предлагают рядом.','Что входит в аудит'),
-  ('why-geo/#investment','GEO-продвижение','Покупатель спрашивает про сроки, совместимость или условия. Дайте ему повод включить ваш продукт в список и посмотреть предложение.','Когда нужно продвижение')]
+  ('audit/','GEO-аудит','Если клиенты уже спрашивают о вас в ИИ, начните с аудита. Вы увидите исходные ответы, соседние бренды и страницы, на которые ведут ссылки. По ним команда сможет проверить конкретное обещание о цене, сроке или комплектации.','Что входит в аудит'),
+  ('why-geo/#investment','GEO-продвижение','Если по важным для бизнеса вопросам раз за разом предлагают других, есть повод обсуждать продвижение. Выбираем с вами продукт и круг покупателей, для которых он подходит. Результат оцениваем по изменениям в ответах и по доступным данным о переходах.','Когда нужно продвижение')]
  figures=['<div class="service-figure audit-mini"><span class="mini-caption">GEO-аудит WINLINE</span><div class="audit-stats"><span><b>300</b> вопросов</span><i>×</i><span><b>5</b> моделей</span><i>×</i><span><b>10</b> прогонов</span></div></div>',
           '<div class="service-figure intent-mini"><span class="mini-caption">Пример выбора подрядчика</span><div class="query-slip">Кто спроектирует свет для отеля?</div><div class="proof-slip"><span aria-hidden="true">↳</span><span>Портфолио бюро<small>Освещение гостиниц</small></span></div></div>']
  items=[]
@@ -73,18 +78,47 @@ def services(question, answer):
 
 def buyer_scenarios():
  examples=[
-  ('b2b','Услуги для бизнеса','Кто спроектирует освещение для небольшого отеля?','Заказчику важно увидеть бюро с опытом в гостиницах. Так он решает, у кого запросить портфолио.','scene-hotel','Архитектурный макет отеля с подсветкой фасада и гостевых комнат'),
-  ('retail','Товары','Какую кофемолку выбрать для эспрессо на маленькой кухне?','Покупатель ищет подходящую модель. Размер корпуса и качество помола для него важнее известности марки.','scene-grinder','Компактная металлическая кофемолка для эспрессо на кухонной столешнице'),
-  ('saas','SaaS','Какой сервис записи подойдёт двум салонам с общей базой клиентов?','Владельцу нужны два расписания и одна клиентская база. Если в ответе есть только цена подписки, ему придётся искать информацию о филиалах отдельно.','scene-booking','Планшет с расписанием приёмов на стойке салона')]
+  ('b2b','Услуги для бизнеса','Кто спроектирует освещение для небольшого отеля?','Владелец отеля ищет бюро, которое уже работало с гостиничными номерами и лобби. Если нейросеть приводит похожий проект и даёт ссылку на портфолио, у заказчика появляется конкретный повод позвонить.','scene-hotel','Архитектурный макет отеля с подсветкой фасада и гостевых комнат'),
+  ('retail','Товары','Какую кофемолку выбрать для эспрессо на маленькой кухне?','Покупатель ограничен местом под навесным шкафом. Он сравнит высоту корпуса, настройки помола и цену. Марка может быть ему знакома, но в магазин он перейдёт за конкретной моделью, которая поместится на кухне.','scene-grinder','Компактная металлическая кофемолка для эспрессо на кухонной столешнице'),
+  ('saas','SaaS','Какой сервис записи подойдёт двум салонам с общей базой клиентов?','Администраторы работают по разным адресам, а клиент хочет записываться в оба салона. Владельцу важно узнать, увидят ли сотрудники общую историю визитов и сколько стоит второй филиал. От этого зависит, какой сервис он возьмёт на пробу.','scene-booking','Планшет с расписанием приёмов на стойке салона')]
  choices=[]; panels=[]
  for i,(key,label,prompt,comment,photo,alt) in enumerate(examples):
   choices.append(f'<label><input type="radio" name="buyer" value="{key}"'+(' checked' if i==0 else '')+f'><span>{label}</span></label>')
   art=scene_image(photo,alt,'(max-width: 700px) 100vw, (max-width: 1400px) 82vw, 1200px')
   panels.append(f'<figure class="buyer-example" data-buyer="{key}"><div class="buyer-photo" data-scene>{art}</div><figcaption><span class="prompt-label">Пример запроса</span><blockquote>{prompt}</blockquote><p>{comment}</p></figcaption></figure>')
- return chapter('buyer-stage',headline('Как покупатель выбирает бренд в ИИ?','Покупатель описывает задачу своими словами. Для отеля, магазина и онлайн-сервиса короткий список выглядит по-разному.')+'<div class="scenario-view" id="business"><fieldset class="buyer-controls"><legend>Сфера бизнеса</legend>'+''.join(choices)+'</fieldset><div class="buyer-examples">'+''.join(panels)+'</div></div>','value')
+ return chapter('buyer-stage',headline('Как покупатель выбирает бренд в ИИ?','Клиент ещё не знает вашего названия. Зато он знает, для чего ему нужен продукт, сколько места есть на кухне или сколько филиалов у его компании. Посмотрите, как одна такая деталь меняет выбор.')+'<div class="scenario-view" id="business"><fieldset class="buyer-controls"><legend>Сфера бизнеса</legend>'+''.join(choices)+'</fieldset><div class="buyer-examples">'+''.join(panels)+'</div></div>','value')
 
-main=home_hero()+buyer_scenarios()
-main+=services('Аудит или продвижение?','Аудит покажет, что покупатели видят сейчас. Продвижение помогает бренду появляться в ответах о тех товарах и услугах, которые он продаёт.')
+def home_projects():
+ return chapter('home-projects', headline('Что меняется для бизнеса?', 'Один клиент хотел, чтобы покупатель нашёл его изделия, ещё не зная названия марки. Другому нужно было понять, чьи страницы нейросети показывают рядом с его именем.')+f'''
+ <div class="evidence-pair">
+ <article class="fashion-evidence">
+ <figure class="evidence-photo"><img src="{{PRE}}{asset('shoe-editorial.webp')}" width="1440" height="960" loading="lazy" alt="Чёрный кожаный лофер"><figcaption>Иллюстрация к кейсу</figcaption></figure>
+ <div class="evidence-copy"><span>Модный бренд · NDA</span><h3>Можно ли найти марку по описанию вещи?</h3>
+ <p class="short-answer">К пятому месяцу ChatGPT и Perplexity назвали клиента первым в ответах о покупке изделия ручной работы в Дубае. За полгода на два сайта бренда пришло больше 10 000 переходов из нейросетей. Около 1 500 из них пришлись на вопросы без названия марки.</p>
+ {arrow_link('cases/fashion/', 'Прочитать историю бренда')}</div></article>
+ <article class="audit-evidence"><img src="{{PRE}}{asset('cases/winline.svg')}" width="483" height="116" alt="WINLINE" loading="lazy">
+ <p class="evidence-stat">15 000 <small>замеров в пяти моделях</small></p>
+ <div class="evidence-copy"><h3>Куда ИИ отправляет читателя за условиями?</h3>
+ <p class="short-answer">Когда нейросеть упоминает WINLINE, за условиями акции она может отправить читателя на сторонний сайт. В исследовании мы отдельно проверили название в ответе, ссылку и страницу, на которую она ведёт. У команды теперь есть исходные ответы и рекомендации по 119 адресам. Редактор может открыть вопрос о регистрации и увидеть, какую страницу предложила модель.</p>
+ {arrow_link('cases/winline/', 'Посмотреть исследование WINLINE')}</div></article></div>''', 'projects')
+
+
+def home_measurement():
+ return chapter('home-measurement', headline('Как понять, дошёл ли покупатель до сайта?', 'Допустим, нейросеть назвала вашу компанию в числе трёх подрядчиков. Чтобы оценить пользу для бизнеса, стоит проследить, куда человек может перейти и что сделает дальше.')+'''
+ <dl class="outcome-list">
+ <div><dt>Имя в ответе</dt><dd>Прочитайте фразу целиком. Модель может предложить ваше бюро для конкретного проекта, а может просто перечислить знакомые ей компании. В отчёте видно, за что вас рекомендуют и с кем сравнивают.</dd></div>
+ <div><dt>Адрес в источниках</dt><dd>За названием может стоять ссылка на обзор посредника. Откройте адрес и проверьте, ведёт ли он на вашу страницу, есть ли там нужный товар или подходящий проект в портфолио.</dd></div>
+ <div><dt>Переход и обращение</dt><dd>В веб-аналитике можно увидеть часть визитов из ИИ и последующие заявки. Если человек вернулся позже по названию или позвонил напрямую, уточнить источник знакомства помогает разговор с клиентом.</dd></div></dl>''', 'from-answer')
+
+
+def home_consultation():
+ return chapter('brief-stage', headline('Что разберём на бесплатной консультации?', 'Возьмём продукт, который вы хотите продавать чаще, и вопрос, с которым покупатель приходит к вашей команде. Обсудим, где у него возникает выбор, с какой страницы начать и по чему вы поймёте, что продвижение приносит пользу.')+f'''
+ <a class="action-pill" href="{CONSULT_LINK}" data-open-brief>Записаться на консультацию <span aria-hidden="true">↗</span></a>''', 'brief')
+
+
+main=home_hero()+buyer_scenarios()+home_projects()
+main+=services('Аудит или продвижение?', 'Выбор зависит от того, что вам нужно решить сейчас. Разобраться, как нейросети описывают компанию, можно отдельным аудитом. Для работы над присутствием по выбранной теме есть GEO-продвижение.')
+main+=home_measurement()
 commonfaq=[('Можно гарантировать рекомендацию нейросети?','Нет. Даже один покупатель может получить другой список, когда уточнит город, бюджет или требования к продукту.'),('GEO заменяет SEO?','Нет. SEO помогает покупателю найти вашу страницу через поиск. GEO помогает ему встретить ваш бренд, когда он просит нейросеть сравнить варианты.'),('Упоминание бренда уже означает продажу?','Покупатель может увидеть знакомое название и уйти к конкуренту. Продажу подтверждает сделка, а связь с рекомендацией помогают проверить переходы и обращения.'),('Можно начать с отдельного аудита?','Да. Вы получите отчёт и сможете передать его своей команде. Продвижение можно обсудить отдельно.')]
 home_questions,mainfaq=faq(commonfaq)
 # Detail pages.
@@ -186,7 +220,7 @@ def story_shelf(items, heading, journal=False):
   <div class="shelf-words">{meta}<{heading}>{title}</{heading}><p class="short-answer">{answer}</p></div><span class="shelf-arrow" aria-hidden="true">↗</span></a></article>''')
  return '<div class="story-shelf">'+''.join(rows)+'</div>'
 
-main+=home_questions+closing()
+main+=home_questions+home_consultation()
 blog='''<section class="journal-opening"><div class="wrap"><h1>Как работает <span>GEO?</span></h1>
  <p class="short-answer">В блоге разбираем, как нейросети называют компании, ссылаются на сайты и объясняют покупателю свой выбор.</p></div></section>'''+chapter('journal-shelf archive-edition',story_shelf(posts,'h2',journal=True))
 
@@ -233,7 +267,7 @@ def common_header(pre,current):
  <nav class="nav-links" id="navigation" aria-label="Основная навигация">{''.join(links)}</nav>
  <a class="btn nav-cta" href="{CONSULT_LINK}" data-open-brief><span class="desktop-label">Бесплатная консультация</span><span class="mobile-label">Консультация</span><span aria-hidden="true">↗</span></a>
  <button class="menu-toggle" aria-controls="navigation" aria-expanded="false" aria-label="Открыть меню"><span class="menu-bars" aria-hidden="true"></span></button></div></header>'''
-def notice(pre):return '<aside id="cookie-banner" class="cookie-banner a-cookie wrap" aria-labelledby="cookie-title" hidden><div><h2 id="cookie-title">Какие cookie используются?</h2><p class="short-answer">Только необходимые настройки. Аналитика не подключена.</p></div><a href="'+pre+'privacy.html#cookies">Подробнее</a><button type="button" class="btn" data-cookie-accept>Понятно</button></aside>'
+def notice(pre):return '<aside id="cookie-banner" class="cookie-banner a-cookie" aria-labelledby="cookie-title" hidden><div><h2 id="cookie-title">Какие cookie используются?</h2><p class="short-answer">Только необходимые настройки. Аналитика не подключена.</p></div><a href="'+pre+'privacy.html#cookies">Подробнее</a><button type="button" class="btn" data-cookie-accept>Понятно</button></aside>'
 def footer(pre,published):
  groups=[
   ('Услуги', [('','GEO-продвижение'),('audit/','GEO-аудит')]),
@@ -298,9 +332,9 @@ page('','Как стать брендом, который рекомендуют
 page('audit/','Что измеряет GEO-аудит бренда в нейросетях? | aileed','GEO-аудит бренда в нейросетях. Упоминания, сайт в источниках, URL в ответах, доля голоса и место среди конкурентов. Посмотрите пример и состав отчёта.',audit,'2026-11-02',faqs=auditfaq)
 page('why-geo/','Зачем бренду GEO-продвижение? | aileed','Зачем бизнесу GEO-продвижение: видимость, доверие и участие в выборе клиента. Когда оно уместно для B2B, магазинов и сервисов.',why,FIRST_EDITION,faqs=whyfaq)
 page('cases/','Что GEO дало бизнесу? Кейсы продвижения и аудита | aileed','Два кейса с исходными презентациями: модный бренд под NDA и GEO-аудит WINLINE. Переходы из нейросетей, упоминания и цитирование.',case_index(asset),UPDATED)
-case_links = f'''<div class="story-next wrap">
+case_links = f'''<div class="reading-end wrap"><div class="story-next">
  <a class="btn primary" href="{CONSULT_LINK}" data-open-brief>Обсудить свой проект ↗</a>
- <a class="edition-link" href="{{PRE}}cases/">Все кейсы →</a></div>'''
+ <a class="edition-link" href="{{PRE}}cases/">Все кейсы →</a></div></div>'''
 for key, project in PROJECTS.items():
  page(f'cases/{key}/', project['title']+' | aileed', project['lead'],
       case_article(key, asset)+case_links, UPDATED, article=True)
@@ -311,8 +345,8 @@ for (route,title,answer,image,date),text in zip(posts,[geo,mention,competitor]):
  body=f'''<article class="a-article"><header class="studio-article-head"><div class="wrap article-lead">
  <div><h1>{hero_title}</h1><p class="short-answer">{answer}</p>
  </div>
- <div class="editorial-object">{cover}</div></div></header>'''+reading_layout(text,'В этой статье')+'''<div class="wrap a-article-cta">
- <a class="btn" href="{PRE}audit/">Об услуге GEO-аудита <span aria-hidden="true">↗</span></a><a class="text-link" href="{PRE}blog/">Весь блог <span aria-hidden="true">→</span></a></div></article>'''
+ <div class="editorial-object">{cover}</div></div></header>'''+reading_layout(text,'В этой статье')+'''<div class="reading-end wrap"><div class="a-article-cta">
+ <a class="btn" href="{PRE}audit/">Об услуге GEO-аудита <span aria-hidden="true">↗</span></a><a class="text-link" href="{PRE}blog/">Весь блог <span aria-hidden="true">→</span></a></div></div></article>'''
  page(route,title+' | aileed',answer,body,date,True)
 # Preserve necessary legal information and the previously agreed contact status.
 for name,date in [('privacy.html','2026-10-07'),('consent.html','2026-11-02')]:
