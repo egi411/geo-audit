@@ -71,23 +71,18 @@ def audit_opening():
 
 
 def audit_model_ribbon():
- marks = [
-  ('Perplexity', 'perplexity.svg', 'symbol', False),
-  ('Gemini', 'gemini-text.svg', 'wordmark', False),
-  ('DeepSeek', 'deepseek.svg', 'symbol', False),
-  ('Claude', 'claude-lockup.svg', 'wordmark', False),
-  ('Алиса', 'alice-mono.svg', 'symbol', True),
-  ('GigaChat', 'gigachat.svg', 'symbol', False),
-  ('Grok', 'grok-lockup.svg', 'wordmark', False),
-  ('ChatGPT', 'chatgpt.svg', 'symbol', True),
- ]
- items = []
- for name, filename, kind, show_name in marks:
-  label = f'<span aria-hidden="true">{name}</span>' if show_name else ''
-  items.append(f'<li><img class="{kind}" src="{{PRE}}{asset("brands/" + filename)}" alt="{name}">{label}</li>')
- logos = ''.join(items)
- return f'''<div class="model-ribbon" id="neural-networks">
- <div class="model-ribbon-track" role="region" aria-label="Логотипы нейросетей" tabindex="0"><ul role="list">{logos}</ul><ul aria-hidden="true">{logos}</ul></div></div>'''
+ models = (
+  ('ChatGPT', 'chatgpt.svg'), ('Claude', 'claude.svg'), ('Grok', 'grok.svg'),
+  ('Gemini', 'gemini.svg'), ('Алиса', 'alice-mono.svg'), ('GigaChat', 'gigachat.svg'),
+ )
+ logos = ''.join(
+  f'<li><img src="{{PRE}}{asset("brands/" + filename)}" alt="{name}" width="24" height="24"><span aria-hidden="true">{name}</span></li>'
+  for name, filename in models
+ )
+ return f'''<section class="model-ribbon" id="neural-networks" aria-labelledby="audit-models-title">
+ <div class="wrap model-ribbon-layout"><h2 id="audit-models-title">Нейросети в аудите</h2>
+ <div class="model-ribbon-window" role="group" aria-labelledby="audit-models-title" tabindex="0">
+ <ul role="list">{logos}</ul><ul aria-hidden="true">{logos}</ul></div></div></section>'''
 
 
 def metric_sheet():

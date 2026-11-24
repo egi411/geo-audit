@@ -52,6 +52,8 @@ for f in files:
    audit_main = s.split('<main id="main">',1)[1].split('</main>',1)[0]
    assert re.findall(r'href="(\.\./cases/[^"]*)"', audit_main) == ['../cases/'], 'audit should link once to the case directory'
    assert 'Посмотрите кейсы' in audit_main and 'WINLINE' not in s, 'case details belong on case pages'
+   roster = re.search(r'<section class="model-ribbon".*?<ul role="list">(.*?)</ul>', audit_main, re.S)
+   assert roster and re.findall(r'alt="([^"]+)"', roster[1]) == ['ChatGPT','Claude','Grok','Gemini','Алиса','GigaChat'], 'unexpected audit models'
   if name.startswith(('blog/','what-is-geo/')):
    for t,a in p.tags:
     if t!='a': continue
