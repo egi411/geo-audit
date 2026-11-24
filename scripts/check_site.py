@@ -31,20 +31,22 @@ for f in files:
   ids=[a['id'] for t,a in p.tags if 'id' in a];assert len(ids)==len(set(ids)),'duplicate ids'
   assert sum(t=='h1' for t,a in p.tags)==1
   if name in ('cases/fashion/index.html','cases/winline/index.html'):
-   slide_count=10 if 'fashion' in name else 11
-   transcript=re.search(r'<details class="slide-transcript">(.*?)</details>',s,re.S)
-   assert transcript and transcript[1].count('<li>')==slide_count,'incomplete slide transcript'
-   assert s.count('<figure class="deck-slide">')==slide_count,'incomplete slide reader'
+   chapters=re.findall(r'<section id="([^"]+)" class="story-(?:chapter|interlude)',s)
+   assert len(chapters)>=5 and all(f'href="#{anchor}"' in s for anchor in chapters),'case navigation'
+   assert 'slide-reader' not in s,'duplicate case reader'
    headings=re.findall(r'<h[12]>(.*?)</h[12]>',s,re.S)
    assert headings and all('?' not in heading for heading in headings),'case should read as a story'
    assert next(node['headline'] for node in graph if node['@type']=='Article')==headings[0]
   if name=='index.html':
-   film=next(a for t,a in p.tags if t=='video' and 'data-line-src' in a)
-   assert film.get('preload')=='none' and 'src' not in film
-   for key in ('data-line-src','data-line-mobile'):
-    assert (ROOT/urlsplit(film[key]).path).is_file(),'missing hero film'
+   assert not any(t=='video' for t,a in p.tags),'unrelated film in hero'
+   assert 'recommendation-map' in s and 'Perplexity' in s and 'ChatGPT' in s and 'href="cases/fashion/"' in s
+  if name.startswith(('blog/','what-is-geo/')):
    for t,a in p.tags:
-    if t=='source':assert (ROOT/urlsplit(a['srcset']).path).is_file(),'missing responsive poster'
+    if t!='a': continue
+    if urlsplit(a.get('href','')).netloc:
+     assert 'nofollow' in a.get('rel','').split(),'outbound blog source must be nofollow'
+    else:
+     assert 'nofollow' not in a.get('rel','').split(),'internal editorial link must stay followable'
   for field in ['datePublished','dateModified']:
    assert next(a['content'] for t,a in p.tags if t=='meta' and a.get('name')==field)==page[field]
    if field=='datePublished':assert next(a['datetime'] for t,a in p.tags if t=='time' and a.get('itemprop')==field)==page[field]

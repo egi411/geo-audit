@@ -34,56 +34,6 @@
     } else window.addEventListener("resize", fitHero);
   }
 
-  const film = home?.querySelector("[data-line-src]");
-  if (film && "IntersectionObserver" in window && film.canPlayType("video/mp4")) {
-    const narrowFrame = matchMedia("(max-width: 600px)");
-    const sequence = home.querySelector(".press-sequence");
-    const showFrame = () => {
-      if (!sequence || !Number.isFinite(film.duration)) return;
-      const step = Math.min(sequence.children.length - 1,
-        Math.floor(film.currentTime / film.duration * sequence.children.length));
-      sequence.hidden = !film.classList.contains("is-ready") || film.ended;
-      for (const [index, note] of Array.from(sequence.children).entries()) {
-        note.hidden = index !== step;
-      }
-    };
-    let inView = false;
-    const syncFilm = () => {
-      const still = reducedMotion.matches || navigator.connection?.saveData;
-      if (still || !inView || document.hidden) {
-        film.pause();
-        if (still) {
-          film.classList.remove("is-ready");
-          if (sequence) sequence.hidden = true;
-        }
-        return;
-      }
-      const src = narrowFrame.matches ? film.dataset.lineMobile : film.dataset.lineSrc;
-      if (film.getAttribute("src") !== src) {
-        film.classList.remove("is-ready");
-        film.src = src;
-      }
-      if (!film.ended) film.play().catch(() => {});
-    };
-    film.addEventListener("playing", () => {
-      film.classList.add("is-ready");
-      showFrame();
-    });
-    film.addEventListener("timeupdate", showFrame);
-    film.addEventListener("ended", showFrame);
-    film.addEventListener("error", () => {
-      film.classList.remove("is-ready");
-      if (sequence) sequence.hidden = true;
-    });
-    new IntersectionObserver(([entry]) => {
-      inView = entry.isIntersecting;
-      syncFilm();
-    }).observe(film);
-    narrowFrame.addEventListener("change", syncFilm);
-    reducedMotion.addEventListener("change", syncFilm);
-    document.addEventListener("visibilitychange", syncFilm);
-  }
-
   function updateHeader() {
     header.classList.toggle("is-scrolled", scrollY > 16);
   }
@@ -117,67 +67,6 @@
     });
   }
 
-  for (const reader of document.querySelectorAll(".slide-reader")) {
-    const track = reader.querySelector(".slide-track");
-    const controls = reader.querySelector(".deck-controls");
-    const previous = controls.querySelector("[data-back]");
-    const next = controls.querySelector("[data-next]");
-    const count = track.children.length;
-    let index = 0;
-    let target = null;
-    function setIndex(value) {
-      index = value;
-      controls.querySelector("output").value = value + 1 + " / " + count;
-      previous.disabled = value === 0;
-      next.disabled = value === count - 1;
-    }
-    function go(value, smooth = true) {
-      target = Math.max(0, Math.min(value, count - 1));
-      setIndex(target);
-      track.scrollTo({
-        left: target * track.clientWidth,
-        behavior: smooth && !reducedMotion.matches ? "smooth" : "instant",
-      });
-    }
-    previous.addEventListener("click", () => go(index - 1));
-    next.addEventListener("click", () => go(index + 1));
-    track.addEventListener("keydown", (e) => {
-      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key)) return;
-      e.preventDefault();
-      if (e.key === "Home") go(0);
-      else if (e.key === "End") go(count - 1);
-      else go(index + (e.key === "ArrowRight" ? 1 : -1));
-    });
-    for (const name of ["pointerdown", "wheel", "focusin"]) {
-      track.addEventListener(
-        name,
-        () => {
-          target = null;
-        },
-        { passive: true },
-      );
-    }
-    track.addEventListener(
-      "scroll",
-      () => {
-        const current = Math.round(track.scrollLeft / track.clientWidth);
-        if (target !== null && current !== target) return;
-        target = null;
-        if (current !== index) setIndex(current);
-      },
-      { passive: true },
-    );
-    let width = track.clientWidth;
-    if ("ResizeObserver" in window)
-      new ResizeObserver(() => {
-        if (width === track.clientWidth) return;
-        width = track.clientWidth;
-        go(index, false);
-      }).observe(track);
-    controls.hidden = false;
-    setIndex(0);
-  }
-
   if (!("IntersectionObserver" in window)) return;
   const observer = new IntersectionObserver(
     (entries) => {
@@ -191,7 +80,7 @@
   );
   document
     .querySelectorAll(
-      ".service-figure, .project-intro, .slide-reader, .decision-path",
+      ".service-figure, .project-intro, .recommendation-map",
     )
     .forEach((el) => observer.observe(el));
 })();

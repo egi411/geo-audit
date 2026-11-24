@@ -29,5 +29,3 @@ indicator-{name,source,link}.webp + indicator-frames.webp: transparent outputs o
 
 neural-line.mp4 / neural-line-mobile.mp4 / neural-line*.webp — original aileed Blender/Cycles scene, source scripts/art/neural-line.py. Cards in a feeder, optical processing chamber, output rail and screen. The mobile film follows the same run in a tighter crop. Art direction reference for staged machinery: https://booster-compressor.ru/. No assets from the reference used.
 shoe-editorial.webp — generated with ImageGen. Editorial product photograph of an anonymous black leather loafer on a pale plinth in a cool blue studio, raking daylight, no logo. Illustration of the category, not a product photograph from the NDA client.
-
-press-feed.mp4 / press-feed-mobile.mp4 / stills: Three licensed live-action clips edited to a 4.8-second monochrome film. Credit: Kuba Grzybek (https://www.pexels.com/video/11730362/), Everett Bumstead (https://www.pexels.com/video/29975898/) and Dominiquemel16 Ramos (https://www.pexels.com/video/37533329/). License: https://www.pexels.com/license/. The press illustrates a sequence; it is not the client's facility.
