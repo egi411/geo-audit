@@ -34,6 +34,35 @@
     } else window.addEventListener("resize", fitHero);
   }
 
+  const film = home?.querySelector("[data-line-src]");
+  if (film && "IntersectionObserver" in window && film.canPlayType("video/mp4")) {
+    const narrowFrame = matchMedia("(max-width: 600px)");
+    let inView = false;
+    const syncFilm = () => {
+      const still = reducedMotion.matches || navigator.connection?.saveData;
+      if (still || !inView || document.hidden) {
+        film.pause();
+        if (still) film.classList.remove("is-ready");
+        return;
+      }
+      const src = narrowFrame.matches ? film.dataset.lineMobile : film.dataset.lineSrc;
+      if (film.getAttribute("src") !== src) {
+        film.classList.remove("is-ready");
+        film.src = src;
+      }
+      if (!film.ended) film.play().catch(() => {});
+    };
+    film.addEventListener("playing", () => film.classList.add("is-ready"));
+    film.addEventListener("error", () => film.classList.remove("is-ready"));
+    new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      syncFilm();
+    }).observe(film);
+    narrowFrame.addEventListener("change", syncFilm);
+    reducedMotion.addEventListener("change", syncFilm);
+    document.addEventListener("visibilitychange", syncFilm);
+  }
+
   function updateHeader() {
     header.classList.toggle("is-scrolled", scrollY > 16);
   }
@@ -141,7 +170,7 @@
   );
   document
     .querySelectorAll(
-      ".visibility-goal, .service-figure, .project-intro, .slide-reader, .decision-path",
+      ".service-figure, .project-intro, .slide-reader, .decision-path",
     )
     .forEach((el) => observer.observe(el));
 })();

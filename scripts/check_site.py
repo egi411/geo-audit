@@ -30,6 +30,21 @@ for f in files:
   assert not any(t in ('input','textarea','select') and a.get('name') in ('brand','audience','task','service') for t,a in p.tags),'old brief fields'
   ids=[a['id'] for t,a in p.tags if 'id' in a];assert len(ids)==len(set(ids)),'duplicate ids'
   assert sum(t=='h1' for t,a in p.tags)==1
+  if name in ('cases/fashion/index.html','cases/winline/index.html'):
+   slide_count=10 if 'fashion' in name else 11
+   transcript=re.search(r'<details class="slide-transcript">(.*?)</details>',s,re.S)
+   assert transcript and transcript[1].count('<li>')==slide_count,'incomplete slide transcript'
+   assert s.count('<figure class="deck-slide">')==slide_count,'incomplete slide reader'
+   headings=re.findall(r'<h[12]>(.*?)</h[12]>',s,re.S)
+   assert headings and all('?' not in heading for heading in headings),'case should read as a story'
+   assert next(node['headline'] for node in graph if node['@type']=='Article')==headings[0]
+  if name=='index.html':
+   film=next(a for t,a in p.tags if t=='video' and 'data-line-src' in a)
+   assert film.get('preload')=='none' and 'src' not in film
+   for key in ('data-line-src','data-line-mobile'):
+    assert (ROOT/urlsplit(film[key]).path).is_file(),'missing hero film'
+   for t,a in p.tags:
+    if t=='source':assert (ROOT/urlsplit(a['srcset']).path).is_file(),'missing responsive poster'
   for field in ['datePublished','dateModified']:
    assert next(a['content'] for t,a in p.tags if t=='meta' and a.get('name')==field)==page[field]
    if field=='datePublished':assert next(a['datetime'] for t,a in p.tags if t=='time' and a.get('itemprop')==field)==page[field]

@@ -3,7 +3,7 @@
 from pathlib import Path
 import argparse,json,re,html,hashlib
 from xml.sax.saxutils import escape
-from visibility import frequency_figure, observation_figure, instrument
+from visibility import frequency_figure, observation_figure
 from cases import PROJECTS, case_index, case_article
 ROOT=Path(__file__).resolve().parents[1]
 ap=argparse.ArgumentParser();ap.add_argument('--base-url',default='https://egi411.github.io/geo-audit/');args=ap.parse_args();BASE=args.base_url.rstrip('/')+'/'
@@ -22,12 +22,18 @@ CONSULT_SUBJECT = "Заявка%20на%20бесплатную%20консульт
 CONSULT_LINK = f"mailto:{CONSULT_EMAIL}?subject={CONSULT_SUBJECT}&amp;body=Здравствуйте!%20Хочу%20записаться%20на%20бесплатную%20консультацию."
 
 def home_hero():
- return f'''<section class="home-hero"><div class="wrap hero-spread"><div class="hero-copy">
-     <h1>Как стать брендом, который рекомендуют нейросети?</h1>
-     <p class="short-answer">На бесплатной консультации покажем, с каких вопросов покупателей и страниц вашего сайта начать GEO-продвижение уже сейчас.</p>
-     <div class="actions"><a class="btn primary" href="{CONSULT_LINK}" data-open-brief>Записаться на консультацию <span aria-hidden="true">↗</span></a>
-     <a class="text-link" href="{{PRE}}cases/">Кейсы <span aria-hidden="true">↗</span></a></div>
-</div>{instrument()}</div></section>'''
+ return f'''<section class="home-hero line-hero"><div class="wrap line-layout">
+ <div class="line-intro"><div class="line-offer"><h1>Как стать брендом, который рекомендуют нейросети?</h1>
+ <p class="short-answer">На бесплатной консультации покажем, с каких вопросов покупателей и страниц вашего сайта начать GEO-продвижение.</p>
+ <div class="actions"><a class="btn primary" href="{CONSULT_LINK}" data-open-brief>Получить консультацию ↗</a>
+ <a class="text-link" href="{{PRE}}cases/">Кейсы →</a></div></div>
+ <div class="line-target"><strong>100<span>%</span></strong><span>Цель продвижения</span><p>Видимость в ответах на вопросы о вашем продукте.</p></div></div>
+ <figure class="line-machine"><div class="machine-stage">
+ <picture><source media="(max-width: 600px) and (prefers-reduced-motion: no-preference)" srcset="{{PRE}}{asset('neural-line-mobile.webp')}"><img src="{{PRE}}{asset('neural-line.webp')}" width="1280" height="440" fetchpriority="high" alt="Конвейер aileed подаёт карточки вопросов в вычислительный модуль и выводит ответ на экран."></picture>
+ <video muted playsinline preload="none" aria-hidden="true" data-line-src="{{PRE}}{asset('neural-line.mp4')}" data-line-mobile="{{PRE}}{asset('neural-line-mobile.mp4')}"></video></div>
+ <figcaption><span>Вопрос покупателя</span><span>Нейросеть и источники</span><span>Ответ с брендом</span></figcaption></figure>
+ </div></section>'''
+
 
 def chapter(name, content, anchor=''):
  anchor = f' id="{anchor}"' if anchor else ''
@@ -292,8 +298,12 @@ page('','Как стать брендом, который рекомендуют
 page('audit/','Что измеряет GEO-аудит бренда в нейросетях? | aileed','GEO-аудит бренда в нейросетях. Упоминания, сайт в источниках, URL в ответах, доля голоса и место среди конкурентов. Посмотрите пример и состав отчёта.',audit,'2026-11-02',faqs=auditfaq)
 page('why-geo/','Зачем бренду GEO-продвижение? | aileed','Зачем бизнесу GEO-продвижение: видимость, доверие и участие в выборе клиента. Когда оно уместно для B2B, магазинов и сервисов.',why,FIRST_EDITION,faqs=whyfaq)
 page('cases/','Что GEO дало бизнесу? Кейсы продвижения и аудита | aileed','Два кейса с исходными презентациями: модный бренд под NDA и GEO-аудит WINLINE. Переходы из нейросетей, упоминания и цитирование.',case_index(asset),UPDATED)
-for key,project in PROJECTS.items():
- page(f'cases/{key}/',project['title']+' | aileed',project['lead'],case_article(key,asset)+closing(),UPDATED,article=True)
+case_links = f'''<div class="story-next wrap">
+ <a class="btn primary" href="{CONSULT_LINK}" data-open-brief>Обсудить свой проект ↗</a>
+ <a class="edition-link" href="{{PRE}}cases/">Все кейсы →</a></div>'''
+for key, project in PROJECTS.items():
+ page(f'cases/{key}/', project['title']+' | aileed', project['lead'],
+      case_article(key, asset)+case_links, UPDATED, article=True)
 page('blog/','Что важно знать о GEO и AI-видимости? Блог | aileed','Блог aileed для владельцев бизнеса и маркетологов: GEO, рекомендации нейросетей, доверие и выбор бренда.',blog,FIRST_EDITION)
 for (route,title,answer,image,date),text in zip(posts,[geo,mention,competitor]):
  cover=cover_art(image)
