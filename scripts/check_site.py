@@ -8,12 +8,18 @@ ROOT=Path(__file__).resolve().parents[1]
 class Page(HTMLParser):
  def __init__(self):super().__init__();self.tags=[]
  def handle_starttag(self,t,a):self.tags.append((t,dict(a)))
-files=[ROOT/'index.html',ROOT/'audit/index.html',ROOT/'why-geo/index.html',ROOT/'blog/index.html',ROOT/'what-is-geo/index.html',ROOT/'blog/mention-or-recommendation/index.html',ROOT/'blog/why-ai-recommends-competitors/index.html',ROOT/'contacts.html',ROOT/'privacy.html',ROOT/'consent.html']
+files=[ROOT/'index.html',ROOT/'audit/index.html',ROOT/'why-geo/index.html',ROOT/'blog/index.html',ROOT/'what-is-geo/index.html',ROOT/'blog/mention-or-recommendation/index.html',ROOT/'blog/why-ai-recommends-competitors/index.html',ROOT/'cases/index.html',ROOT/'privacy.html',ROOT/'consent.html']
 errors=[]
 for f in files:
  s=f.read_text();p=Page();p.feed(s);name=str(f.relative_to(ROOT))
  try:
-  data=json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',s,re.S).group(1));graph=data['@graph'];page=next(x for x in graph if x['@type']=='WebPage')
+  graph=[json.loads(raw) for raw in re.findall(r'<script type="application/ld\+json">(.*?)</script>',s,re.S)]
+  assert graph and all(node.get('@context')=='https://schema.org' for node in graph),'missing schema context'
+  page=next(node for node in graph if node['@type']=='WebPage')
+  faqs=[node for node in graph if node['@type']=='FAQPage']
+  visible=re.findall(r'<summary>([^<]+)</summary>\s*<div class="faq-answer">\s*<p>([^<]+)</p>',s)
+  questions=[(q['name'],q['acceptedAnswer']['text']) for faq in faqs for q in faq['mainEntity']]
+  assert questions==visible,'FAQ markup differs from visible questions and answers'
   title=re.search('<title>(.*?)</title>',s,re.S).group(1);assert title==page['name'] and '?' in title
   assert next(a['content'] for t,a in p.tags if t=='meta' and a.get('property')=='og:title')==title
   assert next(a['href'] for t,a in p.tags if t=='link' and a.get('rel')=='canonical')==page['url']
@@ -22,7 +28,7 @@ for f in files:
   assert sum(t=='h1' for t,a in p.tags)==1
   for field in ['datePublished','dateModified']:
    assert next(a['content'] for t,a in p.tags if t=='meta' and a.get('name')==field)==page[field]
-   assert next(a['datetime'] for t,a in p.tags if t=='time' and a.get('itemprop')==field)==page[field]
+   if field=='datePublished':assert next(a['datetime'] for t,a in p.tags if t=='time' and a.get('itemprop')==field)==page[field]
   for t,a in p.tags:
    if t=='img':assert a.get('alt'),'missing alt'
    ref=a.get('src','') if t in ['img','script'] else a.get('href','') if t in ['a','link'] else ''
@@ -35,6 +41,7 @@ for f in files:
    assert a.get('author') and a['datePublished']==page['datePublished']
   print(name,'OK')
  except Exception as e:errors.append((name,str(e)));print(name,'FAIL',e)
+assert 'url=privacy.html#operator' in (ROOT/'contacts.html').read_text()
 legacy=(ROOT/'platforms/index.html').read_text()
 assert 'noindex,follow' in legacy and 'url=../why-geo/' in legacy
 for path in [*files,ROOT/'sitemap.xml',ROOT/'llms.txt']:
