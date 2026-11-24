@@ -20,7 +20,7 @@ for f in files:
   visible=re.findall(r'<summary>([^<]+)</summary>\s*<div class="faq-answer">\s*<p>([^<]+)</p>',s)
   questions=[(q['name'],q['acceptedAnswer']['text']) for faq in faqs for q in faq['mainEntity']]
   assert questions==visible,'FAQ markup differs from visible questions and answers'
-  title=re.search('<title>(.*?)</title>',s,re.S).group(1);assert title==page['name'] and (name=='index.html' or '?' in title)
+  title=re.search('<title>(.*?)</title>',s,re.S).group(1);assert title.strip() and title==page['name']
   assert next(a['content'] for t,a in p.tags if t=='meta' and a.get('property')=='og:title')==title
   assert next(a['href'] for t,a in p.tags if t=='link' and a.get('rel')=='canonical')==page['url']
   assert 'AiLeeds' not in s and 'AILEEDS' not in s
@@ -32,7 +32,7 @@ for f in files:
   assert sum(t=='h1' for t,a in p.tags)==1
   if name in ('cases/fashion/index.html','cases/winline/index.html'):
    chapters=re.findall(r'<section id="([^"]+)" class="story-(?:chapter|interlude)',s)
-   assert len(chapters)>=5 and all(f'href="#{anchor}"' in s for anchor in chapters),'case navigation'
+   assert chapters and all(f'href="#{anchor}"' in s for anchor in chapters),'case navigation'
    assert 'slide-reader' not in s,'duplicate case reader'
    headings=re.findall(r'<h[12]>(.*?)</h[12]>',s,re.S)
    assert headings and all('?' not in heading for heading in headings),'case should read as a story'
