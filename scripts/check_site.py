@@ -20,7 +20,7 @@ for f in files:
   visible=re.findall(r'<summary>([^<]+)</summary>\s*<div class="faq-answer">\s*<p>([^<]+)</p>',s)
   questions=[(q['name'],q['acceptedAnswer']['text']) for faq in faqs for q in faq['mainEntity']]
   assert questions==visible,'FAQ markup differs from visible questions and answers'
-  title=re.search('<title>(.*?)</title>',s,re.S).group(1);assert title==page['name'] and '?' in title
+  title=re.search('<title>(.*?)</title>',s,re.S).group(1);assert title==page['name'] and (name=='index.html' or '?' in title)
   assert next(a['content'] for t,a in p.tags if t=='meta' and a.get('property')=='og:title')==title
   assert next(a['href'] for t,a in p.tags if t=='link' and a.get('rel')=='canonical')==page['url']
   assert 'AiLeeds' not in s and 'AILEEDS' not in s
@@ -39,7 +39,13 @@ for f in files:
    assert next(node['headline'] for node in graph if node['@type']=='Article')==headings[0]
   if name=='index.html':
    assert not any(t=='video' for t,a in p.tags),'unrelated film in hero'
-   assert 'recommendation-map' in s and 'Perplexity' in s and 'ChatGPT' in s and 'href="cases/fashion/"' in s
+   assert 'market-examples' in s and 'enquiry-layout' in s and 'measurement-table' not in s
+   assert all(city in s for city in ('Москва','Казань','Екатеринбург'))
+  if name!='cases/fashion/index.html':
+   assert not re.search('дуба[йяеию]', s, re.I), 'Dubai belongs only to the fashion case'
+  if name=='audit/index.html':
+   assert all(s.count(f'data-measure="{key}"')==1 for key in ('name','source','link'))
+   assert 'Учебный отчёт' in s and '300 вопросов' in s and 'scoreboard' in s
   if name.startswith(('blog/','what-is-geo/')):
    for t,a in p.tags:
     if t!='a': continue
