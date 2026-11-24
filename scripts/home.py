@@ -26,16 +26,16 @@ def demand():
 
 
 def fashion_case(asset):
-    return f'''<section class="agency-section fashion-feature"><div class="wrap" id="projects">
+    return f'''<section class="agency-section fashion-feature" id="projects">
     <div class="fashion-canvas"><img src="{asset('shoe-editorial.webp')}" alt="Чёрный кожаный лофер на светлом фоне" width="1440" height="960" loading="lazy">
-    <div class="fashion-label">Кейс продвижения <span>Модный бренд · NDA</span></div>
-    <div class="fashion-title"><h2><strong>10 000+</strong> переходов из нейросетей за полгода</h2></div>
+    <div class="wrap fashion-layout"><div class="fashion-label">Кейс продвижения <span>Модный бренд · NDA</span></div>
+    <div class="fashion-title"><h2><strong>10 000+</strong> переходов из нейросетей за полгода</h2></div></div>
     <small class="fashion-credit">Иллюстрация к кейсу</small></div>
-    <div class="project-byline agency-grid"><h3>Из разговора об изделии в каталог марки</h3>
+    <div class="wrap project-byline agency-grid"><h3>Из разговора об изделии в каталог марки</h3>
     <div><p>У международной марки были сайт бренда и отдельный каталог. Мы подготовили журнальные материалы об изделиях и связали их с карточками товаров. Читатель, который интересовался ручной работой, мог сразу открыть подходящую модель.</p>
     <p>Около 10 000 переходов пришлись на запросы без названия бренда. Так к каталогу пришли люди, которые искали изделие и ещё выбирали марку.</p>
     <a class="agency-link" href="cases/fashion/">Как менялся результат по месяцам <span aria-hidden="true">↗</span></a></div></div>
-    </div></section>'''
+    </section>'''
 
 
 PROMOTION_AREAS = [
