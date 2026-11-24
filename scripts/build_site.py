@@ -23,28 +23,15 @@ CONSULT_SUBJECT = "Заявка%20на%20бесплатную%20консульт
 CONSULT_LINK = f"mailto:{CONSULT_EMAIL}?subject={CONSULT_SUBJECT}&amp;body=Здравствуйте!%20Хочу%20записаться%20на%20бесплатную%20консультацию."
 
 def home_hero():
- examples = [
-  ('shop', 'Магазин', 'Москва', 'Где в Москве купить кофемолку для эспрессо с самовывозом сегодня?', 'scene-grinder', 'Кофемолка на кухонной столешнице'),
-  ('bureau', 'Услуги', 'Казань', 'Кто в Казани спроектирует освещение для гостиницы?', 'scene-hotel', 'Архитектурная модель гостиницы с подсветкой фасада'),
-  ('software', 'Онлайн-сервис', 'Екатеринбург', 'Открываем второй салон в Екатеринбурге. Как вести запись клиентов в одной базе?', 'scene-booking', 'Расписание приёма клиентов на планшете'),
- ]
- controls, views = [], []
- for i,(key,label,city,question,photo,alt) in enumerate(examples):
-  checked = ' checked' if i==0 else ''
-  priority = 'fetchpriority="high"' if i==0 else 'loading="lazy"'
-  controls.append(f'<label><input type="radio" name="market" value="{key}"{checked}><span>{label}</span></label>')
-  views.append(f'''<figure class="market-view" data-market="{key}">
-   <img src="{{PRE}}{asset(photo+"-small.webp")}" srcset="{{PRE}}{asset(photo+"-small.webp")} 720w, {{PRE}}{asset(photo+".webp")} 1440w"
-    sizes="(max-width: 760px) 94vw, 48vw" width="1440" height="960" alt="{alt}" {priority}>
-   <figcaption><small>Пример запроса покупателя · {city}</small><blockquote>{question}</blockquote></figcaption></figure>''')
  return f'''<section class="home-hero market-hero"><div class="market-layout wrap" id="value">
  <div class="market-offer"><h1>Продвижение брендов в нейросетях</h1>
- <p class="short-answer">Покупатели спрашивают Алису и ChatGPT, где заказать товар и кому доверить работу. Помогаем российским компаниям попасть в этот выбор. На бесплатном разборе покажем, с чего начать вашему бренду.</p>
- <div class="actions"><a class="btn primary" href="{CONSULT_LINK}" data-open-brief>Получить консультацию ↗</a>
+ <p class="short-answer">Помогаем покупателям находить вашу компанию в ответах нейросетей, когда они выбирают, у кого купить. На бесплатном разборе покажем, с чего начать продвижение вашего бренда.</p>
+ <div class="actions"><a class="btn primary" href="{CONSULT_LINK}" data-open-brief>Бесплатный разбор ↗</a>
  <a class="text-link" href="{{PRE}}cases/">Наши кейсы →</a></div></div>
- <div class="market-examples" id="business"><fieldset class="market-controls"><legend>Учебные примеры для российского рынка</legend>{''.join(controls)}</fieldset>
- {''.join(views)}</div>
- <div class="visibility-goal"><strong>100<span>%</span></strong><p>Наша цель по видимости бренда в ответах на выбранные вопросы покупателей.</p></div>
+ <figure class="coverage-figure" id="business">
+ <div class="coverage-dial"><div class="coverage-value"><strong>100<span>%</span></strong></div></div>
+ <figcaption><strong>Наша цель по видимости бренда</strong>
+ <p>Доля ответов, в которых нейросети называют ваш бренд по выбранным вопросам покупателей.</p></figcaption></figure>
  </div></section>'''
 
 
