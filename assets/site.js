@@ -101,6 +101,10 @@
     const active = document.querySelector('[data-variant="' + event.target.value + '"] blockquote');
     keepAnswerVisible(active);
   });
+  document.querySelector(".brief-switch")?.addEventListener("change", (event) => {
+    const reader = event.currentTarget.closest(".brief-reader");
+    keepAnswerVisible(reader.querySelector('[data-engagement="' + event.target.value + '"] h3'));
+  });
   const dialog = document.getElementById("brief-dialog");
   let trigger;
   document.querySelectorAll("[data-open-brief]").forEach((button) =>
