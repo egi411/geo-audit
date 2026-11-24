@@ -104,12 +104,10 @@
   const dialog = document.getElementById("brief-dialog");
   let trigger;
   document.querySelectorAll("[data-open-brief]").forEach((button) =>
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (event) => {
+      if (!dialog || typeof dialog.showModal !== "function") return;
+      event.preventDefault();
       trigger = button;
-      const service = dialog.querySelector("[name=service]");
-      if (button.dataset.openBrief === "free") service.value = "Бесплатный разбор";
-      else service.value = location.pathname.includes("/audit/") ? "GEO-аудит" : "GEO-продвижение";
-      dialog.querySelector(".brief-status").textContent = "";
       dialog.showModal();
     }),
   );
@@ -129,32 +127,4 @@
     }
   });
   dialog?.addEventListener("close", () => trigger?.focus());
-  dialog?.querySelector("form").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const brand = form.elements.brand;
-    if (!brand.value.trim()) {
-      brand.setCustomValidity("Укажите бренд или сайт");
-      brand.reportValidity();
-      return;
-    }
-    brand.setCustomValidity("");
-    const data = new FormData(form);
-    const text = `Бриф / aileed\n\nБренд или сайт: ${data.get("brand").trim()}\nУслуга: ${data.get("service")}\nАудитория: ${data.get("audience").trim() || "—"}\nЗадача и конкуренты: ${data.get("task").trim() || "—"}\n\nФайл подготовлен локально. Данные не отправлены.\n`;
-    const url = URL.createObjectURL(
-      new Blob(["\ufeff", text], { type: "text/plain;charset=utf-8" }),
-    );
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "aileed-brief.txt";
-    document.body.append(link);
-    link.click();
-    link.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 15000);
-    dialog.querySelector(".brief-status").textContent =
-      "Бриф подготовлен к скачиванию. Данные не отправлены.";
-  });
-  dialog
-    ?.querySelector("[name=brand]")
-    .addEventListener("input", (e) => e.target.setCustomValidity(""));
 })();

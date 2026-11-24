@@ -7,7 +7,9 @@
 - [GEO-аудит](https://egi411.github.io/geo-audit/audit/): AI-видимость, конкуренты и образ бренда.
 
 ## Материалы
-- [Кейсы](https://egi411.github.io/geo-audit/cases/): презентации проектов WINLINE и модного бренда под NDA.
+- [Кейсы](https://egi411.github.io/geo-audit/cases/): истории двух проектов.
+- [Кейс модного бренда](https://egi411.github.io/geo-audit/cases/fashion/): более 10 000 переходов из нейросетей за полгода.
+- [Кейс WINLINE](https://egi411.github.io/geo-audit/cases/winline/): 15 000 замеров и задачи по 119 страницам.
 - [Зачем бренду GEO](https://egi411.github.io/geo-audit/why-geo/): бизнес-смысл и применимость.
 - [Что такое GEO](https://egi411.github.io/geo-audit/what-is-geo/): определение и отличия от SEO/AEO.
 - [Блог](https://egi411.github.io/geo-audit/blog/): выбор бренда и рекомендации нейросетей.

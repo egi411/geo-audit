@@ -1,58 +1,8 @@
-<dialog id="brief-dialog" aria-labelledby="brief-title">
-      <div class="dialog-head">
-        <h2 id="brief-title">Что указать в брифе?</h2>
-        <button class="dialog-close" aria-label="Закрыть бриф">×</button>
-      </div>
-      <p class="short-answer">
-        Бренд, аудиторию, задачу и основных конкурентов.
-      </p>
-
-      <p class="brief-privacy">
-        Бриф формируется на вашем устройстве и не отправляется нам.
-        <a href="privacy.html">Конфиденциальность</a> ·
-        <a href="consent.html">Обработка данных</a>
-      </p>
-      <form class="brief-form">
-        <label
-          >Бренд или сайт<input
-            name="brand"
-            required
-            maxlength="200"
-            placeholder="Название или example.ru"
-            autocomplete="organization" />
-</label
-        >
-<label
-          >Что вас интересует<select
-            name="service"
-            aria-label="Что вас интересует"
-          >
-            <option>Бесплатный разбор</option>
-            <option>GEO-продвижение</option>
-            <option>GEO-аудит</option>
-          </select>
-</label
-        >
-<label
-          >Кто ваши клиенты?<input
-            name="audience"
-            maxlength="400"
-            placeholder="Продукт, аудитория, география" />
-</label
-        >
-<label
-          >Задача и конкуренты<textarea
-            name="task"
-            maxlength="3000"
-            placeholder="Что важно узнать или изменить?"
-          >
-</textarea>
-</label
-        >
-<button class="btn primary" type="submit">
-          Скачать бриф <span aria-hidden="true">↓</span>
-        </button>
-        <p class="brief-status" role="status" aria-live="polite">
-</p>
-      </form>
-    </dialog>
+<dialog id="brief-dialog" aria-labelledby="brief-title" aria-describedby="consult-intro">
+  <div class="dialog-head"><button type="button" class="dialog-close" aria-label="Закрыть">×</button>
+    <h2 id="brief-title">Как попасть на бесплатную консультацию?</h2></div>
+  <p id="consult-intro" class="short-answer">Оставьте заявку. Мы свяжемся с вами в ближайшее время и проведём бесплатную консультацию.</p>
+  <a class="btn primary consult-mail" href="{CONSULT_LINK}">Оставить заявку по почте <span aria-hidden="true">↗</span></a>
+  <p class="consult-note">Отправьте готовое письмо в почтовом приложении. Можно написать напрямую на <a href="mailto:egorkl2307@gmail.com">egorkl2307@gmail.com</a>.</p>
+  <a class="consult-privacy" href="privacy.html">Как мы используем данные</a>
+</dialog>
