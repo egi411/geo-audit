@@ -70,6 +70,26 @@ def audit_opening():
  <a class="text-link" href="#observations">Посмотреть образец отчёта ↓</a></div></div></header>'''
 
 
+def audit_model_ribbon():
+ marks = [
+  ('Perplexity', 'perplexity.svg', 'symbol', False),
+  ('Gemini', 'gemini-text.svg', 'wordmark', False),
+  ('DeepSeek', 'deepseek.svg', 'symbol', False),
+  ('Claude', 'claude-lockup.svg', 'wordmark', False),
+  ('Алиса', 'alice-mono.svg', 'symbol', True),
+  ('GigaChat', 'gigachat.svg', 'symbol', False),
+  ('Grok', 'grok-lockup.svg', 'wordmark', False),
+  ('ChatGPT', 'chatgpt.svg', 'symbol', True),
+ ]
+ items = []
+ for name, filename, kind, show_name in marks:
+  label = f'<span aria-hidden="true">{name}</span>' if show_name else ''
+  items.append(f'<li><img class="{kind}" src="{{PRE}}{asset("brands/" + filename)}" alt="{name}">{label}</li>')
+ logos = ''.join(items)
+ return f'''<div class="model-ribbon" id="neural-networks">
+ <div class="model-ribbon-track" role="region" aria-label="Логотипы нейросетей" tabindex="0"><ul role="list">{logos}</ul><ul aria-hidden="true">{logos}</ul></div></div>'''
+
+
 def metric_sheet():
  metrics=[
   ('text','Упоминание бренда','Название встречается в основном тексте.','Повтор названия в одном ответе засчитывается один раз. Название только в адресе или в подписи ссылки сюда не входит.'),
@@ -124,7 +144,7 @@ audit_focus = chapter('audit-focus', '''<header><h2>Что аудит даст �
  <p>Отчёт показывает, по каким запросам покупатель встречает вашу компанию и что именно узнаёт о ней. Эти выводы помогают выбрать темы для продвижения и исправить ошибки в описании продукта.</p></header>
  <div class="audit-lenses"><article><h3>Положение среди конкурентов</h3><p>По каким темам вас видят рядом с другими компаниями? Где нейросети называют только конкурента? Отчёт показывает разницу по продуктам и отделяет поиск решения от вопросов об уже знакомом бренде.</p></article>
  <article><h3>Образ бренда</h3><p>Какие достоинства, недостатки и условия описывают нейросети? Сверяем эти утверждения с вашим предложением. Вы увидите, где сведения расходятся и к какому источнику отсылает ответ.</p></article></div>''', 'audit-value')
-audit='<div class="audit-edition">'+audit_opening()+observation_figure(asset('audit-workspace.webp'))+audit_focus+answer_sample()+metric_sheet()+competitor_sheet()+deliverables()
+audit='<div class="audit-edition">'+audit_opening()+audit_model_ribbon()+observation_figure(asset('audit-workspace.webp'))+audit_focus+answer_sample()+metric_sheet()+competitor_sheet()+deliverables()
 x,auditfaq=faq([('Можно ли увидеть реальные ответы из моего аудита?','Да. В приложении доступны тексты, ссылки, даты, модели и статусы замеров. По ним команда может проверить выводы отчёта.'),('Что покажут вопросы без названия компании?','В каких ситуациях ИИ назвал бренд без подсказки. Вопросы с названием мы разбираем отдельно. По ним видно, как ИИ описывает уже известную покупателю компанию.'),('Аудит покажет продажи из ИИ?','Для выводов о продажах нужны данные аналитики и CRM. Аудит показывает содержание ответов, упоминания и ссылки в пределах исследованной выборки.'),('Можно использовать результат со своей командой?','Да. Таблица связывает наблюдения с вопросами и страницами. Редакция или разработчики могут взять задачи в работу.')], 'Вопросы о GEO-аудите', '')
 audit+='<aside class="audit-projects wrap"><a href="{PRE}cases/">Посмотрите кейсы <span aria-hidden="true">→</span></a></aside>'
 audit+=x+closing(True)+'</div>'
