@@ -39,7 +39,12 @@ for f in files:
    assert next(node['headline'] for node in graph if node['@type']=='Article')==headings[0]
   if name=='index.html':
    assert not any(t=='video' for t,a in p.tags),'unrelated film in hero'
-   assert 'market-examples' in s and 'enquiry-layout' in s and 'measurement-table' not in s
+   assert all(id_ in ids for id_ in ('value','business','offers','from-answer','projects','faq','brief'))
+   assert sum(a.get('name')=='market' for t,a in p.tags if t=='input')==3
+   assert sum('data-open-brief' in a for t,a in p.tags if t=='a')>=3
+   assert not any(t=='table' for t,a in p.tags),'audit data belongs on the audit page'
+   cover=urlsplit(next(a['content'] for t,a in p.tags if t=='meta' and a.get('property')=='og:image'))
+   assert (ROOT/'assets'/Path(cover.path).name).is_file(),'missing homepage social image'
    assert all(city in s for city in ('Москва','Казань','Екатеринбург'))
   if name!='cases/fashion/index.html':
    assert not re.search('дуба[йяеию]', s, re.I), 'Dubai belongs only to the fashion case'
