@@ -39,7 +39,10 @@ for f in files:
    assert next(node['headline'] for node in graph if node['@type']=='Article')==headings[0]
   if name=='index.html':
    assert not any(t=='video' for t,a in p.tags),'unrelated film in hero'
-   assert 'market-examples' in s and 'enquiry-layout' in s and 'measurement-table' not in s
+   assert 'market-examples' in s and 'measurement-table' not in s
+   assert all(anchor in ids for anchor in ('scope','offers','projects','winline-study','faq','brief'))
+   choices={a['value'] for t,a in p.tags if t=='input' and a.get('name')=='engagement'}
+   assert choices and choices=={a['data-engagement'] for _,a in p.tags if 'data-engagement' in a}
    assert all(city in s for city in ('Москва','Казань','Екатеринбург'))
   if name!='cases/fashion/index.html':
    assert not re.search('дуба[йяеию]', s, re.I), 'Dubai belongs only to the fashion case'

@@ -5,6 +5,7 @@ import argparse,json,re,html,hashlib
 from xml.sax.saxutils import escape
 from visibility import frequency_figure, observation_figure
 from cases import PROJECTS, case_index, case_article
+from home import FAQ as home_faq, agency_home
 ROOT=Path(__file__).resolve().parents[1]
 ap=argparse.ArgumentParser();ap.add_argument('--base-url',default='https://egi411.github.io/geo-audit/');args=ap.parse_args();BASE=args.base_url.rstrip('/')+'/'
 FIRST_EDITION='2026-11-18'
@@ -38,7 +39,7 @@ def home_hero():
    <figcaption><small>Пример запроса покупателя · {city}</small><blockquote>{question}</blockquote></figcaption></figure>''')
  return f'''<section class="home-hero market-hero"><div class="market-layout wrap" id="value">
  <div class="market-offer"><h1>Продвижение брендов в нейросетях</h1>
- <p class="short-answer">Помогаем покупателям в России находить ваши товары и услуги в Алисе, ChatGPT и других нейросетях. На бесплатной консультации разберём ваш сайт и выберем, с какого направления начать.</p>
+ <p class="short-answer">Покупатели спрашивают Алису и ChatGPT, где заказать товар и кому доверить работу. Помогаем российским компаниям попасть в этот выбор. На бесплатном разборе покажем, с чего начать вашему бренду.</p>
  <div class="actions"><a class="btn primary" href="{CONSULT_LINK}" data-open-brief>Получить консультацию ↗</a>
  <a class="text-link" href="{{PRE}}cases/">Наши кейсы →</a></div></div>
  <div class="market-examples" id="business"><fieldset class="market-controls"><legend>Учебные примеры для российского рынка</legend>{''.join(controls)}</fieldset>
@@ -75,66 +76,7 @@ def closing(audit=False):
  return chapter('brief-stage',headline(question,'На бесплатной консультации покажем, какие вопросы о вашем продукте уже задают покупатели и где стоит начать продвижение.')+f'''
  <a class="action-pill" href="{CONSULT_LINK}" data-open-brief>Записаться на консультацию <span aria-hidden="true">↗</span></a>''','brief')
 
-def services(question, answer):
- options=[
-  ('audit/#observations','GEO-аудит','Узнайте, где покупатели встречают ваш бренд и с кем его сравнивают. Вы получите ответы нейросетей и список страниц, которые стоит доработать в первую очередь. По этому отчёту может работать ваша команда.','Посмотреть образец отчёта'),
-  ('#scope','GEO-продвижение','Выберите продукт или услугу, по которым хотите получать заказы. Мы поможем представить их в каталоге, на страницах услуг и в публикациях, чтобы покупатели могли найти вас, даже когда ищут без названия бренда.','Что входит в продвижение')]
- figures=['<div class="service-figure audit-mini"><span class="mini-caption">GEO-аудит WINLINE</span><div class="audit-stats"><span><b>300</b> вопросов</span><i>×</i><span><b>5</b> моделей</span><i>×</i><span><b>10</b> прогонов</span></div></div>',
-          '<div class="service-figure intent-mini"><span class="mini-caption">Пример выбора подрядчика</span><div class="query-slip">Кому заказать свет для отеля в Казани?</div><div class="proof-slip"><span aria-hidden="true">↳</span><span>Портфолио бюро<small>Освещение гостиниц</small></span></div></div>']
- items=[]
- for (route,name,reason,link),figure in zip(options,figures):
-  fields='<div class="dossier-fields"><span>В отчёте</span><b>Упоминания</b><b>Источники</b><b>Ссылки</b></div>' if route.startswith('audit/') else ''
-  items.append(f'<a class="service-tile" href="{route}">{figure}<div class="service-description">{fields}<strong>{name}</strong><p>{reason}</p></div><span class="tile-action">{link} <span aria-hidden="true">↗</span></span></a>')
- return chapter('service-gallery',headline(question,answer)+'<div class="service-pair" id="from-answer">'+''.join(items)+'</div>','offers')
-
-def promotion_scope():
- return chapter('promotion-scope', f'''<header><h2>Что входит в GEO-продвижение</h2>
- <p>Представим поставщика печей в Самаре. Ему интересны заказы с монтажом, но об этой услуге покупатели узнают только в разговоре с менеджером. Что можно сделать для такого бизнеса?</p></header>
- <div class="scope-spread">
- <figure class="scope-question"><figcaption>Пример запроса покупателя · Самара</figcaption>
- <blockquote>Где заказать печь для пекарни, чтобы её привезли, подключили и взяли на обслуживание?</blockquote>
- <a class="edition-link" href="{CONSULT_LINK}" data-open-brief>Разобрать мой проект <span aria-hidden="true">↗</span></a></figure>
- <div class="scope-delivery"><h3>Что получит поставщик</h3>
- <dl><dt>Подборку печей для небольших пекарен</dt>
- <dd>В карточках укажем размеры, мощность и число противней. Владелец сможет отобрать модели, которые поместятся на кухне.</dd>
- <dt>Страницу о поставке и подключении</dt>
- <dd>Соберём в одном месте условия доставки по Самаре, требования к помещению и порядок вызова мастера. Покупатель увидит, за что отвечает поставщик.</dd>
- <dt>Рассказ о монтаже у клиента</dt>
- <dd>Если у поставщика есть такой проект, по его фотографиям и данным покажем, какую печь выбрали и как прошёл запуск. Из публикации можно будет перейти к этой модели.</dd></dl></div></div>''','scope')
-
-def home_projects():
- return chapter('home-projects', headline('Два проекта aileed', 'Для WINLINE мы разобрали ответы о регистрации и акциях. Для модного бренда связали публикации в журнале с каталогом, чтобы читатели могли перейти к конкретному изделию.')+f'''
- <div class="evidence-pair">
- <article class="audit-evidence"><img src="{{PRE}}{asset('cases/winline.svg')}" width="483" height="116" alt="WINLINE" loading="lazy">
- <p class="evidence-stat">15 000 <small>замеров в пяти нейросетях</small></p>
- <div class="evidence-copy"><h3>Какие страницы WINLINE попадают в ответы</h3>
- <p class="short-answer">Выяснили, в каких ответах нейросети ссылаются на WINLINE, а в каких отправляют к посредникам. В отчёте связали 124 темы со 119 страницами бренда.</p>
- {arrow_link('cases/winline/', 'Кейс WINLINE')}</div></article>
- <article class="fashion-evidence"><figure class="evidence-photo"><img src="{{PRE}}{asset('shoe-editorial.webp')}" width="1440" height="960" loading="lazy" alt="Чёрный кожаный лофер"><figcaption>Иллюстрация к кейсу</figcaption></figure>
- <div class="evidence-copy"><span>Модный бренд · NDA</span><h3>Больше 10 000 переходов из нейросетей</h3>
- <p class="short-answer">Это результат двух сайтов марки за полгода. Около 1 500 переходов пришлись на запросы покупателей, которые искали изделие без названия бренда.</p>
- {arrow_link('cases/fashion/', 'Кейс модного бренда')}</div></article></div>''', 'projects')
-
-
-def home_footer_offer():
- questions=[
-  ('Что разберём на бесплатной консультации?', 'Возьмём один товар или услугу, которые вы хотите продвигать. Посмотрим страницу глазами покупателя и обсудим, где начать работу. Для первого разговора достаточно адреса сайта.'),
-  ('Можно заказать только аудит?', 'Да. Вы получите отчёт с ответами нейросетей и списком страниц для доработки. Внедрение можно поручить своей команде.'),
-  ('У нас несколько филиалов. С какого начать?', 'Выберите город, где хотите получать больше обращений. Например, московской сети с новым филиалом в Туле имеет смысл начать разбор с вопросов покупателей в Туле.'),
-  ('У нас уже есть SEO-подрядчик. Как работать вместе?', 'Если ваш подрядчик уже переделывает каталог, обсудим с ним, какие сведения добавить в карточки. Отдельно договоримся, кто возьмёт на себя тексты и публикацию.'),
-  ('От чего зависит стоимость продвижения?', 'Важны размер каталога, география и состояние сайта. Если описание товара уже есть, его можно дополнить. Для новой линейки может понадобиться целый раздел. Обсудим объём на консультации.'),
-  ('Как быстро видны изменения?', 'В проекте модного бренда нейросети верно описывали компанию уже в первый месяц. Переходы мы считали за полгода. Это сроки одного проекта. Чтобы дать ориентир для вашего, сначала посмотрим, как покупатели находят вас сегодня.')
- ]
- entries=faq_entries(questions)
- block=chapter('enquiry-section',f'''<header><h2>С чего начать работу?</h2></header>
- <div class="enquiry-layout"><div class="question-list">{entries}</div>
- <aside id="brief"><h3>Обсудим ваш проект?</h3><p>Оставьте заявку. Мы свяжемся с вами в ближайшее время и проведём бесплатную консультацию.</p>
- <a class="btn primary" href="{CONSULT_LINK}" data-open-brief>Оставить заявку ↗</a></aside></div>''','faq')
- return block,questions
-
-
-main=home_hero()+services('Аудит или продвижение?', 'Аудит подойдёт, если вам нужен план для своей команды. Продвижение можно начать с одной услуги или линейки товаров, для которой вы ищете новых покупателей.')+promotion_scope()+home_projects()
-home_questions,mainfaq=home_footer_offer()
+main = agency_home(home_hero(), asset, CONSULT_LINK, faq_entries)
 
 # Detail pages.
 why=hero('Зачем бренду <span>GEO?</span>','Чтобы покупатель учитывал вашу компанию, когда спрашивает у нейросети, к кому обратиться или что купить.','Если нейросеть назвала двух конкурентов, именно их предложения клиент может открыть первыми. Стоит узнать, попадаете ли вы в этот список и что о вас говорят.',('Посмотреть пример аудита','audit/#observations'),('Упоминания и цитирования','#visibility'))
@@ -239,7 +181,6 @@ def story_shelf(items, heading, journal=False):
   <div class="shelf-words">{meta}<{heading}>{title}</{heading}><p class="short-answer">{answer}</p></div><span class="shelf-arrow" aria-hidden="true">↗</span></a></article>''')
  return '<div class="story-shelf">'+''.join(rows)+'</div>'
 
-main+=home_questions
 blog='''<section class="journal-opening"><div class="wrap"><h1>Как работает <span>GEO?</span></h1>
  <p class="short-answer">В блоге разбираем, как нейросети называют компании, ссылаются на сайты и объясняют покупателю свой выбор.</p></div></section>'''+chapter('journal-shelf archive-edition',story_shelf(posts,'h2',journal=True))
 
@@ -340,14 +281,15 @@ def write(route,title,desc,body,published,article=False,faqs=None):
   graph.append({'@type':'BreadcrumbList','itemListElement':crumbs})
 
  structured=''.join('<script type="application/ld+json">'+json.dumps({'@context':'https://schema.org',**node},ensure_ascii=False)+'</script>' for node in graph)
- head='<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+html.escape(title)+'</title><meta name="description" content="'+html.escape(desc)+'"><meta name="author" content="aileed"><meta name="datePublished" content="'+published+'"><meta name="dateModified" content="'+UPDATED+'"><meta name="robots" content="index,follow,max-image-preview:large"><meta name="theme-color" content="#101113"><link rel="canonical" href="'+url+'"><link rel="describedby" type="text/plain" href="'+BASE+'llms.txt"><meta property="og:title" content="'+html.escape(title)+'"><meta property="og:description" content="'+html.escape(desc)+'"><meta property="og:url" content="'+url+'"><meta property="og:site_name" content="aileed"><meta property="og:locale" content="ru_RU"><meta property="og:type" content="'+('article' if article else 'website')+'"><meta property="og:image" content="'+BASE+asset(social)+'"><meta name="twitter:card" content="summary_large_image"><link rel="icon" type="image/svg+xml" href="'+pre+asset('mark.svg')+'"><link rel="stylesheet" href="'+pre+asset('paper.css')+'">'+structured+''.join('<script src="'+pre+asset(f)+'" defer></script>' for f in ['site.js','privacy.js','dashboard.js'])+'</head>'
+ home_styles = '<link rel="stylesheet" href="'+asset('agency.css')+'">' if not route else ''
+ head='<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+html.escape(title)+'</title><meta name="description" content="'+html.escape(desc)+'"><meta name="author" content="aileed"><meta name="datePublished" content="'+published+'"><meta name="dateModified" content="'+UPDATED+'"><meta name="robots" content="index,follow,max-image-preview:large"><meta name="theme-color" content="#101113"><link rel="canonical" href="'+url+'"><link rel="describedby" type="text/plain" href="'+BASE+'llms.txt"><meta property="og:title" content="'+html.escape(title)+'"><meta property="og:description" content="'+html.escape(desc)+'"><meta property="og:url" content="'+url+'"><meta property="og:site_name" content="aileed"><meta property="og:locale" content="ru_RU"><meta property="og:type" content="'+('article' if article else 'website')+'"><meta property="og:image" content="'+BASE+asset(social)+'"><meta name="twitter:card" content="summary_large_image"><link rel="icon" type="image/svg+xml" href="'+pre+asset('mark.svg')+'"><link rel="stylesheet" href="'+pre+asset('paper.css')+'">'+home_styles+structured+''.join('<script src="'+pre+asset(f)+'" defer></script>' for f in ['site.js','privacy.js','dashboard.js'])+'</head>'
  content=head+'<body class="paper-site" itemscope itemtype="https://schema.org/WebPage" itemid="'+url+'#page">'+common_header(pre,route)+notice(pre)+'<main id="main">'+body.replace('{PRE}',pre)+'</main>'+footer(pre,published)+dialog.replace('href="privacy.html"','href="'+pre+'privacy.html"').replace('href="consent.html"','href="'+pre+'consent.html"')+'<noscript><p class="cookie-noscript">Аналитика и рекламные cookie не используются.</p></noscript></body></html>'
  # Fragment-only primary destinations belong to the current page.
  content=content.replace('href="'+pre+'#','href="#')
  file.parent.mkdir(parents=True,exist_ok=True);file.write_text("\n".join(line.rstrip() for line in content.replace("><",">\n<").splitlines())+"\n")
 PAGES=[]
 def page(route,title,desc,body,date,article=False,faqs=None):write(route,title,desc,body,date,article,faqs);PAGES.append((route,date))
-page('','Продвижение в нейросетях для бизнеса в России | aileed','GEO-продвижение для российских компаний. Помогаем покупателям находить ваши товары и услуги в нейросетях. Запишитесь на бесплатную консультацию.',main,'2026-10-07',faqs=mainfaq)
+page('','Продвижение в нейросетях для бизнеса в России | aileed','GEO-продвижение для российских компаний. Помогаем покупателям находить ваши товары и услуги в нейросетях. Запишитесь на бесплатную консультацию.',main,'2026-10-07',faqs=home_faq)
 page('audit/','Что измеряет GEO-аудит бренда в нейросетях? | aileed','GEO-аудит бренда в нейросетях. Упоминания, сайт в источниках, URL в ответах, доля голоса и место среди конкурентов. Посмотрите пример и состав отчёта.',audit,'2026-11-02',faqs=auditfaq)
 page('why-geo/','Зачем бренду GEO-продвижение? | aileed','Зачем бизнесу GEO-продвижение: видимость, доверие и участие в выборе клиента. Когда оно уместно для B2B, магазинов и сервисов.',why,FIRST_EDITION,faqs=whyfaq)
 page('cases/','Что GEO дало бизнесу? Кейсы продвижения и аудита | aileed','Результаты продвижения модного бренда под NDA и GEO-аудита WINLINE. Переходы из нейросетей, упоминания и цитирование.',case_index(asset),UPDATED)

@@ -80,7 +80,7 @@
   );
   document
     .querySelectorAll(
-      ".service-figure, .project-intro, .audit-case, .scoreboard",
+      ".service-figure, .project-intro, .audit-case, .scoreboard, .buyer-notebook, .research-split",
     )
     .forEach((el) => observer.observe(el));
 })();
