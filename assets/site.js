@@ -64,47 +64,6 @@
   });
   const desktop = matchMedia("(min-width:769px)");
   desktop.addEventListener("change", closeMenu);
-  if (
-    "IntersectionObserver" in window &&
-    !matchMedia("(prefers-reduced-motion:reduce)").matches
-  ) {
-    const observer = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        }),
-      { threshold: 0.08 },
-    );
-    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
-    document.documentElement.classList.add("motion-enabled");
-  }
-  // Reveal the changed answer only when the selector is too close to a viewport edge.
-  function keepAnswerVisible(element) {
-    if (!element) return;
-    const box = element.getBoundingClientRect();
-    const header = document.querySelector(".site-header").getBoundingClientRect();
-    const top = header.bottom + 14;
-    const bottom = window.innerHeight - 14;
-    const excerptEnd = box.top + Math.min(box.height, 130);
-    if (box.top < top || excerptEnd > bottom) {
-      window.scrollBy({top: box.top < top ? box.top - top : excerptEnd - bottom, behavior: "instant"});
-    }
-  }
-  document.querySelector(".buyer-controls")?.addEventListener("change", (event) => {
-    const active = document.querySelector('[data-buyer="' + event.target.value + '"] figcaption');
-    keepAnswerVisible(active);
-  });
-  document.querySelector(".sample-choices")?.addEventListener("change", (event) => {
-    const active = document.querySelector('[data-variant="' + event.target.value + '"] blockquote');
-    keepAnswerVisible(active);
-  });
-  document.querySelector(".brief-switch")?.addEventListener("change", (event) => {
-    const reader = event.currentTarget.closest(".brief-reader");
-    keepAnswerVisible(reader.querySelector('[data-engagement="' + event.target.value + '"] h3'));
-  });
   const dialog = document.getElementById("brief-dialog");
   let trigger;
   document.querySelectorAll("[data-open-brief]").forEach((button) =>
@@ -131,4 +90,56 @@
     }
   });
   dialog?.addEventListener("close", () => trigger?.focus());
+
+  const header = document.querySelector(".site-header");
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  const home = document.querySelector(".home-hero");
+  if (home || document.querySelector("#case-directory")) {
+    const moveCaseBookmark = () => {
+      const oldRoute = {
+        "#case-fashion": "fashion/",
+        "#case-winline": "winline/",
+        "#cases": "",
+      };
+      if (!Object.hasOwn(oldRoute, location.hash)) return;
+      const directory = home ? "cases/" : "./";
+      location.replace(
+        new URL(directory + oldRoute[location.hash], document.baseURI),
+      );
+    };
+    moveCaseBookmark();
+    window.addEventListener("hashchange", moveCaseBookmark);
+  }
+  function updateHeader() {
+    header.classList.toggle("is-scrolled", scrollY > 16);
+  }
+  updateHeader();
+  window.addEventListener("scroll", updateHeader, { passive: true });
+
+  // Preserve native details for keyboard activation and for browsers without animations.
+  for (const entry of document.querySelectorAll(".question-list details")) {
+    const panel = entry.querySelector(".faq-answer");
+    let animation;
+    let expanding;
+    entry.querySelector("summary").addEventListener("click", (event) => {
+      if (!panel.animate || reducedMotion.matches) return;
+      event.preventDefault();
+      expanding = animation ? !expanding : !entry.open;
+      const from = entry.open ? panel.getBoundingClientRect().height : 0;
+      animation?.cancel();
+      entry.open = true;
+      const to = expanding ? panel.scrollHeight : 0;
+      animation = panel.animate(
+        [{ height: from + "px" }, { height: to + "px" }],
+        { duration: 260, easing: "cubic-bezier(.22,.75,.23,1)" },
+      );
+      animation.onfinish = () => {
+        entry.open = expanding;
+        animation = null;
+      };
+    });
+    reducedMotion.addEventListener("change", () => {
+      if (reducedMotion.matches) animation?.finish();
+    });
+  }
 })();

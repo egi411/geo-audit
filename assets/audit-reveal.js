@@ -4,6 +4,32 @@
   if (!spread) return;
 
   const board = spread.querySelector(".scoreboard");
+  // Reveal the changed answer only when the selector is too close to a viewport edge.
+  function keepAnswerVisible(element) {
+    if (!element) return;
+    const box = element.getBoundingClientRect();
+    const header = document.querySelector(".site-header").getBoundingClientRect();
+    const top = header.bottom + 14;
+    const bottom = window.innerHeight - 14;
+    const excerptEnd = box.top + Math.min(box.height, 130);
+    if (box.top < top || excerptEnd > bottom) {
+      window.scrollBy({top: box.top < top ? box.top - top : excerptEnd - bottom, behavior: "instant"});
+    }
+  }
+  document.querySelector(".sample-choices")?.addEventListener("change", (event) => {
+    const active = document.querySelector('[data-variant="' + event.target.value + '"] blockquote');
+    keepAnswerVisible(active);
+  });
+
+  if ("IntersectionObserver" in window) {
+    const revealBars = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        board.classList.add("in-view");
+        revealBars.disconnect();
+      }
+    }, { threshold: 0.16 });
+    revealBars.observe(board);
+  }
   const barsFor = key => board.querySelectorAll('[data-measure="' + key + '"] li b');
   let previousMeasure = board.querySelector("input:checked").value;
   board.querySelector(".score-tabs").addEventListener("change", event => {

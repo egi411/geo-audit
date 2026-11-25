@@ -1,31 +1,18 @@
 chatgpt-phone.avif
 Source page: https://powerofgeo.com/
 Source asset: https://cdn.prod.website-files.com/690737c12eaba5388456c2c0/6907558bf0037622118e9814_c5b7d72a1e460c7138c7d0380768a521_chatgpt-phone-new.avif
-Added at the owner's explicit request using their reference, 2026-11-04.
 The screen is an illustrative ChatGPT answer from the reference, not an AiLeeds case study.
 
 chatgpt-phone-ru.webp
-Edited with built-in ImageGen from the phone reference, at the owner's request, 2026-11-04.
+Edited with ImageGen from the phone reference.
 Screen: Russian illustrative buyer prompt about choosing an e-commerce marketing agency, followed by selection criteria.
-This is an illustration, not a recorded ChatGPT result or client case. Generated source is preserved in the Codex image library.
+This is an illustration, not a recorded ChatGPT result or client case.
 
-Aileed November rebrand: aileed-recommendation.webp, aileed-shortlist.webp, aileed-trust.webp — original built-in ImageGen renders. Prompt set and semantic mapping: design.md. Generated originals remain in the Codex image library. WebP delivery conversion uses cwebp.
-
-Quote stage: original built-in ImageGen editorial plates, 2026-11-18. Two isolated solids, split at the transparent gutter for independent geometry, plus an optical disc at two responsive resolutions. Materials and placement are described in design.md.
 The vector quotation emblem is original. The wordmark uses outlines of Onest, with custom spacing. Onest project: https://github.com/simpals/onest (SIL Open Font License).
 
-Interior optical collection, 2026-11-18: studio-lens.webp, studio-shortlist.webp, studio-dialogue.webp. Three original product studies generated together with built-in ImageGen on transparency. Each 724-pixel crop maps to a separate relief field in quote-stage.js. Creative brief and placement are in design.md.
-
-Buyer scenarios: three original generated studio illustrations of architectural lighting, a compact grinder and a salon booking tablet. They accompany hypothetical buyer questions. Optics and answer display are original product studies. cover-prism, cover-mention and cover-choice are crops from an original three-panel optical still life. Local variable font subsets are Onest from Google Fonts, licensed in fonts/OFL.txt.
-
-Copper studio, 2026-11-18 — built-in ImageGen. Responsive WebP plates remove the black studio background at export.
-copper-ribbon.webp + copper-ribbon-small.webp
-Prompt: Produce an ultra-wide horizontal 3:2 photographic CGI master plate for a high-end digital design studio site. Macro advertising shot of one monumental continuous S-folded band of thick smoked optical glass, copper foil embedded at the edges. The sculptural band sweeps from outside the lower-left edge, twists and opens a high loop at the right and exits frame, a visual metaphor of a signal becoming a citation. Film-quality material: deep black glass, cognac amber caustics and refraction, a fine white-hot filament following its geometry, soft warm broad reflections and a bit of brushed copper on one face. In the silhouette there must be meaningful black negative space between passes of the glass. Completely black photography studio with no walls or horizon, shadow falls off to pure near-black toward every edge. The main gesture runs horizontally in the middle 55% of the image; top quarter almost black. Dramatic macro scale, optical polish, rich highlight-to-shadow, restrained exposure, visual weight middle/right. Stylish physical luxury tech campaign, closer to a photographed machined optical object than a sci-fi illustration. No text, UI, logo, numbers, stars, grids, sparks, bubbles or extra floating objects. Palette strictly graphite, copper, champagne. No other hues.
-
-object-text.webp, object-sources.webp, object-url.webp
-Prompt: Create an ultra-wide landscape three-object product photography contact sheet. Strict triptych composition on pure seamless black: three distinct individual 3D artworks of equal importance, separate and completely contained in three equal-width invisible columns. Left third: two huge paired precision machined double quotation marks of brushed champagne steel faced with amber glass. Middle third: a fan of three overlapping squarish smoked-glass thin document plates with a clipped upper corner and three fine parallel engraved lines, rising in a beautiful exploded stack. Right third: two interlocking substantial oblong copper and graphite glass chain links suspended diagonally, with clearly visible holes. Three completely separated still lifes, each centered vertically and horizontally in its own cell with substantial negative space around every object, absolutely no object crosses vertical 1/3 or 2/3 divisions. No dividing lines, borders, cards, letters, characters, numbers, labels, ground, stand or scenery. All use the exact same luxurious advertising still life aesthetic: shot in a dark studio, warm copper rim light from lower right, champagne white softbox grazing upper left, mostly dark materials with controlled luminous edges. Deep amber internal caustics in the glass. Rich tactile cinematic octane render, subtle machining texture, contact shadows, absolutely tack sharp silhouettes; not abstract neon drawings, not graphic icons. Edge pixels almost black. Wide horizontal canvas.
-
-indicator-{name,source,link}.webp + indicator-frames.webp: transparent outputs of scripts/art/audit-model.mjs. Column order is mention, source and URL. The three poses encode the fictitious examples published alongside the visual.
-
-neural-line.mp4 / neural-line-mobile.mp4 / neural-line*.webp — original aileed Blender/Cycles scene, source scripts/art/neural-line.py. Cards in a feeder, optical processing chamber, output rail and screen. The mobile film follows the same run in a tighter crop. Art direction reference for staged machinery: https://booster-compressor.ru/. No assets from the reference used.
 shoe-editorial.webp — generated with ImageGen. Editorial product photograph of an anonymous black leather loafer on a pale plinth in a cool blue studio, raking daylight, no logo. Illustration of the category, not a product photograph from the NDA client.
+
+audit-workspace.webp — Carlos Muza, Unsplash. https://unsplash.com/photos/hpjSkU2UYSU
+
+cases/stadium.webp — Daniel Mironov, Unsplash. https://unsplash.com/photos/empty-stadium-seating-with-floodlight-tower-d4wnTbyPPiU
+Editorial illustration for the sports case. The photograph depicts the category, not the client’s property.
