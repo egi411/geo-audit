@@ -233,54 +233,43 @@ body:has(.front-cover) .nav-cta {
   letter-spacing: -0.055em;
   font-weight: 520;
 }
-.buyer-section { background: var(--mist); }
-.choice-section { background: white; }
-.front-questions { background: var(--paper-blue); }
-.buyer-layout,
-.scope-layout,
-.faq-layout,
-.invite-layout {
-  display: grid;
-  grid-template-columns: var(--columns);
-  gap: var(--gap);
-  align-items: start;
-}
+.buyer-section,
+.choice-section,
+.front-invite { background: white; }
+.scope-section,
+.front-questions { background: var(--paper-gray); }
 .buyer-intro,
-.scope-layout header,
-.faq-layout h2,
-.invite-layout > div {
-  grid-column: 1/7;
-  max-width: 16ch;
-}
-.buyer-decisions,
-.scope-items,
-.faq-layout .question-list {
-  grid-column: 7/-1;
-}
-.buyer-intro {
-  max-width: 34rem;
+.faq-layout > h2,
+.invite-layout {
+  text-align: center;
 }
 .buyer-intro p {
-  margin: 1rem 0 1.25rem;
-  max-width: 41ch;
+  max-width: 48ch;
+  margin: 1rem auto 0;
   color: var(--sub);
 }
-.buyer-intro .front-link { color: var(--blue); }
-.buyer-decisions > div {
+.buyer-decisions {
   display: grid;
-  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1fr);
-  gap: 1.15rem;
-  padding-block: 1.1rem;
-  border-top: 1px solid var(--blue-rule);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+  margin-block: clamp(1.75rem, 5.5svh, 4rem) 1.45rem;
 }
-.buyer-decisions > div:last-child { border-bottom: 1px solid var(--blue-rule); }
+.buyer-decisions > div {
+  padding-top: 1.05rem;
+  border-top: 1px solid var(--ink);
+}
 .buyer-decisions dt {
-  font-size: clamp(1.2rem, 2vw, 1.85rem);
-  font-weight: 570;
-  line-height: 1.14;
-  letter-spacing: -0.028em;
+  font-size: clamp(1.3rem, 2.15vw, 2.15rem);
+  font-weight: 580;
+  line-height: 1.1;
+  letter-spacing: -0.034em;
 }
-.buyer-decisions dd { color: var(--sub); }
+.buyer-decisions dd {
+  margin-top: .65rem;
+  color: var(--sub);
+  max-width: 38ch;
+}
+.buyer-layout > .front-link { color: var(--blue); }
 .front-cover ~ .front-projects { padding: 0; }
 .front-projects { background: white; }
 .section-top {
@@ -381,28 +370,83 @@ body:has(.front-cover) .nav-cta {
   margin-top: 1.05rem;
   color: #153fab;
 }
-.scope-section {
-  background: var(--night);
+.scope-layout {
+  display: grid;
+  grid-template-columns: var(--columns);
+  grid-template-rows: min-content 1fr;
+  align-items: start;
+  gap: 1.35rem var(--gap);
 }
-.front-cover ~ .scope-section {
-  color: #fff;
+.scope-layout header,
+.scope-items {
+  grid-column: 7/-1;
 }
-.scope-layout header {
-  max-width: 32rem;
-}
+.scope-layout header h2 { max-width: 14ch; }
 .scope-layout header > p,
 .invite-layout p {
-  max-width: 40ch;
-  margin-top: 1.1rem;
-  color: #c5c9d2;
+  max-width: 45ch;
+  margin-top: 1rem;
+  color: var(--sub);
+}
+.scope-figure {
+  grid-column: 1/7;
+  grid-row: 1/3;
+  align-self: center;
+  background: white;
+  border: 1px solid var(--rule);
+  padding: clamp(1rem, 3vw, 2.8rem);
+}
+.scope-figure figcaption {
+  font-weight: 560;
+  margin-bottom: clamp(1rem, 3vw, 2rem);
+}
+.scope-figure ul {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--halves);
+  gap: .55rem;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 1.35rem;
+}
+.scope-figure ul::after {
+  content: "";
+  position: absolute;
+  inset: auto 25% 0;
+  height: 1.35rem;
+  border: 1px solid var(--blue-rule);
+  border-top: 0;
+}
+.scope-figure li,
+.scope-result {
+  display: grid;
+  gap: .2rem;
+  padding: clamp(.55rem, 1.2vw, 1.05rem);
+  line-height: 1.25;
+}
+.scope-figure li { background: var(--paper-gray); }
+.scope-figure span { color: var(--sub); font-size: .88rem; }
+.scope-result {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  margin: .85rem auto 0;
+  background: var(--paper-blue);
+  color: var(--blue-black);
+}
+.scope-result::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  height: .85rem;
+  border-left: 1px solid var(--blue-rule);
 }
 .scope-items details {
-  border-top: 1px solid #40444c;
-  padding-block: 0.9rem;
+  border-top: 1px solid var(--rule);
+  padding-block: .85rem;
 }
-.scope-items details:last-child {
-  border-bottom: 1px solid #40444c;
-}
+.scope-items details:last-child { border-bottom: 1px solid var(--rule); }
 .scope-items summary {
   list-style: none;
   display: flex;
@@ -416,7 +460,7 @@ body:has(.front-cover) .nav-cta {
 }
 .scope-items summary::after {
   content: "+";
-  color: #9db6ff;
+  color: var(--blue);
 }
 .scope-items [open] summary::after {
   content: "−";
@@ -433,40 +477,26 @@ body:has(.front-cover) .nav-cta {
 }
 .scope-items p {
   font-size: 1rem;
-  color: #c5c9d2;
+  color: var(--sub);
   margin-top: 0.4rem;
 }
-.choice-layout {
-  display: grid;
-  grid-template-columns: var(--columns);
-  gap: var(--gap);
-}
-.choice-layout > h2 {
-  grid-column: 1/5;
-}
+.choice-layout > h2 { margin-bottom: clamp(1.2rem, 4vw, 2.6rem); }
 .choice-links {
-  grid-column: 5/-1;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
-  background: var(--blue-rule);
+  grid-template-columns: var(--halves);
+  gap: var(--gap);
 }
 .choice-links a {
   display: flex;
   flex-direction: column;
   text-decoration: none;
   color: var(--ink);
-  background: var(--mist);
-  padding: clamp(1.2rem, 2.4vw, 2.4rem);
+  background: var(--paper-gray);
+  border-top: 2px solid var(--ink);
+  padding: clamp(1.2rem, 2.8vw, 2.6rem);
   transition: background .2s;
 }
-.choice-links a:last-child {
-  background: var(--blue-dark);
-  color: white;
-}
 .choice-links a:hover { background: var(--paper-blue); }
-.choice-links a:last-child:hover { background: var(--blue-black); }
-.choice-links a:last-child :is(p, span) { color: #e0e8ff; }
 .choice-links .offer-intent {
   margin: 0 0 .7rem;
   font-size: .88rem;
@@ -487,7 +517,10 @@ body:has(.front-cover) .nav-cta {
 .choice-links a:hover span {
   text-decoration: underline;
 }
-.faq-layout h2 { max-width: 11ch; }
+.faq-layout .question-list {
+  max-width: 55rem;
+  margin: clamp(1.2rem, 4vw, 2.8rem) auto 0;
+}
 .front-questions .question-list summary {
   font-size: 1.16rem;
 }
@@ -495,22 +528,12 @@ body:has(.front-cover) .nav-cta {
   max-width: 65ch;
 }
 
-.front-cover ~ .front-invite {
-  background: var(--blue-dark);
-  color: white;
-}
-.invite-layout {
-  align-items: center;
-}
-.invite-layout > div {
-  max-width: 44rem;
-  grid-column: 1/9;
-}
+.invite-layout > div { margin-inline: auto; }
+.invite-layout p { margin-inline: auto; }
 .invite-layout .primary {
-  grid-column: 9/-1;
-  justify-self: end;
-  background: white;
-  color: #101113;
+  margin-top: 1.35rem;
+  background: var(--blue);
+  color: white;
 }
 @media (min-width: 761px) and (max-width: 1000px) {
   .cover-copy h1 {
@@ -575,34 +598,26 @@ body:has(.front-cover) .nav-cta {
   .cover-foot strong { font-size: 1.25rem; }
   .cover-foot a span { grid-column: 1/-1; grid-row: 2; }
   .cover-foot a i { grid-column: 2; grid-row: 1; }
-  .buyer-layout,
-  .scope-layout,
-  .choice-layout,
-  .faq-layout,
-  .invite-layout {
+  .scope-layout {
     grid-template-columns: minmax(0, 1fr);
-    gap: 1.5rem;
+    grid-template-rows: auto;
   }
-  .buyer-layout > *,
-  .scope-layout > *,
-  .choice-layout > *,
-  .faq-layout > *,
-  .invite-layout > *,
-  .invite-layout .primary {
+  .scope-layout > :is(header, .scope-figure, .scope-items) {
     grid-column: 1;
-    justify-self: start;
+    grid-row: auto;
   }
-  .scope-items,
-  .faq-layout .question-list,
-  .choice-links {
-    width: 100%;
-  }
+  .scope-layout header h2 { max-width: none; }
+  .buyer-intro,
+  .faq-layout > h2,
+  .invite-layout { text-align: left; }
+  .buyer-intro p,
+  .invite-layout p { margin-inline: 0; }
+  .buyer-decisions { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; }
   .project-spread { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; }
   .project-spread :is(.project-picture, .project-description),
   .project-winline .project-spread :is(.project-picture, .project-description) {
     grid-column: 1; grid-row: auto;
   }
-  .buyer-decisions > div { grid-template-columns: minmax(0, 1fr); gap: .4rem; }
   .project-picture { aspect-ratio: 1.7; }
   .front-cover ~ section h2 {
     font-size: clamp(2.25rem, 7vw, 3.5rem);
@@ -611,7 +626,7 @@ body:has(.front-cover) .nav-cta {
 @media (max-width: 480px) {
   .choice-links {
     grid-template-columns: minmax(0, 1fr);
-    gap: 1px;
+    gap: .9rem;
   }
   .front-actions {
     gap: 0.8rem 1rem;

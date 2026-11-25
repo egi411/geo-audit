@@ -1,13 +1,13 @@
-"""Interactive sample report for the audit. One mark per answer and indicator."""
+"""Figures in the audit’s demonstration report."""
 
 GROUPS = (
-    ('Выбор сервиса', 25, (17, 12, 7)),
-    ('Тарифы', 25, (11, 10, 5)),
-    ('Переезд с другой CRM', 25, (15, 8, 4)),
-    ('Связь с почтой и чатом', 25, (9, 6, 3)),
+    ('Выбор поставщика', 25, (17, 12, 7)),
+    ('Стоимость', 25, (11, 10, 5)),
+    ('Условия обслуживания', 25, (15, 8, 4)),
+    ('Сравнение предложений', 25, (9, 6, 3)),
 )
 MEASURES = (
-    ('name', 'Упоминания', 'ответов с названием «Линия»', 'Покупатель увидел название сервиса. Чтобы понять, советовала ли его нейросеть, откройте текст ответа.'),
+    ('name', 'Упоминания', 'ответов с упоминанием бренда', 'Покупатель увидел название компании. Из полного ответа можно понять, советует ли её нейросеть и почему.'),
     ('source', 'Источники', 'ответов с сайтом в источниках', 'Сайт указан среди источников. Нейросеть могла использовать его документацию, даже если в самом ответе предложила другой сервис.'),
     ('link', 'Ссылки', 'ответов с прямой ссылкой в тексте', 'Читатель может перейти на сайт из текста. Это возможность перехода. Число состоявшихся визитов покажет веб-аналитика.'),
 )
@@ -47,10 +47,10 @@ def observation_figure(photo):
     total_cells = ''.join(f'<td>{n}</td>' for n in TOTALS)
     return f'''<section class="audit-report wrap" id="observations" aria-labelledby="audit-report-title">
         <div class="report-spread"><header class="report-cover">
-        <img src="{{PRE}}{photo}" width="1350" height="962" alt="Ноутбук с графиками веб-аналитики на экране" decoding="async">
-        <div class="report-title"><span>Учебный отчёт</span><h2 id="audit-report-title">Видимость по 100 промптам</h2></div></header>
+        <img src="{{PRE}}{photo}" width="1350" height="962" alt="Графики на экране ноутбука" decoding="async" loading="lazy">
+        <div class="report-title"><span>Учебный отчёт</span><h2 id="audit-report-title">По каким темам виден бренд?</h2></div></header>
         <div class="report-pocket"><div class="scoreboard">
-        <p class="report-context">Вымышленный сервис «Линия». По каждой из четырёх тем задали 25 вопросов. Переключите показатель, чтобы сравнить темы, или откройте таблицу со всеми результатами.</p>
+        <p class="report-context">В учебной выборке 100 ответов, по 25 на каждую тему. Переключите показатель, чтобы сравнить темы, или откройте общую таблицу.</p>
         <fieldset class="score-tabs"><legend>Показатель отчёта</legend>{''.join(controls)}</fieldset>
         {''.join(plots)}</div></div></div>
         <details class="report-register"><summary>Таблица по всем показателям</summary>
@@ -59,3 +59,50 @@ def observation_figure(photo):
         <tr><th scope="col">Тема запроса</th><th scope="col">Ответы</th><th scope="col">Упоминания</th><th scope="col">Источники</th><th scope="col">Ссылки</th></tr></thead>
         <tbody>{rows}</tbody><tfoot><tr><th scope="row">Всего</th><td>{TOTAL}</td>{total_cells}</tr></tfoot></table></div>
         </details></section>'''
+
+
+def tone_figure():
+    counts = (
+        ('positive', 'Положительная', 24, 'Компания подойдёт, если нужен выезд к заказчику в выходные.'),
+        ('neutral', 'Нейтральная', 18, 'У компании есть услуга выездного обслуживания.'),
+        ('critical', 'Критическая', 10, 'Для срочного заказа стоит рассмотреть других поставщиков.'),
+    )
+    total = sum(count for _, _, count, _ in counts)
+    first_end = counts[0][2] * 100 / total
+    second_end = (counts[0][2] + counts[1][2]) * 100 / total
+    items = ''.join(f'''<li class="tone-{key}"><b>{count}</b><div><h3>{label}</h3>
+    <blockquote>«{quote}»</blockquote></div></li>''' for key, label, count, quote in counts)
+    return f'''<section class="tone-section" id="tone"><div class="wrap">
+    <header class="edition-head"><h2>Как нейросети описывают бренд?</h2>
+    <p class="short-answer">В отчёте видно, что нейросети называют преимуществом, где дают справку и по какой причине советуют выбрать другую компанию.</p></header>
+    <figure class="tone-figure"><figcaption>Учебный пример · ответы с упоминанием бренда</figcaption>
+    <div class="tone-ring" style="--tone-first:{first_end:.2f}%;--tone-second:{second_end:.2f}%">
+    <div><b>{total}</b><span>ответа</span></div></div><ul>{items}</ul></figure>
+    </div></section>'''
+
+
+def source_map():
+    paths = (
+        ('official', 'Официальный сайт', 'Карточка услуги', 'На сайте компании указаны график выездов и условия обслуживания.',
+         'Покупатель видит актуальные условия и может обратиться напрямую.'),
+        ('review', 'Отраслевой обзор', 'Сравнение компаний', 'В отраслевом обзоре перечислены поставщики, которые выезжают в выходные.',
+         'Покупатель видит несколько компаний и читает, чем они отличаются.'),
+        ('directory', 'Каталог', 'Профиль поставщика', 'В каталоге есть телефон компании, но график выезда не указан.',
+         'До обращения покупателю придётся уточнить, подходит ли ему график.'),
+    )
+    controls, readings = [], []
+    for i, (key, label, title, quote, consequence) in enumerate(paths):
+        checked = ' checked' if i == 0 else ''
+        controls.append(f'''<label><input type="radio" name="source-route" value="{key}"{checked}>
+        <span>{label}<span aria-hidden="true">→</span></span></label>''')
+        readings.append(f'''<div class="route-reading" data-route="{key}">
+        <span>Куда ведёт ссылка</span><h3>{title}</h3><p>{consequence}</p>
+        <blockquote>«{quote}»</blockquote></div>''')
+    return f'''<section class="source-section wrap" id="sample">
+    <header class="edition-head"><h2>Куда ведут ссылки из ответов?</h2>
+    <p class="short-answer">Выберите источник, чтобы увидеть, какую страницу откроет покупатель и что сможет на ней узнать.</p></header>
+    <figure id="sample-board" class="source-map">
+    <figcaption>Учебный пример · ссылки в тексте ответа</figcaption>
+    <div class="route-question"><span>Вопрос покупателя</span><b>Кто обслуживает оборудование с выездом в выходные?</b></div>
+    <fieldset class="route-options"><legend>Выбрать направление ссылки</legend>{''.join(controls)}</fieldset>
+    <div class="route-readings">{''.join(readings)}</div></figure></section>'''
