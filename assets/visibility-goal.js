@@ -3,13 +3,36 @@
   const home = document.querySelector(".home-hero");
   const header = document.querySelector(".site-header");
   const notice = document.querySelector(".cookie-banner");
+  const words = document.querySelector(".work-display");
+  const outcomes = [...document.querySelectorAll(".work-item")];
+  let scrollFrame = 0;
+
+  function syncScroll() {
+    scrollFrame = 0;
+    header.classList.toggle("is-past-cover", home.getBoundingClientRect().bottom <= header.offsetHeight + 1);
+    const threshold = window.innerHeight * 0.54;
+    let current = outcomes[0];
+    for (const item of outcomes) {
+      if (item.getBoundingClientRect().top <= threshold) current = item;
+    }
+    words.dataset.current = current.dataset.result;
+  }
+
+  function queueScrollSync() {
+    if (!scrollFrame) scrollFrame = requestAnimationFrame(syncScroll);
+  }
+
   function fitHero() {
     home.style.setProperty(
       "--top-chrome",
       header.offsetHeight + notice.offsetHeight + "px",
     );
+    queueScrollSync();
   }
   fitHero();
+  window.addEventListener("scroll", queueScrollSync, { passive: true });
+  window.addEventListener("resize", queueScrollSync);
+  window.addEventListener("pageshow", queueScrollSync);
   if ("ResizeObserver" in window) {
     const observer = new ResizeObserver(fitHero);
     observer.observe(header);

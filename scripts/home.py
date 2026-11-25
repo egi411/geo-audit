@@ -9,7 +9,7 @@ FAQ = [
     ("Можно начать с одного продукта?",
      "Да. Подойдёт и отдельная услуга, и товарная категория. Выберите направление, в котором сейчас важнее всего привлечь новых покупателей. Его и обсудим на первом разборе."),
     ("Как мы поймём, что изменилось?",
-     "Вы увидите, в каких сравнениях появился бренд, точнее ли нейросети описывают продукт и куда ведут ссылки. Переходы и обращения оценивают отдельно по данным сайта и отдела продаж."),
+     "Мы покажем, в каких сравнениях появился бренд, как нейросети описывают продукт и куда ведут ссылки. Переходы и обращения можно оценить по данным сайта и отдела продаж."),
     ("Можно гарантировать рекомендацию?",
      "Нейросети сами выбирают, какие компании назвать. До начала работ согласуем, какие изменения важны для вашего бизнеса и по каким признакам можно будет их проверить."),
 ]
@@ -56,61 +56,64 @@ def home_hero(contact):
     <a href="cases/winline/"><strong>15 000</strong><span>замеров для WINLINE</span><i aria-hidden="true">↗</i></a></div></section>'''
 
 
-def demand():
-    return '''<section class="buyer-section" id="demand"><div class="wrap buyer-layout">
-    <header class="buyer-intro"><h2>Как покупатель выбирает компанию?</h2>
-    <p>Покупатель описывает задачу и условия. Из ответа нейросети он может решить, чьи предложения открыть и что сначала проверить.</p></header>
-    <dl class="buyer-decisions">
-    <div><dt>Кого включить в сравнение?</dt><dd>Компания может быть известна по имени и при этом отсутствовать в ответах, где покупатель впервые ищет поставщика.</dd></div>
-    <div><dt>Кто подходит по условиям?</dt><dd>Нейросеть пересказывает условия и различия. Устаревшие сведения могут исключить компанию из выбора ещё до визита.</dd></div>
-    <div><dt>Где узнать подробности?</dt><dd>Если ответ ведёт на обзор или агрегатор, покупатель видит ваше предложение рядом с другими. Ссылка на сайт даёт ему доступ к информации из первых рук.</dd></div>
-    </dl><a class="front-link" href="why-geo/">Когда бизнесу стоит заниматься GEO <span aria-hidden="true">↗</span></a></div></section>'''
+def fit():
+    return '''<section class="fit-section" id="demand" aria-labelledby="fit-title"><div class="wrap">
+    <header class="fit-heading"><h2 id="fit-title">Когда мы можем помочь?</h2>
+    <p>Начинаем с&nbsp;одного продукта или услуги, по&nbsp;которым вам важно получать новые обращения.</p></header>
+    <dl class="fit-cases">
+    <div><dt>Покупатели ещё не&nbsp;знают о&nbsp;продукте</dt><dd>Помогаем сделать так, чтобы они могли найти предложение по&nbsp;своей задаче, прежде чем узнают название бренда.</dd></div>
+    <div><dt>В&nbsp;сравнениях называют конкурентов</dt><dd>Помогаем раскрыть, кому подходит ваш продукт и&nbsp;что может стать причиной выбрать именно его.</dd></div>
+    <div><dt>О&nbsp;вас говорят по&nbsp;устаревшим данным</dt><dd>Помогаем обновить сведения о&nbsp;продукте, чтобы покупателю было проще проверить актуальные условия.</dd></div>
+    </dl><a class="front-link" href="why-geo/">Когда GEO имеет смысл <span aria-hidden="true">↗</span></a>
+    </div></section>'''
 
 
 def projects(asset):
-    return f'''<section class="front-projects" id="projects">
-    <header class="wrap section-top"><h2>Что показали проекты?</h2><a class="front-link" href="cases/">Все проекты <span aria-hidden="true">↗</span></a></header>
+    return f'''<section class="front-projects" id="projects"><div class="project-opening">
+    <header class="wrap section-top"><h2>Что показали наши проекты?</h2><a class="front-link" href="cases/">Все проекты <span aria-hidden="true">↗</span></a></header>
     <article class="project-feature project-fashion"><div class="wrap project-spread">
     <a class="project-picture shoe" href="cases/fashion/" aria-label="Открыть кейс модного бренда"><img src="{asset('shoe-editorial.webp')}" alt="Чёрный кожаный лофер на светлом подиуме" width="1440" height="960" loading="lazy"><small>Иллюстрация к кейсу под NDA</small></a>
     <div class="project-description"><p class="project-byline">Модный бренд · GEO и SEO</p>
-    <h3><a href="cases/fashion/"><strong>10 000+</strong> переходов из нейросетей в журнал и каталог</a></h3>
-    <p>В начале проекта нейросети путали даже род деятельности компании. Через полгода покупатели находили её изделия, в том числе по запросам без названия марки.</p>
-    <a class="front-link" href="cases/fashion/">Читать кейс модного бренда <span aria-hidden="true">↗</span></a></div></div></article>
+    <h3><a href="cases/fashion/"><strong>10&nbsp;000+</strong> переходов из&nbsp;нейросетей в&nbsp;журнал и&nbsp;каталог</a></h3>
+    <p>В&nbsp;начале проекта нейросети путали даже род деятельности компании. Мы доработали журнал и&nbsp;каталог. Через полгода покупатели находили изделия и&nbsp;по&nbsp;запросам без&nbsp;названия марки.</p>
+    <a class="front-link" href="cases/fashion/">Читать кейс модного бренда <span aria-hidden="true">↗</span></a></div></div></article></div>
     <article class="project-feature project-winline" id="winline-study"><div class="wrap project-spread"><a class="project-picture stadium" href="cases/winline/" aria-label="Открыть кейс WINLINE">
     <img src="{asset('cases/stadium.webp')}" alt="Ряды трибун и прожектор стадиона" width="1152" height="1438" loading="lazy">
     <img class="client-mark" src="{asset('cases/winline.svg')}" width="483" height="116" alt="WINLINE"></a>
-    <div class="project-description"><p class="project-byline">WINLINE · GEO-аудит</p><h3><a href="cases/winline/"><strong>15 000</strong> замеров за десять дней</a></h3>
-    <p>Ответы о WINLINE вели в том числе на сайты посредников. Команда получила карту из 124 тем и задачи по 119 страницам.</p>
+    <div class="project-description"><p class="project-byline">WINLINE · GEO-аудит</p><h3><a href="cases/winline/"><strong>15&nbsp;000</strong> замеров за&nbsp;десять дней</a></h3>
+    <p>В&nbsp;рамках аудита мы выяснили, куда вели ответы о&nbsp;WINLINE, и&nbsp;передали команде карту из&nbsp;124 тем и&nbsp;задачи по&nbsp;119 страницам.</p>
     <a class="front-link" href="cases/winline/">Читать кейс WINLINE <span aria-hidden="true">↗</span></a></div></div></article></section>'''
 
 
 def scope():
-    items = (
-        ('Сайт бренда', 'Что покупатель может узнать из первых рук',
-         'Дополняем страницы фактами, которые влияют на выбор: характеристики, условия, ограничения и отличия от других предложений. Покупатель сможет проверить важные детали на вашем сайте.'),
-        ('Внешние публикации', 'Где о вашем продукте читают за пределами сайта',
-         'Помогаем подготовить материалы для отраслевых изданий и обзоров. Читатель получает возможность сопоставить то, что компания говорит о себе, с информацией на независимых площадках.'),
-        ('Видимость бренда', 'По каким вопросам изменились ответы',
-         'Проверяем, стало ли чаще встречаться ваше название, как описывают предложение и на какие страницы ведут ссылки. По этим наблюдениям вместе выбираем следующее направление работы.'),
-    )
-    entries = ''.join(f'<details name="scope-item"{" open" if i == 0 else ""}><summary>{title}</summary><div><h3>{heading}</h3><p>{body}</p></div></details>'
-                      for i, (title, heading, body) in enumerate(items))
-    return f'''<section id="scope" class="scope-section"><div class="wrap scope-layout"><header>
-    <h2>Что входит в GEO-продвижение?</h2><p>Помогаем покупателю понять, подходит ли ваш продукт, и найти сведения, которые влияют на выбор.</p></header>
-    <figure class="scope-figure"><figcaption>Откуда покупатель узнаёт о бренде</figcaption>
-    <ul><li><strong>Сайт бренда</strong><span>Характеристики и условия</span></li>
-    <li><strong>Внешние публикации</strong><span>Обзоры и сравнения</span></li></ul>
-    <div class="scope-result"><strong>Ответ нейросети</strong><span>Какие варианты подходят и почему</span></div></figure>
-    <div class="scope-items">{entries}</div></div></section>'''
+    return '''<section class="scope-section" id="scope" aria-labelledby="scope-title"><div class="wrap work-layout">
+    <div class="work-intro">
+    <h2 id="scope-title">Что мы меняем в&nbsp;ответах нейросетей?</h2>
+    <p>Работаем с&nbsp;тем, что компания рассказывает о&nbsp;себе, и&nbsp;с&nbsp;тем, что покупатель может узнать из&nbsp;других публикаций.</p>
+    <div class="work-display" data-current="mention" aria-hidden="true">
+    <span class="display-line display-mention">Упоминают</span>
+    <span class="display-line display-citation">Цитируют</span>
+    <span class="display-line display-link">Переходят <i>↗</i></span>
+    </div></div>
+    <div class="work-items">
+    <article class="work-item" data-result="mention"><h3>Бренд включают в&nbsp;сравнение</h3>
+    <p>Мы раскрываем условия и&nbsp;отличия предложения по&nbsp;тем вопросам, с&nbsp;которых покупатель начинает выбор. У&nbsp;него появляется больше оснований рассмотреть ваш продукт, даже если он ещё не&nbsp;знает названия компании.</p></article>
+    <article class="work-item" data-result="citation"><h3>На&nbsp;ваши материалы ссылаются</h3>
+    <p>Мы добавляем на&nbsp;страницы проверяемые условия, характеристики и&nbsp;ответы на&nbsp;частые вопросы. Эти сведения можно процитировать. Так у&nbsp;нейросетей появляется источник, на&nbsp;который можно сослаться.</p></article>
+    <article class="work-item" data-result="link"><h3>На&nbsp;ваш сайт переходят за&nbsp;деталями</h3>
+    <p>Мы помогаем сделать полезной саму страницу назначения. По&nbsp;ссылке из&nbsp;ответа покупатель может проверить условия, посмотреть товар или обратиться в&nbsp;компанию.</p></article>
+    </div></div></section>'''
 
 
 def agency_home(hero, asset, contact, entries):
-    offers = f'''<section class="choice-section" id="offers"><div class="wrap choice-layout"><h2>С чего начать?</h2>
-    <div class="choice-links" id="from-answer"><a href="audit/"><p class="offer-intent">Проверить текущую видимость</p><h3>GEO-аудит</h3><p>Получите ответы о вашей компании, сравнение с конкурентами и приоритеты по страницам сайта.</p><span>Что входит в аудит ↗</span></a>
-    <a href="{contact}" data-open-brief><p class="offer-intent">Развить видимость продукта</p><h3>GEO-продвижение</h3><p>Дополняем материалы о продукте, чтобы у покупателя было больше оснований включить его в сравнение.</p><span>Обсудить продвижение ↗</span></a></div></div></section>'''
+    offers = f'''<section class="choice-section" id="offers"><div class="wrap choice-layout"><h2>С&nbsp;чего мы предлагаем начать?</h2>
+    <div class="choice-links" id="from-answer">
+    <a class="choice-primary" href="{contact}" data-open-brief><h3>GEO-продвижение</h3><p>Если вы уже знаете, какой продукт нужно продвигать. Мы работаем над&nbsp;тем, чтобы бренд чаще называли в&nbsp;ответах и&nbsp;давали ссылки на&nbsp;ваши страницы.</p><span>Обсудить продвижение ↗</span></a>
+    <a href="audit/"><h3>GEO-аудит</h3><p>Если сначала нужно выяснить, как вас описывают сейчас, с&nbsp;кем сравнивают и&nbsp;откуда берут сведения. Мы покажем, с&nbsp;чего начать работу.</p><span>Что входит в&nbsp;аудит ↗</span></a>
+    </div></div></section>'''
     questions = f'''<section class="front-questions" id="faq"><div class="wrap faq-layout">
     <h2>Что важно знать перед началом?</h2><div class="question-list">{entries(FAQ)}</div></div></section>'''
     invite = f'''<section class="front-invite" id="brief"><div class="wrap invite-layout"><div>
-    <h2>Как получить бесплатный разбор?</h2><p>Пришлите ссылку на сайт и скажите, в каком направлении нужны новые клиенты. На бесплатной консультации обсудим, что стоит проверить в первую очередь.</p></div>
+    <h2>Как мы можем помочь вашему бренду?</h2><p>На&nbsp;бесплатной консультации обсудим, какой продукт вы хотите продвигать и&nbsp;что о&nbsp;нём важно знать покупателю.</p></div>
     <a class="btn primary" href="{contact}" data-open-brief>Записаться на консультацию <span aria-hidden="true">↗</span></a></div></section>'''
-    return ''.join((hero, projects(asset), demand(), scope(), offers, questions, invite))
+    return ''.join((hero, scope(), projects(asset), fit(), offers, questions, invite))

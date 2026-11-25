@@ -236,7 +236,7 @@ def write(route,title,desc,body,published,article=False,faqs=None):
  file.parent.mkdir(parents=True,exist_ok=True);file.write_text("\n".join(line.rstrip() for line in content.replace("><",">\n<").splitlines())+"\n")
 PAGES=[]
 def page(route,title,desc,body,date,article=False,faqs=None):write(route,title,desc,body,date,article,faqs);PAGES.append((route,date))
-page('','GEO-продвижение брендов в нейросетях | aileed','GEO-продвижение для бизнеса в России. Помогаем брендам появляться в ответах нейросетей, когда покупатели ищут товары и услуги. Кейсы и бесплатный разбор.',main,'2026-10-07',faqs=home_faq)
+page('','GEO-продвижение брендов в нейросетях | aileed','Продвигаем бренды в нейросетях. Работаем над упоминаниями, цитированием и ссылками в ответах о ваших товарах и услугах. Кейсы и бесплатный разбор.',main,'2026-10-07',faqs=home_faq)
 page('audit/','GEO-аудит бренда в нейросетях | aileed','GEO-аудит показывает видимость бренда, тональность ответов, конкурентов и источники. Посмотрите интерактивный отчёт на демонстрационных данных.',audit,'2026-11-02',faqs=auditfaq)
 page('why-geo/','Зачем бренду GEO-продвижение? | aileed','Когда покупатели ищут, сравнивают и выбирают бренды в нейросетях. Как оценить пользу GEO для бизнеса и выбрать первое направление продвижения.',why,FIRST_EDITION,faqs=whyfaq)
 page('cases/','Кейсы GEO-продвижения и аудита | aileed','Результаты продвижения модного бренда под NDA и GEO-аудита WINLINE. Переходы из нейросетей, упоминания и цитирование.',case_index(asset),UPDATED)

@@ -41,8 +41,10 @@ for f in files:
   if name=='index.html':
    assert not any(t=='video' for t,a in p.tags),'unrelated film in hero'
    assert 'aria-label="100 процентов"' in s and 'Цель продвижения' in s, 'visibility goal missing'
-   assert all(anchor in ids for anchor in ('scope','offers','projects','winline-study','faq','brief'))
-   assert all(label in s for label in ('Сайт бренда', 'Внешние публикации', 'Видимость бренда')), 'promotion scope missing'
+   assert all(anchor in ids for anchor in ('scope','demand','offers','projects','winline-study','faq','brief'))
+   assert 'Что мы меняем в&nbsp;ответах нейросетей?' in s, 'promotion outcomes heading missing'
+   assert [a.get('data-result') for t,a in p.tags if t=='article' and 'data-result' in a]==['mention','citation','link'], 'promotion outcomes missing'
+   assert 'Когда мы можем помочь?' in s, 'promotion suitability missing'
    assert all(any(t=='a' and a.get('href')==path for t,a in p.tags) for path in ('cases/fashion/','cases/winline/')), 'case link missing'
    assert all(marker not in s for marker in ('market-examples', 'Пример запроса покупателя', 'scope-estimate', 'Как работать с вашей командой')), 'retired homepage content'
   if name!='cases/fashion/index.html':
