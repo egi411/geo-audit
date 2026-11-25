@@ -58,19 +58,18 @@ def home_hero(contact):
 
 def demand():
     return '''<section class="buyer-section" id="demand"><div class="wrap buyer-layout">
-    <div class="buyer-intro"><h2>Выбор начинается до визита на сайт</h2>
-    <p>Когда покупатель ещё не знает названия компании, он описывает задачу и свои условия. Ответ нейросети может определить, чьи предложения он откроет.</p>
-    <a class="front-link" href="why-geo/">Когда бизнесу стоит заниматься GEO <span aria-hidden="true">↗</span></a></div>
+    <header class="buyer-intro"><h2>Как покупатель выбирает компанию?</h2>
+    <p>Покупатель описывает задачу и условия. Из ответа нейросети он может решить, чьи предложения открыть и что сначала проверить.</p></header>
     <dl class="buyer-decisions">
     <div><dt>Кого включить в сравнение?</dt><dd>Компания может быть известна по имени и при этом отсутствовать в ответах, где покупатель впервые ищет поставщика.</dd></div>
     <div><dt>Кто подходит по условиям?</dt><dd>Нейросеть пересказывает условия и различия. Устаревшие сведения могут исключить компанию из выбора ещё до визита.</dd></div>
     <div><dt>Где узнать подробности?</dt><dd>Если ответ ведёт на обзор или агрегатор, покупатель видит ваше предложение рядом с другими. Ссылка на сайт даёт ему доступ к информации из первых рук.</dd></div>
-    </dl></div></section>'''
+    </dl><a class="front-link" href="why-geo/">Когда бизнесу стоит заниматься GEO <span aria-hidden="true">↗</span></a></div></section>'''
 
 
 def projects(asset):
     return f'''<section class="front-projects" id="projects">
-    <header class="wrap section-top"><h2>Кейсы</h2><a class="front-link" href="cases/">Все проекты <span aria-hidden="true">↗</span></a></header>
+    <header class="wrap section-top"><h2>Что показали проекты?</h2><a class="front-link" href="cases/">Все проекты <span aria-hidden="true">↗</span></a></header>
     <article class="project-feature project-fashion"><div class="wrap project-spread">
     <a class="project-picture shoe" href="cases/fashion/" aria-label="Открыть кейс модного бренда"><img src="{asset('shoe-editorial.webp')}" alt="Чёрный кожаный лофер на светлом подиуме" width="1440" height="960" loading="lazy"><small>Иллюстрация к кейсу под NDA</small></a>
     <div class="project-description"><p class="project-byline">Модный бренд · GEO и SEO</p>
@@ -97,17 +96,21 @@ def scope():
     entries = ''.join(f'<details name="scope-item"{" open" if i == 0 else ""}><summary>{title}</summary><div><h3>{heading}</h3><p>{body}</p></div></details>'
                       for i, (title, heading, body) in enumerate(items))
     return f'''<section id="scope" class="scope-section"><div class="wrap scope-layout"><header>
-    <h2>Что входит в продвижение</h2><p>Работаем с официальным сайтом и публикациями о бренде. Показываем, какие изменения видны покупателю в ответах нейросетей.</p></header>
+    <h2>Что входит в GEO-продвижение?</h2><p>Помогаем покупателю понять, подходит ли ваш продукт, и найти сведения, которые влияют на выбор.</p></header>
+    <figure class="scope-figure"><figcaption>Откуда покупатель узнаёт о бренде</figcaption>
+    <ul><li><strong>Сайт бренда</strong><span>Характеристики и условия</span></li>
+    <li><strong>Внешние публикации</strong><span>Обзоры и сравнения</span></li></ul>
+    <div class="scope-result"><strong>Ответ нейросети</strong><span>Какие варианты подходят и почему</span></div></figure>
     <div class="scope-items">{entries}</div></div></section>'''
 
 
 def agency_home(hero, asset, contact, entries):
-    offers = f'''<section class="choice-section" id="offers"><div class="wrap choice-layout"><h2>С чего начать</h2>
+    offers = f'''<section class="choice-section" id="offers"><div class="wrap choice-layout"><h2>С чего начать?</h2>
     <div class="choice-links" id="from-answer"><a href="audit/"><p class="offer-intent">Проверить текущую видимость</p><h3>GEO-аудит</h3><p>Получите ответы о вашей компании, сравнение с конкурентами и приоритеты по страницам сайта.</p><span>Что входит в аудит ↗</span></a>
     <a href="{contact}" data-open-brief><p class="offer-intent">Развить видимость продукта</p><h3>GEO-продвижение</h3><p>Дополняем материалы о продукте, чтобы у покупателя было больше оснований включить его в сравнение.</p><span>Обсудить продвижение ↗</span></a></div></div></section>'''
     questions = f'''<section class="front-questions" id="faq"><div class="wrap faq-layout">
-    <h2>Перед началом работы</h2><div class="question-list">{entries(FAQ)}</div></div></section>'''
+    <h2>Что важно знать перед началом?</h2><div class="question-list">{entries(FAQ)}</div></div></section>'''
     invite = f'''<section class="front-invite" id="brief"><div class="wrap invite-layout"><div>
-    <h2>Выберите продукт для разбора</h2><p>Пришлите ссылку на сайт и скажите, в каком направлении нужны новые клиенты. На бесплатной консультации обсудим, что стоит проверить в первую очередь.</p></div>
+    <h2>Как получить бесплатный разбор?</h2><p>Пришлите ссылку на сайт и скажите, в каком направлении нужны новые клиенты. На бесплатной консультации обсудим, что стоит проверить в первую очередь.</p></div>
     <a class="btn primary" href="{contact}" data-open-brief>Записаться на консультацию <span aria-hidden="true">↗</span></a></div></section>'''
     return ''.join((hero, projects(asset), demand(), scope(), offers, questions, invite))
