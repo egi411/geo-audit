@@ -10,6 +10,7 @@ class Page(HTMLParser):
  def handle_starttag(self,t,a):self.tags.append((t,dict(a)))
 files=[ROOT/'index.html',ROOT/'audit/index.html',ROOT/'why-geo/index.html',ROOT/'blog/index.html',ROOT/'what-is-geo/index.html',ROOT/'blog/mention-or-recommendation/index.html',ROOT/'blog/why-ai-recommends-competitors/index.html',ROOT/'cases/index.html',ROOT/'cases/fashion/index.html',ROOT/'cases/winline/index.html',ROOT/'privacy.html',ROOT/'consent.html']
 errors=[]
+stylesheets=set()
 for f in files:
  s=f.read_text();p=Page();p.feed(s);name=str(f.relative_to(ROOT))
  try:
@@ -39,10 +40,10 @@ for f in files:
    assert next(node['headline'] for node in graph if node['@type']=='Article')==headings[0]
   if name=='index.html':
    assert not any(t=='video' for t,a in p.tags),'unrelated film in hero'
-   assert 'coverage-dial' in s and 'Наша цель по видимости бренда' in s, 'visibility goal missing'
+   assert 'aria-label="100 процентов"' in s and 'Цель продвижения' in s, 'visibility goal missing'
    assert all(anchor in ids for anchor in ('scope','offers','projects','winline-study','faq','brief'))
-   choices={a['value'] for t,a in p.tags if t=='input' and a.get('name')=='engagement'}
-   assert choices and choices=={a['data-engagement'] for _,a in p.tags if 'data-engagement' in a}
+   assert all(label in s for label in ('Сайт бренда', 'Внешние публикации', 'Видимость бренда')), 'promotion scope missing'
+   assert all(any(t=='a' and a.get('href')==path for t,a in p.tags) for path in ('cases/fashion/','cases/winline/')), 'case link missing'
    assert all(marker not in s for marker in ('market-examples', 'Пример запроса покупателя', 'scope-estimate', 'Как работать с вашей командой')), 'retired homepage content'
   if name!='cases/fashion/index.html':
    assert not re.search('дуба[йяеию]', s, re.I), 'Dubai belongs only to the fashion case'
@@ -71,6 +72,8 @@ for f in files:
    u=urlsplit(ref);target=f if not u.path else f.parent/u.path
    if target.is_dir():target=target/'index.html'
    assert target.exists(),ref
+   if t=='link' and a.get('rel')=='stylesheet':
+    stylesheets.add(target.resolve())
    if u.fragment:assert re.search(r'\bid="'+re.escape(u.fragment)+'"',target.read_text()),ref
   for a in [x for x in graph if x['@type']=='Article']:
    assert a.get('author') and a['datePublished']==page['datePublished']
@@ -81,5 +84,13 @@ legacy=(ROOT/'platforms/index.html').read_text()
 assert 'noindex,follow' in legacy and 'url=../why-geo/' in legacy
 for path in [*files,ROOT/'sitemap.xml',ROOT/'llms.txt']:
  assert 'platforms/' not in path.read_text(), f'Retired route linked in {path.name}'
+for sheet in sorted(stylesheets):
+ for match in re.finditer(r"""url\(\s*(['"]?)(.*?)\1\s*\)""",sheet.read_text(),re.I):
+  url=urlsplit(match[2])
+  if url.scheme or url.netloc or not url.path:continue
+  target=ROOT/url.path.lstrip('/') if url.path.startswith('/') else sheet.parent/url.path
+  if not target.is_file():
+   errors.append((sheet.name,url.path))
+   print(sheet.relative_to(ROOT),'missing',url.path)
 if errors:sys.exit(1)
 print('All',len(files),'public pages passed.')
