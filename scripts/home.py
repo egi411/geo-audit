@@ -15,8 +15,8 @@ FAQ = [
 ]
 
 
-def visibility_dial():
-    # Each segment represents one percent of the target, rather than a measured result.
+def visibility_dial(sample_counts=()):
+    # The homepage shows the goal. The audit shades the same scale for each sample metric.
     marks, graduations = [], []
     def point(angle, radius):
         return f'{238 + cos(angle) * radius:.2f} {231 + sin(angle) * radius:.2f}'
@@ -25,7 +25,9 @@ def visibility_dial():
         edge = radians(.96)
         path = (f'M{point(mid-edge, 204)} L{point(mid+edge, 204)} '
                 f'L{point(mid+edge, 158)} L{point(mid-edge, 158)} Z')
-        marks.append(f'<path d="{path}"/>')
+        keys = ' '.join(key for key, count in sample_counts if i < count)
+        active = f' class="{keys}"' if keys else ''
+        marks.append(f'<path d="{path}"{active}/>')
         end = 221 if i % 10 == 0 or i == 99 else 216
         graduations.append(f'M{point(mid, 212)} L{point(mid, end)}')
     return ('''<svg class="coverage-dial" viewBox="0 0 476 415" aria-hidden="true" focusable="false">

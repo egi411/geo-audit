@@ -59,7 +59,9 @@ for f in files:
    audit_main = s.split('<main id="main">',1)[1].split('</main>',1)[0]
    assert not re.search(r'href="\.\./cases/', audit_main), 'case promotion in the audit'
    assert 'Линия' not in audit_main and 'WINLINE' not in s, 'sample must be anonymous'
-   assert all(anchor in ids for anchor in ('observations', 'tone', 'sample-board')), 'audit examples missing'
+   assert all(anchor in ids for anchor in ('audit-start', 'observations', 'tone', 'sample-board', 'results', 'competitors', 'audit-value', 'report', 'faq', 'brief')), 'audit sections missing'
+   assert 'audit-opening front-cover' in audit_main and 'Учебный срез' in audit_main, 'audit cover or sample label missing'
+   assert [a.get('value') for t, a in p.tags if t=='input' and a.get('name')=='preview-metric']==['name','source','link'], 'audit cover measures missing'
    roster = re.search(r'<section class="model-ribbon".*?<ul role="list">(.*?)</ul>', audit_main, re.S)
    assert roster and re.findall(r'alt="([^"]+)"', roster[1]) == ['ChatGPT','Claude','Grok','Gemini','Алиса','GigaChat'], 'unexpected audit models'
   if name.startswith(('blog/','what-is-geo/')):

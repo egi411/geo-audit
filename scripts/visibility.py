@@ -1,4 +1,5 @@
 """Figures in the audit’s demonstration report."""
+from home import visibility_dial
 
 GROUPS = (
     ('Выбор поставщика', 25, (17, 12, 7)),
@@ -19,18 +20,15 @@ def report_preview():
     for i, (key, label, caption, _) in enumerate(MEASURES):
         checked = ' checked' if i == 0 else ''
         options.append(f'<label><input type="radio" name="preview-metric" value="{key}"{checked}><span>{label}</span></label>')
-        readings.append(f'<div class="preview-reading reading-{key}"><strong>{TOTALS[i]}<small>/{TOTAL}</small></strong><p>{caption}</p></div>')
-    cells = []
-    for n in range(TOTAL):
-        active = ' '.join(key for i, (key, *_) in enumerate(MEASURES) if n < TOTALS[i])
-        cells.append(f'<i class="{active}"></i>')
-    return f'''<div class="audit-preview" aria-label="Фрагмент учебного отчёта">
-    <div class="preview-meta"><b>Видимость бренда</b><span>Учебный отчёт</span></div>
-    <div class="preview-body"><div class="preview-readings">{''.join(readings)}</div><div class="preview-grid" aria-hidden="true">{''.join(cells)}</div></div>
-    <p class="preview-key">Одна ячейка — один ответ нейросети.</p>
+        readings.append(f'''<div class="preview-reading reading-{key}">
+        <strong>{TOTALS[i]}<small> из {TOTAL}</small></strong><p>{caption}</p></div>''')
+    dial = visibility_dial(tuple((measure[0], count) for measure, count in zip(MEASURES, TOTALS)))
+    return f'''<figure class="audit-preview" aria-labelledby="audit-preview-title">
+    <div class="audit-dial">{dial}
+    <div class="audit-dial-caption"><span id="audit-preview-title">Учебный срез</span>
+    {''.join(readings)}</div></div>
     <fieldset class="preview-select"><legend>Показатель учебной выборки</legend>{''.join(options)}</fieldset>
-    </div>'''
-
+    </figure>'''
 
 def observation_figure(photo):
     controls, plots = [], []
@@ -74,7 +72,7 @@ def tone_figure():
     <blockquote>«{quote}»</blockquote></div></li>''' for key, label, count, quote in counts)
     return f'''<section class="tone-section" id="tone"><div class="wrap">
     <header class="edition-head"><h2>Как нейросети описывают бренд?</h2>
-    <p class="short-answer">В отчёте видно, что нейросети называют преимуществом, где дают справку и по какой причине советуют выбрать другую компанию.</p></header>
+    <p class="short-answer">Мы отмечаем, что нейросети называют преимуществом и почему советуют выбрать другую компанию. Если ассистент ссылается на ограничение, сверяем его с&nbsp;действующими условиями.</p></header>
     <figure class="tone-figure"><figcaption>Учебный пример · ответы с упоминанием бренда</figcaption>
     <div class="tone-ring" style="--tone-first:{first_end:.2f}%;--tone-second:{second_end:.2f}%">
     <div><b>{total}</b><span>ответа</span></div></div><ul>{items}</ul></figure>
@@ -100,7 +98,7 @@ def source_map():
         <blockquote>«{quote}»</blockquote></div>''')
     return f'''<section class="source-section wrap" id="sample">
     <header class="edition-head"><h2>Куда ведут ссылки из ответов?</h2>
-    <p class="short-answer">Выберите источник, чтобы увидеть, какую страницу откроет покупатель и что сможет на ней узнать.</p></header>
+    <p class="short-answer">В отчёте мы показываем страницу назначения. Так видно, может ли покупатель проверить условия и&nbsp;обратиться к&nbsp;вам. Выберите источник, чтобы посмотреть разницу.</p></header>
     <figure id="sample-board" class="source-map">
     <figcaption>Учебный пример · ссылки в тексте ответа</figcaption>
     <div class="route-question"><span>Вопрос покупателя</span><b>Кто обслуживает оборудование с выездом в выходные?</b></div>

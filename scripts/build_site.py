@@ -40,9 +40,8 @@ def faq(items, heading):
  intro=f'<header class="edition-head"><h2>{heading}</h2></header>'
  return chapter('question-column',intro+'<div class="question-list">'+entries+'</div>','faq'),items
 
-def closing(audit=False):
- question='С чего начать GEO-аудит?' if audit else 'С чего начать продвижение в ИИ?'
- return chapter('brief-stage',headline(question,'Пришлите ссылку на сайт и укажите продукт или услугу, которую хотите продвигать. На консультации обсудим, что важно узнать о вашем бренде и конкурентах.')+f'''
+def closing():
+ return chapter('brief-stage',headline('С чего начать продвижение в ИИ?','Пришлите ссылку на сайт и укажите продукт или услугу, которую хотите продвигать. На консультации обсудим, что важно узнать о вашем бренде и конкурентах.')+f'''
  <a class="action-pill" href="{CONSULT_LINK}" data-open-brief>Записаться на консультацию <span aria-hidden="true">↗</span></a>''','brief')
 
 main = agency_home(home_hero(CONSULT_LINK), asset, CONSULT_LINK, faq_entries)
@@ -56,12 +55,17 @@ why_questions,whyfaq=faq([
  'Что уточнить перед началом GEO?')
 why+=why_questions+closing()
 def audit_opening():
- return f'''<div class="audit-opening"><header class="audit-intro wrap"><div class="audit-offer"><h1>GEO-аудит бренда</h1>
- <p class="short-answer">Узнайте, когда нейросети называют ваш бренд, кого предлагают рядом и куда отправляют читателя за подробностями.</p>
- <p>В отчёте получите ответы по вашим продуктам, ссылки на источники и список страниц, с которых стоит начать работу.</p>
- <div class="actions"><a class="btn primary" href="{CONSULT_LINK}" data-open-brief>Обсудить аудит ↗</a>
- <a class="text-link" href="#observations">Образец отчёта ↓</a></div></div>{report_preview()}</header></div>'''
-
+ return f'''<div class="audit-hero"><section class="audit-opening front-cover" id="audit-start">
+ <div class="wrap cover-layout"><div class="cover-copy"><h1>GEO-аудит <span>бренда</span></h1>
+ <p class="short-answer">Мы покажем, где нейросети называют ваш бренд, с&nbsp;кем сравнивают и&nbsp;куда ведут ссылки. По&nbsp;отчёту вы поймёте, какие темы и&nbsp;страницы требуют внимания.</p>
+ <div class="front-actions"><a class="btn primary" href="{CONSULT_LINK}" data-open-brief>Обсудить аудит <span aria-hidden="true">↗</span></a>
+ <a class="front-link" href="#observations">Смотреть образец <span aria-hidden="true">↓</span></a></div>
+ </div>{report_preview()}</div>
+ <nav class="wrap audit-cover-index" aria-label="Разделы отчёта"><span>В&nbsp;отчёте</span>
+ <a href="#observations">Видимость <span aria-hidden="true">↓</span></a>
+ <a href="#tone">Тональность <span aria-hidden="true">↓</span></a>
+ <a href="#sample">Источники <span aria-hidden="true">↓</span></a></nav>
+ </section></div>'''
 
 
 def audit_model_ribbon():
@@ -77,44 +81,100 @@ def audit_model_ribbon():
   items.append(f'<li><img src="{{PRE}}{asset("brands/" + filename)}" alt="{name}" width="{width}" height="24" style="--mark-width:{width}">{lettering}</li>')
  logos = ''.join(items)
  return f'''<section class="model-ribbon" id="neural-networks" aria-labelledby="audit-models-title">
- <div class="wrap"><h2 id="audit-models-title">Какие нейросети входят в аудит?</h2></div>
+ <div class="wrap model-ribbon-heading"><h2 id="audit-models-title">Какие нейросети входят в&nbsp;аудит?</h2>
+ <p>Сопоставляем ответы по&nbsp;одним и&nbsp;тем же вопросам. В&nbsp;отчёте видно, где вывод повторяется и&nbsp;где зависит от&nbsp;платформы.</p></div>
  <div class="model-ribbon-window" role="group" aria-labelledby="audit-models-title" tabindex="0">
  <ul role="list">{logos}</ul><ul aria-hidden="true">{logos}</ul></div></section>'''
 
 
 def metric_sheet():
  metrics=[
-  ('Упоминание бренда','Название встречается в основном тексте.','Повтор названия в одном ответе засчитывается один раз. Название только в адресе или в подписи ссылки сюда не входит.'),
-  ('Сайт в источниках','Домен есть в списке источников ответа.','Несколько страниц одного сайта дают одно попадание за замер. Источник может остаться за пределами текста, который видит покупатель.'),
-  ('URL в ответе','В тексте ответа есть прямая ссылка на страницу сайта.','Считается и ссылка под словом. В отчёте видно, куда попадёт покупатель по ссылке. Это может быть карточка продукта, обзор или главная страница.')]
- rows=''.join(f'<div><dt>{name}</dt><dd><strong>{definition}</strong><p>{detail}</p></dd></div>' for name,definition,detail in metrics)
- return chapter('measurement-notes',headline('Как читать показатели?','Нейросеть может назвать компанию и отправить читателя на чужой сайт. Поэтому в отчёте отдельно считаем три вещи.')+f'<dl class="measurement-index">{rows}</dl>'+'''<details class="source-book"><summary>Как считается процент?</summary><p>Число замеров с признаком делим на все попытки в выбранной группе. Отказы и ошибки входят в знаменатель и отмечены отдельно. Один ответ может учитываться сразу в нескольких показателях.</p></details>''','results')
+  ('Упоминание', 'Текст ответа', '«<mark>Компания</mark> выполняет выезды по&nbsp;выходным».',
+   'Мы фиксируем, увидел ли покупатель название в&nbsp;ответе. Одного упоминания недостаточно, чтобы считать его рекомендацией.'),
+  ('Источник', 'Список источников', '<span class="evidence-ref"><i aria-hidden="true">↗</i> Сайт компании</span>',
+   'Мы отмечаем домен в&nbsp;источниках, даже если в&nbsp;ответе нейросеть назвала другую компанию.'),
+  ('Прямая ссылка', 'Текст ответа', '«Уточните <span class="evidence-link">условия выезда ↗</span> перед заказом».',
+   'Мы проверяем, на&nbsp;какую страницу ведёт ссылка. Покупателю проще принять решение, если там сразу видны условия.'),
+ ]
+ rows = ''.join(f'''<div class="measurement-item"><dt>{name}</dt><dd>
+ <div class="metric-specimen"><span>{context}</span><p>{example}</p></div><p>{detail}</p></dd></div>'''
+                for name, context, example, detail in metrics)
+ return chapter('measurement-notes', headline('Как читать показатели?', 'Мы различаем три ситуации, даже когда они встречаются в&nbsp;одном ответе. Вот что в&nbsp;каждой увидит покупатель.')+
+ f'<figure class="measurement-figure"><figcaption>Учебный пример</figcaption><dl class="measurement-index">{rows}</dl></figure>'+
+ '<details class="source-book"><summary>Как считается доля ответов?</summary><p>Число замеров с&nbsp;признаком делим на&nbsp;все попытки в&nbsp;выбранной группе. Отказы и&nbsp;ошибки отмечаем отдельно. Один ответ может учитываться в&nbsp;нескольких показателях.</p></details>', 'results')
+
 
 def competitor_sheet():
- rows=[
-  ('Доля голоса','Какую часть всех появлений брендов из списка сравнения занимает ваша компания. Каждый бренд учитывается один раз за ответ.','Кто чаще других попадает в поле зрения покупателя.'),
-  ('Первое место и топ-3','Как часто название встречается первым или среди первых трёх. Среднюю позицию считаем среди ответов, где бренд назван.','Кого клиент видит раньше. Порядок имён сам по себе не доказывает рекомендацию.'),
-  ('Конкурент без вас','По каким вопросам другой бренд появляется, когда вашего нет. Для сайтов так же сравниваем конкретные URL и их порядок в источниках.','По каким темам покупатель видит только конкурента и его страницы.'),
-  ('Повторяемость','В скольких повторах и на каких платформах воспроизводится наблюдение. Ответы на вопросы с названием бренда и без подсказки показываем раздельно.','Какие результаты подтвердились при повторной проверке.')]
- body=''.join(f'<tr><th scope="row">{key}</th><td>{rule}</td><td>{why}</td></tr>' for key,rule,why in rows)
- return chapter('rival-sheet',headline('Где покупатели встречают конкурентов?','Вы увидите соперников по каждому вопросу и платформе. Даже при одинаковой частоте упоминаний порядок брендов и ссылки могут отличаться.')+
- '<table class="rival-table"><thead><tr><th>Показатель</th><th>Что входит в сравнение</th><th>Что это даёт бизнесу</th></tr></thead><tbody>'+body+'</tbody></table>','competitors')
+ rows = (
+  ('Выезд в&nbsp;выходные', 'Есть', 'Есть'),
+  ('Срочный заказ', 'Нет', 'Есть'),
+  ('Договор обслуживания', 'Есть', 'Нет'),
+ )
+ body = ''.join(f'<tr><th scope="row">{topic}</th><td><span data-status="{brand}">{brand}</span></td>'
+                f'<td><span data-status="{rival}">{rival}</span></td></tr>' for topic, brand, rival in rows)
+ return chapter('rival-sheet', headline('Где покупатели встречают конкурентов?', 'Мы сопоставляем компании, которых нейросеть называет по&nbsp;конкретным задачам клиента. Так видно, по&nbsp;каким темам покупатель пока встречает только других поставщиков.')+f'''
+ <figure class="rival-board"><figcaption>Учебный пример · кого назвали в&nbsp;ответе</figcaption>
+ <table class="rival-table"><thead><tr><th scope="col">Тема вопроса</th><th scope="col">Бренд</th><th scope="col">Конкурент</th></tr></thead>
+ <tbody>{body}</tbody></table>
+ <p>В&nbsp;этом примере стоит начать со&nbsp;срочных заказов, если компания их принимает.</p></figure>
+ <details class="source-book"><summary>Что ещё входит в&nbsp;сравнение?</summary>
+ <p>Мы сравниваем долю упоминаний, порядок появления брендов и&nbsp;страницы в&nbsp;источниках. Отдельно отмечаем ответы, где нейросеть прямо советует компанию, и&nbsp;смотрим, повторяется ли вывод.</p></details>''', 'competitors')
+
+
+def audit_decisions():
+ rows = [
+  ('Выбрать тему для продвижения', 'В&nbsp;ответе назвали только конкурента', 'Проверить страницу услуги',
+   'Если компания берёт срочные заказы, проверяем, можно ли узнать об&nbsp;этом из&nbsp;карточки услуги. По&nbsp;выводам аудита вы сможете выбрать тему для продвижения.'),
+  ('Уточнить сведения о&nbsp;продукте', 'В&nbsp;ответе устарели условия', 'Сверить источник и&nbsp;обновить сведения',
+   'Сопоставляем фразу из&nbsp;ответа с&nbsp;текущим предложением. Если причина в&nbsp;старой информации, в&nbsp;отчёте видно, где она опубликована.'),
+ ]
+ items = ''.join(f'''<article><h3>{title}</h3>
+ <ol class="decision-route"><li><span>В&nbsp;ответе</span>{finding}</li>
+ <li><span>Действие</span>{action}</li></ol><p>{description}</p></article>'''
+                 for title, finding, action, description in rows)
+ return chapter('audit-focus', headline('Какие решения можно принять?', 'Связываем наблюдение с&nbsp;конкретной задачей. Вот как из&nbsp;ответа ассистента получается то, что можно поручить команде.')+
+ f'<div class="audit-lenses">{items}</div>', 'audit-value')
+
 
 def deliverables():
- rows=[
- ('Маркетингу','Карта спроса','По каждой теме вы получите вопрос покупателя, частоту упоминаний, имена конкурентов и ссылки на источники. Можно сразу увидеть темы, в которых ваш бренд пока не встречается.'),
- ('Продукту и PR','Что говорят о продукте','Фрагменты ответов с характеристиками продукта и причинами, по которым нейросеть предлагает его или исключает из выбора. Команда сможет сверить спорное утверждение с условиями, которые предлагает клиентам сейчас.'),
- ('Редакции и разработке','Приоритеты по страницам','Для конкретного URL собраны наблюдение, подтверждающий пример и задача по содержанию или доступности страницы. Команда может вернуться к тому же вопросу после изменений.')]
- return chapter('report-delivery',headline('Что вы получите после аудита?','Руководителю передадим выводы по бренду и конкурентам. Команде — таблицу с вопросами, ответами и адресами страниц, которые нужно проверить.')+
- '<div class="delivery-list">'+''.join(f'<div><span>{team}</span><strong>{name}</strong><p>{desc}</p></div>' for team,name,desc in rows)+'</div>','report')
+ rows = [
+  ('Маркетингу', 'Карта спроса', (('Тема', 'Срочный выезд'), ('Вопрос', 'Кто приедет сегодня?'), ('Кого назвали', 'Конкурент')), 'По&nbsp;каждой теме соберём вопросы, частоту упоминаний и&nbsp;имена конкурентов. Вы увидите, в&nbsp;каких задачах покупателя ваш бренд уже заметен.'),
+  ('Продукту и&nbsp;PR', 'Подборка ответов', (('Цитата', '«Выезд по&nbsp;выходным»'), ('Факт', 'График работы'), ('Источник', 'Карточка услуги')), 'Передадим фразы, в&nbsp;которых нейросеть объясняет выбор. Команда сможет сверить характеристики и&nbsp;условия с&nbsp;текущим предложением.'),
+  ('Редакции и&nbsp;разработке', 'Задачи по&nbsp;страницам', (('Страница', 'Карточка услуги'), ('Наблюдение', 'Графика нет'), ('Задача', 'Добавить часы выезда')), 'Свяжем каждый приоритет с&nbsp;адресом страницы и&nbsp;примером ответа. После правки команда сможет вернуться к&nbsp;тому же вопросу.'),
+ ]
+ items = []
+ for team, title, fields, detail in rows:
+  specimen = ''.join(f'<div><dt>{label}</dt><dd>{value}</dd></div>' for label, value in fields)
+  items.append(f'''<article><p class="delivery-team">{team}</p><h3>{title}</h3>
+  <dl class="delivery-specimen">{specimen}</dl><p>{detail}</p></article>''')
+ return chapter('report-delivery', headline('Что вы получите после аудита?', 'Мы передадим выводы для руководителя и&nbsp;приложение с&nbsp;данными для проверки. По&nbsp;учебным фрагментам видно, что получит каждая команда.')+
+ f'<div class="delivery-list">{''.join(items)}</div>', 'report')
 
-audit_focus = chapter('audit-focus', '''<header><h2>Какие решения можно принять?</h2>
- <p>По отчёту можно выбрать тему, где покупатели видят только конкурентов, или найти сведения о вашем предложении, которые пора обновить.</p></header>
- <div class="audit-lenses"><article><h3>Выбрать тему для продвижения</h3><p>Посмотрите, по каким вопросам в ответах есть конкуренты, а вашего продукта пока нет. В отчёте можно отдельно изучить запросы людей, которые уже знают вашу марку.</p></article>
- <article><h3>Исправить сведения о продукте</h3><p>Откройте фразу об условиях или возможностях продукта и сверьте её с действующим предложением. Рядом в отчёте будет источник, на который сослалась нейросеть.</p></article></div>''', 'audit-value')
-audit='<div class="audit-edition">'+audit_opening()+audit_model_ribbon()+observation_figure(asset('audit-workspace.webp'))+tone_figure()+source_map()+metric_sheet()+competitor_sheet()+audit_focus+deliverables()
-x,auditfaq=faq([('Можно ли увидеть реальные ответы из моего аудита?','Да. В приложении доступны тексты, ссылки, даты, модели и статусы замеров. По ним команда может проверить выводы отчёта.'),('Что покажут вопросы без названия компании?','В каких ситуациях ИИ назвал бренд без подсказки. Вопросы с названием мы разбираем отдельно. По ним видно, как ИИ описывает уже известную покупателю компанию.'),('Аудит покажет продажи из ИИ?','Для выводов о продажах нужны данные аналитики и CRM. Аудит показывает содержание ответов, упоминания и ссылки в пределах исследованной выборки.'),('Можно использовать результат со своей командой?','Да. Таблица связывает наблюдения с вопросами и страницами. Редакция или разработчики могут взять задачи в работу.')], 'Что уточнить перед заказом аудита?')
-audit+=x+closing(True)+'</div>'
+
+def audit_closing():
+ return chapter('brief-stage audit-next', headline('С&nbsp;чего начать GEO-аудит?', 'Пришлите ссылку на&nbsp;сайт и&nbsp;укажите продукт или услугу. На&nbsp;консультации обсудим, что вам важно узнать о&nbsp;бренде и&nbsp;конкурентах.')+f'''
+ <div class="audit-mail"><div class="mail-preview" aria-hidden="true">
+ <span>Готовое письмо</span><b>Заявка на&nbsp;консультацию</b>
+ <span>Сайт</span><span>Продукт или услуга</span></div>
+ <a class="btn primary" href="{CONSULT_LINK}" data-open-brief>Записаться на консультацию <span aria-hidden="true">↗</span></a></div>''', 'brief')
+
+
+auditfaq = [
+ ('Можно ли увидеть реальные ответы из&nbsp;моего аудита?', 'Да. Мы передаём тексты ответов, ссылки, даты, названия моделей и&nbsp;статусы замеров. Команда сможет сверить выводы с&nbsp;первичными данными.'),
+ ('Что покажут вопросы без названия компании?', 'Мы покажем, в&nbsp;каких ситуациях нейросеть назвала вас без подсказки. Вопросы с&nbsp;названием разбираем отдельно. По&nbsp;ним видно, как нейросеть описывает уже известную покупателю компанию.'),
+ ('Аудит покажет продажи из&nbsp;нейросетей?', 'Для оценки продаж нужны данные веб-аналитики и&nbsp;CRM. По&nbsp;аудиту мы покажем, где нейросети называют бренд и&nbsp;по&nbsp;каким ссылкам покупатель может перейти на&nbsp;сайт.'),
+ ('Можно использовать результат со&nbsp;своей командой?', 'Да. Мы связываем наблюдения с&nbsp;ответами и&nbsp;страницами. Редакция или разработчики смогут взять задачи в&nbsp;работу.'),
+]
+audit_questions = chapter('question-column audit-questions', headline('Что уточнить перед заказом аудита?', 'К&nbsp;выводам прилагаем материалы, по&nbsp;которым их можно перепроверить.')+'''
+ <div class="audit-faq-evidence"><h3>Как проверить вывод</h3>
+ <ol><li>Найти вопрос покупателя</li><li>Прочитать полный ответ</li><li>Открыть страницу источника</li></ol>
+ <a class="front-link" href="#sample">Посмотреть пример <span aria-hidden="true">↗</span></a></div>
+ <div class="question-list">'''+faq_entries(auditfaq)+'</div>', 'faq')
+audit = '<div class="audit-edition">' + ''.join((
+ audit_opening(), audit_model_ribbon(), observation_figure(asset('audit-workspace.webp')), tone_figure(), source_map(),
+ metric_sheet(), competitor_sheet(), audit_decisions(), deliverables(), audit_questions, audit_closing(),
+)) + '</div>'
+
 
 def reading_layout(sections, label, count_named=True):
  links=[]
@@ -223,7 +283,7 @@ def write(route,title,desc,body,published,article=False,faqs=None):
   if route != 'cases/':
    scripts.append('case-navigation.js')
  if route == 'audit/':
-  styles.append('audit.css')
+  styles.extend(('agency.css', 'audit.css'))
   scripts.append('audit-reveal.js')
  stylesheets = ''.join(f'<link rel="stylesheet" href="{pre}{asset(name)}">' for name in styles)
  image_meta = ''.join(f'<meta property="og:image:{key}" content="{value}">' for key, value in (
@@ -237,7 +297,7 @@ def write(route,title,desc,body,published,article=False,faqs=None):
 PAGES=[]
 def page(route,title,desc,body,date,article=False,faqs=None):write(route,title,desc,body,date,article,faqs);PAGES.append((route,date))
 page('','GEO-продвижение брендов в нейросетях | aileed','Продвигаем бренды в нейросетях. Работаем над упоминаниями, цитированием и ссылками в ответах о ваших товарах и услугах. Кейсы и бесплатный разбор.',main,'2026-10-07',faqs=home_faq)
-page('audit/','GEO-аудит бренда в нейросетях | aileed','GEO-аудит показывает видимость бренда, тональность ответов, конкурентов и источники. Посмотрите интерактивный отчёт на демонстрационных данных.',audit,'2026-11-02',faqs=auditfaq)
+page('audit/','GEO-аудит бренда в нейросетях | aileed','Проверим, как ChatGPT, Алиса и другие нейросети описывают ваш бренд, кого называют рядом и куда ведут ссылки. Посмотрите образец GEO-аудита и состав отчёта.',audit,'2026-11-02',faqs=auditfaq)
 page('why-geo/','Зачем бренду GEO-продвижение? | aileed','Когда покупатели ищут, сравнивают и выбирают бренды в нейросетях. Как оценить пользу GEO для бизнеса и выбрать первое направление продвижения.',why,FIRST_EDITION,faqs=whyfaq)
 page('cases/','Кейсы GEO-продвижения и аудита | aileed','Результаты продвижения модного бренда под NDA и GEO-аудита WINLINE. Переходы из нейросетей, упоминания и цитирование.',case_index(asset),UPDATED)
 case_links = f'''<div class="reading-end wrap"><div class="story-next">

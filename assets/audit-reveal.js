@@ -1,4 +1,31 @@
 (() => {
+  const cover = document.querySelector(".audit-opening");
+  const header = document.querySelector(".site-header");
+  const notice = document.querySelector(".cookie-banner");
+  let frame = 0;
+
+  function updateNavigation() {
+    frame = 0;
+    header.classList.toggle("is-past-cover", cover.getBoundingClientRect().bottom <= header.offsetHeight + 1);
+  }
+  function scheduleNavigation() {
+    if (!frame) frame = requestAnimationFrame(updateNavigation);
+  }
+  function fitCover() {
+    cover.style.setProperty("--top-chrome", header.offsetHeight + notice.offsetHeight + "px");
+    scheduleNavigation();
+  }
+
+  fitCover();
+  window.addEventListener("scroll", scheduleNavigation, { passive: true });
+  window.addEventListener("resize", fitCover);
+  window.addEventListener("pageshow", fitCover);
+  if ("ResizeObserver" in window) {
+    const chrome = new ResizeObserver(fitCover);
+    chrome.observe(header);
+    chrome.observe(notice);
+  }
+
   const spread = document.querySelector(".report-spread");
   const motion = matchMedia("(prefers-reduced-motion: reduce)");
   if (!spread) return;
