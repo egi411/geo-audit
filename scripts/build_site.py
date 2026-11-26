@@ -264,7 +264,11 @@ def write(route,title,desc,body,published,article=False,faqs=None):
  collection = {'blog/':[post[0] for post in POSTS], 'cases/':[f'cases/{key}/' for key in PROJECTS]}
  if route in collection:
   page['hasPart'] = [{'@type':'WebPage','@id':BASE+path+'#page'} for path in collection[route]]
- if faqs:graph.append({'@type':'FAQPage','@id':url+'#faq','isPartOf':{'@id':url+'#page'},'mainEntity':[{'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a}} for q,a in faqs]})
+ if faqs:
+  questions = [{'@type': 'Question', 'name': html.unescape(question),
+                'acceptedAnswer': {'@type': 'Answer', 'text': html.unescape(answer)}}
+               for question, answer in faqs]
+  graph.append({'@type': 'FAQPage', '@id': url + '#faq', 'isPartOf': {'@id': url + '#page'}, 'mainEntity': questions})
  if route:
   label=re.sub(r' \| aileed$','',title)
   crumbs=[{'@type':'ListItem','position':1,'name':'aileed','item':BASE}]
