@@ -20,6 +20,7 @@ for f in files:
   faqs=[node for node in graph if node['@type']=='FAQPage']
   visible=re.findall(r'<summary>([^<]+)</summary>\s*<div class="faq-answer">\s*<p>([^<]+)</p>',s)
   questions=[(q['name'],q['acceptedAnswer']['text']) for faq in faqs for q in faq['mainEntity']]
+  visible = [(html.unescape(question), html.unescape(answer)) for question,answer in visible]
   assert questions==visible,'FAQ markup differs from visible questions and answers'
   title=re.search('<title>(.*?)</title>',s,re.S).group(1);assert title.strip() and title==page['name']
   assert next(a['content'] for t,a in p.tags if t=='meta' and a.get('property')=='og:title')==title
