@@ -54,6 +54,12 @@ for f in files:
    main=s.split('<main id="main">',1)[1].split('</main>',1)[0]
    headings=re.findall(r'<h2(?: [^>]*)?>(.*?)</h2>',main,re.S)
    assert headings and all(heading.strip().endswith('?') for heading in headings), 'section headings must be buyer questions'
+  if name=='why-geo/index.html':
+   guide_anchors = ('before-after', 'before-geo', 'after-geo', 'visibility', 'investment', 'demand', 'outcome', 'practice', 'faq', 'brief')
+   assert all(anchor in ids for anchor in guide_anchors), 'missing GEO guide section'
+   assert main.count('Вопрос покупателя')==1 and 'Оба ответа смоделированы' in main, 'missing shared question or sample label'
+   assert re.findall(r'<h3>(До GEO|После GEO)</h3>', main)==['До GEO', 'После GEO'], 'missing before and after comparison'
+   assert [a.get('value') for t,a in p.tags if t=='input' and a.get('name')=='answer-lens']==['brand','terms','source'], 'comparison annotations missing'
   if name=='audit/index.html':
    assert all(s.count(f'data-measure="{key}"')==1 for key in ('name','source','link'))
    assert 'Учебный отчёт' in s and 'scoreboard' in s and 'tone-ring' in s
