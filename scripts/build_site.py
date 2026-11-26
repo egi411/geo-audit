@@ -6,7 +6,7 @@ import argparse,json,re,html,hashlib
 from urllib.parse import quote
 from xml.sax.saxutils import escape
 from visibility import observation_figure, report_preview, source_map, tone_figure
-from guide import brand_guide
+from guide import FAQ as why_faq, brand_guide
 from editorial import POSTS, TOPICS, cover_art, journal, geo_article, mention_article, competitor_article
 from cases import PROJECTS, case_index, case_article
 from home import FAQ as home_faq, agency_home, home_hero
@@ -35,25 +35,10 @@ def headline(question, answer):
 def faq_entries(items):
  return ''.join(f'<details{" open" if i==0 else ""}><summary>{q}</summary><div class="faq-answer"><p>{a}</p></div></details>' for i,(q,a) in enumerate(items))
 
-def faq(items, heading):
- entries=faq_entries(items)
- intro=f'<header class="edition-head"><h2>{heading}</h2></header>'
- return chapter('question-column',intro+'<div class="question-list">'+entries+'</div>','faq'),items
-
-def closing():
- return chapter('brief-stage',headline('С чего начать продвижение в ИИ?','Пришлите ссылку на сайт и укажите продукт или услугу, которую хотите продвигать. На консультации обсудим, что важно узнать о вашем бренде и конкурентах.')+f'''
- <a class="action-pill" href="{CONSULT_LINK}" data-open-brief>Записаться на консультацию <span aria-hidden="true">↗</span></a>''','brief')
-
 main = agency_home(home_hero(CONSULT_LINK), asset, CONSULT_LINK, faq_entries)
+why = brand_guide(CONSULT_LINK, asset, faq_entries)
 
-# Detail pages.
-why=brand_guide(CONSULT_LINK)
-why_questions,whyfaq=faq([
- ('Когда имеет смысл вложиться в GEO?', 'Когда покупатели могут выбирать между несколькими компаниями и им важно разобраться в различиях до обращения. Если влияние нейросетей на выбор пока неизвестно, начните с разбора текущей видимости.'),
- ('Подойдёт ли GEO компании с известным именем?', 'Да. У известного бренда своя задача: проверить, как нейросети объясняют его предложение, какие ограничения упоминают и куда ведут за подробностями.'),
- ('Как понять, оправдан ли бюджет?', 'Согласуйте, какие темы важны для бизнеса, и зафиксируйте исходное положение. После публикаций сравните видимость по тем же вопросам. Для оценки коммерческого результата понадобятся данные о переходах, обращениях и сделках.')],
- 'Что уточнить перед началом GEO?')
-why+=why_questions+closing()
+
 def audit_opening():
  return f'''<div class="audit-hero"><section class="audit-opening front-cover" id="audit-start">
  <div class="wrap cover-layout"><div class="cover-copy"><h1>GEO-аудит <span>бренда</span></h1>
@@ -286,6 +271,8 @@ def write(route,title,desc,body,published,article=False,faqs=None):
   styles.append('cases.css')
   if route != 'cases/':
    scripts.append('case-navigation.js')
+ if route == 'why-geo/':
+  styles.append('why-geo.css')
  if route == 'audit/':
   styles.extend(('agency.css', 'audit.css'))
   scripts.append('audit-reveal.js')
@@ -302,7 +289,7 @@ PAGES=[]
 def page(route,title,desc,body,date,article=False,faqs=None):write(route,title,desc,body,date,article,faqs);PAGES.append((route,date))
 page('','GEO-продвижение брендов в нейросетях | aileed','Продвигаем бренды в нейросетях. Работаем над упоминаниями, цитированием и ссылками в ответах о ваших товарах и услугах. Кейсы и бесплатный разбор.',main,'2026-10-07',faqs=home_faq)
 page('audit/','GEO-аудит бренда в нейросетях | aileed','Проверим, как ChatGPT, Алиса и другие нейросети описывают ваш бренд, кого называют рядом и куда ведут ссылки. Посмотрите образец GEO-аудита и состав отчёта.',audit,'2026-11-02',faqs=auditfaq)
-page('why-geo/','Зачем бренду GEO-продвижение? | aileed','Когда покупатели ищут, сравнивают и выбирают бренды в нейросетях. Как оценить пользу GEO для бизнеса и выбрать первое направление продвижения.',why,FIRST_EDITION,faqs=whyfaq)
+page('why-geo/','Зачем бренду GEO-продвижение? | aileed','Зачем бренду GEO-продвижение. Сравните два ответа нейросети на один вопрос покупателя и узнайте, как оценить упоминания, ссылки, переходы и обращения.',why,FIRST_EDITION,faqs=why_faq)
 page('cases/','Кейсы GEO-продвижения и аудита | aileed','Результаты продвижения модного бренда под NDA и GEO-аудита WINLINE. Переходы из нейросетей, упоминания и цитирование.',case_index(asset),UPDATED)
 case_links = f'''<div class="reading-end wrap"><div class="story-next">
  <a class="btn primary" href="{CONSULT_LINK}" data-open-brief>Обсудить свой проект ↗</a>
