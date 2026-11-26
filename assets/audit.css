@@ -706,6 +706,7 @@
   font-variant-numeric: tabular-nums;
 }
 .preview-reading small {
+  margin-left: .13em;
   color: #c2d1ff;
   font-size: .33em;
   letter-spacing: -.03em;
