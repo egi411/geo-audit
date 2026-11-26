@@ -56,9 +56,10 @@ def audit_opening():
 def audit_model_ribbon():
  # Widths are the native SVG proportions. Wordmarks include their lettering.
  models = (
-  ('ChatGPT', 'chatgpt.svg', 24), ('Claude', 'claude-lockup.svg', 124),
-  ('Grok', 'grok-lockup.svg', 89), ('Gemini', 'gemini-text.svg', 98),
-  ('Алиса', 'alice-mono.svg', 24), ('GigaChat', 'gigachat.svg', 24),
+  ('Claude', 'claude-lockup.svg', 124), ('ChatGPT', 'chatgpt.svg', 24),
+  ('Gemini', 'gemini-text.svg', 98), ('DeepSeek', 'deepseek.svg', 24),
+  ('Алиса', 'alice-mono.svg', 24), ('Google AI Overviews', 'google.svg', 24),
+  ('Perplexity', 'perplexity.svg', 24),
  )
  items = []
  for name, filename, width in models:
@@ -66,8 +67,8 @@ def audit_model_ribbon():
   items.append(f'<li><img src="{{PRE}}{asset("brands/" + filename)}" alt="{name}" width="{width}" height="24" style="--mark-width:{width}">{lettering}</li>')
  logos = ''.join(items)
  return f'''<section class="model-ribbon" id="neural-networks" aria-labelledby="audit-models-title">
- <div class="wrap model-ribbon-heading"><h2 id="audit-models-title">Какие нейросети входят в&nbsp;аудит?</h2>
- <p>Сопоставляем ответы по&nbsp;одним и&nbsp;тем же вопросам. В&nbsp;отчёте видно, где вывод повторяется и&nbsp;где зависит от&nbsp;платформы.</p></div>
+ <div class="wrap model-ribbon-heading"><h2 id="audit-models-title">Где мы проверяем ответы?</h2>
+ <p>Сравниваем ответы ассистентов и&nbsp;обзоры ИИ в&nbsp;поиске Google по&nbsp;одним и&nbsp;тем же вопросам. В&nbsp;отчёте показываем, какие выводы повторяются.</p></div>
  <div class="model-ribbon-window" role="group" aria-labelledby="audit-models-title" tabindex="0">
  <ul role="list">{logos}</ul><ul aria-hidden="true">{logos}</ul></div></section>'''
 
@@ -288,7 +289,7 @@ def write(route,title,desc,body,published,article=False,faqs=None):
 PAGES=[]
 def page(route,title,desc,body,date,article=False,faqs=None):write(route,title,desc,body,date,article,faqs);PAGES.append((route,date))
 page('','GEO-продвижение брендов в нейросетях | aileed','Продвигаем бренды в нейросетях. Работаем над упоминаниями, цитированием и ссылками в ответах о ваших товарах и услугах. Кейсы и бесплатный разбор.',main,'2026-10-07',faqs=home_faq)
-page('audit/','GEO-аудит бренда в нейросетях | aileed','Проверим, как ChatGPT, Алиса и другие нейросети описывают ваш бренд, кого называют рядом и куда ведут ссылки. Посмотрите образец GEO-аудита и состав отчёта.',audit,'2026-11-02',faqs=auditfaq)
+page('audit/','GEO-аудит бренда в нейросетях | aileed','GEO-аудит бренда в Claude, ChatGPT, Gemini, DeepSeek, Алисе, Google AI Overviews и Perplexity. Проверим упоминания, конкурентов и ссылки в ответах.',audit,'2026-11-02',faqs=auditfaq)
 page('why-geo/','Зачем бренду GEO-продвижение? | aileed','Зачем бренду GEO-продвижение. Сравните два ответа нейросети на один вопрос покупателя и узнайте, как оценить упоминания, ссылки, переходы и обращения.',why,FIRST_EDITION,faqs=why_faq)
 page('cases/','Кейсы GEO-продвижения и аудита | aileed','Результаты продвижения модного бренда под NDA и GEO-аудита WINLINE. Переходы из нейросетей, упоминания и цитирование.',case_index(asset),UPDATED)
 case_links = f'''<div class="reading-end wrap"><div class="story-next">

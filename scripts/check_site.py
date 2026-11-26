@@ -70,7 +70,8 @@ for f in files:
    assert 'audit-opening front-cover' in audit_main and 'Учебный срез' in audit_main, 'audit cover or sample label missing'
    assert [a.get('value') for t, a in p.tags if t=='input' and a.get('name')=='preview-metric']==['name','source','link'], 'audit cover measures missing'
    roster = re.search(r'<section class="model-ribbon".*?<ul role="list">(.*?)</ul>', audit_main, re.S)
-   assert roster and re.findall(r'alt="([^"]+)"', roster[1]) == ['ChatGPT','Claude','Grok','Gemini','Алиса','GigaChat'], 'unexpected audit models'
+   expected_platforms = ['Claude', 'ChatGPT', 'Gemini', 'DeepSeek', 'Алиса', 'Google AI Overviews', 'Perplexity']
+   assert roster and re.findall(r'alt="([^"]+)"', roster[1]) == expected_platforms, 'unexpected audit platforms'
   if name.startswith(('blog/','what-is-geo/')):
    for t,a in p.tags:
     if t!='a': continue
