@@ -1,5 +1,6 @@
 """Marketing homepage and its visibility target."""
 from math import cos, radians, sin
+from icons import topic_icon
 
 FAQ = [
     ("Что мы узнаем на бесплатном разборе?",
@@ -49,23 +50,24 @@ def home_hero(contact):
     <div class="cover-copy"><h1>Продвижение брендов <span>в нейросетях</span></h1>
     <p class="short-answer">Помогаем вашему бренду попасть в круг компаний, которые покупатель сравнивает в нейросети перед заказом.</p>
     <div class="front-actions"><a class="btn primary" href="{contact}" data-open-brief>Получить бесплатный разбор <span aria-hidden="true">↗</span></a>
-    <a class="front-link" href="#projects">Смотреть кейсы <span aria-hidden="true">↓</span></a></div></div>
+    <a class="front-link" href="#projects">Смотреть кейсы <span aria-hidden="true">↓</span></a></div>
+    <p class="front-brief-note">На&nbsp;разборе покажем, с&nbsp;каких вопросов покупателей начать. Для записи откроется готовое письмо.</p></div>
     <figure class="visibility-scene" id="business">{visibility_dial()}
-    <figcaption class="visibility-caption"><strong aria-label="100 процентов"><span data-coverage-value aria-hidden="true">100</span><small aria-hidden="true">%</small></strong>
-    <b>Цель продвижения</b><p>Присутствовать в ответах на выбранные вопросы покупателей.</p></figcaption></figure>
+    <figcaption class="visibility-caption"><b>Цель продвижения</b><strong aria-label="100 процентов"><span data-coverage-value aria-hidden="true">100</span><small aria-hidden="true">%</small></strong>
+    <p>Ориентир для выбранных вопросов покупателей.</p></figcaption></figure>
     </div><div class="wrap cover-foot"><span>Из практики aileed</span>
     <a href="cases/fashion/"><strong>10 000+</strong><span>переходов из ИИ</span><i aria-hidden="true">↗</i></a>
     <a href="cases/winline/"><strong>15 000</strong><span>замеров для WINLINE</span><i aria-hidden="true">↗</i></a></div></section>'''
 
 
 def fit():
-    return '''<section class="fit-section" id="demand" aria-labelledby="fit-title"><div class="wrap">
+    return f'''<section class="fit-section" id="demand" aria-labelledby="fit-title"><div class="wrap">
     <header class="fit-heading"><h2 id="fit-title">Когда мы можем помочь?</h2>
     <p>Начинаем с&nbsp;одного продукта или услуги, по&nbsp;которым вам важно получать новые обращения.</p></header>
     <dl class="fit-cases">
-    <div><dt>Покупатели ещё не&nbsp;знают о&nbsp;продукте</dt><dd>Помогаем сделать так, чтобы они могли найти предложение по&nbsp;своей задаче, прежде чем узнают название бренда.</dd></div>
-    <div><dt>В&nbsp;сравнениях называют конкурентов</dt><dd>Помогаем раскрыть, кому подходит ваш продукт и&nbsp;что может стать причиной выбрать именно его.</dd></div>
-    <div><dt>О&nbsp;вас говорят по&nbsp;устаревшим данным</dt><dd>Помогаем обновить сведения о&nbsp;продукте, чтобы покупателю было проще проверить актуальные условия.</dd></div>
+    <div><dt>{topic_icon('search')}Покупатели ещё не&nbsp;знают о&nbsp;продукте</dt><dd>Помогаем сделать так, чтобы они могли найти предложение по&nbsp;своей задаче, прежде чем узнают название бренда.</dd></div>
+    <div><dt>{topic_icon('compare')}В&nbsp;сравнениях называют конкурентов</dt><dd>Помогаем раскрыть, кому подходит ваш продукт и&nbsp;что может стать причиной выбрать именно его.</dd></div>
+    <div><dt>{topic_icon('refresh')}О&nbsp;вас говорят по&nbsp;устаревшим данным</dt><dd>Помогаем обновить сведения о&nbsp;продукте, чтобы покупателю было проще проверить актуальные условия.</dd></div>
     </dl><a class="front-link" href="why-geo/">Когда GEO имеет смысл <span aria-hidden="true">↗</span></a>
     </div></section>'''
 
@@ -88,7 +90,7 @@ def projects(asset):
 
 
 def scope():
-    return '''<section class="scope-section" id="scope" aria-labelledby="scope-title"><div class="wrap work-layout">
+    return f'''<section class="scope-section" id="scope" aria-labelledby="scope-title"><div class="wrap work-layout">
     <div class="work-intro">
     <h2 id="scope-title">Что мы меняем в&nbsp;ответах нейросетей?</h2>
     <p>Работаем с&nbsp;тем, что компания рассказывает о&nbsp;себе, и&nbsp;с&nbsp;тем, что покупатель может узнать из&nbsp;других публикаций.</p>
@@ -98,11 +100,11 @@ def scope():
     <span class="display-line display-link">Переходят <i>↗</i></span>
     </div></div>
     <div class="work-items">
-    <article class="work-item" data-result="mention"><h3>Бренд включают в&nbsp;сравнение</h3>
+    <article class="work-item" data-result="mention">{topic_icon('chat')}<h3>Бренд включают в&nbsp;сравнение</h3>
     <p>Мы раскрываем условия и&nbsp;отличия предложения по&nbsp;тем вопросам, с&nbsp;которых покупатель начинает выбор. У&nbsp;него появляется больше оснований рассмотреть ваш продукт, даже если он ещё не&nbsp;знает названия компании.</p></article>
-    <article class="work-item" data-result="citation"><h3>На&nbsp;ваши материалы ссылаются</h3>
+    <article class="work-item" data-result="citation">{topic_icon('quote')}<h3>На&nbsp;ваши материалы ссылаются</h3>
     <p>Мы добавляем на&nbsp;страницы проверяемые условия, характеристики и&nbsp;ответы на&nbsp;частые вопросы. Эти сведения можно процитировать. Так у&nbsp;нейросетей появляется источник, на&nbsp;который можно сослаться.</p></article>
-    <article class="work-item" data-result="link"><h3>На&nbsp;ваш сайт переходят за&nbsp;деталями</h3>
+    <article class="work-item" data-result="link">{topic_icon('link')}<h3>На&nbsp;ваш сайт переходят за&nbsp;деталями</h3>
     <p>Мы помогаем сделать полезной саму страницу назначения. По&nbsp;ссылке из&nbsp;ответа покупатель может проверить условия, посмотреть товар или обратиться в&nbsp;компанию.</p></article>
     </div></div></section>'''
 
@@ -110,8 +112,8 @@ def scope():
 def agency_home(hero, asset, contact, entries):
     offers = f'''<section class="choice-section" id="offers"><div class="wrap choice-layout"><h2>С&nbsp;чего мы предлагаем начать?</h2>
     <div class="choice-links" id="from-answer">
-    <a class="choice-primary" href="{contact}" data-open-brief><h3>GEO-продвижение</h3><p>Если вы уже знаете, какой продукт нужно продвигать. Мы работаем над&nbsp;тем, чтобы бренд чаще называли в&nbsp;ответах и&nbsp;давали ссылки на&nbsp;ваши страницы.</p><span>Обсудить продвижение ↗</span></a>
-    <a href="audit/"><h3>GEO-аудит</h3><p>Если сначала нужно выяснить, как вас описывают сейчас, с&nbsp;кем сравнивают и&nbsp;откуда берут сведения. Мы покажем, с&nbsp;чего начать работу.</p><span>Что входит в&nbsp;аудит ↗</span></a>
+    <a class="choice-primary" href="{contact}" data-open-brief><h3>{topic_icon('target')}GEO-продвижение</h3><p>Если вы уже знаете, какой продукт нужно продвигать. Мы работаем над&nbsp;тем, чтобы бренд чаще называли в&nbsp;ответах и&nbsp;давали ссылки на&nbsp;ваши страницы.</p><span>Обсудить продвижение ↗</span></a>
+    <a href="audit/"><h3>{topic_icon('search')}GEO-аудит</h3><p>Если сначала нужно выяснить, как вас описывают сейчас, с&nbsp;кем сравнивают и&nbsp;откуда берут сведения. Мы покажем, с&nbsp;чего начать работу.</p><span>Что входит в&nbsp;аудит ↗</span></a>
     </div></div></section>'''
     questions = f'''<section class="front-questions" id="faq"><div class="wrap faq-layout">
     <h2>Что важно знать перед началом?</h2><div class="question-list">{entries(FAQ)}</div></div></section>'''

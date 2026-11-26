@@ -73,6 +73,13 @@ body:has(.front-cover) .site-header:not(.is-past-cover) .nav-cta {
   font-size: clamp(1.06rem, 1.4vw, 1.28rem);
   line-height: 1.48;
 }
+.front-brief-note {
+  margin: .72rem 0 0;
+  max-width: 45ch;
+  color: #d5def8;
+  font-size: .87rem;
+  line-height: 1.36;
+}
 .front-actions {
   display: flex;
   align-items: center;
@@ -145,7 +152,7 @@ body:has(.front-cover) .site-header:not(.is-past-cover) .nav-cta {
 }
 .visibility-caption {
   position: absolute;
-  inset: 32% 20% auto;
+  inset: 31% 20% auto;
   display: grid;
   justify-items: center;
   text-align: center;
@@ -166,9 +173,10 @@ body:has(.front-cover) .site-header:not(.is-past-cover) .nav-cta {
   letter-spacing: -0.05em;
 }
 .visibility-caption b {
-  font-weight: 540;
-  font-size: 1rem;
-  margin-top: 0.45rem;
+  color: #eff4ff;
+  font-weight: 660;
+  font-size: 1.11rem;
+  margin-bottom: .4rem;
 }
 .visibility-caption p {
   max-width: 23ch;
@@ -411,6 +419,10 @@ body:has(.front-cover) .site-header:not(.is-past-cover) .nav-cta {
 .work-display[data-current="citation"] .display-citation,
 .work-display[data-current="link"] .display-link { opacity: 1; transform: none; }
 .work-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: .82rem;
+  align-items: start;
   padding-block: 1.15rem clamp(2.25rem, 8svh, 5.15rem);
   border-top: 1px solid var(--rule);
 }
@@ -421,7 +433,13 @@ body:has(.front-cover) .site-header:not(.is-past-cover) .nav-cta {
   line-height: 1.02;
   margin-bottom: .75rem;
 }
-.work-item p { max-width: 46ch; color: var(--sub); }
+.work-item > .topic-icon {
+  width: clamp(1.45rem, 2.7vw, 2.4rem);
+  height: auto;
+  margin-top: .15rem;
+}
+.work-item p { grid-column: 2; max-width: 46ch; color: var(--sub); }
+.choice-primary .topic-icon { color: #dce6ff; }
 .choice-layout > h2 { margin-bottom: clamp(1.2rem, 4vw, 2.6rem); }
 .choice-links {
   display: grid;
@@ -497,7 +515,7 @@ body:has(.front-cover) .site-header:not(.is-past-cover) .nav-cta {
     font-size: clamp(3.1rem, 6.4vw, 4.6rem);
   }
   .visibility-caption b {
-    font-size: 0.9rem;
+    font-size: 0.96rem;
   }
 }
 @media (max-width: 760px) {
@@ -517,7 +535,7 @@ body:has(.front-cover) .site-header:not(.is-past-cover) .nav-cta {
   .cover-copy .short-answer {
     max-width: 36ch;
     margin: 0.9rem 0 1.2rem;
-    font-size: 1.04rem;
+    font-size: 1rem;
   }
   .front-actions { justify-content: flex-start; }
   .visibility-scene {
@@ -529,7 +547,7 @@ body:has(.front-cover) .site-header:not(.is-past-cover) .nav-cta {
     font-size: clamp(3.3rem, min(12vw, 7.8svh), 5.1rem);
   }
   .visibility-caption b {
-    font-size: 0.9rem;
+    font-size: 0.96rem;
   }
   .visibility-caption p {
     font-size: 0.78rem;
