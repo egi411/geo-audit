@@ -7,6 +7,7 @@ from urllib.parse import quote
 from xml.sax.saxutils import escape
 from visibility import observation_figure, report_preview, source_map, tone_figure
 from guide import FAQ as why_faq, brand_guide
+from icons import topic_icon
 from editorial import POSTS, TOPICS, cover_art, journal, geo_article, mention_article, competitor_article
 from cases import PROJECTS, case_index, case_article
 from home import FAQ as home_faq, agency_home, home_hero
@@ -21,9 +22,23 @@ def asset(name):
  digest = hashlib.sha256(path.read_bytes()).hexdigest()[:12]
  return f'assets/{name}?v={digest}'
 CONSULT_EMAIL = "egorkl2307@gmail.com"
-CONSULT_SUBJECT = quote("Заявка на бесплатную консультацию")
-CONSULT_BODY = quote("Здравствуйте! Хочу записаться на бесплатную консультацию.\n\nСайт: \nПродукт или услуга для продвижения: ")
-CONSULT_LINK = f"mailto:{CONSULT_EMAIL}?subject={CONSULT_SUBJECT}&amp;body={CONSULT_BODY}"
+CONSULTATIONS = {
+ 'general': ('Бесплатная консультация', 'Напишите, что хотите обсудить. Если есть сайт, приложите ссылку. Ответим на письмо и согласуем консультацию.', 'Заявка на бесплатную консультацию', 'Здравствуйте! Хочу обсудить GEO для своего проекта.\n\nСайт: \nМоя задача: '),
+ 'promotion': ('Бесплатный разбор продвижения', 'Пришлите сайт и назовите продукт или услугу. На консультации покажем, с каких вопросов покупателей можно начать.', 'Бесплатный разбор GEO-продвижения', 'Здравствуйте! Хочу обсудить GEO-продвижение.\n\nСайт: \nПродукт или услуга: '),
+ 'audit': ('Обсудить GEO-аудит', 'Пришлите ссылку на сайт и укажите, какой продукт или услугу хотите проверить. На консультации обсудим, что вам важно узнать о бренде и конкурентах.', 'Обсуждение GEO-аудита', 'Здравствуйте! Хочу обсудить GEO-аудит.\n\nСайт: \nПродукт или услуга для аудита: \nЧто хочу проверить: '),
+}
+CONSULT_LINKS = {
+ key: f'mailto:{CONSULT_EMAIL}?subject={quote(subject)}&amp;body={quote(body)}'
+ for key, (_, _, subject, body) in CONSULTATIONS.items()
+}
+CONSULT_ROUTES = {
+ '': 'promotion', 'why-geo/': 'promotion', 'cases/fashion/': 'promotion',
+ 'audit/': 'audit', 'cases/winline/': 'audit',
+}
+
+def consult_kind(route):
+ return CONSULT_ROUTES.get(route, 'general')
+
 
 def chapter(name, content, anchor=''):
  anchor = f' id="{anchor}"' if anchor else ''
@@ -35,19 +50,20 @@ def headline(question, answer):
 def faq_entries(items):
  return ''.join(f'<details{" open" if i==0 else ""}><summary>{q}</summary><div class="faq-answer"><p>{a}</p></div></details>' for i,(q,a) in enumerate(items))
 
-main = agency_home(home_hero(CONSULT_LINK), asset, CONSULT_LINK, faq_entries)
-why = brand_guide(CONSULT_LINK, asset, faq_entries)
+main = agency_home(home_hero(CONSULT_LINKS['promotion']), asset, CONSULT_LINKS['promotion'], faq_entries)
+why = brand_guide(CONSULT_LINKS['promotion'], asset, faq_entries)
 
 
 def audit_opening():
  return f'''<div class="audit-hero"><section class="audit-opening front-cover" id="audit-start">
  <div class="wrap cover-layout"><div class="cover-copy"><h1>GEO-аудит <span>бренда</span></h1>
  <p class="short-answer">Мы покажем, где нейросети называют ваш бренд, с&nbsp;кем сравнивают и&nbsp;куда ведут ссылки. По&nbsp;отчёту вы поймёте, какие темы и&nbsp;страницы требуют внимания.</p>
- <div class="front-actions"><a class="btn primary" href="{CONSULT_LINK}" data-open-brief>Обсудить аудит <span aria-hidden="true">↗</span></a>
+ <div class="front-actions"><a class="btn primary" href="{CONSULT_LINKS['audit']}" data-open-brief>Обсудить аудит <span aria-hidden="true">↗</span></a>
  <a class="front-link" href="#observations">Смотреть образец <span aria-hidden="true">↓</span></a></div>
+ <p class="front-brief-note">Для записи откроется готовое письмо.</p>
  </div>{report_preview()}</div>
  <nav class="wrap audit-cover-index" aria-label="Разделы отчёта"><span>В&nbsp;отчёте</span>
- <a href="#observations">Видимость <span aria-hidden="true">↓</span></a>
+ <a href="#report">Состав отчёта <span aria-hidden="true">↓</span></a>
  <a href="#tone">Тональность <span aria-hidden="true">↓</span></a>
  <a href="#sample">Источники <span aria-hidden="true">↓</span></a></nav>
  </section></div>'''
@@ -75,16 +91,16 @@ def audit_model_ribbon():
 
 def metric_sheet():
  metrics=[
-  ('Упоминание', 'Текст ответа', '«<mark>Компания</mark> выполняет выезды по&nbsp;выходным».',
+  ('chat', 'Упоминание', 'Текст ответа', '«<mark>Компания</mark> выполняет выезды по&nbsp;выходным».',
    'Мы фиксируем, увидел ли покупатель название в&nbsp;ответе. Одного упоминания недостаточно, чтобы считать его рекомендацией.'),
-  ('Источник', 'Список источников', '<span class="evidence-ref"><i aria-hidden="true">↗</i> Сайт компании</span>',
+  ('document', 'Источник', 'Список источников', '<span class="evidence-ref"><i aria-hidden="true">↗</i> Сайт компании</span>',
    'Мы отмечаем домен в&nbsp;источниках, даже если в&nbsp;ответе нейросеть назвала другую компанию.'),
-  ('Прямая ссылка', 'Текст ответа', '«Уточните <span class="evidence-link">условия выезда ↗</span> перед заказом».',
+  ('link', 'Прямая ссылка', 'Текст ответа', '«Уточните <span class="evidence-link">условия выезда ↗</span> перед заказом».',
    'Мы проверяем, на&nbsp;какую страницу ведёт ссылка. Покупателю проще принять решение, если там сразу видны условия.'),
  ]
- rows = ''.join(f'''<div class="measurement-item"><dt>{name}</dt><dd>
+ rows = ''.join(f'''<div class="measurement-item"><dt>{topic_icon(glyph)}{name}</dt><dd>
  <div class="metric-specimen"><span>{context}</span><p>{example}</p></div><p>{detail}</p></dd></div>'''
-                for name, context, example, detail in metrics)
+                for glyph, name, context, example, detail in metrics)
  return chapter('measurement-notes', headline('Как читать показатели?', 'Мы различаем три ситуации, даже когда они встречаются в&nbsp;одном ответе. Вот что в&nbsp;каждой увидит покупатель.')+
  f'<figure class="measurement-figure"><figcaption>Учебный пример</figcaption><dl class="measurement-index">{rows}</dl></figure>'+
  '<details class="source-book"><summary>Как считается доля ответов?</summary><p>Число замеров с&nbsp;признаком делим на&nbsp;все попытки в&nbsp;выбранной группе. Отказы и&nbsp;ошибки отмечаем отдельно. Один ответ может учитываться в&nbsp;нескольких показателях.</p></details>', 'results')
@@ -109,29 +125,29 @@ def competitor_sheet():
 
 def audit_decisions():
  rows = [
-  ('Выбрать тему для продвижения', 'Упомянули только конкурента', 'Проверить страницу услуги',
+  ('target', 'Выбрать тему для продвижения', 'Упомянули только конкурента', 'Проверить страницу услуги',
    'Если компания берёт срочные заказы, проверяем, можно ли узнать об&nbsp;этом из&nbsp;карточки услуги. По&nbsp;выводам аудита вы сможете выбрать тему для продвижения.'),
-  ('Уточнить сведения о&nbsp;продукте', 'Указали старые условия', 'Сверить источник и&nbsp;условия',
+  ('refresh', 'Уточнить сведения о&nbsp;продукте', 'Указали старые условия', 'Сверить источник и&nbsp;условия',
    'Сопоставляем фразу из&nbsp;ответа с&nbsp;текущим предложением. Если причина в&nbsp;старой информации, в&nbsp;отчёте видно, где она опубликована.'),
  ]
- items = ''.join(f'''<article><h3>{title}</h3>
+ items = ''.join(f'''<article><h3>{topic_icon(glyph)}{title}</h3>
  <ol class="decision-route"><li><span>В&nbsp;ответе</span>{finding}</li>
  <li><span>Действие</span>{action}</li></ol><p>{description}</p></article>'''
-                 for title, finding, action, description in rows)
+                 for glyph, title, finding, action, description in rows)
  return chapter('audit-focus', headline('Какие решения можно принять?', 'Связываем наблюдение с&nbsp;конкретной задачей. Вот как из&nbsp;ответа ассистента получается то, что можно поручить команде.')+
  f'<div class="audit-lenses">{items}</div>', 'audit-value')
 
 
 def deliverables():
  rows = [
-  ('Маркетингу', 'Карта спроса', (('Тема', 'Срочный выезд'), ('Вопрос', 'Кто приедет сегодня?'), ('Кого назвали', 'Конкурент')), 'По&nbsp;каждой теме соберём вопросы, частоту упоминаний и&nbsp;имена конкурентов. Вы увидите, в&nbsp;каких задачах покупателя ваш бренд уже заметен.'),
-  ('Продукту и&nbsp;PR', 'Подборка ответов', (('Цитата', '«Выезд по&nbsp;выходным»'), ('Факт', 'График работы'), ('Источник', 'Карточка услуги')), 'Передадим фразы, в&nbsp;которых нейросеть объясняет выбор. Команда сможет сверить характеристики и&nbsp;условия с&nbsp;текущим предложением.'),
-  ('Редакции и&nbsp;разработке', 'Задачи по&nbsp;страницам', (('Страница', 'Карточка услуги'), ('Наблюдение', 'Графика нет'), ('Задача', 'Добавить часы выезда')), 'Свяжем каждый приоритет с&nbsp;адресом страницы и&nbsp;примером ответа. После правки команда сможет вернуться к&nbsp;тому же вопросу.'),
+  ('map', 'Маркетингу', 'Карта спроса', (('Тема', 'Срочный выезд'), ('Вопрос', 'Кто приедет сегодня?'), ('Кого назвали', 'Конкурент')), 'По&nbsp;каждой теме соберём вопросы, частоту упоминаний и&nbsp;имена конкурентов. Вы увидите, в&nbsp;каких задачах покупателя ваш бренд уже заметен.'),
+  ('quote', 'Продукту и&nbsp;PR', 'Подборка ответов', (('Цитата', '«Выезд по&nbsp;выходным»'), ('Факт', 'График работы'), ('Источник', 'Карточка услуги')), 'Передадим фразы, в&nbsp;которых нейросеть объясняет выбор. Команда сможет сверить характеристики и&nbsp;условия с&nbsp;текущим предложением.'),
+  ('checklist', 'Редакции и&nbsp;разработке', 'Задачи по&nbsp;страницам', (('Страница', 'Карточка услуги'), ('Наблюдение', 'Графика нет'), ('Задача', 'Добавить часы выезда')), 'Свяжем каждый приоритет с&nbsp;адресом страницы и&nbsp;примером ответа. После правки команда сможет вернуться к&nbsp;тому же вопросу.'),
  ]
  items = []
- for team, title, fields, detail in rows:
+ for glyph, team, title, fields, detail in rows:
   specimen = ''.join(f'<div><dt>{label}</dt><dd>{value}</dd></div>' for label, value in fields)
-  items.append(f'''<article><p class="delivery-team">{team}</p><h3>{title}</h3>
+  items.append(f'''<article><p class="delivery-team">{topic_icon(glyph)}{team}</p><h3>{title}</h3>
   <dl class="delivery-specimen">{specimen}</dl><p>{detail}</p></article>''')
  return chapter('report-delivery', headline('Что вы получите после аудита?', 'Мы передадим выводы для руководителя и&nbsp;приложение с&nbsp;данными для проверки. По&nbsp;учебным фрагментам видно, что получит каждая команда.')+
  f'<div class="delivery-list">{''.join(items)}</div>', 'report')
@@ -140,9 +156,9 @@ def deliverables():
 def audit_closing():
  return chapter('brief-stage audit-next', headline('С&nbsp;чего начать GEO-аудит?', 'Пришлите ссылку на&nbsp;сайт и&nbsp;укажите продукт или услугу. На&nbsp;консультации обсудим, что вам важно узнать о&nbsp;бренде и&nbsp;конкурентах.')+f'''
  <div class="audit-mail"><div class="mail-preview" aria-hidden="true">
- <span>Готовое письмо</span><b>Заявка на&nbsp;консультацию</b>
+ <span>Готовое письмо</span><b>Обсуждение GEO-аудита</b>
  <span>Сайт</span><span>Продукт или услуга</span></div>
- <a class="btn primary" href="{CONSULT_LINK}" data-open-brief>Записаться на консультацию <span aria-hidden="true">↗</span></a></div>''', 'brief')
+ <a class="btn primary" href="{CONSULT_LINKS['audit']}" data-open-brief>Записаться на консультацию <span aria-hidden="true">↗</span></a></div>''', 'brief')
 
 
 auditfaq = [
@@ -157,8 +173,8 @@ audit_questions = chapter('question-column audit-questions', headline('Что у
  <a class="front-link" href="#sample">Посмотреть пример <span aria-hidden="true">↗</span></a></div>
  <div class="question-list">'''+faq_entries(auditfaq)+'</div>', 'faq')
 audit = '<div class="audit-edition">' + ''.join((
- audit_opening(), audit_model_ribbon(), observation_figure(asset('audit-workspace.webp')), tone_figure(), source_map(),
- metric_sheet(), competitor_sheet(), audit_decisions(), deliverables(), audit_questions, audit_closing(),
+ audit_opening(), audit_model_ribbon(), deliverables(), observation_figure(asset('audit-workspace.webp')), tone_figure(), source_map(),
+ metric_sheet(), competitor_sheet(), audit_decisions(), audit_questions, audit_closing(),
 )) + '</div>'
 
 
@@ -192,7 +208,7 @@ def common_header(pre,current):
  return f'''<a class="skip" href="#main">К содержанию</a><header class="site-header"><div class="wrap nav">
  <a class="logo" href="{pre or "./"}" aria-label="aileed — главная"><img class="wordmark-logo" src="{pre}{asset('aileed-logo.svg')}" width="170" height="46" alt="aileed"></a>
  <nav class="nav-links" id="navigation" aria-label="Основная навигация">{''.join(links)}</nav>
- <a class="btn nav-cta" href="{CONSULT_LINK}" data-open-brief><span class="desktop-label">Бесплатная консультация</span><span class="mobile-label">Консультация</span><span aria-hidden="true">↗</span></a>
+ <a class="btn nav-cta" href="{CONSULT_LINKS[consult_kind(current)]}" data-open-brief><span class="desktop-label">Бесплатная консультация</span><span class="mobile-label">Консультация</span><span aria-hidden="true">↗</span></a>
  <button class="menu-toggle" aria-controls="navigation" aria-expanded="false" aria-label="Открыть меню"><span class="menu-bars" aria-hidden="true"></span></button></div></header>'''
 def notice(pre):return '<aside id="cookie-banner" class="cookie-banner a-cookie" aria-labelledby="cookie-title" hidden><div><h2 id="cookie-title">Какие cookie используются?</h2><p class="short-answer">Только необходимые настройки. Аналитика не подключена.</p></div><a href="'+pre+'privacy.html#cookies">Подробнее</a><button type="button" class="btn" data-cookie-accept>Понятно</button></aside>'
 def footer(pre,published,current):
@@ -217,7 +233,13 @@ def footer(pre,published,current):
 def pretty(d):
  y,m,day=d.split('-');return str(int(day))+' '+{'10':'октября','11':'ноября'}[m]+' '+y
 # The consultation opens a prepared email in the visitor’s own mail app.
-dialog = (ROOT/'content/brief.html').read_text().strip().replace('{CONSULT_LINK}', CONSULT_LINK)
+dialog_template = (ROOT/'content/brief.html').read_text().strip()
+
+def consultation_dialog(pre, route):
+ kind = consult_kind(route)
+ title, intro, _, _ = CONSULTATIONS[kind]
+ return dialog_template.format(TITLE=title, INTRO=intro, CONSULT_LINK=CONSULT_LINKS[kind], PRE=pre)
+
 SOCIAL_IMAGES={
  'audit/':'social-audit.png',
  'cases/':'social-cases.jpg',
@@ -282,7 +304,7 @@ def write(route,title,desc,body,published,article=False,faqs=None):
   ('width', 1200), ('height', 630), ('alt', html.escape(headline)),
  ))
  head='<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+html.escape(title)+'</title><meta name="description" content="'+html.escape(desc)+'"><meta name="author" content="aileed"><meta name="datePublished" content="'+published+'"><meta name="dateModified" content="'+modified+'"><meta name="robots" content="index,follow,max-image-preview:large"><meta name="theme-color" content="#101113"><link rel="canonical" href="'+url+'"><link rel="describedby" type="text/plain" href="'+BASE+'llms.txt"><meta property="og:title" content="'+html.escape(title)+'"><meta property="og:description" content="'+html.escape(desc)+'"><meta property="og:url" content="'+url+'"><meta property="og:site_name" content="aileed"><meta property="og:locale" content="ru_RU"><meta property="og:type" content="'+('article' if article else 'website')+'"><meta property="og:image" content="'+BASE+asset(social)+'">'+image_meta+'<meta name="twitter:card" content="summary_large_image"><link rel="icon" type="image/svg+xml" href="'+pre+asset('mark.svg')+'">'+stylesheets+structured+''.join('<script src="'+pre+asset(f)+'" defer></script>' for f in scripts)+'</head>'
- content=head+'<body class="paper-site" itemscope itemtype="https://schema.org/WebPage" itemid="'+url+'#page">'+common_header(pre,route)+notice(pre)+'<main id="main">'+body.replace('{PRE}',pre)+'</main>'+footer(pre,published,route)+dialog.replace('href="privacy.html"','href="'+pre+'privacy.html"').replace('href="consent.html"','href="'+pre+'consent.html"')+'<noscript><p class="cookie-noscript">Аналитика и рекламные cookie не используются.</p></noscript></body></html>'
+ content=head+'<body class="paper-site" itemscope itemtype="https://schema.org/WebPage" itemid="'+url+'#page">'+common_header(pre,route)+notice(pre)+'<main id="main">'+body.replace('{PRE}',pre)+'</main>'+footer(pre,published,route)+consultation_dialog(pre,route)+'<noscript><p class="cookie-noscript">Аналитика и рекламные cookie не используются.</p></noscript></body></html>'
  # Fragment-only primary destinations belong to the current page.
  content=content.replace('href="'+pre+'#','href="#')
  file.parent.mkdir(parents=True,exist_ok=True);file.write_text("\n".join(line.rstrip() for line in content.replace("><",">\n<").splitlines())+"\n")
@@ -292,11 +314,12 @@ page('','GEO-продвижение брендов в нейросетях | ail
 page('audit/','GEO-аудит бренда в нейросетях | aileed','GEO-аудит бренда в Claude, ChatGPT, Gemini, DeepSeek, Алисе, Google AI Overviews и Perplexity. Проверим упоминания, конкурентов и ссылки в ответах.',audit,'2026-11-02',faqs=auditfaq)
 page('why-geo/','Зачем бренду GEO-продвижение? | aileed','Зачем бренду GEO-продвижение. Сравните два ответа нейросети на один вопрос покупателя и узнайте, как оценить упоминания, ссылки, переходы и обращения.',why,FIRST_EDITION,faqs=why_faq)
 page('cases/','Кейсы GEO-продвижения и аудита | aileed','Результаты продвижения модного бренда под NDA и GEO-аудита WINLINE. Переходы из нейросетей, упоминания и цитирование.',case_index(asset),UPDATED)
-case_links = f'''<div class="reading-end wrap"><div class="story-next">
- <a class="btn primary" href="{CONSULT_LINK}" data-open-brief>Обсудить свой проект ↗</a>
- <a class="edition-link" href="{{PRE}}cases/">Все кейсы →</a></div></div>'''
 for key, project in PROJECTS.items():
- page(f'cases/{key}/', project['title']+' | aileed', project['lead'],
+ case_route = f'cases/{key}/'
+ case_links = f'''<div class="reading-end wrap"><div class="story-next">
+ <a class="btn primary" href="{CONSULT_LINKS[consult_kind(case_route)]}" data-open-brief>Обсудить свой проект ↗</a>
+ <a class="edition-link" href="{{PRE}}cases/">Все кейсы →</a></div></div>'''
+ page(case_route, project['title']+' | aileed', project['lead'],
       case_article(key, asset)+case_links, UPDATED, article=True)
 page('blog/','Блог о GEO и видимости в нейросетях | aileed','Блог aileed для владельцев бизнеса и маркетологов: GEO, рекомендации нейросетей, доверие и выбор бренда.',journal(),FIRST_EDITION)
 for (route,title,answer,image,date),text in zip(POSTS,[geo_article(),mention_article(),competitor_article()]):

@@ -432,7 +432,7 @@
 .model-ribbon ul[aria-hidden] {
   display: none;
 }
-@media screen and (prefers-reduced-motion: no-preference) {
+@media screen and (min-width: 769px) and (prefers-reduced-motion: no-preference) {
   .model-ribbon-window {
     display: flex;
   }
@@ -464,7 +464,7 @@
     animation-play-state: paused;
   }
 }
-@media (max-width: 600px) and (prefers-reduced-motion: reduce) {
+@media (max-width: 600px) {
   .model-ribbon ul:not([aria-hidden]) {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -798,7 +798,7 @@
 }
 
 /* Show the evidence beside its interpretation on the same grid. */
-.audit-edition :is(.measurement-notes, .report-delivery) {
+.audit-edition .measurement-notes {
   background: var(--paper-gray);
 }
 .measurement-figure,

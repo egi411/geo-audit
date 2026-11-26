@@ -82,6 +82,18 @@ body {
   line-height: 1.48;
   -webkit-font-smoothing: antialiased;
 }
+/* Keep prose a little denser on phones without changing the sizing scale. */
+@media (max-width: 768px) {
+  body { font-size: 1rem; }
+}
+.topic-icon {
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  color: var(--blue);
+  vertical-align: -.18em;
+}
+:is(h3, dt, .delivery-team) > .topic-icon { margin-inline-end: .4em; }
 button,
 input {
   font: inherit;

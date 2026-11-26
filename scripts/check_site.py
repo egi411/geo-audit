@@ -29,6 +29,8 @@ for f in files:
   visible_text=' '.join(html.unescape(re.sub('<[^>]+>', ' ', s)).split())
   assert not re.search(r'(?<!\d)(31|33)\s*(%|из 100|вопрос|промпт)',visible_text),'retired frequency figures'
   assert all(a.get('href','').startswith('mailto:egorkl2307@gmail.com?') for t,a in p.tags if 'data-open-brief' in a),'missing consultation destination'
+  prepared_mail = next(a['href'] for t,a in p.tags if t=='a' and 'consult-mail' in a.get('class','').split())
+  assert all(a['href']==prepared_mail for t,a in p.tags if 'data-open-brief' in a), 'consultation dialog and fallback links disagree'
   assert not any(t in ('input','textarea','select') and a.get('name') in ('brand','audience','task','service') for t,a in p.tags),'old brief fields'
   ids=[a['id'] for t,a in p.tags if 'id' in a];assert len(ids)==len(set(ids)),'duplicate ids'
   assert sum(t=='h1' for t,a in p.tags)==1
@@ -61,6 +63,7 @@ for f in files:
    assert re.findall(r'<h3>(До GEO|После GEO)</h3>', main)==['До GEO', 'После GEO'], 'missing before and after comparison'
    assert [a.get('value') for t,a in p.tags if t=='input' and a.get('name')=='answer-lens']==['brand','terms','source'], 'comparison annotations missing'
   if name=='audit/index.html':
+   assert s.index('id="report"') < s.index('id="observations"'), 'audit deliverables should precede the example'
    assert all(s.count(f'data-measure="{key}"')==1 for key in ('name','source','link'))
    assert 'Учебный отчёт' in s and 'scoreboard' in s and 'tone-ring' in s
    audit_main = s.split('<main id="main">',1)[1].split('</main>',1)[0]

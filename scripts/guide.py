@@ -1,5 +1,7 @@
 """Show what GEO can change in the buyer's decision."""
 
+from icons import topic_icon
+
 BUYER_QUESTION = 'Кто обслуживает складские ворота в&nbsp;Казани с&nbsp;выездом в&nbsp;выходные?'
 BEFORE = 'В&nbsp;Казани можно поискать подрядчика в&nbsp;каталогах ремонтных компаний. Уточните по&nbsp;телефону, обслуживает ли он складские ворота и&nbsp;выезжает ли по&nbsp;выходным.'
 AFTER = (
@@ -62,15 +64,15 @@ def response_lenses():
 
 def fit():
     options = (
-        ('Покупатели сравнивают подрядчиков', 'Попасть в&nbsp;сравнение',
+        ('compare', 'Покупатели сравнивают подрядчиков', 'Попасть в&nbsp;сравнение',
          'Проверим запросы без названия бренда по&nbsp;услуге, которая важна для продаж. В&nbsp;примере это обслуживание ворот в&nbsp;выходные.'),
-        ('Покупатели уже знают компанию', 'Уточнить условия',
+        ('refresh', 'Покупатели уже знают компанию', 'Уточнить условия',
          'Сверим, как нейросети описывают географию, график и&nbsp;ограничения услуги. Вы увидите, что на&nbsp;сайте стоит прояснить.'),
-        ('Условия ещё уточняются', 'Подготовить предложение',
+        ('checklist', 'Условия ещё уточняются', 'Подготовить предложение',
          'Зафиксируйте, где и&nbsp;на&nbsp;каких условиях можете принять заказ. С&nbsp;этими сведениями мы сможем выбрать вопросы для продвижения.'),
     )
-    rows = ''.join(f'''<div><dt>{situation}</dt><dd><span>{goal}</span><p>{detail}</p></dd></div>'''
-                   for situation, goal, detail in options)
+    rows = ''.join(f'''<div><dt>{topic_icon(glyph)}{situation}</dt><dd><span>{goal}</span><p>{detail}</p></dd></div>'''
+                   for glyph, situation, goal, detail in options)
     return f'''<section class="why-band why-fit" id="investment" aria-labelledby="why-fit-title"><div class="wrap">
     <header class="why-section-head"><h2 id="why-fit-title">Когда GEO имеет смысл?</h2>
     <p class="short-answer">Начинаем с&nbsp;одной услуги или категории, по&nbsp;которой покупатель сравнивает предложения, а&nbsp;вам важно получать обращения.</p></header>
@@ -80,13 +82,13 @@ def fit():
 
 
 def outcomes():
-    return '''<section class="why-band why-outcomes" id="outcome" aria-labelledby="why-outcome-title"><div class="wrap why-outcome-board">
+    return f'''<section class="why-band why-outcomes" id="outcome" aria-labelledby="why-outcome-title"><div class="wrap why-outcome-board">
     <header class="why-section-head"><h2 id="why-outcome-title">Как понять, что GEO приносит пользу?</h2>
     <p class="short-answer">Мы сравниваем ответы по&nbsp;тем же вопросам. Переходы и&nbsp;обращения проверяем отдельно по&nbsp;данным бизнеса.</p></header>
     <ol class="why-progress">
-    <li><span class="why-progress-dot" aria-hidden="true"></span><h3>Ответы</h3><p>Появился ли бренд в&nbsp;сравнении, корректны ли условия и&nbsp;на&nbsp;какую страницу ссылаются.</p><b>Смотрим выборку ответов</b></li>
-    <li><span class="why-progress-dot" aria-hidden="true"></span><h3>Переходы</h3><p>Сколько было переходов из&nbsp;нейросетей на&nbsp;страницу услуги среди визитов с&nbsp;известным источником.</p><b>Смотрим веб-аналитику</b></li>
-    <li><span class="why-progress-dot" aria-hidden="true"></span><h3>Обращения</h3><p>Приходят ли клиенты с&nbsp;подходящей задачей и&nbsp;говорят ли, что нашли компанию через нейросеть.</p><b>Сверяем с&nbsp;CRM и&nbsp;отделом продаж</b></li>
+    <li><span class="why-progress-dot" aria-hidden="true"></span><h3>{topic_icon('chat')}Ответы</h3><p>Появился ли бренд в&nbsp;сравнении, корректны ли условия и&nbsp;на&nbsp;какую страницу ссылаются.</p><b>Смотрим выборку ответов</b></li>
+    <li><span class="why-progress-dot" aria-hidden="true"></span><h3>{topic_icon('cursor')}Переходы</h3><p>Сколько было переходов из&nbsp;нейросетей на&nbsp;страницу услуги среди визитов с&nbsp;известным источником.</p><b>Смотрим веб-аналитику</b></li>
+    <li><span class="why-progress-dot" aria-hidden="true"></span><h3>{topic_icon('mail')}Обращения</h3><p>Приходят ли клиенты с&nbsp;подходящей задачей и&nbsp;говорят ли, что нашли компанию через нейросеть.</p><b>Сверяем с&nbsp;CRM и&nbsp;отделом продаж</b></li>
     </ol></div></section>'''
 
 
